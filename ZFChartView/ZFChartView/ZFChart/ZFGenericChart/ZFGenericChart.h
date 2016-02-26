@@ -22,6 +22,10 @@
 @property (nonatomic, assign) float yLineMaxValue;
 /** y轴数值显示的段数 */
 @property (nonatomic, assign) NSInteger yLineSectionCount;
+/** x轴上名称字体大小(默认为10.f) */
+@property (nonatomic, assign) CGFloat xLineTitleFontSize;
+/** x轴上数值字体大小(默认为10.f) */
+@property (nonatomic, assign) CGFloat xLineValueFontSize;
 
 #warning message - readonly(只读)
 
@@ -33,6 +37,8 @@
 @property (nonatomic, assign, readonly) CGFloat yLineMaxValueYPos;
 /** 获取y轴最大上限值与0值的高度 */
 @property (nonatomic, assign, readonly) CGFloat yLineMaxValueHeight;
+/** y轴结束Y位置(从数学坐标轴(0.0)(左下角)开始) */
+@property (nonatomic, assign, readonly) CGFloat yLineEndYPos;
 
 #pragma mark - public method
 

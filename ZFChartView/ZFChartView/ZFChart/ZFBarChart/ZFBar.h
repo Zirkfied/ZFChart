@@ -15,6 +15,11 @@
 /** 百分比小数 */
 @property (nonatomic, assign) CGFloat percent;
 
+#warning message - readonly(只读)
+
+/** bar终点Y值 */
+@property (nonatomic, assign, readonly) CGFloat endYPos;
+
 #pragma mark - public method
 
 /**

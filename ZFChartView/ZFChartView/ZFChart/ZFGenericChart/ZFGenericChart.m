@@ -10,6 +10,7 @@
 #import "ZFAxisLine.h"
 #import "ZFLabel.h"
 #import "ZFConst.h"
+#import "NSString+Zirkfied.h"
 
 @interface ZFGenericChart()
 
@@ -28,6 +29,8 @@
 - (void)commonInit{
     _yLineSectionCount = 5;
     _xLineLabelHeight = 30.f;
+    _xLineTitleFontSize = 10.f;
+    _xLineValueFontSize = 10.f;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -60,10 +63,14 @@
         CGFloat width = XLineItemWidth;
         CGFloat height = _xLineLabelHeight;
         
-        ZFLabel * label = [[ZFLabel alloc] initWithFrame:CGRectMake(xPos, yPos, width, height)];
+        //label的中心点
+        CGPoint label_center = CGPointMake(xPos + width * 0.5, yPos + height * 0.5);
+        CGRect rect = [self.xLineTitleArray[i] stringWidthRectWithSize:CGSizeMake(width + XLineItemGapLength * 0.5, height) fontOfSize:_xLineTitleFontSize];
+        ZFLabel * label = [[ZFLabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
         label.text = self.xLineTitleArray[i];
-        label.font = [UIFont systemFontOfSize:8.f];
+        label.font = [UIFont systemFontOfSize:_xLineTitleFontSize];
         label.numberOfLines = 0;
+        label.center = label_center;
         [self addSubview:label];
         
         //根据item个数,设置x轴长度
@@ -84,10 +91,14 @@
         CGFloat width = XLineItemWidth;
         CGFloat height = _xLineLabelHeight;
         
-        ZFLabel * label = [[ZFLabel alloc] initWithFrame:CGRectMake(xPos, yPos, width, height)];
+        //label的中心点
+        CGPoint label_center = CGPointMake(xPos + width * 0.5, yPos + height * 0.5);
+        CGRect rect = [self.xLineValueArray[i] stringWidthRectWithSize:CGSizeMake(width + XLineItemGapLength * 0.5, height) fontOfSize:_xLineValueFontSize];
+        ZFLabel * label = [[ZFLabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
         label.text = self.xLineValueArray[i];
-        label.font = [UIFont systemFontOfSize:8.f];
+        label.font = [UIFont systemFontOfSize:_xLineValueFontSize];
         label.numberOfLines = 0;
+        label.center = label_center;
         [self addSubview:label];
     }
 }
@@ -163,6 +174,11 @@
  */
 - (CGFloat)yLineMaxValueHeight{
     return self.axisLine.yLineStartYPos - (self.axisLine.yLineEndYPos + ZFAxisLineGapFromYLineMaxValueToArrow);
+}
+
+/** y轴结束Y位置(从数学坐标轴(0.0)(左下角)开始) */
+- (CGFloat)yLineEndYPos{
+    return self.axisLine.yLineEndYPos;
 }
 
 @end

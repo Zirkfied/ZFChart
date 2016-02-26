@@ -10,16 +10,30 @@
 
 @interface ZFLineChart : UIScrollView
 
-/** 标题 */
-@property (nonatomic, copy) NSString * title;
+#pragma mark - 初始化时必须要赋值的属性
+
 /** x轴数值数组 (存储的是NSString类型) */
 @property (nonatomic, strong) NSMutableArray * xLineValueArray;
 /** x轴名字数组 (存储的是NSString类型) */
 @property (nonatomic, strong) NSMutableArray * xLineTitleArray;
 /** y轴数值显示的上限 */
 @property (nonatomic, assign) float yLineMaxValue;
-/** y轴数值显示的段数 */
+
+
+#pragma mark - 可选属性
+
+/** y轴数值显示的段数(默认5段) */
 @property (nonatomic, assign) NSInteger yLineSectionCount;
+/** 标题 */
+@property (nonatomic, copy) NSString * title;
+/** 是否显示圆环上的label(默认为YES) */
+@property (nonatomic, assign) BOOL isShowValueOnChart;
+/** 图表上label字体大小 */
+@property (nonatomic, assign) CGFloat valueOnChartFontSize;
+/** x轴上名称字体大小(默认为10.f) */
+@property (nonatomic, assign) CGFloat xLineTitleFontSize;
+/** x轴上数值字体大小(默认为10.f) */
+@property (nonatomic, assign) CGFloat xLineValueFontSize;
 
 #pragma mark - public method
 

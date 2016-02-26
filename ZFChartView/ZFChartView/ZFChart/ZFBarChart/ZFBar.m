@@ -62,6 +62,7 @@
  */
 - (UIBezierPath *)fill{
     CGFloat currentHeight = _barHeightLimit * self.percent;
+    _endYPos = _barHeightLimit - currentHeight;
     
     UIBezierPath * bezier = [UIBezierPath bezierPathWithRect:CGRectMake(0, _barHeightLimit - currentHeight, _barWidth, currentHeight)];
     [bezier fill];

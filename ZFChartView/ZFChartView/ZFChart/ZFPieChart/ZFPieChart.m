@@ -81,6 +81,7 @@
     _pieCenter = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2);
     _isShowDetail = YES;
     _isShowPercent = YES;
+    _percentOnChartFontSize = 10.f;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -278,7 +279,7 @@
         [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
     }
     
-    _isShowDetail == YES?[self addUI]:nil;
+    _isShowDetail ? [self addUI] : nil;
 }
 
 #pragma mark - 定时器
@@ -287,7 +288,7 @@
     _index = [[sender.userInfo objectForKey:@"index"] integerValue];
     CAShapeLayer * shapeLayer = [self shapeLayer];
     [self.layer addSublayer:shapeLayer];
-    _isShowPercent == YES?[self creatPercentLabel]:nil;
+    _isShowPercent ? [self creatPercentLabel] : nil;
     
     [sender invalidate];
     sender = nil;
@@ -413,13 +414,12 @@
  */
 - (void)creatPercentLabel{
     NSString * string = [self getPercent:_index];
-    CGRect rect = [string stringWidthRectWithSize:CGSizeMake(0, 0) fontOfSize:9.f];
-    
+    CGRect rect = [string stringWidthRectWithSize:CGSizeMake(0, 0) fontOfSize:_percentOnChartFontSize];
     UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
     label.text = string;
     label.alpha = 0.f;
     label.textAlignment = NSTextAlignmentCenter;
-    label.font = [UIFont boldSystemFontOfSize:9.f];
+    label.font = [UIFont boldSystemFontOfSize:_percentOnChartFontSize];
     label.center = self.centerPoint;
     label.tag = PercentLabelTag + _index;
     [self addSubview:label];

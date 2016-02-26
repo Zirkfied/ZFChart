@@ -21,20 +21,29 @@ typedef enum{
 
 @interface ZFPieChart : UIView
 
-/** 标题 */
-@property (nonatomic, copy) NSString * title;
+#pragma mark - 初始化时必须要赋值的属性
+
 /** 数值数组 (存储的是NSString类型) */
 @property (nonatomic, strong) NSMutableArray * valueArray;
 /** 名字数组 (存储的是NSString类型) */
 @property (nonatomic, strong) NSMutableArray * nameArray;
 /** 颜色数组 (存储的是UIColor类型) */
 @property (nonatomic, strong) NSMutableArray * colorArray;
+
+
+#pragma mark - 可选属性
+
+/** 标题 */
+@property (nonatomic, copy) NSString * title;
 /** kPercentType类型 */
 @property (nonatomic, assign) kPercentType percentType;
 /** 显示详细信息(默认为YES) */
 @property (nonatomic, assign) BOOL isShowDetail;
 /** 显示百分比(默认为YES) */
 @property (nonatomic, assign) BOOL isShowPercent;
+/** 图表上百分比字体大小 */
+@property (nonatomic, assign) CGFloat percentOnChartFontSize;
+
 
 #pragma mark - public method
 

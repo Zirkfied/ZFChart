@@ -12,6 +12,8 @@
 #import "ZFLine.h"
 #import "ZFCirque.h"
 #import "ZFConst.h"
+#import "ZFLabel.h"
+#import "NSString+Zirkfied.h"
 
 @interface ZFLineChart()
 
@@ -33,9 +35,18 @@
     return _cirqueArray;
 }
 
+/**
+ *  初始化变量
+ */
+- (void)commonInit{
+    _isShowValueOnChart = YES;
+    _valueOnChartFontSize = 10.f;
+}
+
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
+        [self commonInit];
         [self drawGenericChart];
         self.showsHorizontalScrollIndicator = NO;
         
@@ -67,6 +78,7 @@
  */
 - (void)drawLineAndCirque{
     [self removeAllLineAndCirque];
+    [self removeLabelOnChart];
     [self.cirqueArray removeAllObjects];
     
     //圆环
@@ -99,10 +111,46 @@
         
         CGFloat end_XPos = fabs(cirque.center.x - nextCirque.center.x);
         CGFloat end_YPos = nextCirque.center.y - cirque.center.y;
-        
         ZFLine * line = [[ZFLine alloc] initWithStartPoint:CGPointMake(cirque.center.x, cirque.center.y) endPoint:CGPointMake(end_XPos, end_YPos)];
         [line strokePath];
         [self.genericChart addSubview:line];
+    }
+    
+    //圆环上的label
+    _isShowValueOnChart ? [self showLabelOnChart] : nil;
+}
+
+/**
+ *  显示圆环上的label
+ */
+- (void)showLabelOnChart{
+    //圆环上的label
+    for (NSInteger i = 0; i < self.cirqueArray.count; i++) {
+        //label的中心点
+        CGPoint label_center;
+        if (i < self.cirqueArray.count - 1) {
+            ZFCirque * cirque = self.cirqueArray[i];
+            ZFCirque * nextCirque = self.cirqueArray[i+1];
+            
+            //根据end_YPos判断label显示在圆环上面或下面
+            CGFloat end_YPos = nextCirque.center.y - cirque.center.y;
+            label_center = end_YPos <= 0 ? CGPointMake(cirque.center.x, cirque.center.y + 20) : CGPointMake(cirque.center.x, cirque.center.y - 20);
+        }else{
+            ZFCirque * cirque = self.cirqueArray[i];
+            ZFCirque * preCirque = self.cirqueArray[i-1];
+            
+            //根据end_YPos判断label显示在圆环上面或下面
+            CGFloat end_YPos = preCirque.center.y - cirque.center.y;
+            label_center = end_YPos <= 0 ? CGPointMake(cirque.center.x, cirque.center.y + 20) : CGPointMake(cirque.center.x, cirque.center.y - 20);
+        }
+        
+        CGRect rect = [self.xLineValueArray[i] stringWidthRectWithSize:CGSizeMake(45, 30) fontOfSize:_valueOnChartFontSize];
+        ZFLabel * label = [[ZFLabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
+        label.text = self.xLineValueArray[i];
+        label.font = [UIFont systemFontOfSize:_valueOnChartFontSize];
+        label.center = label_center;
+        label.numberOfLines = 0;
+        [self addSubview:label];
     }
 }
 
@@ -113,6 +161,17 @@
     for (UIView * view in self.genericChart.subviews) {
         if ([view isKindOfClass:[ZFLine class]] || [view isKindOfClass:[ZFCirque class]]) {
             [view removeFromSuperview];
+        }
+    }
+}
+
+/**
+ *  清除圆环上的Label
+ */
+- (void)removeLabelOnChart{
+    for (UIView * view in self.subviews) {
+        if ([view isKindOfClass:[ZFLabel class]]) {
+            [(ZFLabel *)view removeFromSuperview];
         }
     }
 }
@@ -153,6 +212,16 @@
 - (void)setTitle:(NSString *)title{
     _title = title;
     self.titleLabel.text = _title;
+}
+
+- (void)setXLineTitleFontSize:(CGFloat)xLineTitleFontSize{
+    _xLineTitleFontSize = xLineTitleFontSize;
+    self.genericChart.xLineTitleFontSize = _xLineTitleFontSize;
+}
+
+- (void)setXLineValueFontSize:(CGFloat)xLineValueFontSize{
+    _xLineValueFontSize = xLineValueFontSize;
+    self.genericChart.xLineValueFontSize = _xLineValueFontSize;
 }
 
 @end

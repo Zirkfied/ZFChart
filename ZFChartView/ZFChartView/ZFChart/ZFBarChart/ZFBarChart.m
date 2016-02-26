@@ -10,6 +10,8 @@
 #import "ZFGenericChart.h"
 #import "ZFBar.h"
 #import "ZFConst.h"
+#import "ZFLabel.h"
+#import "NSString+Zirkfied.h"
 
 @interface ZFBarChart()
 
@@ -17,14 +19,32 @@
 @property (nonatomic, strong) ZFGenericChart * genericChart;
 /** 标题Label */
 @property (nonatomic, strong) UILabel * titleLabel;
+/** 存储柱状条的数组 */
+@property (nonatomic, strong) NSMutableArray * barArray;
 
 @end
 
 @implementation ZFBarChart
 
+- (NSMutableArray *)barArray{
+    if (!_barArray) {
+        _barArray = [NSMutableArray array];
+    }
+    return _barArray;
+}
+
+/**
+ *  初始化变量
+ */
+- (void)commonInit{
+    _isShowValueOnChart = YES;
+    _valueOnChartFontSize = 10.f;
+}
+
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
+        [self commonInit];
         [self drawGenericChart];
         self.showsHorizontalScrollIndicator = NO;
         
@@ -56,6 +76,7 @@
  */
 - (void)drawBar{
     [self removeAllBar];
+    [self removeLabelOnChart];
     
     for (NSInteger i = 0; i < self.xLineValueArray.count; i++) {
         CGFloat xPos = self.genericChart.axisStartXPos + XLineItemGapLength + (XLineItemWidth + XLineItemGapLength) * i;
@@ -72,7 +93,28 @@
             bar.barBackgroundColor = [UIColor redColor];
         }
         [bar strokePath];
+        [self.barArray addObject:bar];
         [self addSubview:bar];
+    }
+    
+    _isShowValueOnChart ? [self showLabelOnChart] : nil;
+}
+
+/**
+ *  显示bar上的label
+ */
+- (void)showLabelOnChart{
+    for (NSInteger i = 0; i < self.barArray.count; i++) {
+        ZFBar * bar = self.barArray[i];
+        //label的中心点
+        CGPoint label_center = CGPointMake(bar.center.x, bar.endYPos + self.genericChart.yLineEndYPos);
+        CGRect rect = [self.xLineValueArray[i] stringWidthRectWithSize:CGSizeMake(XLineItemWidth + XLineItemGapLength * 0.5, 30) fontOfSize:_valueOnChartFontSize];
+        ZFLabel * label = [[ZFLabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
+        label.text = self.xLineValueArray[i];
+        label.font = [UIFont systemFontOfSize:_valueOnChartFontSize];
+        label.numberOfLines = 0;
+        label.center = label_center;
+        [self addSubview:label];
     }
 }
 
@@ -83,6 +125,17 @@
     for (UIView * view in self.subviews) {
         if ([view isKindOfClass:[ZFBar class]]) {
             [(ZFBar *)view removeFromSuperview];
+        }
+    }
+}
+
+/**
+ *  清除圆环上的Label
+ */
+- (void)removeLabelOnChart{
+    for (UIView * view in self.subviews) {
+        if ([view isKindOfClass:[ZFLabel class]]) {
+            [(ZFLabel *)view removeFromSuperview];
         }
     }
 }
@@ -123,6 +176,16 @@
 - (void)setTitle:(NSString *)title{
     _title = title;
     self.titleLabel.text = _title;
+}
+
+- (void)setXLineTitleFontSize:(CGFloat)xLineTitleFontSize{
+    _xLineTitleFontSize = xLineTitleFontSize;
+    self.genericChart.xLineTitleFontSize = _xLineTitleFontSize;
+}
+
+- (void)setXLineValueFontSize:(CGFloat)xLineValueFontSize{
+    _xLineValueFontSize = xLineValueFontSize;
+    self.genericChart.xLineValueFontSize = _xLineValueFontSize;
 }
 
 @end
