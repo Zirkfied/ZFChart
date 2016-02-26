@@ -16,7 +16,6 @@
 		180AAF7D1C7EDBD60030A0C2 /* ZFChartViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 180AAF7C1C7EDBD60030A0C2 /* ZFChartViewUITests.m */; };
 		180AAFB71C7EDC4E0030A0C2 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180AAF981C7EDC4E0030A0C2 /* TableViewController.m */; };
 		180AAFB81C7EDC4E0030A0C2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180AAF9A1C7EDC4E0030A0C2 /* ViewController.m */; };
-		180AAFEA1C7EEC010030A0C2 /* NSObject+Zirkfied.m in Sources */ = {isa = PBXBuildFile; fileRef = 180AAFC71C7EEC010030A0C2 /* NSObject+Zirkfied.m */; };
 		180AAFEB1C7EEC010030A0C2 /* NSString+Zirkfied.m in Sources */ = {isa = PBXBuildFile; fileRef = 180AAFC91C7EEC010030A0C2 /* NSString+Zirkfied.m */; };
 		180AAFEC1C7EEC010030A0C2 /* UIColor+Zirkfied.m in Sources */ = {isa = PBXBuildFile; fileRef = 180AAFCB1C7EEC010030A0C2 /* UIColor+Zirkfied.m */; };
 		180AAFED1C7EEC010030A0C2 /* UIView+Zirkfied.m in Sources */ = {isa = PBXBuildFile; fileRef = 180AAFCD1C7EEC010030A0C2 /* UIView+Zirkfied.m */; };
@@ -68,15 +67,13 @@
 		180AAF981C7EDC4E0030A0C2 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		180AAF991C7EDC4E0030A0C2 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		180AAF9A1C7EDC4E0030A0C2 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		180AAFC61C7EEC010030A0C2 /* NSObject+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Zirkfied.h"; sourceTree = "<group>"; };
-		180AAFC71C7EEC010030A0C2 /* NSObject+Zirkfied.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Zirkfied.m"; sourceTree = "<group>"; };
 		180AAFC81C7EEC010030A0C2 /* NSString+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Zirkfied.h"; sourceTree = "<group>"; };
 		180AAFC91C7EEC010030A0C2 /* NSString+Zirkfied.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Zirkfied.m"; sourceTree = "<group>"; };
 		180AAFCA1C7EEC010030A0C2 /* UIColor+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Zirkfied.h"; sourceTree = "<group>"; };
 		180AAFCB1C7EEC010030A0C2 /* UIColor+Zirkfied.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Zirkfied.m"; sourceTree = "<group>"; };
 		180AAFCC1C7EEC010030A0C2 /* UIView+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Zirkfied.h"; sourceTree = "<group>"; };
 		180AAFCD1C7EEC010030A0C2 /* UIView+Zirkfied.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Zirkfied.m"; sourceTree = "<group>"; };
-		180AAFCF1C7EEC010030A0C2 /* ZFChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFChartView.h; sourceTree = "<group>"; };
+		180AAFCF1C7EEC010030A0C2 /* ZFChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFChart.h; sourceTree = "<group>"; };
 		180AAFD01C7EEC010030A0C2 /* ZFColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFColor.h; sourceTree = "<group>"; };
 		180AAFD11C7EEC010030A0C2 /* ZFConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFConst.h; sourceTree = "<group>"; };
 		180AAFD31C7EEC010030A0C2 /* ZFBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFBar.h; sourceTree = "<group>"; };
@@ -207,8 +204,6 @@
 		180AAFC51C7EEC010030A0C2 /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				180AAFC61C7EEC010030A0C2 /* NSObject+Zirkfied.h */,
-				180AAFC71C7EEC010030A0C2 /* NSObject+Zirkfied.m */,
 				180AAFC81C7EEC010030A0C2 /* NSString+Zirkfied.h */,
 				180AAFC91C7EEC010030A0C2 /* NSString+Zirkfied.m */,
 				180AAFCA1C7EEC010030A0C2 /* UIColor+Zirkfied.h */,
@@ -222,7 +217,7 @@
 		180AAFCE1C7EEC010030A0C2 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				180AAFCF1C7EEC010030A0C2 /* ZFChartView.h */,
+				180AAFCF1C7EEC010030A0C2 /* ZFChart.h */,
 				180AAFD01C7EEC010030A0C2 /* ZFColor.h */,
 				180AAFD11C7EEC010030A0C2 /* ZFConst.h */,
 			);
@@ -413,7 +408,6 @@
 				180AAFEF1C7EEC010030A0C2 /* ZFBarChart.m in Sources */,
 				180AAFF11C7EEC010030A0C2 /* ZFGenericChart.m in Sources */,
 				180AAFED1C7EEC010030A0C2 /* UIView+Zirkfied.m in Sources */,
-				180AAFEA1C7EEC010030A0C2 /* NSObject+Zirkfied.m in Sources */,
 				180AAFF71C7EEC010030A0C2 /* ZFTranslucencePath.m in Sources */,
 				180AAFF21C7EEC010030A0C2 /* ZFLabel.m in Sources */,
 				180AAFEB1C7EEC010030A0C2 /* NSString+Zirkfied.m in Sources */,
