@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "ZFChartView.h"
+#import "ZFChart.h"
 
 @interface ViewController ()
 
