@@ -5,9 +5,13 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart. Thanks 
 
 ###用法:
         第一步(step 1)
-        #import "ZFChart.h"
+        将项目里ZFChart整个文件夹拖进新项目
         
         第二步(step 2)
+        #import "ZFChart.h"
+        
+        第三步(step 3)
+        
 ## BarChart(柱状图)
 
 ![](https://github.com/Zirkfied/Library/blob/master/bar.png)
