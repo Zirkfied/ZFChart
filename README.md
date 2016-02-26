@@ -45,4 +45,20 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart. Thanks 
         pieChart.colorArray = [NSMutableArray arrayWithObjects:ZFRandomColor, ZFRandomColor, ZFRandomColor, ZFRandomColor, ZFRandomColor, ZFRandomColor, nil];
         [self.view addSubview:pieChart];
         [pieChart strokePath];
+        
+###饼图其余属性
 
+![](https://github.com/Zirkfied/Library/blob/master/pie1.png)
+
+        该属性默认为YES，设置NO时，饼图将不显示详细信息，如上所示
+        pieChart.isShowDetail = NO;
+        
+![](https://github.com/Zirkfied/Library/blob/master/pie2.png)
+        
+        该属性默认为YES，设置NO时，饼图将不显示饼图上的百分比，如上所示
+        pieChart.isShowPercent = NO;
+        
+![](https://github.com/Zirkfied/Library/blob/master/pie3.png)
+        
+        该属性默认为kPercentTypeDecimal（显示2位小数），当设置kPercentTypeInteger时，将显示四舍五入后的整数，如上所示
+        pieChart.percentType = kPercentTypeInteger;
