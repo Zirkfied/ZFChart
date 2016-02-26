@@ -64,6 +64,7 @@
         CGFloat height = self.genericChart.yLineMaxValueHeight;
         
         ZFBar * bar = [[ZFBar alloc] initWithFrame:CGRectMake(xPos, yPos, width, height)];
+        //当前数值超过y轴显示上限时，柱状改为红色
         if ([self.xLineValueArray[i] floatValue] / _yLineMaxValue <= 1) {
             bar.percent = [self.xLineValueArray[i] floatValue] / _yLineMaxValue;
         }else{
