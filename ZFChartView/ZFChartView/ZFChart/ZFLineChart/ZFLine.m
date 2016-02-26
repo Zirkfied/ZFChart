@@ -121,10 +121,4 @@
     [self.layer addSublayer:[self shapeLayer]];
 }
 
-//#pragma mark - 重写setter,getter方法
-//
-//- (void)setEndPoint:(CGPoint)endPoint{
-//    
-//}
-
 @end
