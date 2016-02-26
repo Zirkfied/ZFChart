@@ -8,7 +8,6 @@
 
 #import "ZFAxisLine.h"
 #import "ZFConst.h"
-#import "NSObject+Zirkfied.h"
 
 @interface ZFAxisLine()
 
@@ -270,9 +269,17 @@
     }
     
     //延迟0.5秒执行
-    [self dispatch_after_withSeconds:_animationDuration actions:^{
-        [self.layer addSublayer:[self arrowsShapeLayer]];
-    }];
+    NSTimer * timer = [NSTimer timerWithTimeInterval:_animationDuration target:self selector:@selector(timerAction:) userInfo:nil repeats:NO];
+    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+}
+
+#pragma mark - 定时器
+
+- (void)timerAction:(NSTimer *)sender{
+    [self.layer addSublayer:[self arrowsShapeLayer]];
+    
+    [sender invalidate];
+    sender = nil;
 }
 
 #pragma mark - 重写setter,getter方法
