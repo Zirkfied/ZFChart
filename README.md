@@ -4,10 +4,10 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart. Thanks 
 模仿PNChart写的一个图表库，用法简单，暂时有柱状图，线状图，饼图三种类型，后续可能会更新新的类型，喜欢的欢迎star一个，有问题可以加QQ群交流：451169423
 
 ###用法:
-        第一步
+        第一步(step 1)
         #import "ZFChart.h"
         
-        第二步
+        第二步(step 2)
 ## BarChart(柱状图)
 
 ![](https://github.com/Zirkfied/Library/blob/master/bar.png)
