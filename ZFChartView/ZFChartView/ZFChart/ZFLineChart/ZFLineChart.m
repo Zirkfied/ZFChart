@@ -83,6 +83,7 @@
         CGFloat x = self.genericChart.axisStartXPos + XLineItemGapLength + (XLineItemWidth + XLineItemGapLength) * i + XLineItemWidth / 2;
         
         ZFCirque * cirque = [[ZFCirque alloc] initWithFrame:CGRectMake(x, y, 0, 0)];
+        //当前数值超过y轴显示上限时，圆环改为红色
         if (isOverrun == YES) {
             cirque.cirqueColor = [UIColor redColor];
         }
