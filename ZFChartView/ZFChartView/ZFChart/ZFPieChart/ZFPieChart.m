@@ -8,7 +8,6 @@
 
 #import "ZFPieChart.h"
 #import "ZFConst.h"
-#import "NSObject+Zirkfied.h"
 #import "NSString+Zirkfied.h"
 #import "UIColor+Zirkfied.h"
 #import "UIView+Zirkfied.h"
@@ -270,24 +269,28 @@
  *  重绘
  */
 - (void)strokePath{
-    self.userInteractionEnabled = NO;
     [self removeAllSubLayers];
     _startAngle = ZFRadian(-90);
     
     for (NSInteger i = 0; i < _valueArray.count; i++) {
-        [self dispatch_after_withSeconds:[self.startTimeArray[i] floatValue] actions:^{
-            _index = i;
-            CAShapeLayer * shapeLayer = [self shapeLayer];
-            [self.layer addSublayer:shapeLayer];
-            _isShowPercent == YES?[self creatPercentLabel]:nil;
-        }];
+        NSDictionary * userInfo = @{@"index":@(i)};
+        NSTimer * timer = [NSTimer timerWithTimeInterval:[self.startTimeArray[i] floatValue] target:self selector:@selector(timerAction:) userInfo:userInfo repeats:NO];
+        [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
     }
     
-    [self dispatch_after_withSeconds:_totalDuration actions:^{
-        self.userInteractionEnabled = YES;
-    }];
-    
     _isShowDetail == YES?[self addUI]:nil;
+}
+
+#pragma mark - 定时器
+
+- (void)timerAction:(NSTimer *)sender{
+    _index = [[sender.userInfo objectForKey:@"index"] integerValue];
+    CAShapeLayer * shapeLayer = [self shapeLayer];
+    [self.layer addSublayer:shapeLayer];
+    _isShowPercent == YES?[self creatPercentLabel]:nil;
+    
+    [sender invalidate];
+    sender = nil;
 }
 
 #pragma mark - UIResponder
