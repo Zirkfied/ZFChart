@@ -8,15 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-//typedef enum{
-//    ZFAxisLineX = 0,//x轴
-//    ZFAxisLineY = 1//y轴
-//}ZFAxisLineType;
-
 @interface ZFAxisLine : UIView
-
-/** ZFAxisLineType类型 */
-//@property (nonatomic, assign) ZFAxisLineType axisLineType;
 
 /** x轴宽度 */
 @property (nonatomic, assign) CGFloat xLineWidth;
