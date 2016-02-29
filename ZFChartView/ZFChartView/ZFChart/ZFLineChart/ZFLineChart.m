@@ -15,7 +15,7 @@
 #import "ZFLabel.h"
 #import "NSString+Zirkfied.h"
 
-@interface ZFLineChart()
+@interface ZFLineChart()<UIScrollViewDelegate>
 
 /** 通用坐标轴图表 */
 @property (nonatomic, strong) ZFGenericChart * genericChart;
@@ -41,6 +41,10 @@
 - (void)commonInit{
     _isShowValueOnChart = YES;
     _valueOnChartFontSize = 10.f;
+    _valueOnChartPosition = kLineChartValuePositionDefalut;
+    _isShadow = YES;
+    self.showsHorizontalScrollIndicator = NO;
+    self.delegate = self;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -48,7 +52,6 @@
     if (self) {
         [self commonInit];
         [self drawGenericChart];
-        self.showsHorizontalScrollIndicator = NO;
         
         //标题Label
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 30)];
@@ -99,6 +102,7 @@
         if (isOverrun == YES) {
             cirque.cirqueColor = [UIColor redColor];
         }
+        cirque.isShadow = _isShadow;
         [cirque strokePath];
         [self.genericChart addSubview:cirque];
         [self.cirqueArray addObject:cirque];
@@ -112,6 +116,7 @@
         CGFloat end_XPos = fabs(cirque.center.x - nextCirque.center.x);
         CGFloat end_YPos = nextCirque.center.y - cirque.center.y;
         ZFLine * line = [[ZFLine alloc] initWithStartPoint:CGPointMake(cirque.center.x, cirque.center.y) endPoint:CGPointMake(end_XPos, end_YPos)];
+        line.isShadow = _isShadow;
         [line strokePath];
         [self.genericChart addSubview:line];
     }
@@ -126,22 +131,35 @@
 - (void)showLabelOnChart{
     //圆环上的label
     for (NSInteger i = 0; i < self.cirqueArray.count; i++) {
+        ZFCirque * cirque = self.cirqueArray[i];
         //label的中心点
         CGPoint label_center;
-        if (i < self.cirqueArray.count - 1) {
-            ZFCirque * cirque = self.cirqueArray[i];
-            ZFCirque * nextCirque = self.cirqueArray[i+1];
-            
+        
+        //_valueOnChartPosition为上下分布
+        if (_valueOnChartPosition == kLineChartValuePositionDefalut) {
             //根据end_YPos判断label显示在圆环上面或下面
-            CGFloat end_YPos = nextCirque.center.y - cirque.center.y;
-            label_center = end_YPos <= 0 ? CGPointMake(cirque.center.x, cirque.center.y + 20) : CGPointMake(cirque.center.x, cirque.center.y - 20);
-        }else{
-            ZFCirque * cirque = self.cirqueArray[i];
-            ZFCirque * preCirque = self.cirqueArray[i-1];
+            CGFloat end_YPos;
             
-            //根据end_YPos判断label显示在圆环上面或下面
-            CGFloat end_YPos = preCirque.center.y - cirque.center.y;
+            if (i < self.cirqueArray.count - 1) {//当前圆环不是最后一个时
+                ZFCirque * nextCirque = self.cirqueArray[i+1];
+                end_YPos = nextCirque.center.y - cirque.center.y;
+                
+            }else{//当前圆环为最后一个时
+                ZFCirque * preCirque = self.cirqueArray[i-1];
+                end_YPos = preCirque.center.y - cirque.center.y;
+                
+            }
+            
             label_center = end_YPos <= 0 ? CGPointMake(cirque.center.x, cirque.center.y + 20) : CGPointMake(cirque.center.x, cirque.center.y - 20);
+            
+        //_valueOnChartPosition为圆环上方
+        }else if (_valueOnChartPosition == kLineChartValuePositionOnTop){
+            label_center = CGPointMake(cirque.center.x, cirque.center.y - 20);
+            
+        //_valueOnChartPosition为圆环下方
+        }else if (_valueOnChartPosition == kLineChartValuePositionOnBelow){
+            label_center = CGPointMake(cirque.center.x, cirque.center.y + 20);
+            
         }
         
         CGRect rect = [self.xLineValueArray[i] stringWidthRectWithSize:CGSizeMake(45, 30) fontOfSize:_valueOnChartFontSize];
@@ -150,6 +168,7 @@
         label.font = [UIFont systemFontOfSize:_valueOnChartFontSize];
         label.center = label_center;
         label.numberOfLines = 0;
+        label.isFadeInAnimation = YES;
         [self addSubview:label];
     }
 }
@@ -185,6 +204,13 @@
     [self.genericChart strokePath];
     [self drawLineAndCirque];
     self.contentSize = CGSizeMake(CGRectGetWidth(self.genericChart.frame), self.frame.size.height);
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    //self滚动时，标题保持相对不动
+    self.titleLabel.frame = CGRectMake(self.contentOffset.x, self.titleLabel.frame.origin.y, self.titleLabel.frame.size.width, self.titleLabel.frame.size.height);
 }
 
 #pragma mark - 重写setter,getter方法

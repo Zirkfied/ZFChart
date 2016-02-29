@@ -76,25 +76,28 @@
     _lineWidth = _radius;
     _totalDuration = 0.75f;
     _startAngle = ZFRadian(-90);
-    _extendLength = 10.f;
+    _extendLength = 20.f;
     _originHeight = self.frame.size.height;
-    _pieCenter = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2);
+    _pieCenter = CGPointMake(self.center.x, CGRectGetHeight(self.titleLabel.frame) + NAVIGATIONBAR_HEIGHT + _radius);
     _isShowDetail = YES;
     _isShowPercent = YES;
     _percentOnChartFontSize = 10.f;
+    _isShadow = YES;
+    self.bounces = NO;
+    self.showsHorizontalScrollIndicator = NO;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
-        [self commonInit];
-        
         //标题Label
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 30)];
         self.titleLabel.font = [UIFont boldSystemFontOfSize:18.f];
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
         self.titleLabel.textColor = [UIColor redColor];
         [self addSubview:self.titleLabel];
+        
+        [self commonInit];
         
         //数值Label
         self.valueLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _radius, _radius * 0.5)];
@@ -113,7 +116,7 @@
 - (void)addUI{
     for (NSInteger i = 0; i < self.valueArray.count; i++) {
         //装载容器
-        UIView * background = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height / 8.f * 7 + 30 + 25 * i, self.frame.size.width, 25)];
+        UIView * background = [[UIView alloc] initWithFrame:CGRectMake(0, _pieCenter.y + _radius * 1.75 + 25 * i, self.frame.size.width, 25)];
         background.tag = DetailBackgroundTag + i;
         [self addSubview:background];
         
@@ -126,21 +129,23 @@
         color.backgroundColor = _colorArray[i];
         [background addSubview:color];
         
-        //名称
         CGFloat width = (self.frame.size.width * (1 - 0.1) - 40) / 3.f;
+        CGFloat gap = (SCREEN_WIDTH - CGRectGetMaxX(color.frame) - 10 - self.frame.size.width * 0.05 - 3 * width) / 2;
+        
+        //名称
         UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(color.frame) + 10, 0, width, 20)];
         name.text = _nameArray[i];
         name.font = [UIFont boldSystemFontOfSize:16.f];
         [background addSubview:name];
         
         //数值
-        UILabel * value = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + 10, 0, width, 20)];
+        UILabel * value = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + gap, 0, width, 20)];
         value.text = _valueArray[i];
         value.font = [UIFont boldSystemFontOfSize:16.f];
         [background addSubview:value];
         
         //百分比
-        UILabel * percent = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(value.frame) + 10, 0, width, 20)];
+        UILabel * percent = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(value.frame) + gap, 0, width, 20)];
         percent.text = [self getPercent:i];
         percent.font = [UIFont boldSystemFontOfSize:16.f];
         [background addSubview:percent];
@@ -148,7 +153,7 @@
     
     //重设self.frame的值
     UILabel * lastLabel = (UILabel *)[self viewWithTag:DetailBackgroundTag + self.valueArray.count - 1];
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, CGRectGetMaxY(lastLabel.frame) + 20);
+    self.contentSize = CGSizeMake(self.frame.size.width, CGRectGetMaxY(lastLabel.frame) + 20);
 }
 
 #pragma mark - Arc(圆弧)
@@ -184,6 +189,12 @@
     layer.strokeColor = [_colorArray[_index] CGColor];
     layer.lineWidth = _lineWidth;
     layer.path = [self fill].CGPath;
+    
+    if (_isShadow) {
+        layer.shadowOpacity = 1.f;
+        layer.shadowColor = [UIColor darkGrayColor].CGColor;
+        layer.shadowOffset = CGSizeMake(2, 2);
+    }
 
     CABasicAnimation * animation = [self animation];
     [layer addAnimation:animation forKey:nil];
@@ -258,7 +269,7 @@
  *  @return ZFTranslucencePath
  */
 - (ZFTranslucencePath *)translucencePathShapeLayerWithStartAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle index:(NSInteger)index{
-    ZFTranslucencePath * layer = [ZFTranslucencePath layerWithArcCenter:_pieCenter radius:_radius + _extendLength startAngle:startAngle endAngle:endAngle clockwise:YES];
+    ZFTranslucencePath * layer = [ZFTranslucencePath layerWithArcCenter:_pieCenter radius:_radius + _extendLength * 0.5 startAngle:startAngle endAngle:endAngle clockwise:YES];
     layer.strokeColor = [_colorArray[index] CGColor];
     layer.lineWidth = _lineWidth + _extendLength;
     return layer;
@@ -300,10 +311,10 @@
     [super touchesBegan:touches withEvent:event];
     UITouch * touch = [touches anyObject];
     CGPoint point = [touch locationInView:self];
-    if (point.y > _originHeight / 8.f * 7 + 30) {
+    if (point.y > _pieCenter.y + _radius + 60) {
         return;
     }
-    
+
     //求弧度
     CGFloat x = (point.x - _pieCenter.x);
     CGFloat y = (point.y - _pieCenter.y);

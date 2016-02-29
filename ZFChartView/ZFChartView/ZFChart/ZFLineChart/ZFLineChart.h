@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ *  线状图上的value的位置
+ */
+typedef enum{
+    kLineChartValuePositionDefalut = 0,//上下分布
+    kLineChartValuePositionOnTop = 1,//圆环上方
+    kLineChartValuePositionOnBelow = 2//圆环下方
+}kLineChartValuePosition;
+
 @interface ZFLineChart : UIScrollView
 
 #pragma mark - 初始化时必须要赋值的属性
@@ -34,6 +43,10 @@
 @property (nonatomic, assign) CGFloat xLineTitleFontSize;
 /** x轴上数值字体大小(默认为10.f) */
 @property (nonatomic, assign) CGFloat xLineValueFontSize;
+/** 圆环上的value位置(默认为kLineChartValuePositionDefalut) */
+@property (nonatomic, assign) kLineChartValuePosition valueOnChartPosition;
+/** 是否带阴影效果(默认为YES) */
+@property (nonatomic, assign) BOOL isShadow;
 
 #pragma mark - public method
 

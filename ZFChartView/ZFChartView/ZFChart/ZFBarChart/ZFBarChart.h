@@ -34,6 +34,8 @@
 @property (nonatomic, assign) CGFloat xLineTitleFontSize;
 /** x轴上数值字体大小(默认为10.f) */
 @property (nonatomic, assign) CGFloat xLineValueFontSize;
+/** 是否带阴影效果(默认为YES) */
+@property (nonatomic, assign) BOOL isShadow;
 
 #pragma mark - public method
 

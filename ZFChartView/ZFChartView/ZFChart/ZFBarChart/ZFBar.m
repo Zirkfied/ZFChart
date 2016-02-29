@@ -9,6 +9,7 @@
 #import "ZFBar.h"
 #import "ZFConst.h"
 
+
 @interface ZFBar()
 
 /** bar宽度 */
@@ -31,6 +32,7 @@
     _barHeightLimit = self.frame.size.height;
     _percent = 0;
     _animationDuration = 0.5f;
+    _isShadow = YES;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -79,6 +81,12 @@
     layer.strokeColor = _barBackgroundColor.CGColor;
     layer.fillColor = _barBackgroundColor.CGColor;
     layer.lineCap = kCALineCapRound;
+    
+    if (_isShadow) {
+        layer.shadowOpacity = 1.f;
+        layer.shadowColor = [UIColor darkGrayColor].CGColor;
+        layer.shadowOffset = CGSizeMake(2, 1);
+    }
     
     CABasicAnimation * animation = [self animation];
     [layer addAnimation:animation forKey:nil];

@@ -11,7 +11,10 @@
 
 @interface ZFLine()
 
+/** 线宽 */
 @property (nonatomic, assign) CGFloat lineWidth;
+/** 动画时间 */
+@property (nonatomic, assign) CGFloat animationDuration;
 
 @end
 
@@ -22,6 +25,8 @@
  */
 - (void)commonInit{
     _lineWidth = 1.5f;
+    _animationDuration = 0.5f;
+    _isShadow = YES;
 }
 
 - (instancetype)initWithStartPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint{
@@ -74,6 +79,12 @@
     layer.lineWidth = _lineWidth;
     layer.path = [self fill].CGPath;
     
+    if (_isShadow) {
+        layer.shadowOpacity = 1.f;
+        layer.shadowColor = [UIColor lightGrayColor].CGColor;
+        layer.shadowOffset = CGSizeMake(2, 1);
+    }
+    
     CABasicAnimation * animation = [self animation];
     [layer addAnimation:animation forKey:nil];
     
@@ -89,7 +100,7 @@
  */
 - (CABasicAnimation *)animation{
     CABasicAnimation * fillAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-    fillAnimation.duration = 0.5f;
+    fillAnimation.duration = _animationDuration;
     fillAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     fillAnimation.fillMode = kCAFillModeForwards;
     fillAnimation.removedOnCompletion = NO;

@@ -14,6 +14,8 @@
 @property (nonatomic, strong) UIColor * barBackgroundColor;
 /** 百分比小数 */
 @property (nonatomic, assign) CGFloat percent;
+/** 是否带阴影效果(默认为YES) */
+@property (nonatomic, assign) BOOL isShadow;
 
 #warning message - readonly(只读)
 

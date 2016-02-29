@@ -13,7 +13,7 @@
 #import "ZFLabel.h"
 #import "NSString+Zirkfied.h"
 
-@interface ZFBarChart()
+@interface ZFBarChart()<UIScrollViewDelegate>
 
 /** 通用坐标轴图表 */
 @property (nonatomic, strong) ZFGenericChart * genericChart;
@@ -39,6 +39,9 @@
 - (void)commonInit{
     _isShowValueOnChart = YES;
     _valueOnChartFontSize = 10.f;
+    _isShadow = YES;
+    self.showsHorizontalScrollIndicator = NO;
+    self.delegate = self;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -46,7 +49,6 @@
     if (self) {
         [self commonInit];
         [self drawGenericChart];
-        self.showsHorizontalScrollIndicator = NO;
         
         //标题Label
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 30)];
@@ -92,6 +94,7 @@
             bar.percent = 1.f;
             bar.barBackgroundColor = [UIColor redColor];
         }
+        bar.isShadow = _isShadow;
         [bar strokePath];
         [self.barArray addObject:bar];
         [self addSubview:bar];
@@ -114,6 +117,7 @@
         label.font = [UIFont systemFontOfSize:_valueOnChartFontSize];
         label.numberOfLines = 0;
         label.center = label_center;
+        label.isFadeInAnimation = YES;
         [self addSubview:label];
     }
 }
@@ -149,6 +153,13 @@
     [self.genericChart strokePath];
     [self drawBar];
     self.contentSize = CGSizeMake(CGRectGetWidth(self.genericChart.frame), self.frame.size.height);
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    //self滚动时，标题保持相对不动
+    self.titleLabel.frame = CGRectMake(self.contentOffset.x, self.titleLabel.frame.origin.y, self.titleLabel.frame.size.width, self.titleLabel.frame.size.height);
 }
 
 #pragma mark - 重写setter,getter方法

@@ -12,6 +12,8 @@
 
 /** 圆环颜色 */
 @property (nonatomic, strong) UIColor * cirqueColor;
+/** 是否带阴影效果(默认为YES) */
+@property (nonatomic, assign) BOOL isShadow;
 
 #pragma mark - public method
 

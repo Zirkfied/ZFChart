@@ -19,7 +19,7 @@ typedef enum{
     kPercentTypeInteger = 1
 }kPercentType;
 
-@interface ZFPieChart : UIView
+@interface ZFPieChart : UIScrollView
 
 #pragma mark - 初始化时必须要赋值的属性
 
@@ -43,6 +43,8 @@ typedef enum{
 @property (nonatomic, assign) BOOL isShowPercent;
 /** 图表上百分比字体大小 */
 @property (nonatomic, assign) CGFloat percentOnChartFontSize;
+/** 是否带阴影效果(默认为YES) */
+@property (nonatomic, assign) BOOL isShadow;
 
 
 #pragma mark - public method

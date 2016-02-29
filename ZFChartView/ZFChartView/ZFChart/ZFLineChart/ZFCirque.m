@@ -11,8 +11,12 @@
 
 @interface ZFCirque()
 
+/** 半径 */
 @property (nonatomic, assign) CGFloat radius;
+/** 线宽 */
 @property (nonatomic, assign) CGFloat lineWidth;
+/** 动画时间 */
+@property (nonatomic, assign) CGFloat animationDuration;
 @property (nonatomic, strong) CAShapeLayer * shapeLayer;
 
 @end
@@ -26,6 +30,8 @@
     _radius = 3;
     _lineWidth = 2;
     _cirqueColor = ZFDecimalColor(0, 0.68, 1, 1);
+    _animationDuration = 0.5f;
+    _isShadow = YES;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -62,6 +68,12 @@
     layer.strokeColor = _cirqueColor.CGColor;
     self.shapeLayer = layer;
     
+    if (_isShadow) {
+        layer.shadowOpacity = 1.f;
+        layer.shadowColor = [UIColor lightGrayColor].CGColor;
+        layer.shadowOffset = CGSizeMake(2, 1);
+    }
+    
     CABasicAnimation * animation = [self animation];
     [layer addAnimation:animation forKey:nil];
     
@@ -77,7 +89,7 @@
  */
 - (CABasicAnimation *)animation{
     CABasicAnimation * fillAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-    fillAnimation.duration = 0.5;
+    fillAnimation.duration = _animationDuration;
     fillAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     fillAnimation.fillMode = kCAFillModeForwards;
     fillAnimation.removedOnCompletion = NO;

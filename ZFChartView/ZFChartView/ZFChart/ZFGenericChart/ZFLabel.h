@@ -10,4 +10,7 @@
 
 @interface ZFLabel : UILabel
 
+/** 是否开始以渐现动画方式显示(默认为NO) */
+@property (nonatomic, assign) BOOL isFadeInAnimation;
+
 @end

@@ -12,6 +12,8 @@
 
 /** 终点的坐标 */
 @property (nonatomic, assign) CGPoint endPoint;
+/** 是否带阴影效果(默认为YES) */
+@property (nonatomic, assign) BOOL isShadow;
 
 #pragma mark - public method
 

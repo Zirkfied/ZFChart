@@ -194,9 +194,9 @@
 				180AAFC51C7EEC010030A0C2 /* Category */,
 				180AAFCE1C7EEC010030A0C2 /* Other */,
 				180AAFD21C7EEC010030A0C2 /* ZFBarChart */,
-				180AAFD71C7EEC010030A0C2 /* ZFGenericChart */,
 				180AAFDE1C7EEC010030A0C2 /* ZFLineChart */,
 				180AAFE51C7EEC010030A0C2 /* ZFPieChart */,
+				180AAFD71C7EEC010030A0C2 /* ZFGenericChart */,
 			);
 			path = ZFChart;
 			sourceTree = "<group>";
