@@ -74,3 +74,7 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart. Thanks 
 ###更新日志
         2016.02.25 初版发布
         2016.02.26 新增柱状图和线状图表上的数值显示
+        2016.02.29 新增阴影效果，新增线状图Value位置选项
+        
+        
+        近期将添加雷达图表
