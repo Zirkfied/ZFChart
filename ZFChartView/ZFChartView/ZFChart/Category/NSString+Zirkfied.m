@@ -19,7 +19,7 @@
  *  @return 返回CGRect
  */
 - (CGRect)stringWidthRectWithSize:(CGSize)size fontOfSize:(CGFloat)font{
-    NSDictionary * attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:font]};
+    NSDictionary * attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:font]};
     
     return [self boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
 }
