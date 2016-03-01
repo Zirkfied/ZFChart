@@ -1,3 +1,14 @@
+//
+//  ZFConst.h
+//  ZFChartView
+//
+//  Created by apple on 16/3/1.
+//  Copyright © 2016年 apple. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <CoreGraphics/CoreGraphics.h>
+
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 
@@ -15,9 +26,6 @@
  *  随机颜色
  */
 #define ZFRandomColor ZFColor(arc4random() % 256, arc4random() % 256, arc4random() % 256, 1)
-
-#define NAVIGATIONBAR_HEIGHT 64.f
-#define TABBAR_HEIGHT 49.f
 
 /**
  *  角度求三角函数sin值
@@ -49,29 +57,52 @@
  */
 #define ZFRadian(angle) (angle / 180.f * M_PI)
 
+
 /**
  *  坐标轴起点x值
  */
-#define ZFAxisLineStartXPos 50.f
+extern CGFloat const ZFAxisLineStartXPos;
 
 /**
  *  y轴label tag值
  */
-#define YLineValueLabelTag 100
+extern NSInteger const YLineValueLabelTag;
 
 /**
  *  x轴item宽度
  */
-#define XLineItemWidth 25.f
+extern CGFloat const XLineItemWidth;
 
 /**
  *  x轴item间隔
  */
-#define XLineItemGapLength 20.f
+extern CGFloat const XLineItemGapLength;
 
-
-#warning message - 此属性最好不要随意修改
 /**
- *  坐标y轴最大上限值到箭头的间隔距离 (此属性最好不要随意修改)
+ *  坐标y轴最大上限值到箭头的间隔距离
  */
-#define ZFAxisLineGapFromYLineMaxValueToArrow 20.f
+extern CGFloat const ZFAxisLineGapFromYLineMaxValueToArrow;
+
+/**
+ *  饼图百分比label Tag值
+ */
+extern NSInteger const PieChartPercentLabelTag;
+
+/**
+ *  饼图详情背景容器 Tag值
+ */
+extern NSInteger const PieChartDetailBackgroundTag;
+
+/**
+ *  导航栏高度
+ */
+extern CGFloat const NAVIGATIONBAR_HEIGHT;
+
+/**
+ *  tabBar高度
+ */
+extern CGFloat const TABBAR_HEIGHT;
+
+@interface ZFConst : NSObject
+
+@end

@@ -13,9 +13,6 @@
 #import "UIView+Zirkfied.h"
 #import "ZFTranslucencePath.h"
 
-#define PercentLabelTag 100
-#define DetailBackgroundTag 500
-
 @interface ZFPieChart()
 
 /** 总数 */
@@ -117,7 +114,7 @@
     for (NSInteger i = 0; i < self.valueArray.count; i++) {
         //装载容器
         UIView * background = [[UIView alloc] initWithFrame:CGRectMake(0, _pieCenter.y + _radius * 1.75 + 25 * i, self.frame.size.width, 25)];
-        background.tag = DetailBackgroundTag + i;
+        background.tag = PieChartDetailBackgroundTag + i;
         [self addSubview:background];
         
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showTranslucencePathAction:)];
@@ -152,7 +149,7 @@
     }
     
     //重设self.frame的值
-    UILabel * lastLabel = (UILabel *)[self viewWithTag:DetailBackgroundTag + self.valueArray.count - 1];
+    UILabel * lastLabel = (UILabel *)[self viewWithTag:PieChartDetailBackgroundTag + self.valueArray.count - 1];
     self.contentSize = CGSizeMake(self.frame.size.width, CGRectGetMaxY(lastLabel.frame) + 20);
 }
 
@@ -333,7 +330,7 @@
         if (radian >= startAngle && radian < endAngle) {
             [self removeZFTranslucencePath];
             [self.layer addSublayer:[self translucencePathShapeLayerWithStartAngle:startAngle endAngle:endAngle index:i]];
-            UILabel * percentLabel = [self viewWithTag:PercentLabelTag + i];
+            UILabel * percentLabel = [self viewWithTag:PieChartPercentLabelTag + i];
             [self bringSubviewToFront:percentLabel];
             self.valueLabel.text = _valueArray[i];
             
@@ -348,14 +345,14 @@
  *  @param sender UITapGestureRecognizer
  */
 - (void)showTranslucencePathAction:(UITapGestureRecognizer *)sender{
-    NSInteger index = sender.view.tag - DetailBackgroundTag;
+    NSInteger index = sender.view.tag - PieChartDetailBackgroundTag;
     NSDictionary * dict = self.angelArray[index];
     CGFloat startAngle = [dict[@"startAngle"] floatValue];
     CGFloat endAngle = [dict[@"endAngle"] floatValue];
     
     [self removeZFTranslucencePath];
     [self.layer addSublayer:[self translucencePathShapeLayerWithStartAngle:startAngle endAngle:endAngle index:index]];
-    UILabel * percentLabel = [self viewWithTag:PercentLabelTag + index];
+    UILabel * percentLabel = [self viewWithTag:PieChartPercentLabelTag + index];
     [self bringSubviewToFront:percentLabel];
     self.valueLabel.text = _valueArray[index];
 }
@@ -432,7 +429,7 @@
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont boldSystemFontOfSize:_percentOnChartFontSize];
     label.center = self.centerPoint;
-    label.tag = PercentLabelTag + _index;
+    label.tag = PieChartPercentLabelTag + _index;
     [self addSubview:label];
     
     [UIView animateWithDuration:[self countDuration:_index] animations:^{

@@ -133,7 +133,7 @@
     for (NSInteger i = 0; i < self.cirqueArray.count; i++) {
         ZFCirque * cirque = self.cirqueArray[i];
         //label的中心点
-        CGPoint label_center;
+        CGPoint label_center = CGPointMake(0, 0);
         
         //_valueOnChartPosition为上下分布
         if (_valueOnChartPosition == kLineChartValuePositionDefalut) {

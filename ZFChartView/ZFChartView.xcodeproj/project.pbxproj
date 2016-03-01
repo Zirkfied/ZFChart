@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		180092301C8541F700DE6CA0 /* ZFConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 1800922F1C8541F700DE6CA0 /* ZFConst.m */; };
 		180AAF591C7EDBD50030A0C2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 180AAF581C7EDBD50030A0C2 /* main.m */; };
 		180AAF5C1C7EDBD50030A0C2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 180AAF5B1C7EDBD50030A0C2 /* AppDelegate.m */; };
 		180AAF621C7EDBD50030A0C2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 180AAF601C7EDBD50030A0C2 /* Main.storyboard */; };
@@ -49,6 +50,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1800922E1C8541F700DE6CA0 /* ZFConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFConst.h; sourceTree = "<group>"; };
+		1800922F1C8541F700DE6CA0 /* ZFConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFConst.m; sourceTree = "<group>"; };
 		180AAF541C7EDBD50030A0C2 /* ZFChartView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZFChartView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		180AAF581C7EDBD50030A0C2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		180AAF5A1C7EDBD50030A0C2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -75,7 +78,6 @@
 		180AAFCD1C7EEC010030A0C2 /* UIView+Zirkfied.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Zirkfied.m"; sourceTree = "<group>"; };
 		180AAFCF1C7EEC010030A0C2 /* ZFChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFChart.h; sourceTree = "<group>"; };
 		180AAFD01C7EEC010030A0C2 /* ZFColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFColor.h; sourceTree = "<group>"; };
-		180AAFD11C7EEC010030A0C2 /* ZFConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFConst.h; sourceTree = "<group>"; };
 		180AAFD31C7EEC010030A0C2 /* ZFBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFBar.h; sourceTree = "<group>"; };
 		180AAFD41C7EEC010030A0C2 /* ZFBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFBar.m; sourceTree = "<group>"; };
 		180AAFD51C7EEC010030A0C2 /* ZFBarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFBarChart.h; sourceTree = "<group>"; };
@@ -219,7 +221,8 @@
 			children = (
 				180AAFCF1C7EEC010030A0C2 /* ZFChart.h */,
 				180AAFD01C7EEC010030A0C2 /* ZFColor.h */,
-				180AAFD11C7EEC010030A0C2 /* ZFConst.h */,
+				1800922E1C8541F700DE6CA0 /* ZFConst.h */,
+				1800922F1C8541F700DE6CA0 /* ZFConst.m */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				180AAFF31C7EEC010030A0C2 /* ZFCirque.m in Sources */,
 				180AAFF01C7EEC010030A0C2 /* ZFAxisLine.m in Sources */,
 				180AAFF51C7EEC010030A0C2 /* ZFLineChart.m in Sources */,
+				180092301C8541F700DE6CA0 /* ZFConst.m in Sources */,
 				180AAFEF1C7EEC010030A0C2 /* ZFBarChart.m in Sources */,
 				180AAFF11C7EEC010030A0C2 /* ZFGenericChart.m in Sources */,
 				180AAFED1C7EEC010030A0C2 /* UIView+Zirkfied.m in Sources */,
