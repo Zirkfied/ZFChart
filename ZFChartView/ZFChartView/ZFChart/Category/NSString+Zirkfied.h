@@ -17,9 +17,10 @@
  *
  *  @param size 填入预留的大小
  *  @param font 字体大小
+ *  @param isBold 字体是否加粗
  *
  *  @return 返回CGRect
  */
-- (CGRect)stringWidthRectWithSize:(CGSize)size fontOfSize:(CGFloat)font;
+- (CGRect)stringWidthRectWithSize:(CGSize)size fontOfSize:(CGFloat)font isBold:(BOOL)isBold;
 
 @end
