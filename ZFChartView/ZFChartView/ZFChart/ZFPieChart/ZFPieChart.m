@@ -422,7 +422,7 @@
  */
 - (void)creatPercentLabel{
     NSString * string = [self getPercent:_index];
-    CGRect rect = [string stringWidthRectWithSize:CGSizeMake(0, 0) fontOfSize:_percentOnChartFontSize];
+    CGRect rect = [string stringWidthRectWithSize:CGSizeMake(0, 0) fontOfSize:_percentOnChartFontSize isBold:YES];
     UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
     label.text = string;
     label.alpha = 0.f;
