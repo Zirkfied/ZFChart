@@ -65,7 +65,7 @@
         
         //label的中心点
         CGPoint label_center = CGPointMake(xPos + width * 0.5, yPos + height * 0.5);
-        CGRect rect = [self.xLineTitleArray[i] stringWidthRectWithSize:CGSizeMake(width + XLineItemGapLength * 0.5, height) fontOfSize:_xLineTitleFontSize];
+        CGRect rect = [self.xLineTitleArray[i] stringWidthRectWithSize:CGSizeMake(width + XLineItemGapLength * 0.5, height) fontOfSize:_xLineTitleFontSize isBold:NO];
         ZFLabel * label = [[ZFLabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
         label.text = self.xLineTitleArray[i];
         label.font = [UIFont systemFontOfSize:_xLineTitleFontSize];
@@ -93,7 +93,7 @@
         
         //label的中心点
         CGPoint label_center = CGPointMake(xPos + width * 0.5, yPos + height * 0.5);
-        CGRect rect = [self.xLineValueArray[i] stringWidthRectWithSize:CGSizeMake(width + XLineItemGapLength * 0.5, height) fontOfSize:_xLineValueFontSize];
+        CGRect rect = [self.xLineValueArray[i] stringWidthRectWithSize:CGSizeMake(width + XLineItemGapLength * 0.5, height) fontOfSize:_xLineValueFontSize isBold:NO];
         ZFLabel * label = [[ZFLabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
         label.text = self.xLineValueArray[i];
         label.font = [UIFont systemFontOfSize:_xLineValueFontSize];
