@@ -162,7 +162,7 @@
             
         }
         
-        CGRect rect = [self.xLineValueArray[i] stringWidthRectWithSize:CGSizeMake(45, 30) fontOfSize:_valueOnChartFontSize];
+        CGRect rect = [self.xLineValueArray[i] stringWidthRectWithSize:CGSizeMake(45, 30) fontOfSize:_valueOnChartFontSize isBold:NO];
         ZFLabel * label = [[ZFLabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
         label.text = self.xLineValueArray[i];
         label.font = [UIFont systemFontOfSize:_valueOnChartFontSize];
