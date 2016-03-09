@@ -36,6 +36,10 @@
 @property (nonatomic, assign) CGFloat xLineValueFontSize;
 /** 是否带阴影效果(默认为YES) */
 @property (nonatomic, assign) BOOL isShadow;
+/** 柱状条bar颜色 */
+@property (nonatomic, strong) UIColor * barColor;
+/** 超过y轴显示最大值时柱状条bar颜色(默认为红色) */
+@property (nonatomic, strong) UIColor * overMaxValueBarColor;
 
 #pragma mark - public method
 

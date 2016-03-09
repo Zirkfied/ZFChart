@@ -43,6 +43,9 @@
     _valueOnChartFontSize = 10.f;
     _valueOnChartPosition = kLineChartValuePositionDefalut;
     _isShadow = YES;
+    _lineColor = ZFDecimalColor(0, 0.68, 1, 1);
+    _cirqueColor = ZFDecimalColor(0, 0.68, 1, 1);
+    _overMaxValueCirqueColor = ZFRed;
     self.showsHorizontalScrollIndicator = NO;
     self.delegate = self;
 }
@@ -99,9 +102,7 @@
         
         ZFCirque * cirque = [[ZFCirque alloc] initWithFrame:CGRectMake(x, y, 0, 0)];
         //当前数值超过y轴显示上限时，圆环改为红色
-        if (isOverrun == YES) {
-            cirque.cirqueColor = [UIColor redColor];
-        }
+        cirque.cirqueColor = isOverrun ? _overMaxValueCirqueColor : _cirqueColor;
         cirque.isShadow = _isShadow;
         [cirque strokePath];
         [self.genericChart addSubview:cirque];
@@ -117,6 +118,7 @@
         CGFloat end_YPos = nextCirque.center.y - cirque.center.y;
         ZFLine * line = [[ZFLine alloc] initWithStartPoint:CGPointMake(cirque.center.x, cirque.center.y) endPoint:CGPointMake(end_XPos, end_YPos)];
         line.isShadow = _isShadow;
+        line.lineColor = _lineColor;
         [line strokePath];
         [self.genericChart addSubview:line];
     }

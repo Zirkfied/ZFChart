@@ -75,7 +75,7 @@
  */
 - (CAShapeLayer *)shapeLayer{
     CAShapeLayer * layer = [CAShapeLayer layer];
-    layer.strokeColor = ZFDecimalColor(0, 0.68, 1, 1).CGColor;
+    layer.strokeColor = _lineColor.CGColor;
     layer.lineWidth = _lineWidth;
     layer.path = [self fill].CGPath;
     

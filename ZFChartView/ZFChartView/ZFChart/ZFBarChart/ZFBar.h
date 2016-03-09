@@ -11,7 +11,7 @@
 @interface ZFBar : UIView
 
 /** bar颜色 */
-@property (nonatomic, strong) UIColor * barBackgroundColor;
+@property (nonatomic, strong) UIColor * barColor;
 /** 百分比小数 */
 @property (nonatomic, assign) CGFloat percent;
 /** 是否带阴影效果(默认为YES) */

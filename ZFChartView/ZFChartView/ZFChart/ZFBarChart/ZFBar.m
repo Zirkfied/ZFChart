@@ -27,7 +27,6 @@
  *  初始化默认变量
  */
 - (void)commonInit{
-    _barBackgroundColor = ZFDecimalColor(0, 0.68, 1, 1);
     _barWidth = XLineItemWidth;
     _barHeightLimit = self.frame.size.height;
     _percent = 0;
@@ -78,8 +77,7 @@
  */
 - (CAShapeLayer *)shapeLayer{
     CAShapeLayer * layer = [CAShapeLayer layer];
-    layer.strokeColor = _barBackgroundColor.CGColor;
-    layer.fillColor = _barBackgroundColor.CGColor;
+    layer.fillColor = _barColor.CGColor;
     layer.lineCap = kCALineCapRound;
     
     if (_isShadow) {

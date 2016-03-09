@@ -29,7 +29,6 @@
 - (void)commonInit{
     _radius = 3;
     _lineWidth = 2;
-    _cirqueColor = ZFDecimalColor(0, 0.68, 1, 1);
     _animationDuration = 0.5f;
     _isShadow = YES;
 }

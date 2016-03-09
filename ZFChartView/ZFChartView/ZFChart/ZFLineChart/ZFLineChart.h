@@ -47,6 +47,12 @@ typedef enum{
 @property (nonatomic, assign) kLineChartValuePosition valueOnChartPosition;
 /** 是否带阴影效果(默认为YES) */
 @property (nonatomic, assign) BOOL isShadow;
+/** 线状图上的线条颜色 */
+@property (nonatomic, strong) UIColor * lineColor;
+/** 线状图上的圆环颜色 */
+@property (nonatomic, strong) UIColor * cirqueColor;
+/** 超过y轴显示最大值时线状图上的圆环颜色(默认为红色) */
+@property (nonatomic, strong) UIColor * overMaxValueCirqueColor;
 
 #pragma mark - public method
 

@@ -14,6 +14,8 @@
 @property (nonatomic, assign) CGPoint endPoint;
 /** 是否带阴影效果(默认为YES) */
 @property (nonatomic, assign) BOOL isShadow;
+/** 线条颜色 */
+@property (nonatomic, strong) UIColor * lineColor;
 
 #pragma mark - public method
 

@@ -40,6 +40,8 @@
     _isShowValueOnChart = YES;
     _valueOnChartFontSize = 10.f;
     _isShadow = YES;
+    _barColor = ZFDecimalColor(0, 0.68, 1, 1);
+    _overMaxValueBarColor = ZFRed;
     self.showsHorizontalScrollIndicator = NO;
     self.delegate = self;
 }
@@ -90,9 +92,10 @@
         //当前数值超过y轴显示上限时，柱状改为红色
         if ([self.xLineValueArray[i] floatValue] / _yLineMaxValue <= 1) {
             bar.percent = [self.xLineValueArray[i] floatValue] / _yLineMaxValue;
+            bar.barColor = _barColor;
         }else{
             bar.percent = 1.f;
-            bar.barBackgroundColor = [UIColor redColor];
+            bar.barColor = _overMaxValueBarColor;
         }
         bar.isShadow = _isShadow;
         [bar strokePath];
