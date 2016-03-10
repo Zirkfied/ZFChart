@@ -77,8 +77,6 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart. Thanks 
         2016.02.29 新增阴影效果，新增线状图Value位置选项
         
         
-        近期将添加雷达图表
-        
 ##本人其他开源框架
 ####[ZFChart - 一款简单好用的图表库，目前有柱状，线状，饼图类型](https://github.com/Zirkfied/ZFChart)
 ####[ZFScan - 仿微信 二维码/条形码 扫描](https://github.com/Zirkfied/ZFScan)
