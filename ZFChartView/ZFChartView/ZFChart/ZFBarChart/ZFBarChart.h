@@ -24,7 +24,7 @@
 - (CGFloat)paddingForGroupsInBarChart:(ZFBarChart *)barChart;
 
 /**
- *  每组里面，bar与bar之间的间距(若不设置，默认为5.f)(当只有一组数组时，此方法无效)
+ *  每组里面，bar与bar之间的间距(若不设置，默认为5.f)(当只有一组数据时，此方法无效)
  */
 - (CGFloat)paddingForBarInBarChart:(ZFBarChart *)barChart;
 
