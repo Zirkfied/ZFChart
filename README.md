@@ -20,30 +20,39 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart. Thanks 
           当有多组数据时，NSArray存储 @[@[@"123", @"300", @"490", @"380", @"167", @"235"], @[@"256", @"283", @"236", @"240", @"183", @"200"], , @[@"256", @"256", @"256", @"256", @"256", @"256"]] 
         //barChart: 代表有6组，每组有3个item
         //lineChart: 代表有6组，每组有3个item（另一种理解就是有3条线，每条线上有6个点）
+        
         - (NSArray *)valueArrayInGenericChart:(ZFGenericChart *)chart;
         
 ####     @optional 可选实现的方法
         //返回名称数组(NSArray必须存储NSString类型)
+        
         - (NSArray *)nameArrayInGenericChart:(ZFGenericChart *)chart{
                 return @[@"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级"];
         }
         
+        
         //返回颜色数组(NSArray必须存储UIColor类型, 若不设置，默认随机) 
         //barChart: 若每组有3个item,则返回3个颜色
         //lineChart：若有3条线，则返回3个颜色
+        
         - (NSArray *)colorArrayInGenericChart:(ZFGenericChart *)chart{
                 return @[ZFSkyBlue, ZFOrange, ZFMagenta];
         }
         
+        
         //y轴数值显示的上限(若不设置，默认返回数据源最大值)
+        
         - (CGFloat)yLineMaxValueInGenericChart:(ZFGenericChart *)chart{
                 return 500;
         }
         
+        
         //y轴数值显示的段数(若不设置,默认5段)
+        
         - (NSInteger)yLineSectionCountInGenericChart:(ZFGenericChart *)chart{
                 return 10;
         }
+        
         
 ## BarChart(柱状图)
         须遵循ZFGenericChartDataSource数据源协议
@@ -61,16 +70,24 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart. Thanks 
 ####    @optional 可选实现的方法
         //x轴value文本颜色数组(若不设置，则全部返回黑色)
         //返回UIColor或者NSArray(NSArray里必须存储UIColor类型)
+        
         - (id)valueTextColorArrayInChart:(ZFGenericChart *)chart;
 
+
         //bar宽度(若不设置，默认为25.f)
+        
         - (CGFloat)barWidthInBarChart:(ZFBarChart *)barChart;
         
+        
         //组与组之间的间距(若不设置,默认为20.f)
+        
         - (CGFloat)paddingForGroupsInBarChart:(ZFBarChart *)barChart;
         
+        
         //每组里面，bar与bar之间的间距(若不设置，默认为5.f)(当只有一组数组时，此方法无效)
+        
         - (CGFloat)paddingForBarInBarChart:(ZFBarChart *)barChart;
+        
         
 效果展示
 
@@ -127,16 +144,24 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart. Thanks 
 ###     ZFLineChartDelegate协议方法
 ####    @optional 可选实现的方法
         //组宽(若不设置，默认为25.f)
+        
         - (CGFloat)groupWidthInLineChart:(ZFLineChart *)lineChart;
         
+        
         //组与组之间的间距(若不设置，默认为20.f)
+        
         - (CGFloat)paddingForGroupsInLineChart:(ZFLineChart *)lineChart
         
+        
         //圆的半径(若不设置，默认为5.f)
+        
         - (CGFloat)circleRadiusInLineChart:(ZFLineChart *)lineChart;
         
+        
         线宽(若不设置，默认为2.f)
+        
         - (CGFloat)lineWidthInLineChart:(ZFLineChart *)lineChart;
+
 
 效果展示
 
@@ -168,14 +193,20 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart. Thanks 
 ###     ZFPieChartDataSource数据源方法
 ####    @required 必须实现的方法
         //返回value数据(NSArray必须存储NSString类型)
+        
         - (NSArray *)valueArrayInPieChart:(ZFPieChart *)chart;
         
+        
         //返回颜色数组(NSArray必须存储UIColor类型)
+        
         - (NSArray *)colorArrayInPieChart:(ZFPieChart *)chart;
+        
         
 ####    @optional 可选实现的方法
         //返回名称数据(NSArray必须存储NSString类型)
+        
         - (NSArray *)nameArrayInPieChart:(ZFPieChart *)chart
+        
         
 效果展示
 
