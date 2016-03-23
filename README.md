@@ -251,7 +251,7 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart. Thanks 
             ZFLineChartDelegate协议方法 和 线状图(LineChart)其余属性 请查看 ZFLineChart.h
             ZFPieChartDataSource 和 饼图(PieChart)其余属性 请查看 ZFPieChart.h
         
-        5.仔细以上4个.h文件的中文注释
+        5.其余属性请仔细查看4个.h文件的中文注释
 
 
 ###更新日志
