@@ -89,7 +89,7 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart. Thanks 
         - (CGFloat)paddingForBarInBarChart:(ZFBarChart *)barChart;
         
         
-效果展示
+####效果展示
 
 ![](https://github.com/Zirkfied/Library/blob/master/bar1.png)
         
