@@ -7,6 +7,7 @@
 //
 
 #import "ZFGenericChart.h"
+#import "ZFPopoverLabel.h"
 @class ZFBarChart;
 
 /*********************  ZFBarChartDelegate(ZFBarChart协议方法)  *********************/
@@ -24,7 +25,7 @@
 - (CGFloat)paddingForGroupsInBarChart:(ZFBarChart *)barChart;
 
 /**
- *  每组里面，bar与bar之间的间距(若不设置，默认为5.f)(当只有一组数据时，此方法无效)
+ *  每组里面，bar与bar之间的间距(若不设置，默认为5.f)(当只有一组数组时，此方法无效)
  */
 - (CGFloat)paddingForBarInBarChart:(ZFBarChart *)barChart;
 
@@ -32,8 +33,8 @@
  *  x轴value文本颜色数组(若不设置，则全部返回黑色)
  *
  *  @return 返回UIColor或者NSArray
- *          eg: return ZFRed;  若返回UIColor,则全部value文本颜色为红色,当只有一组数据时,只允许返回UIColor
- *              return @[ZFRed, ZFOrange, ZFBlue];  若返回数组,则不同类别的bar上的value文本颜色为
+ *          eg: ①return ZFRed;  若返回UIColor,则全部value文本颜色为红色,当只有一组数据时,只允许返回UIColor
+ *              ②return @[ZFRed, ZFOrange, ZFBlue];  若返回数组,则不同类别的bar上的value文本颜色为
  *                                                  数组对应下标的颜色，样式看Github文档
  */
 - (id)valueTextColorArrayInChart:(ZFGenericChart *)chart;
@@ -68,6 +69,12 @@
 @property (nonatomic, strong) UIColor * overMaxValueBarColor;
 /** 背景颜色(默认为白色) */
 @property (nonatomic, strong) UIColor * backgroundColor;
+/** valueLabel样式(默认为kPopoverLabelPatternPopover) */
+@property (nonatomic, assign) kPopoverLabelPattern valueLabelPattern;
+/** 是否显示分割线(默认为NO) */
+@property (nonatomic, assign) BOOL isShowSeparate;
+/** valueLabel当为气泡样式时，是否带阴影效果(默认为YES) */
+@property (nonatomic, assign) BOOL isShadowForValueLabel;
 
 
 #pragma mark - public method

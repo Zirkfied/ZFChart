@@ -24,6 +24,9 @@
     barChart.topic = @"xx小学各年级男女人数";
     barChart.unit = @"人";
     barChart.topicColor = ZFPurple;
+//    barChart.isShadowForValueLabel = NO;
+//    barChart.valueLabelPattern = kPopoverLabelPatternBlank;
+//    barChart.isShowSeparate = YES;
     [self.view addSubview:barChart];
     [barChart strokePath];
 }

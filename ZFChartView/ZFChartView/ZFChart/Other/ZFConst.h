@@ -140,6 +140,17 @@ extern CGFloat const NAVIGATIONBAR_HEIGHT;
 extern CGFloat const TABBAR_HEIGHT;
 
 
+
+/**
+ *  线状图, 波浪图上的value的位置
+ */
+typedef enum{
+    kChartValuePositionDefalut = 0,//上下分布
+    kChartValuePositionOnTop = 1,//上方
+    kChartValuePositionOnBelow = 2//下方
+}kChartValuePosition;
+
+
 @interface ZFConst : NSObject
 
 @end

@@ -9,8 +9,6 @@
 #import "ZFLineChart.h"
 #import "ZFCircle.h"
 #import "ZFGenericAxis.h"
-#import "ZFConst.h"
-#import "ZFLabel.h"
 #import "ZFLine.h"
 #import "NSString+Zirkfied.h"
 #import "ZFMethod.h"
@@ -44,10 +42,13 @@
 - (void)commonInit{
     _valueOnChartFontSize = 10.f;
     _valueCenterToCircleCenterPadding = 25.f;
-    _valuePosition = kLineChartValuePositionDefalut;
+    _valuePosition = kChartValuePositionDefalut;
     _isShadow = YES;
     _overMaxValueCircleColor = ZFRed;
     _lineWidth = 2.f;
+    _valueLabelPattern = kPopoverLabelPatternPopover;
+    _unit = @"";
+    _isShadowForValueLabel = YES;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -166,46 +167,52 @@
  *  @param valueArray  当前线段的value数组
  */
 - (void)addValueLabel:(NSMutableArray *)circleArray index:(NSInteger)index colorIndex:(NSInteger)colorIndex valueArray:(NSMutableArray *)valueArray{
-    ZFCircle * cirque = circleArray[index];
-    //label的中心点
-    CGPoint label_center = CGPointMake(0, 0);
+    //当前的圆
+    ZFCircle * circle = circleArray[index];
+    
+    CGRect rect = [valueArray[index] stringWidthRectWithSize:CGSizeMake(45, 30) fontOfSize:_valueOnChartFontSize isBold:NO];
+    ZFPopoverLabel * popoverLabel = [[ZFPopoverLabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width + 10, rect.size.height + 10)];
+    popoverLabel.text = valueArray[index];
+    popoverLabel.font = [UIFont systemFontOfSize:_valueOnChartFontSize];
+    popoverLabel.textColor = _colorArray[colorIndex];
+    popoverLabel.pattern = _valueLabelPattern;
+    popoverLabel.isShadow = _isShadowForValueLabel;
+    [self.genericAxis addSubview:popoverLabel];
     
     //_valueOnChartPosition为上下分布
-    if (_valuePosition == kLineChartValuePositionDefalut) {
+    if (_valuePosition == kChartValuePositionDefalut) {
         //根据end_YPos判断label显示在圆环上面或下面
         CGFloat end_YPos;
         
-        if (index < circleArray.count - 1) {//当前圆环不是最后一个时
-            ZFCircle * nextCirque = circleArray[index+1];
-            end_YPos = nextCirque.center.y - cirque.center.y;
+        if (index == 0) {//当前圆环是第一个时
+            end_YPos = circle.center.y;
             
-        }else{//当前圆环为最后一个时
+        }else{//当前圆环不是第一个时
             ZFCircle * preCirque = circleArray[index-1];
-            end_YPos = preCirque.center.y - cirque.center.y;
-            
+            end_YPos = preCirque.center.y - circle.center.y;
         }
         
-        label_center = end_YPos <= 0 ? CGPointMake(cirque.center.x, cirque.center.y + _valueCenterToCircleCenterPadding) : CGPointMake(cirque.center.x, cirque.center.y - _valueCenterToCircleCenterPadding);
+        //根据end_YPos，设置popoverLabel的上下位置
+        if (end_YPos < 0) {
+            popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnTop;
+            popoverLabel.center = CGPointMake(circle.center.x, circle.center.y + _valueCenterToCircleCenterPadding);
+        }else{
+            popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnBelow;
+            popoverLabel.center = CGPointMake(circle.center.x, circle.center.y - _valueCenterToCircleCenterPadding);
+        }
         
-        //_valueOnChartPosition为圆环上方
-    }else if (_valuePosition == kLineChartValuePositionOnTop){
-        label_center = CGPointMake(cirque.center.x, cirque.center.y - _valueCenterToCircleCenterPadding);
+    //_valueOnChartPosition为圆环上方
+    }else if (_valuePosition == kChartValuePositionOnTop){
+        popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnBelow;
+        popoverLabel.center = CGPointMake(circle.center.x, circle.center.y - _valueCenterToCircleCenterPadding);
         
-        //_valueOnChartPosition为圆环下方
-    }else if (_valuePosition == kLineChartValuePositionOnBelow){
-        label_center = CGPointMake(cirque.center.x, cirque.center.y + _valueCenterToCircleCenterPadding);
-        
+    //_valueOnChartPosition为圆环下方
+    }else if (_valuePosition == kChartValuePositionOnBelow){
+        popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnTop;
+        popoverLabel.center = CGPointMake(circle.center.x, circle.center.y + _valueCenterToCircleCenterPadding);
     }
     
-    CGRect rect = [valueArray[index] stringWidthRectWithSize:CGSizeMake(45, 30) fontOfSize:_valueOnChartFontSize isBold:NO];
-    ZFLabel * label = [[ZFLabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
-    label.text = valueArray[index];
-    label.font = [UIFont systemFontOfSize:_valueOnChartFontSize];
-    label.center = label_center;
-    label.numberOfLines = 0;
-    label.textColor = _colorArray[colorIndex];
-    label.isFadeInAnimation = YES;
-    [self.genericAxis addSubview:label];
+    [popoverLabel strokePath];
 }
 
 #pragma mark - 画线
@@ -243,7 +250,8 @@
  */
 - (void)removeAllCircle{
     [self.circleArray removeAllObjects];
-    for (UIView * view in self.genericAxis.subviews) {
+    NSArray * subviews = [NSArray arrayWithArray:self.genericAxis.subviews];
+    for (UIView * view in subviews) {
         if ([view isKindOfClass:[ZFCircle class]]) {
             [(ZFCircle *)view removeFromSuperview];
         }
@@ -254,9 +262,10 @@
  *  清除柱状条上的Label
  */
 - (void)removeLabelOnChart{
-    for (UIView * view in self.genericAxis.subviews) {
-        if ([view isKindOfClass:[ZFLabel class]]) {
-            [(ZFLabel *)view removeFromSuperview];
+    NSArray * subviews = [NSArray arrayWithArray:self.genericAxis.subviews];
+    for (UIView * view in subviews) {
+        if ([view isKindOfClass:[ZFPopoverLabel class]]) {
+            [(ZFPopoverLabel *)view removeFromSuperview];
         }
     }
 }
@@ -362,6 +371,12 @@
 - (void)setBackgroundColor:(UIColor *)backgroundColor{
     _backgroundColor = !backgroundColor ? ZFWhite : backgroundColor;
     self.genericAxis.axisLineBackgroundColor = _backgroundColor;
+}
+
+- (void)setIsShowSeparate:(BOOL)isShowSeparate{
+    _isShowSeparate = isShowSeparate;
+    self.genericAxis.isShowSeparate = _isShowSeparate;
+    self.genericAxis.sectionColor = ZFLightGray;
 }
 
 @end

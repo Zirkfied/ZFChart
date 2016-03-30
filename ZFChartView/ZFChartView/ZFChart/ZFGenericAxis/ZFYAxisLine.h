@@ -34,6 +34,8 @@
 @property (nonatomic, assign, readonly) CGFloat yLineEndYPos;
 /** 计算y轴分段高度的平均值 */
 @property (nonatomic, assign, readonly) CGFloat yLineSectionHeightAverage;
+/** 分段线颜色 */
+@property (nonatomic, strong) UIColor * sectionColor;
 
 #pragma mark - public method
 

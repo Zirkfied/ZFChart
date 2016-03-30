@@ -10,7 +10,6 @@
 #import "ZFBar.h"
 #import "ZFGenericAxis.h"
 #import "ZFConst.h"
-#import "ZFLabel.h"
 #import "NSString+Zirkfied.h"
 #import "ZFMethod.h"
 
@@ -58,6 +57,9 @@
     _barWidth = XLineItemWidth;
     _barPadding = XLinePaddingForBarLength;
     _valueTextColor = ZFBlack;
+    _valueLabelPattern = kPopoverLabelPatternPopover;
+    _unit = @"";
+    _isShadowForValueLabel = YES;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -159,15 +161,17 @@
             //label的中心点
             CGPoint label_center = CGPointMake(bar.center.x, bar.endYPos + self.genericAxis.yAxisLine.yLineEndYPos);
             CGRect rect = [self.genericAxis.xLineValueArray[i] stringWidthRectWithSize:CGSizeMake(_barWidth + self.genericAxis.groupPadding * 0.5, 30) fontOfSize:_valueOnChartFontSize isBold:NO];
-            ZFLabel * label = [[ZFLabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
             
-            label.text = self.genericAxis.xLineValueArray[i];
-            label.font = [UIFont systemFontOfSize:_valueOnChartFontSize];
-            label.numberOfLines = 0;
-            label.center = label_center;
-            label.isFadeInAnimation = YES;
-            label.textColor = (UIColor *)_valueTextColorArray.firstObject;
-            [self.genericAxis addSubview:label];
+            ZFPopoverLabel * popoverLabel = [[ZFPopoverLabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width + 10, rect.size.height + 10)];
+            popoverLabel.text = self.genericAxis.xLineValueArray[i];
+            popoverLabel.font = [UIFont systemFontOfSize:_valueOnChartFontSize];
+            popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnBelow;
+            popoverLabel.center = label_center;
+            popoverLabel.pattern = _valueLabelPattern;
+            popoverLabel.textColor = (UIColor *)_valueTextColorArray.firstObject;
+            popoverLabel.isShadow = _isShadowForValueLabel;
+            [popoverLabel strokePath];
+            [self.genericAxis addSubview:popoverLabel];
         }
         
     }else if ([subObject isKindOfClass:[NSArray class]]){
@@ -179,25 +183,31 @@
                 //label的中心点
                 CGPoint label_center = CGPointMake(bar.center.x, bar.endYPos + self.genericAxis.yAxisLine.yLineEndYPos);
                 CGRect rect = [valueArray[groupIndex][barIndex] stringWidthRectWithSize:CGSizeMake(_barWidth + self.genericAxis.groupPadding * 0.5, 30) fontOfSize:_valueOnChartFontSize isBold:NO];
-                ZFLabel * label = [[ZFLabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
-                label.text = valueArray[groupIndex][barIndex];
-                label.font = [UIFont systemFontOfSize:_valueOnChartFontSize];
-                label.numberOfLines = 0;
-                label.center = label_center;
-                label.isFadeInAnimation = YES;
-                label.textColor = (UIColor *)_valueTextColorArray[groupIndex];
-                [self.genericAxis addSubview:label];
+                
+                ZFPopoverLabel * popoverLabel = [[ZFPopoverLabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width + 10, rect.size.height + 10)];
+                popoverLabel.text = valueArray[groupIndex][barIndex];
+                popoverLabel.font = [UIFont systemFontOfSize:_valueOnChartFontSize];
+                popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnBelow;
+                popoverLabel.center = label_center;
+                popoverLabel.pattern = _valueLabelPattern;
+                popoverLabel.textColor = (UIColor *)_valueTextColorArray[groupIndex];
+                popoverLabel.isShadow = _isShadowForValueLabel;
+                [popoverLabel strokePath];
+                [self.genericAxis addSubview:popoverLabel];
             }
         }
     }
 }
+
+#pragma mark - 清除控件
 
 /**
  *  清除之前所有柱状条
  */
 - (void)removeAllBar{
     [self.barArray removeAllObjects];
-    for (UIView * view in self.genericAxis.subviews) {
+    NSArray * subviews = [NSArray arrayWithArray:self.genericAxis.subviews];
+    for (UIView * view in subviews) {
         if ([view isKindOfClass:[ZFBar class]]) {
             [(ZFBar *)view removeFromSuperview];
         }
@@ -208,9 +218,10 @@
  *  清除柱状条上的Label
  */
 - (void)removeLabelOnChart{
-    for (UIView * view in self.genericAxis.subviews) {
-        if ([view isKindOfClass:[ZFLabel class]]) {
-            [(ZFLabel *)view removeFromSuperview];
+    NSArray * subviews = [NSArray arrayWithArray:self.genericAxis.subviews];
+    for (UIView * view in subviews) {
+        if ([view isKindOfClass:[ZFPopoverLabel class]]) {
+            [(ZFPopoverLabel *)view removeFromSuperview];
         }
     }
 }
@@ -342,6 +353,12 @@
 - (void)setBackgroundColor:(UIColor *)backgroundColor{
     _backgroundColor = !backgroundColor ? ZFWhite : backgroundColor;
     self.genericAxis.axisLineBackgroundColor = _backgroundColor;
+}
+
+- (void)setIsShowSeparate:(BOOL)isShowSeparate{
+    _isShowSeparate = isShowSeparate;
+    self.genericAxis.isShowSeparate = _isShowSeparate;
+    self.genericAxis.sectionColor = ZFLightGray;
 }
 
 @end

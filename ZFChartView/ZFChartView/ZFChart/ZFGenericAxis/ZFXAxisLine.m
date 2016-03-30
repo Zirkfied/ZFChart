@@ -85,6 +85,7 @@
 - (CAShapeLayer *)xAxisLineShapeLayer{
     CAShapeLayer * xAxisLineLayer = [CAShapeLayer layer];
     xAxisLineLayer.fillColor = [UIColor blackColor].CGColor;
+    xAxisLineLayer.path = [self drawXAxisLine].CGPath;
     
     CABasicAnimation * animation = [self animationFromValue:[self axisLineNoFill] toValue:[self drawXAxisLine]];
     [xAxisLineLayer addAnimation:animation forKey:nil];
@@ -132,6 +133,7 @@
 - (CAShapeLayer *)arrowsShapeLayer{
     CAShapeLayer * arrowsLayer = [CAShapeLayer layer];
     arrowsLayer.fillColor = [UIColor blackColor].CGColor;
+    arrowsLayer.path = [self drawArrows].CGPath;
     
     CABasicAnimation * animation = [self animationFromValue:[self arrowsNoFill] toValue:[self drawArrows]];
     [arrowsLayer addAnimation:animation forKey:nil];
@@ -162,8 +164,8 @@
  *  清除之前所有subLayers
  */
 - (void)removeAllSubLayers{
-    NSArray * subLayers = [NSArray arrayWithArray:self.layer.sublayers];
-    for (CALayer * layer in subLayers) {
+    NSArray * sublayers = [NSArray arrayWithArray:self.layer.sublayers];
+    for (CALayer * layer in sublayers) {
         [layer removeAllAnimations];
         [layer removeFromSuperlayer];
     }
@@ -176,7 +178,6 @@
  */
 - (void)strokePath{
     [self removeAllSubLayers];
-    
     [self.layer addSublayer:[self xAxisLineShapeLayer]];
     
     //延迟0.5秒执行

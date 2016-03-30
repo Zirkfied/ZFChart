@@ -25,7 +25,7 @@
  *  初始化默认变量
  */
 - (void)commonInit{
-    _animationDuration = 1.f;
+    _animationDuration = 0.5f;
     _isShadow = YES;
     _circleColor = ZFRandomColor;
     _radius = self.frame.size.width * 0.5;
@@ -71,9 +71,11 @@
     CAShapeLayer * layer = [CAShapeLayer layer];
     layer.fillColor = _circleColor.CGColor;
     layer.strokeColor = _circleColor.CGColor;
+    layer.path = [self fill].CGPath;
     self.shapeLayer = layer;
     
     if (_isShadow) {
+        layer.shadowPath = [self fill].CGPath;
         layer.shadowOpacity = 1.f;
         layer.shadowColor = [UIColor lightGrayColor].CGColor;
         layer.shadowOffset = CGSizeMake(2, 1);

@@ -12,6 +12,7 @@
 #import "SingleLineChartViewController.h"
 #import "MultiLineChartViewController.h"
 #import "PieChartViewController.h"
+#import "WaveChartViewController.h"
 
 @interface TableViewController ()
 
@@ -24,7 +25,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.nameArray = @[@"柱状图:一组数据(SingleBarChartViewController)", @"柱状图:多组数据(MultiBarChartViewController)", @"线状图:一组数据(SingleLineChartViewController)", @"线状图:多组数据(MultiLineChartViewController)", @"饼图(PieChartViewController)"];
+    self.nameArray = @[@"柱状图:一组数据(SingleBarChartViewController)",
+                       @"柱状图:多组数据(MultiBarChartViewController)",
+                       @"线状图:一组数据(SingleLineChartViewController)",
+                       @"线状图:多组数据(MultiLineChartViewController)",
+                       @"饼图(PieChartViewController)",
+                       @"波浪图(WaveChartViewController)"];
 }
 
 #pragma mark - Table view data source
@@ -61,6 +67,9 @@
         [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.row == 4){
         PieChartViewController * vc =[[PieChartViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.row == 5){
+        WaveChartViewController * vc =[[WaveChartViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
     

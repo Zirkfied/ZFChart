@@ -7,6 +7,8 @@
 //
 
 #import "ZFGenericChart.h"
+#import "ZFConst.h"
+#import "ZFPopoverLabel.h"
 @class ZFLineChart;
 
 /*********************  ZFLineChartDelegate(ZFLineChart协议方法)  *********************/
@@ -39,14 +41,7 @@
 
 
 
-/**
- *  线状图上的value的位置
- */
-typedef enum{
-    kLineChartValuePositionDefalut = 0,//上下分布
-    kLineChartValuePositionOnTop = 1,//圆的上方
-    kLineChartValuePositionOnBelow = 2//圆的下方
-}kLineChartValuePosition;
+
 
 @interface ZFLineChart : ZFGenericChart
 
@@ -64,8 +59,8 @@ typedef enum{
 @property (nonatomic, assign) CGFloat yLineValueFontSize;
 /** value中心到圆中心的距离(默认25.f) */
 @property (nonatomic, assign) CGFloat valueCenterToCircleCenterPadding;
-/** 圆上的value位置(默认为kLineChartValuePositionDefalut) */
-@property (nonatomic, assign) kLineChartValuePosition valuePosition;
+/** 图表上value位置(默认为kChartValuePositionDefalut) */
+@property (nonatomic, assign) kChartValuePosition valuePosition;
 /** 是否带阴影效果(默认为YES) */
 @property (nonatomic, assign) BOOL isShadow;
 /** 主题文字颜色(默认黑色) */
@@ -74,6 +69,13 @@ typedef enum{
 @property (nonatomic, strong) UIColor * overMaxValueCircleColor;
 /** 背景颜色(默认为白色) */
 @property (nonatomic, strong) UIColor * backgroundColor;
+/** valueLabel样式(默认为kPopoverLabelPatternPopover) */
+@property (nonatomic, assign) kPopoverLabelPattern valueLabelPattern;
+/** 是否显示分割线(默认为NO) */
+@property (nonatomic, assign) BOOL isShowSeparate;
+/** valueLabel当为气泡样式时，是否带阴影效果(默认为YES) */
+@property (nonatomic, assign) BOOL isShadowForValueLabel;
+
 
 #pragma mark - public method
 

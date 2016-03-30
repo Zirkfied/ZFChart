@@ -34,8 +34,12 @@
 @property (nonatomic, assign) CGFloat groupPadding;
 /** y轴单位 */
 @property (nonatomic, copy) NSString * unit;
-/** y轴背景颜色 */
+/** 坐标轴背景颜色 */
 @property (nonatomic, strong) UIColor * axisLineBackgroundColor;
+/** 是否显示分割线 */
+@property (nonatomic, assign) BOOL isShowSeparate;
+/** 分段线颜色 */
+@property (nonatomic, strong) UIColor * sectionColor;
 
 
 #warning message - readonly(只读)
@@ -47,6 +51,8 @@
 @property (nonatomic, assign, readonly) CGFloat yLineMaxValueYPos;
 /** 获取y轴最大上限值与0值的高度 */
 @property (nonatomic, assign, readonly) CGFloat yLineMaxValueHeight;
+/** 获取x轴宽度 */
+@property (nonatomic, assign, readonly) CGFloat xLineWidth;
 
 #pragma mark - public method
 

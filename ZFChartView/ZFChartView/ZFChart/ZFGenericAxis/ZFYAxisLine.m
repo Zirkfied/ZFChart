@@ -46,6 +46,7 @@
     _arrowsWidthHalf = _arrowsWidth / 2.f;
     _lineWidthHalf = _yLineWidth / 2.f;
     _sectionLength = YLineSectionLength;
+    _sectionColor = ZFBlack;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -88,6 +89,7 @@
 - (CAShapeLayer *)xAxisLineShapeLayer{
     CAShapeLayer * xAxisLineLayer = [CAShapeLayer layer];
     xAxisLineLayer.fillColor = [UIColor blackColor].CGColor;
+    xAxisLineLayer.path = [self drawXAxisLine].CGPath;
     
     CABasicAnimation * animation = [self animationFromValue:[self axisLineNoFill] toValue:[self drawXAxisLine] duration:0.01f];
     [xAxisLineLayer addAnimation:animation forKey:nil];
@@ -114,6 +116,7 @@
 - (CAShapeLayer *)yAxisLineShapeLayer{
     CAShapeLayer * yAxisLineLayer = [CAShapeLayer layer];
     yAxisLineLayer.fillColor = [UIColor blackColor].CGColor;
+    yAxisLineLayer.path = [self drawYAxisLine].CGPath;
     
     CABasicAnimation * animation = [self animationFromValue:[self axisLineNoFill] toValue:[self drawYAxisLine] duration:_animationDuration];
     [yAxisLineLayer addAnimation:animation forKey:nil];
@@ -162,6 +165,7 @@
 - (CAShapeLayer *)arrowsShapeLayer{
     CAShapeLayer * arrowsLayer = [CAShapeLayer layer];
     arrowsLayer.fillColor = [UIColor blackColor].CGColor;
+    arrowsLayer.path = [self drawArrows].CGPath;
     
     CABasicAnimation * animation = [self animationFromValue:[self arrowsNoFill] toValue:[self drawArrows] duration:_animationDuration];
     [arrowsLayer addAnimation:animation forKey:nil];
@@ -212,7 +216,8 @@
  */
 - (CAShapeLayer *)yAxisLineSectionShapeLayer:(NSInteger)i {
     CAShapeLayer * layer = [CAShapeLayer layer];
-    layer.strokeColor = [UIColor blackColor].CGColor;
+    layer.strokeColor = _sectionColor.CGColor;
+    layer.path = [self drawYAxisLineSection:i].CGPath;
     
     CABasicAnimation * animation = [self animationFromValue:[self yAxisLineSectionNoFill:i] toValue:[self drawYAxisLineSection:i] duration:_animationDuration];
     [layer addAnimation:animation forKey:nil];
@@ -241,8 +246,8 @@
  *  清除之前所有subLayers
  */
 - (void)removeAllSubLayers{
-    NSArray * subLayers = [NSArray arrayWithArray:self.layer.sublayers];
-    for (CALayer * layer in subLayers) {
+    NSArray * sublayers = [NSArray arrayWithArray:self.layer.sublayers];
+    for (CALayer * layer in sublayers) {
         [layer removeAllAnimations];
         [layer removeFromSuperlayer];
     }

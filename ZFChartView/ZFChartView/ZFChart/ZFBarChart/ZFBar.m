@@ -76,6 +76,7 @@
     CAShapeLayer * layer = [CAShapeLayer layer];
     layer.fillColor = _barColor.CGColor;
     layer.lineCap = kCALineCapRound;
+    layer.path = [self fill].CGPath;
     
     if (_isShadow) {
         layer.shadowOpacity = 1.f;
@@ -108,17 +109,24 @@
     return fillAnimation;
 }
 
+/**
+ *  清除之前所有subLayers
+ */
+- (void)removeAllLayer{
+    NSArray * sublayers = [NSArray arrayWithArray:self.layer.sublayers];
+    for (CALayer * layer in sublayers) {
+        [layer removeAllAnimations];
+        [layer removeFromSuperlayer];
+    }
+}
+
 #pragma mark - public method
 
 /**
  *  重绘
  */
 - (void)strokePath{
-    for (CALayer * layer in self.layer.sublayers) {
-        [layer removeAllAnimations];
-        [layer removeFromSuperlayer];
-    }
-    
+    [self removeAllLayer];
     [self.layer addSublayer:[self shapeLayer]];
 }
 

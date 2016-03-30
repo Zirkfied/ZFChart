@@ -17,15 +17,14 @@
 @required
 /**
  *  value数据
+ *  
+ *  (PS:波浪图(ZFWaveChart)只支持1组数据,只能按以下①方式传值)
  *
- *  @return 当只有1组数据时，NSArray存储 @[@"1", @"2", @"3", @"4"]
- *          当有多组数据时，NSArray存储 @[@[@"1", @"2", @"3", @"4"], @[@"1", @"2", @"3", @"4"]]
+ *  @return ①当只有1组数据时，NSArray存储 @[@"1", @"2", @"3", @"4"]
+ *          ②当有多组数据时，NSArray存储 @[@[@"1", @"2", @"3", @"4"], @[@"1", @"2", @"3", @"4"]]
  */
 - (NSArray *)valueArrayInGenericChart:(ZFGenericChart *)chart;
 
-
-
-@optional
 /**
  *  名称数据
  *
@@ -33,8 +32,12 @@
  */
 - (NSArray *)nameArrayInGenericChart:(ZFGenericChart *)chart;
 
+@optional
+
 /**
  *  颜色数组(若不设置，默认随机)
+ *  
+ *  (PS:此方法对 波浪图(ZFWaveChart) 无效)
  *
  *  @return NSArray必须存储UIColor类型
  */

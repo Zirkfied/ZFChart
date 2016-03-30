@@ -25,6 +25,8 @@
     lineChart.unit = @"人";
     lineChart.topicColor = ZFPurple;
 //    lineChart.backgroundColor = ZFGreen;
+//    lineChart.valueLabelPattern = kPopoverLabelPatternBlank;
+//    lineChart.isShowSeparate = YES;
     [self.view addSubview:lineChart];
     [lineChart strokePath];
 }

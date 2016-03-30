@@ -33,6 +33,7 @@
     _groupWidth = XLineItemWidth;
     _groupPadding = XLinePaddingForGroupsLength;
     _axisLineBackgroundColor = ZFWhite;
+    _isShowSeparate = NO;
     
     self.delegate = self;
     self.showsHorizontalScrollIndicator = NO;
@@ -57,12 +58,12 @@
 - (void)drawAxisLine{
     //x轴
     self.xAxisLine = [[ZFXAxisLine alloc] initWithFrame:self.bounds];
-    self.xAxisLine.backgroundColor = ZFWhite;
+    self.xAxisLine.backgroundColor = _axisLineBackgroundColor;
     [self addSubview:self.xAxisLine];
     
     //y轴
     self.yAxisLine = [[ZFYAxisLine alloc] initWithFrame:CGRectMake(0, 0, ZFAxisLineStartXPos + YLineSectionLength, self.bounds.size.height)];
-    self.yAxisLine.backgroundColor = ZFWhite;
+    self.yAxisLine.backgroundColor = _axisLineBackgroundColor;
     self.yAxisLine.alpha = 1;
     [self addSubview:self.yAxisLine];
 }
@@ -135,19 +136,79 @@
     }
 }
 
+#pragma mark - 灰色分割线
+
+/**
+ *  灰色分割线起始位置 (未填充)
+ *
+ *  @param i 下标
+ *
+ *  @return UIBezierPath
+ */
+- (UIBezierPath *)yAxisLineSectionNoFill:(NSInteger)i {
+    UIBezierPath * bezier = [UIBezierPath bezierPath];
+    CGFloat yStartPos = self.yAxisLine.yLineStartYPos - (self.yAxisLine.yLineHeight - ZFAxisLineGapFromYLineMaxValueToArrow) / _yLineSectionCount * (i + 1);
+    [bezier moveToPoint:CGPointMake(self.yAxisLine.yLineStartXPos, yStartPos)];
+    [bezier addLineToPoint:CGPointMake(self.yAxisLine.yLineStartXPos, yStartPos)];
+    
+    return bezier;
+}
+
+/**
+ *  画灰色分割线
+ *
+ *  @param i 下标
+ *
+ *  @return UIBezierPath
+ */
+- (UIBezierPath *)drawYAxisLineSection:(NSInteger)i {
+    UIBezierPath * bezier = [UIBezierPath bezierPath];
+    CGFloat yStartPos = self.yAxisLine.yLineStartYPos - (self.yAxisLine.yLineHeight - ZFAxisLineGapFromYLineMaxValueToArrow) / _yLineSectionCount * (i + 1);
+    [bezier moveToPoint:CGPointMake(self.yAxisLine.yLineStartXPos, yStartPos)];
+    [bezier addLineToPoint:CGPointMake(self.yAxisLine.yLineStartXPos + self.xLineWidth, yStartPos)];
+    
+    return bezier;
+}
+
+/**
+ *  灰色分割线CAShapeLayer
+ *
+ *  @param i 下标
+ *
+ *  @return CAShapeLayer
+ */
+- (CAShapeLayer *)yAxisLineSectionShapeLayer:(NSInteger)i {
+    CAShapeLayer * layer = [CAShapeLayer layer];
+    layer.strokeColor = [UIColor lightGrayColor].CGColor;
+    layer.path = [self drawYAxisLineSection:i].CGPath;
+    
+    return layer;
+}
+
+#pragma mark - 清除控件
+
 /**
  *  清除之前所有Label
  */
 - (void)removeAllLabel{
-    for (UIView * view in self.xAxisLine.subviews) {
+    NSArray * subviews1 = [NSArray arrayWithArray:self.xAxisLine.subviews];
+    for (UIView * view in subviews1) {
         if ([view isKindOfClass:[ZFLabel class]]) {
             [(ZFLabel *)view removeFromSuperview];
         }
     }
     
-    for (UIView * view in self.yAxisLine.subviews) {
+    NSArray * subviews2 = [NSArray arrayWithArray:self.yAxisLine.subviews];
+    for (UIView * view in subviews2) {
         if ([view isKindOfClass:[ZFLabel class]]) {
             [(ZFLabel *)view removeFromSuperview];
+        }
+    }
+    
+    NSArray * sublayers = [NSArray arrayWithArray:self.layer.sublayers];
+    for (CALayer * layer in sublayers) {
+        if ([layer isKindOfClass:[CAShapeLayer class]]) {
+            [layer removeFromSuperlayer];
         }
     }
 }
@@ -168,6 +229,13 @@
     
     [self.xAxisLine strokePath];
     [self.yAxisLine strokePath];
+    
+    if (_isShowSeparate) {
+        for (NSInteger i = 0; i < _yLineSectionCount; i++) {
+            [self.layer addSublayer:[self yAxisLineSectionShapeLayer:i]];
+        }
+    }
+    
     [self setXLineNameLabel];
     [self setYLineValueLabel];
     [self addUnitLabel];
@@ -215,6 +283,21 @@
  */
 - (CGFloat)yLineMaxValueHeight{
     return self.yAxisLine.yLineStartYPos - (self.yAxisLine.yLineEndYPos + ZFAxisLineGapFromYLineMaxValueToArrow);
+}
+
+/** 
+ *  获取x轴宽度 
+ */
+- (CGFloat)xLineWidth{
+    return self.xAxisLine.xLineWidth;
+}
+
+/**
+ *  分段线颜色 
+ */
+- (void)setSectionColor:(UIColor *)sectionColor{
+    _sectionColor = sectionColor;
+    self.yAxisLine.sectionColor = _sectionColor;
 }
 
 @end

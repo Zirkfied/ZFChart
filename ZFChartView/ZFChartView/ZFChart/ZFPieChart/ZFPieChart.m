@@ -228,7 +228,8 @@
         }
     }
     
-    for (UIView * view in self.subviews) {
+    NSArray * subviews = [NSArray arrayWithArray:self.subviews];
+    for (UIView * view in subviews) {
         if (view != self.topicLabel) {
             [view removeFromSuperview];
         }
@@ -239,7 +240,7 @@
  *  移除半透明Path
  */
 - (void)removeZFTranslucencePath{
-    NSMutableArray * sublayers = [NSMutableArray arrayWithArray:self.layer.sublayers];
+    NSArray * sublayers = [NSArray arrayWithArray:self.layer.sublayers];
     for (CALayer * layer in sublayers) {
         if ([layer isKindOfClass:[ZFTranslucencePath class]]) {
             [layer removeFromSuperlayer];

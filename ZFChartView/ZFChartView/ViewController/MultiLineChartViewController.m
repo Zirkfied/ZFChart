@@ -24,7 +24,11 @@
     lineChart.topic = @"xx小学各年级男女人数";
     lineChart.unit = @"人";
     lineChart.topicColor = ZFPurple;
-    //    lineChart.backgroundColor = ZFGreen;
+//    lineChart.isShowSeparate = YES;
+//    lineChart.isShadowForValueLabel = NO;
+//    lineChart.isShadow = NO;
+//    lineChart.backgroundColor = ZFGreen;
+//    lineChart.valueLabelPattern = kPopoverLabelPatternBlank;
     [self.view addSubview:lineChart];
     [lineChart strokePath];
 }
