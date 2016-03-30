@@ -302,13 +302,17 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart. Thanks 
 
 ###更新日志
         2016.02.25 初版发布
+        
         2016.02.26 新增柱状图和线状图表上的数值显示
+        
         2016.02.29 ①新增阴影效果
                    ②新增线状图Value位置选项
+                   
         2016.03.23 ①添加柱状图,线状图多组数据显示
                    ②更改数据源传入模式，用法请参考UITableView
                    ③饼图新增整圆模式
                    若更新，请删除旧版本的文件
+                   
         2016.03.30 ①新增波浪图表(ZFWaveChart)
                    ②(BarChart),线状图(LineChart),波浪图(WaveChart)的valueLabel新增气泡样式，请查看ZFPopoverLabel.h的
                     kPopoverLabelPattern枚举类型
