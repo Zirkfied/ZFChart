@@ -163,7 +163,7 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart. Thanks 
         - (CGFloat)lineWidthInLineChart:(ZFLineChart *)lineChart;
 
 
-效果展示
+####效果展示
 
 ![](https://github.com/Zirkfied/Library/blob/master/line1.png)
 
@@ -208,7 +208,7 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart. Thanks 
         - (NSArray *)nameArrayInPieChart:(ZFPieChart *)chart
         
         
-效果展示
+####效果展示
 
 ![](https://github.com/Zirkfied/Library/blob/master/pie2.png)
         
