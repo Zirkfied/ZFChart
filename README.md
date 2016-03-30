@@ -313,8 +313,8 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart. Thanks 
                    ②(BarChart),线状图(LineChart),波浪图(WaveChart)的valueLabel新增气泡样式，请查看ZFPopoverLabel.h的
                     kPopoverLabelPattern枚举类型
                    ③(BarChart),线状图(LineChart),波浪图(WaveChart)新增坐标轴的分割线显示
-                   ④优化线状图(LineChart)重绘时在真机上卡帧Bug
-                   ⑤修复其余小Bug
+                   ④优化线状图(LineChart)重绘时在真机上卡帧问题
+                   ⑤修复其余Bug
         
         
 ##本人其他开源框架
