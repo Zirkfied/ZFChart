@@ -233,33 +233,88 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart. Thanks 
         
         该属性默认为kPieChartPatternTypeForCirque(圆环)，当设置kPieChartPatternTypeForCircle时，则以整圆的形式显示，如上所示
         pieChart.piePatternType = kPieChartPatternTypeForCircle;
+        
+        
+        
+## WaveChart(波浪图)
+        须遵循ZFGenericChartDataSource数据源协议
+        
+        ZFWaveChart * waveChart = [[ZFWaveChart alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT)];
+        waveChart.dataSource = self;
+        waveChart.delegate = self;
+        waveChart.topic = @"xx小学各年级人数";
+        waveChart.unit = @"人";
+        [waveChart strokePath];
+        [self.view addSubview:waveChart];
+        
+###     ZFWaveChartDelegate协议方法
+####    @optional 可选实现的方法
+        //组宽(若不设置，默认为25.f)
+        
+        - (CGFloat)groupWidthInWaveChart:(ZFWaveChart *)waveChart;
+        
+        
+        //组与组之间的间距(若不设置，默认为20.f)
+        
+        - (CGFloat)paddingForGroupsInWaveChart:(ZFWaveChart *)waveChart;
+
+
+        //path颜色(若不设置，默认为ZFSkyBlue)
+        
+        - (UIColor *)pathColorInWaveChart:(ZFWaveChart *)waveChart;
+        
+        
+####效果展示
+
+![](https://github.com/Zirkfied/Library/blob/master/wave1.png)
+        
+        //波浪图只支持显示1组数据，NSArray里只能存NSString类型
+        - (NSArray *)valueArrayInGenericChart:(ZFGenericChart *)chart{
+                return @[@"123", @"256", @"300", @"283", @"490", @"236"];
+        }
 
 
 ###其余说明
 ####    
-        1.  ZFGenericChartDataSource是柱状图(BarChart),线状图(LineChart)的数据源方法
+        1.  ZFGenericChartDataSource是柱状图(BarChart),线状图(LineChart),波浪图(WaveChart)的数据源方法
             ZFPieChartDataSource是饼图(PieChart)的数据源方法
             根据自身使用的图表遵循对应的数据源
         
         2.  ZFBarChartDelegate是柱状图(BarChart)的部分常量设置的协议方法
             ZFLineChartDelegate是线状图(LineChart)的部分常量设置的协议方法
+            ZFWaveChartDelegate是波浪图(WaveChart)的部分常量设置的协议方法
         
         3.  饼图(PieChart)只有DataSource数据源方法，没有Delegate的协议方法
         
         4.  ZFGenericChartDataSource数据源方法请查看 ZFGenericChart.h
             ZFBarChartDelegate协议方法 和 柱状图(BarChart)其余属性 请查看 ZFBarChart.h
             ZFLineChartDelegate协议方法 和 线状图(LineChart)其余属性 请查看 ZFLineChart.h
-            ZFPieChartDataSource 和 饼图(PieChart)其余属性 请查看 ZFPieChart.h
+            ZFPieChartDataSource数据源方法 和 饼图(PieChart)其余属性 请查看 ZFPieChart.h
+            ZFWaveChartDelegate协议方法 和 波浪图(WaveChart)其余属性 请查看 ZFWaveChart.h
+            
+        5.其余属性请仔细查看以上5个.h文件的中文注释
         
-        5.其余属性请仔细查看以上4个.h文件的中文注释
+        6.(BarChart),线状图(LineChart),波浪图(WaveChart)的valueLabel新增气泡样式，对应属性valueLabelPattern，现已默认为
+          kPopoverLabelPatternPopover(气泡样式)，若要改回原样式，则设置为kPopoverLabelPatternBlank；
+          
+          eg:  barChart.valueLabelPattern = kPopoverLabelPatternBlank;
 
 
 ###更新日志
         2016.02.25 初版发布
         2016.02.26 新增柱状图和线状图表上的数值显示
-        2016.02.29 新增阴影效果，新增线状图Value位置选项
-        2016.03.23 添加柱状图,线状图多组数据显示，更改数据源传入模式，用法请参考UITableView，饼图新增整圆模式，
+        2016.02.29 ①新增阴影效果
+                   ②新增线状图Value位置选项
+        2016.03.23 ①添加柱状图,线状图多组数据显示
+                   ②更改数据源传入模式，用法请参考UITableView
+                   ③饼图新增整圆模式
                    若更新，请删除旧版本的文件
+        2016.03.30 ①新增波浪图表(ZFWaveChart)
+                   ②(BarChart),线状图(LineChart),波浪图(WaveChart)的valueLabel新增气泡样式，请查看ZFPopoverLabel.h的
+                    kPopoverLabelPattern枚举类型
+                   ③(BarChart),线状图(LineChart),波浪图(WaveChart)新增坐标轴的分割线显示
+                   ④优化线状图(LineChart)重绘时在真机上卡帧Bug
+                   ⑤修复其余小Bug
         
         
 ##本人其他开源框架
