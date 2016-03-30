@@ -277,17 +277,17 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart. Thanks 
 ###其余说明
 ####    
         1.可根据自身图表需求进行框架瘦身
-          柱状图(ZFBarChart)
-![](https://github.com/Zirkfied/Library/blob/master/BarChart.png)
+        柱状图(ZFBarChart)
+        ![](https://github.com/Zirkfied/Library/blob/master/BarChart.png)
 
-          线状图(ZFLineChart)
-![](https://github.com/Zirkfied/Library/blob/master/LineChart.png)
+        线状图(ZFLineChart)
+        ![](https://github.com/Zirkfied/Library/blob/master/LineChart.png)
 
-          饼图(ZFPieChart)
-![](https://github.com/Zirkfied/Library/blob/master/PieChart.png)
+        饼图(ZFPieChart)
+        ![](https://github.com/Zirkfied/Library/blob/master/PieChart.png)
 
-          波浪图(ZFWaveChart)
-![](https://github.com/Zirkfied/Library/blob/master/WaveChart.png)
+        波浪图(ZFWaveChart)
+        ![](https://github.com/Zirkfied/Library/blob/master/WaveChart.png)
           
         2.  ZFGenericChartDataSource是柱状图(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)的数据源方法
             ZFPieChartDataSource是饼图(ZFPieChart)的数据源方法
