@@ -338,7 +338,8 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
                    ⑤修复其余Bug
                    
         2016.04.07 ①波浪图(ZFWaveChart)新增曲线样式
-                   ②柱状图(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)新增事件点击代理，点击bar,圆或popoverLaber进行后续操作，具                     体看Demo和对应的代理方法
+                   ②柱状图(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)新增事件点击代理，点击bar,圆或popoverLaber进行后续操作，具
+                    体看Demo和对应的代理方法
         
         
 ##本人其他开源框架
