@@ -266,13 +266,17 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         
 ####效果展示
 
-![](https://github.com/Zirkfied/Library/blob/master/wave1.png)
+![](https://github.com/Zirkfied/Library/blob/master/wave2.png)
         
         //波浪图只支持显示1组数据，NSArray里只能存NSString类型
         - (NSArray *)valueArrayInGenericChart:(ZFGenericChart *)chart{
                 return @[@"123", @"256", @"300", @"283", @"490", @"236"];
         }
 
+![](https://github.com/Zirkfied/Library/blob/master/wave1.png)
+        
+        //设置波浪样式，默认为(kWavePatternTypeForCurve)
+        waveChart.wavePatternType = kWavePatternTypeForSharp
 
 ###其余说明
 ####    
@@ -327,11 +331,14 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
                    若更新，请删除旧版本的文件
                    
         2016.03.30 ①新增波浪图表(ZFWaveChart)
-                   ②(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)的valueLabel新增气泡样式，请查看ZFPopoverLabel.h的
+                   ②柱状图(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)的valueLabel新增气泡样式，请查看ZFPopoverLabel.h的
                     kPopoverLabelPattern枚举类型
                    ③(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)新增坐标轴的分割线显示
                    ④优化线状图(LineChart)重绘时在真机上卡帧问题
                    ⑤修复其余Bug
+                   
+        2016.04.07 ①波浪图(ZFWaveChart)新增曲线样式
+                   ②柱状图(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)新增事件点击代理，点击bar,圆或popoverLaber进行后续操作，具                     体看Demo和对应的代理方法
         
         
 ##本人其他开源框架
