@@ -60,6 +60,7 @@
     _valueLabelPattern = kPopoverLabelPatternPopover;
     _unit = @"";
     _isShadowForValueLabel = YES;
+    _isShowXLineValue = YES;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -103,6 +104,8 @@
             CGFloat height = self.genericAxis.yLineMaxValueHeight;
             
             ZFBar * bar = [[ZFBar alloc] initWithFrame:CGRectMake(xPos, yPos, width, height)];
+            bar.groupAtIndex = 0;
+            bar.barIndex = i;
             //当前数值超过y轴显示上限时，柱状改为红色
             if ([self.genericAxis.xLineValueArray[i] floatValue] / self.genericAxis.yLineMaxValue <= 1) {
                 bar.percent = [self.genericAxis.xLineValueArray[i] floatValue] / self.genericAxis.yLineMaxValue;
@@ -115,6 +118,8 @@
             [bar strokePath];
             [self.barArray addObject:bar];
             [self.genericAxis addSubview:bar];
+            
+            [bar addTarget:self action:@selector(barAction:) forControlEvents:UIControlEventTouchUpInside];
         }
         
     }else if ([subObject isKindOfClass:[NSArray class]]){
@@ -133,6 +138,8 @@
                 CGFloat height = self.genericAxis.yLineMaxValueHeight;
                 
                 ZFBar * bar = [[ZFBar alloc] initWithFrame:CGRectMake(xPos, yPos, width, height)];
+                bar.groupAtIndex = groupIndex;
+                bar.barIndex = barIndex;
                 //当前数值超过y轴显示上限时，柱状改为红色
                 if ([valueArray[groupIndex][barIndex] floatValue] / self.genericAxis.yLineMaxValue <= 1) {
                     bar.percent = [valueArray[groupIndex][barIndex] floatValue] / self.genericAxis.yLineMaxValue;
@@ -145,6 +152,8 @@
                 [bar strokePath];
                 [self.barArray addObject:bar];
                 [self.genericAxis addSubview:bar];
+                
+                [bar addTarget:self action:@selector(barAction:) forControlEvents:UIControlEventTouchUpInside];
             }
         }
     }
@@ -163,6 +172,8 @@
             CGRect rect = [self.genericAxis.xLineValueArray[i] stringWidthRectWithSize:CGSizeMake(_barWidth + self.genericAxis.groupPadding * 0.5, 30) fontOfSize:_valueOnChartFontSize isBold:NO];
             
             ZFPopoverLabel * popoverLabel = [[ZFPopoverLabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width + 10, rect.size.height + 10)];
+            popoverLabel.groupIndex = 0;
+            popoverLabel.labelIndex = i;
             popoverLabel.text = self.genericAxis.xLineValueArray[i];
             popoverLabel.font = [UIFont systemFontOfSize:_valueOnChartFontSize];
             popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnBelow;
@@ -172,6 +183,7 @@
             popoverLabel.isShadow = _isShadowForValueLabel;
             [popoverLabel strokePath];
             [self.genericAxis addSubview:popoverLabel];
+            [popoverLabel addTarget:self action:@selector(popoverAction:) forControlEvents:UIControlEventTouchUpInside];
         }
         
     }else if ([subObject isKindOfClass:[NSArray class]]){
@@ -192,10 +204,37 @@
                 popoverLabel.pattern = _valueLabelPattern;
                 popoverLabel.textColor = (UIColor *)_valueTextColorArray[groupIndex];
                 popoverLabel.isShadow = _isShadowForValueLabel;
+                popoverLabel.groupIndex = groupIndex;
+                popoverLabel.labelIndex = barIndex;
                 [popoverLabel strokePath];
                 [self.genericAxis addSubview:popoverLabel];
+                [popoverLabel addTarget:self action:@selector(popoverAction:) forControlEvents:UIControlEventTouchUpInside];
             }
         }
+    }
+}
+
+#pragma mark - 点击事件
+
+/**
+ *  bar点击事件
+ *
+ *  @param sender bar
+ */
+- (void)barAction:(ZFBar *)sender{
+    if ([self.delegate respondsToSelector:@selector(barChart:didSelectBarAtGroupIndex:barIndex:)]) {
+        [self.delegate barChart:self didSelectBarAtGroupIndex:sender.groupAtIndex barIndex:sender.barIndex];
+    }
+}
+
+/**
+ *  popoverLaber点击事件
+ *
+ *  @param sender popoverLabel
+ */
+- (void)popoverAction:(ZFPopoverLabel *)sender{
+    if ([self.delegate respondsToSelector:@selector(barChart:didSelectPopoverLabelAtGroupIndex:labelIndex:)]) {
+        [self.delegate barChart:self didSelectPopoverLabelAtGroupIndex:sender.groupIndex labelIndex:sender.labelIndex];
     }
 }
 
@@ -307,8 +346,9 @@
     [self removeLabelOnChart];
     [self.genericAxis strokePath];
     [self drawBar:self.genericAxis.xLineValueArray];
-    [self setValueLabelOnChart:self.genericAxis.xLineValueArray];
+    _isShowXLineValue ? [self setValueLabelOnChart:self.genericAxis.xLineValueArray] : nil;
     [self.genericAxis bringSubviewToFront:self.genericAxis.yAxisLine];
+    [self.genericAxis bringSectionToFront];
 }
 
 /**

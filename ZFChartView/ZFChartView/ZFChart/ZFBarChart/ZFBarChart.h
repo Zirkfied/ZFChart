@@ -34,12 +34,27 @@
  *
  *  @return 返回UIColor或者NSArray
  *          eg: ①return ZFRed;  若返回UIColor,则全部value文本颜色为红色,当只有一组数据时,只允许返回UIColor
- *              ②return @[ZFRed, ZFOrange, ZFBlue];  若返回数组,则不同类别的bar上的value文本颜色为
- *                                                  数组对应下标的颜色，样式看Github文档
+ *              ②return @[ZFRed, ZFOrange, ZFBlue];  若返回数组,则不同类别的bar上的value文本颜色     
+ *                                                    为数组对应下标的颜色，样式看Github文档
+ *
  */
-- (id)valueTextColorArrayInChart:(ZFGenericChart *)chart;
+- (id)valueTextColorArrayInChart:(ZFBarChart *)chart;
 
+/**
+ *  用于编写点击bar后需要执行后续代码
+ *
+ *  @param groupIndex 点击的bar在第几组
+ *  @param barIndex   点击的bar在该组的下标
+ */
+- (void)barChart:(ZFBarChart *)barChart didSelectBarAtGroupIndex:(NSInteger)groupIndex barIndex:(NSInteger)barIndex;
 
+/**
+ *  用于编写点击x轴valueLabel后需要执行后续代码
+ *
+ *  @param groupIndex 点击的label在第几组
+ *  @param labelIndex 点击的label在该组的下标
+ */
+- (void)barChart:(ZFBarChart *)barChart didSelectPopoverLabelAtGroupIndex:(NSInteger)groupIndex labelIndex:(NSInteger)labelIndex;
 
 @end
 
@@ -75,6 +90,8 @@
 @property (nonatomic, assign) BOOL isShowSeparate;
 /** valueLabel当为气泡样式时，是否带阴影效果(默认为YES) */
 @property (nonatomic, assign) BOOL isShadowForValueLabel;
+/** 是否显示x轴的value(默认为YES，当需要自定义value显示样式时，可设置为NO) */
+@property (nonatomic, assign) BOOL isShowXLineValue;
 
 
 #pragma mark - public method

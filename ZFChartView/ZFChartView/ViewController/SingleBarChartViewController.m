@@ -24,6 +24,7 @@
     barChart.topic = @"xx小学各年级人数";
     barChart.unit = @"人";
     barChart.topicColor = ZFPurple;
+//    barChart.isShowXLineValue = NO;
 //    barChart.backgroundColor = ZFGreen;
 //    barChart.valueLabelPattern = kPopoverLabelPatternBlank;
 //    barChart.isShowSeparate = YES;
@@ -66,5 +67,13 @@
 //- (id)valueTextColorArrayInChart:(ZFGenericChart *)chart{
 //    return ZFBlue;
 //}
+
+- (void)barChart:(ZFBarChart *)barChart didSelectBarAtGroupIndex:(NSInteger)groupIndex barIndex:(NSInteger)barIndex{
+    NSLog(@"第%ld组========第%ld个",(long)groupIndex,(long)barIndex);
+}
+
+- (void)barChart:(ZFBarChart *)barChart didSelectPopoverLabelAtGroupIndex:(NSInteger)groupIndex labelIndex:(NSInteger)labelIndex{
+    NSLog(@"第%ld组========第%ld个",(long)groupIndex,(long)labelIndex);
+}
 
 @end

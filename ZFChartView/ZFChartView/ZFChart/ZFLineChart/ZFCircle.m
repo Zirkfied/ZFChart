@@ -75,6 +75,7 @@
     self.shapeLayer = layer;
     
     if (_isShadow) {
+        //动画的viewj加了阴影会有卡顿现象，添加这句解决
         layer.shadowPath = [self fill].CGPath;
         layer.shadowOpacity = 1.f;
         layer.shadowColor = [UIColor lightGrayColor].CGColor;

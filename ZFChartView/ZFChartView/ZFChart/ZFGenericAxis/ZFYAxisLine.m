@@ -71,33 +71,6 @@
 }
 
 /**
- *  画x轴
- *
- *  @return UIBezierPath
- */
-- (UIBezierPath *)drawXAxisLine{
-    UIBezierPath * bezier = [UIBezierPath bezierPathWithRect:CGRectMake(_yLineStartXPos, _yLineStartYPos, _yLineWidth + _arrowsWidthHalf, _yLineWidth)];
-    [bezier stroke];
-    return bezier;
-}
-
-/**
- *  x轴shapeLayer
- *
- *  @return CAShapeLayer
- */
-- (CAShapeLayer *)xAxisLineShapeLayer{
-    CAShapeLayer * xAxisLineLayer = [CAShapeLayer layer];
-    xAxisLineLayer.fillColor = [UIColor blackColor].CGColor;
-    xAxisLineLayer.path = [self drawXAxisLine].CGPath;
-    
-    CABasicAnimation * animation = [self animationFromValue:[self axisLineNoFill] toValue:[self drawXAxisLine] duration:0.01f];
-    [xAxisLineLayer addAnimation:animation forKey:nil];
-    
-    return xAxisLineLayer;
-}
-
-/**
  *  画y轴
  *
  *  @return UIBezierPath
@@ -260,12 +233,7 @@
  */
 - (void)strokePath{
     [self removeAllSubLayers];
-    [self.layer addSublayer:[self xAxisLineShapeLayer]];
     [self.layer addSublayer:[self yAxisLineShapeLayer]];
-    
-    for (NSInteger i = 0; i < _yLineSectionCount; i++) {
-        [self.layer addSublayer:[self yAxisLineSectionShapeLayer:i]];
-    }
     
     //延迟0.5秒执行
     self.timer = [NSTimer timerWithTimeInterval:_animationDuration target:self selector:@selector(timerAction:) userInfo:nil repeats:NO];

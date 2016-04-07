@@ -61,5 +61,9 @@
  */
 - (void)strokePath;
 
+/**
+ *  把分段线放的父控件最上面
+ */
+- (void)bringSectionToFront;
 
 @end

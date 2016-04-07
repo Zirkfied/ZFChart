@@ -10,17 +10,32 @@
 #import "ZFConst.h"
 #import "ZFLabel.h"
 #import "NSString+Zirkfied.h"
+#import "ZFColor.h"
 
 @interface ZFGenericAxis()<UIScrollViewDelegate>
 
+/** y轴分段线原始x点位置 */
+@property (nonatomic, assign) CGFloat sectionOriginX;
 /** x轴label高度 */
 @property (nonatomic, assign) CGFloat xLineLabelHeight;
+/** 动画时间 */
+@property (nonatomic, assign) CGFloat animationDuration;
 /** y轴单位Label */
 @property (nonatomic, strong) ZFLabel * unitLabel;
+/** 存储分段线的数组 */
+@property (nonatomic, strong) NSMutableArray * sectionArray;
 
 @end
 
 @implementation ZFGenericAxis
+
+- (NSMutableArray *)sectionArray{
+    if (!_sectionArray) {
+        _sectionArray = [NSMutableArray array];
+    }
+    
+    return _sectionArray;
+}
 
 /**
  *  初始化默认变量
@@ -30,6 +45,7 @@
     _xLineLabelHeight = 30.f;
     _xLineNameFontSize = 10.f;
     _yLineValueFontSize = 10.f;
+    _animationDuration = 1.f;
     _groupWidth = XLineItemWidth;
     _groupPadding = XLinePaddingForGroupsLength;
     _axisLineBackgroundColor = ZFWhite;
@@ -62,7 +78,7 @@
     [self addSubview:self.xAxisLine];
     
     //y轴
-    self.yAxisLine = [[ZFYAxisLine alloc] initWithFrame:CGRectMake(0, 0, ZFAxisLineStartXPos + YLineSectionLength, self.bounds.size.height)];
+    self.yAxisLine = [[ZFYAxisLine alloc] initWithFrame:CGRectMake(0, 0, ZFAxisLineStartXPos/* + YLineSectionLength*/, self.bounds.size.height)];
     self.yAxisLine.backgroundColor = _axisLineBackgroundColor;
     self.yAxisLine.alpha = 1;
     [self addSubview:self.yAxisLine];
@@ -161,11 +177,11 @@
  *
  *  @return UIBezierPath
  */
-- (UIBezierPath *)drawYAxisLineSection:(NSInteger)i {
+- (UIBezierPath *)drawYAxisLineSection:(NSInteger)i sectionLength:(CGFloat)sectionLength{
     UIBezierPath * bezier = [UIBezierPath bezierPath];
     CGFloat yStartPos = self.yAxisLine.yLineStartYPos - (self.yAxisLine.yLineHeight - ZFAxisLineGapFromYLineMaxValueToArrow) / _yLineSectionCount * (i + 1);
     [bezier moveToPoint:CGPointMake(self.yAxisLine.yLineStartXPos, yStartPos)];
-    [bezier addLineToPoint:CGPointMake(self.yAxisLine.yLineStartXPos + self.xLineWidth, yStartPos)];
+    [bezier addLineToPoint:CGPointMake(self.yAxisLine.yLineStartXPos + sectionLength, yStartPos)];
     
     return bezier;
 }
@@ -177,12 +193,31 @@
  *
  *  @return CAShapeLayer
  */
-- (CAShapeLayer *)yAxisLineSectionShapeLayer:(NSInteger)i {
+- (CAShapeLayer *)yAxisLineSectionShapeLayer:(NSInteger)i sectionLength:(CGFloat)sectionLength sectionColor:(UIColor *)sectionColor{
     CAShapeLayer * layer = [CAShapeLayer layer];
-    layer.strokeColor = [UIColor lightGrayColor].CGColor;
-    layer.path = [self drawYAxisLineSection:i].CGPath;
+    layer.strokeColor = sectionColor.CGColor;
+    layer.path = [self drawYAxisLineSection:i sectionLength:sectionLength].CGPath;
     
     return layer;
+}
+
+#pragma mark - y轴分段线
+
+/**
+ *  y轴分段线
+ */
+- (UIView *)sectionView:(NSInteger)i{
+    CGFloat yStartPos = self.yAxisLine.yLineStartYPos - (self.yAxisLine.yLineHeight - ZFAxisLineGapFromYLineMaxValueToArrow) / _yLineSectionCount * (i + 1);
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(self.yAxisLine.yLineStartXPos, yStartPos, YLineSectionLength, YLineSectionHeight)];
+    view.backgroundColor = ZFBlack;
+    view.alpha = 0.f;
+    _sectionOriginX = view.frame.origin.x;
+    
+    [UIView animateWithDuration:_animationDuration animations:^{
+        view.alpha = 1.f;
+    }];
+    
+    return view;
 }
 
 #pragma mark - 清除控件
@@ -220,6 +255,7 @@
  */
 - (void)strokePath{
     [self removeAllLabel];
+    [self.sectionArray removeAllObjects];
     self.yAxisLine.yLineSectionCount = _yLineSectionCount;
     
     if (self.xLineNameArray.count > 0) {
@@ -229,16 +265,31 @@
     
     [self.xAxisLine strokePath];
     [self.yAxisLine strokePath];
-    
-    if (_isShowSeparate) {
-        for (NSInteger i = 0; i < _yLineSectionCount; i++) {
-            [self.layer addSublayer:[self yAxisLineSectionShapeLayer:i]];
-        }
-    }
-    
     [self setXLineNameLabel];
     [self setYLineValueLabel];
     [self addUnitLabel];
+    
+    for (NSInteger i = 0; i < _yLineSectionCount; i++) {
+        if (_isShowSeparate) {
+            [self.layer addSublayer:[self yAxisLineSectionShapeLayer:i sectionLength:self.xLineWidth sectionColor:ZFLightGray]];
+        }else{
+            UIView * sectionView = [self sectionView:i];
+            [self addSubview:sectionView];
+            [self.sectionArray addObject:sectionView];
+        }
+    }
+}
+
+/**
+ *  把分段线放的父控件最上面
+ */
+- (void)bringSectionToFront{
+    if (!_isShowSeparate) {
+        for (NSInteger i = 0; i < self.sectionArray.count; i++) {
+            UIView * sectionView = self.sectionArray[i];
+            [self bringSubviewToFront:sectionView];
+        }
+    }
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -246,6 +297,13 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     //滚动时重设y轴的frame
     self.yAxisLine.frame = CGRectMake(scrollView.contentOffset.x, self.yAxisLine.frame.origin.y, self.yAxisLine.frame.size.width, self.yAxisLine.frame.size.height);
+    
+    if (!_isShowSeparate) {
+        for (NSInteger i = 0; i < self.sectionArray.count; i++) {
+            UIView * sectionView = self.sectionArray[i];
+            sectionView.frame = CGRectMake(_sectionOriginX + scrollView.contentOffset.x, sectionView.frame.origin.y, sectionView.frame.size.width, sectionView.frame.size.height);
+        }
+    }
 }
 
 #pragma mark - 重写setter,getter方法

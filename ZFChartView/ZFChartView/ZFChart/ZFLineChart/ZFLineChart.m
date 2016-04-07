@@ -49,6 +49,7 @@
     _valueLabelPattern = kPopoverLabelPatternPopover;
     _unit = @"";
     _isShadowForValueLabel = YES;
+    _isShowXLineValue = YES;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -98,12 +99,16 @@
             CGFloat center_yPos = self.genericAxis.axisStartYPos - height;
             
             ZFCircle * circle = [[ZFCircle alloc] initWithFrame:CGRectMake(0, 0, _radius * 2, _radius * 2)];
+            circle.lineAtIndex = 0;
+            circle.circleIndex = i;
             circle.center = CGPointMake(center_xPos, center_yPos);
             circle.circleColor = isOverrun ? _overMaxValueCircleColor : _colorArray.firstObject;
             circle.isShadow = _isShadow;
             [circle strokePath];
             [self.genericAxis addSubview:circle];
             [self.circleArray addObject:circle];
+            
+            [circle addTarget:self action:@selector(circleAction:) forControlEvents:UIControlEventTouchUpInside];
         }
         
     }else if ([subObject isKindOfClass:[NSArray class]]){
@@ -125,12 +130,16 @@
                     CGFloat center_yPos = self.genericAxis.axisStartYPos - height;
                     
                     ZFCircle * circle = [[ZFCircle alloc] initWithFrame:CGRectMake(0, 0, _radius * 2, _radius * 2)];
+                    circle.lineAtIndex = lineIndex;
+                    circle.circleIndex = circleIndex;
                     circle.center = CGPointMake(center_xPos, center_yPos);
                     circle.circleColor = isOverrun ? _overMaxValueCircleColor : _colorArray[lineIndex];
                     circle.isShadow = _isShadow;
                     [circle strokePath];
                     [self.genericAxis addSubview:circle];
                     [subArray addObject:circle];
+                    
+                    [circle addTarget:self action:@selector(circleAction:) forControlEvents:UIControlEventTouchUpInside];
                 }
                 [self.circleArray addObject:subArray];
             }
@@ -177,7 +186,10 @@
     popoverLabel.textColor = _colorArray[colorIndex];
     popoverLabel.pattern = _valueLabelPattern;
     popoverLabel.isShadow = _isShadowForValueLabel;
+    popoverLabel.groupIndex = colorIndex;
+    popoverLabel.labelIndex = index;
     [self.genericAxis addSubview:popoverLabel];
+    [popoverLabel addTarget:self action:@selector(popoverAction:) forControlEvents:UIControlEventTouchUpInside];
     
     //_valueOnChartPosition为上下分布
     if (_valuePosition == kChartValuePositionDefalut) {
@@ -244,6 +256,32 @@
     
     return layer;
 }
+
+#pragma mark - circle点击事件
+
+/**
+ *  circle点击事件
+ *
+ *  @param sender bar
+ */
+- (void)circleAction:(ZFCircle *)sender{
+    if ([self.delegate respondsToSelector:@selector(lineChart:didSelectCircleAtLineIndex:circleIndex:)]) {
+        [self.delegate lineChart:self didSelectCircleAtLineIndex:sender.lineAtIndex circleIndex:sender.circleIndex];
+    }
+}
+
+/**
+ *  popoverLaber点击事件
+ *
+ *  @param sender popoverLabel
+ */
+- (void)popoverAction:(ZFPopoverLabel *)sender{
+    if ([self.delegate respondsToSelector:@selector(lineChart:didSelectPopoverLabelAtLineIndex:circleIndex:)]) {
+        [self.delegate lineChart:self didSelectPopoverLabelAtLineIndex:sender.groupIndex circleIndex:sender.labelIndex];
+    }
+}
+
+#pragma mark - 清除控件
 
 /**
  *  清除之前所有圆
@@ -337,8 +375,9 @@
     [self.genericAxis strokePath];
     [self drawCircle];
     [self drawLine];
-    [self setValueLabelOnChart];
+    _isShowXLineValue ? [self setValueLabelOnChart] : nil;
     [self.genericAxis bringSubviewToFront:self.genericAxis.yAxisLine];
+    [self.genericAxis bringSectionToFront];
 }
 
 #pragma mark - 重写setter,getter方法

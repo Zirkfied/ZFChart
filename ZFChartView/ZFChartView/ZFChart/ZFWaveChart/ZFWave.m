@@ -8,6 +8,7 @@
 
 #import "ZFWave.h"
 #import "ZFColor.h"
+#import "UIBezierPath+Zirkfied.h"
 
 @interface ZFWave()
 
@@ -41,12 +42,12 @@
         NSDictionary * point = _valuePointArray[i];
         [bezier addLineToPoint:CGPointMake([point[@"xPos"] floatValue], self.frame.size.height)];
     }
-    
+
     [bezier addLineToPoint:CGPointMake(self.frame.size.width, self.frame.size.height)];
     [bezier addLineToPoint:CGPointMake(self.frame.size.width, self.frame.size.height)];
     [bezier closePath];
     
-    return bezier;
+    return bezier = _wavePatternType == kWavePatternTypeForCurve ? [bezier smoothedPathWithGranularity:_padding] : bezier;;
 }
 
 - (UIBezierPath *)fill{
@@ -62,7 +63,7 @@
     [bezier addLineToPoint:CGPointMake(self.frame.size.width, self.frame.size.height)];
     [bezier closePath];
     
-    return bezier;
+    return bezier = _wavePatternType == kWavePatternTypeForCurve ? [bezier smoothedPathWithGranularity:_padding] : bezier;;
 }
 
 - (CAShapeLayer *)shapeLayer{

@@ -26,7 +26,7 @@ typedef enum{
     kPopoverLabelPatternBlank = 1//空白样式(原样式)
 }kPopoverLabelPattern;
 
-@interface ZFPopoverLabel : UIView
+@interface ZFPopoverLabel : UIControl
 
 /** 文本内容 */
 @property (nonatomic, copy) NSString * text;
@@ -40,6 +40,10 @@ typedef enum{
 @property (nonatomic, assign) kPopoverLabelPattern pattern;
 /** 是否带阴影效果(默认为YES) */
 @property (nonatomic, assign) BOOL isShadow;
+/** self所在第几组 */
+@property (nonatomic, assign) NSInteger groupIndex;
+/** self所在的位置下标 */
+@property (nonatomic, assign) NSInteger labelIndex;
 
 /**
  *  重绘

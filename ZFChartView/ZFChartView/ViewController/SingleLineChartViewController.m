@@ -71,4 +71,12 @@
 //    return 2.f;
 //}
 
+- (void)lineChart:(ZFLineChart *)lineChart didSelectCircleAtLineIndex:(NSInteger)lineIndex circleIndex:(NSInteger)circleIndex{
+    NSLog(@"第%ld个", (long)circleIndex);
+}
+
+- (void)lineChart:(ZFLineChart *)lineChart didSelectPopoverLabelAtLineIndex:(NSInteger)lineIndex circleIndex:(NSInteger)circleIndex{
+    NSLog(@"第%ld个" ,(long)circleIndex);
+}
+
 @end

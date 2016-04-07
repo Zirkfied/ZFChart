@@ -14,21 +14,6 @@
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 
 /**
- *  直接填写小数
- */
-#define ZFDecimalColor(r, g, b, a) [UIColor colorWithRed:r green:g blue:b alpha:a]
-
-/**
- *  直接填写整数
- */
-#define ZFColor(r, g, b, a) [UIColor colorWithRed:r / 255.f green:g / 255.f blue:b / 255.f alpha:a]
-
-/**
- *  随机颜色
- */
-#define ZFRandomColor ZFColor(arc4random() % 256, arc4random() % 256, arc4random() % 256, 1)
-
-/**
  *  角度求三角函数sin值
  *  @param a 角度
  */
@@ -93,6 +78,11 @@ extern CGFloat const ZFAxisLineGapFromYLineMaxValueToArrow;
  *  y轴分段线长度
  */
 extern CGFloat const YLineSectionLength;
+
+/**
+ *  y轴分段线高度
+ */
+extern CGFloat const YLineSectionHeight;
 
 /**
  *  开始系数(上方)

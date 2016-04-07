@@ -9,6 +9,7 @@
 #import "ZFGenericChart.h"
 #import "ZFConst.h"
 #import "ZFPopoverLabel.h"
+#import "ZFWave.h"
 @class ZFWaveChart;
 
 /*********************  ZFWaveChartDelegate(ZFWaveChart协议方法)  *********************/
@@ -32,6 +33,13 @@
  *  @return 返回UIColor
  */
 - (UIColor *)pathColorInWaveChart:(ZFWaveChart *)waveChart;
+
+/**
+ *  用于编写x轴valueLabel点击后需要执行后续代码
+ *
+ *  @param index     点击的x轴valueLabel的位置下标
+ */
+- (void)waveChart:(ZFWaveChart *)waveChart popoverLabelAtIndex:(NSInteger)index;
 
 @end
 
@@ -58,7 +66,7 @@
 @property (nonatomic, assign) BOOL isShowSeparate;
 /** 图表上value位置(默认为kChartValuePositionDefalut) */
 @property (nonatomic, assign) kChartValuePosition valuePosition;
-/** valueLabel样式(默认为kPopoverLabelPatternPopover) */
+/** x轴valueLabel样式(默认为kPopoverLabelPatternPopover) */
 @property (nonatomic, assign) kPopoverLabelPattern valueLabelPattern;
 /** value文本颜色(默认黑色) */
 @property (nonatomic, strong) UIColor * valueTextColor;
@@ -66,6 +74,10 @@
 @property (nonatomic, strong) UIColor * overMaxValueTextColor;
 /** valueLabel当为气泡样式时，是否带阴影效果(默认为YES) */
 @property (nonatomic, assign) BOOL isShadowForValueLabel;
+/** 波浪样式(默认为kWavePatternTypeForCurve) */
+@property (nonatomic, assign) kWavePatternType wavePatternType;
+/** 是否显示x轴的value(默认为YES，当需要自定义value显示样式时，可设置为NO) */
+@property (nonatomic, assign) BOOL isShowXLineValue;
 
 #pragma mark - public method
 

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ZFBar : UIView
+@interface ZFBar : UIControl
 
 /** bar颜色 */
 @property (nonatomic, strong) UIColor * barColor;
@@ -16,6 +16,10 @@
 @property (nonatomic, assign) CGFloat percent;
 /** 是否带阴影效果(默认为YES) */
 @property (nonatomic, assign) BOOL isShadow;
+/** self所在第几组数据 */
+@property (nonatomic, assign) NSInteger groupAtIndex;
+/** self在该组数据的下标位置 */
+@property (nonatomic, assign) NSInteger barIndex;
 
 #warning message - readonly(只读)
 

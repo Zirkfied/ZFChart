@@ -24,7 +24,8 @@
     lineChart.topic = @"xx小学各年级男女人数";
     lineChart.unit = @"人";
     lineChart.topicColor = ZFPurple;
-//    lineChart.isShowSeparate = YES;
+    lineChart.isShowSeparate = YES;
+//    lineChart.isShowXLineValue = NO;
 //    lineChart.isShadowForValueLabel = NO;
 //    lineChart.isShadow = NO;
 //    lineChart.backgroundColor = ZFGreen;
@@ -72,5 +73,13 @@
 //- (CGFloat)lineWidthInLineChart:(ZFLineChart *)lineChart{
 //    return 5.f;
 //}
+
+- (void)lineChart:(ZFLineChart *)lineChart didSelectCircleAtLineIndex:(NSInteger)lineIndex circleIndex:(NSInteger)circleIndex{
+    NSLog(@"第%ld条线========第%ld个",(long)lineIndex,(long)circleIndex);
+}
+
+- (void)lineChart:(ZFLineChart *)lineChart didSelectPopoverLabelAtLineIndex:(NSInteger)lineIndex circleIndex:(NSInteger)circleIndex{
+    NSLog(@"第%ld条线========第%ld个",(long)lineIndex,(long)circleIndex);
+}
 
 @end

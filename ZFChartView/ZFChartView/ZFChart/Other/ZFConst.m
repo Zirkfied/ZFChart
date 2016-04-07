@@ -14,6 +14,7 @@ CGFloat const XLinePaddingForGroupsLength = 20.f;
 CGFloat const XLinePaddingForBarLength = 5.f;
 CGFloat const ZFAxisLineGapFromYLineMaxValueToArrow = 20.f;
 CGFloat const YLineSectionLength = 6.f;
+CGFloat const YLineSectionHeight = 1.f;
 CGFloat const StartRatio = 0.1f;
 CGFloat const EndRatio = 0.8f;
 CGFloat const ZFLineChartCircleRadius = 5.f;

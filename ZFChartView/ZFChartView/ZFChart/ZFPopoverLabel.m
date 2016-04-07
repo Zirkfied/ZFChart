@@ -119,7 +119,7 @@
 #pragma mark - 清除所有subLayers
 
 /**
- *  清楚所有subLayers
+ *  清除所有subLayers
  */
 - (void)removeAllLayer{
     NSArray * subLayers = [NSArray arrayWithArray:self.layer.sublayers];

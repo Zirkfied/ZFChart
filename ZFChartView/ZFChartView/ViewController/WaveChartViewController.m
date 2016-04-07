@@ -34,9 +34,11 @@
     waveChart.unit = @"人";
     waveChart.isShowSeparate = YES;
     waveChart.topicColor = ZFPurple;
+//    waveChart.isShowXLineValue = NO;
 //    waveChart.isShadowForValueLabel = NO;
 //    waveChart.valuePosition = kChartValuePositionOnBelow;
 //    waveChart.valueLabelPattern = kPopoverLabelPatternBlank;
+//    waveChart.wavePatternType = kWavePatternTypeForSharp;
     [waveChart strokePath];
     [self.view addSubview:waveChart];
 }
@@ -66,11 +68,15 @@
 //}
 //
 //- (CGFloat)paddingForGroupsInWaveChart:(ZFWaveChart *)waveChart{
-//    return 10.f;
+//    return 20.f;
 //}
 //
 //- (UIColor *)pathColorInWaveChart:(ZFWaveChart *)waveChart{
 //    return ZFOrange;
 //}
+
+- (void)waveChart:(ZFWaveChart *)waveChart popoverLabelAtIndex:(NSInteger)index{
+    NSLog(@"第%ld个Label",(long)index);
+}
 
 @end

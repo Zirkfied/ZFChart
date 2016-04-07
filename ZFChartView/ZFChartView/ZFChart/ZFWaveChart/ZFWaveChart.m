@@ -7,7 +7,6 @@
 //
 
 #import "ZFWaveChart.h"
-#import "ZFWave.h"
 #import "ZFGenericAxis.h"
 #import "ZFMethod.h"
 #import "NSString+Zirkfied.h"
@@ -38,6 +37,8 @@
     _overMaxValueTextColor = ZFRed;
     _unit = @"";
     _isShadowForValueLabel = YES;
+    _wavePatternType = kWavePatternTypeForCurve;
+    _isShowXLineValue = YES;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -70,6 +71,8 @@
     self.wave = [[ZFWave alloc] initWithFrame:CGRectMake(self.genericAxis.axisStartXPos, self.genericAxis.yLineMaxValueYPos, self.genericAxis.xLineWidth, self.genericAxis.yLineMaxValueHeight)];
     self.wave.valuePointArray = _valuePointArray;
     self.wave.pathColor = _pathColor;
+    self.wave.padding = self.genericAxis.groupPadding;
+    self.wave.wavePatternType = _wavePatternType;
     [self.genericAxis addSubview:self.wave];
     [self.wave strokePath];
 }
@@ -92,12 +95,14 @@
         popoverLabel.pattern = _valueLabelPattern;
         popoverLabel.textColor = _valueTextColor;
         popoverLabel.isShadow = _isShadowForValueLabel;
+        popoverLabel.labelIndex = i;
         CGFloat percent = [self.genericAxis.xLineValueArray[i] floatValue] / self.genericAxis.yLineMaxValue;
         if (percent > 1) {
             popoverLabel.textColor = _overMaxValueTextColor;
         }
         
         [self.wave addSubview:popoverLabel];
+        [popoverLabel addTarget:self action:@selector(popoverAction:) forControlEvents:UIControlEventTouchUpInside];
         
         //_valueOnChartPosition为上下分布
         if (_valuePosition == kChartValuePositionDefalut) {
@@ -114,24 +119,32 @@
             
             if (end_YPos < 0) {
                 popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnTop;
-                popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue], [currentDict[@"yPos"] floatValue] + 20.f);
+                popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue], [currentDict[@"yPos"] floatValue] + (rect.size.height + 10)*0.5);
             }else{
                 popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnBelow;
-                popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue], [currentDict[@"yPos"] floatValue] - 20.f);
+                popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue], [currentDict[@"yPos"] floatValue] - (rect.size.height + 10)*0.5);
             }
             
         //_valueOnChartPosition为图表上方
         }else if (_valuePosition == kChartValuePositionOnTop){
             popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnBelow;
-            popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue], [currentDict[@"yPos"] floatValue] - 20.f);
+            popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue], [currentDict[@"yPos"] floatValue] - (rect.size.height + 10)*0.5);
         
         //_valueOnChartPosition为图表下方
         }else if (_valuePosition == kChartValuePositionOnBelow){
             popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnTop;
-            popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue], [currentDict[@"yPos"] floatValue] + 20.f);
+            popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue], [currentDict[@"yPos"] floatValue] + (rect.size.height + 10)*0.5);
         }
         
         [popoverLabel strokePath];
+    }
+}
+
+#pragma mark - popover点击事件
+
+- (void)popoverAction:(ZFPopoverLabel *)sender{
+    if ([self.delegate respondsToSelector:@selector(waveChart:popoverLabelAtIndex:)]) {
+        [self.delegate waveChart:self popoverLabelAtIndex:sender.labelIndex];
     }
 }
 
@@ -194,8 +207,9 @@
     [self.genericAxis strokePath];
     _valuePointArray = [NSMutableArray arrayWithArray:[self cachedValuePointArray:self.genericAxis.xLineValueArray]];
     [self drawWavePath];
-    [self setValueLabelOnChart];
+    _isShowXLineValue ? [self setValueLabelOnChart] : nil;
     [self.genericAxis bringSubviewToFront:self.genericAxis.yAxisLine];
+    [self.genericAxis bringSectionToFront];
 }
 
 /**

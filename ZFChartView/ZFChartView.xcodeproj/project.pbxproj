@@ -21,6 +21,7 @@
 		180260D21CA236D80084DFFA /* SingleBarChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180260CA1CA236D80084DFFA /* SingleBarChartViewController.m */; };
 		180260D31CA236D80084DFFA /* SingleLineChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180260CC1CA236D80084DFFA /* SingleLineChartViewController.m */; };
 		180260D41CA236D80084DFFA /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180260CE1CA236D80084DFFA /* TableViewController.m */; };
+		1808700D1CB4DF0B00C64C74 /* UIBezierPath+Zirkfied.m in Sources */ = {isa = PBXBuildFile; fileRef = 1808700C1CB4DF0B00C64C74 /* UIBezierPath+Zirkfied.m */; };
 		180E96DE1C97959E0056C716 /* ZFBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E96DD1C97959E0056C716 /* ZFBarChart.m */; };
 		180E96E11C9795EC0056C716 /* ZFBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E96E01C9795EC0056C716 /* ZFBar.m */; };
 		187006A51C9AAED300BEF5FB /* ZFMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 187006A41C9AAED300BEF5FB /* ZFMethod.m */; };
@@ -90,6 +91,8 @@
 		180260CC1CA236D80084DFFA /* SingleLineChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleLineChartViewController.m; sourceTree = "<group>"; };
 		180260CD1CA236D80084DFFA /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		180260CE1CA236D80084DFFA /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		1808700B1CB4DF0B00C64C74 /* UIBezierPath+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+Zirkfied.h"; sourceTree = "<group>"; };
+		1808700C1CB4DF0B00C64C74 /* UIBezierPath+Zirkfied.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+Zirkfied.m"; sourceTree = "<group>"; };
 		180E96DC1C97959E0056C716 /* ZFBarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFBarChart.h; sourceTree = "<group>"; };
 		180E96DD1C97959E0056C716 /* ZFBarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFBarChart.m; sourceTree = "<group>"; };
 		180E96DF1C9795EC0056C716 /* ZFBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFBar.h; sourceTree = "<group>"; };
@@ -259,6 +262,8 @@
 				18E41DB71C96ACC700402ACF /* UIColor+Zirkfied.m */,
 				18E41DB81C96ACC700402ACF /* UIView+Zirkfied.h */,
 				18E41DB91C96ACC700402ACF /* UIView+Zirkfied.m */,
+				1808700B1CB4DF0B00C64C74 /* UIBezierPath+Zirkfied.h */,
+				1808700C1CB4DF0B00C64C74 /* UIBezierPath+Zirkfied.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -497,6 +502,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1808700D1CB4DF0B00C64C74 /* UIBezierPath+Zirkfied.m in Sources */,
 				1801F81B1CA6689000DA2D53 /* ZFWaveChart.m in Sources */,
 				18E41DBC1C96ACC700402ACF /* UIView+Zirkfied.m in Sources */,
 				18E41DBB1C96ACC700402ACF /* UIColor+Zirkfied.m in Sources */,
