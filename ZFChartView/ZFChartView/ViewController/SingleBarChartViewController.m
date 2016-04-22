@@ -29,13 +29,16 @@
 //    barChart.valueLabelPattern = kPopoverLabelPatternBlank;
 //    barChart.isShowSeparate = YES;
     [self.view addSubview:barChart];
+    
+    
+    
     [barChart strokePath];
 }
 
 #pragma mark - ZFGenericChartDataSource
 
 - (NSArray *)valueArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[@"123", @"256", @"300", @"283", @"490", @"236"];
+    return @[@"2", @"4", @"6", @"8", @"9", @"12"];
 }
 
 - (NSArray *)nameArrayInGenericChart:(ZFGenericChart *)chart{
@@ -47,7 +50,7 @@
 }
 
 - (CGFloat)yLineMaxValueInGenericChart:(ZFGenericChart *)chart{
-    return 500;
+    return 12;
 }
 
 - (NSInteger)yLineSectionCountInGenericChart:(ZFGenericChart *)chart{
