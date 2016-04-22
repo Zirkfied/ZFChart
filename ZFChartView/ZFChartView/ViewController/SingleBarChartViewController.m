@@ -21,13 +21,15 @@
     ZFBarChart * barChart = [[ZFBarChart alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT)];
     barChart.dataSource = self;
     barChart.delegate = self;
-    barChart.topic = @"xx小学各年级人数";
-    barChart.unit = @"人";
-    barChart.topicColor = ZFPurple;
+    barChart.topic = @"最高年化收益率";
+    barChart.unit = @"年收益率(％)";
+    barChart.topicColor = ZFOrange;
+    barChart.isShadow = NO;
 //    barChart.isShowXLineValue = NO;
-//    barChart.backgroundColor = ZFGreen;
-//    barChart.valueLabelPattern = kPopoverLabelPatternBlank;
+  //  barChart.backgroundColor = ZFGreen;
+    barChart.valueLabelPattern = kPopoverLabelPatternPopover;
 //    barChart.isShowSeparate = YES;
+   // barChart.overMaxValueBarColor = [UIColor orangeColor];
     [self.view addSubview:barChart];
     
     
@@ -42,7 +44,7 @@
 }
 
 - (NSArray *)nameArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[@"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级"];
+    return @[@"7天", @"3个月", @"6个月", @"1年", @"2年", @"3年"];
 }
 
 - (NSArray *)colorArrayInGenericChart:(ZFGenericChart *)chart{

@@ -46,7 +46,10 @@
     _arrowsWidthHalf = _arrowsWidth / 2.f;
     _lineWidthHalf = _yLineWidth / 2.f;
     _sectionLength = YLineSectionLength;
-    _sectionColor = ZFBlack;
+   
+   // _sectionColor = ZFBlack;
+    _sectionColor = [UIColor redColor];
+
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -88,7 +91,8 @@
  */
 - (CAShapeLayer *)yAxisLineShapeLayer{
     CAShapeLayer * yAxisLineLayer = [CAShapeLayer layer];
-    yAxisLineLayer.fillColor = [UIColor blackColor].CGColor;
+    //y轴 颜色
+    yAxisLineLayer.fillColor =  ZFZhuClolor.CGColor;
     yAxisLineLayer.path = [self drawYAxisLine].CGPath;
     
     CABasicAnimation * animation = [self animationFromValue:[self axisLineNoFill] toValue:[self drawYAxisLine] duration:_animationDuration];
@@ -137,7 +141,8 @@
  */
 - (CAShapeLayer *)arrowsShapeLayer{
     CAShapeLayer * arrowsLayer = [CAShapeLayer layer];
-    arrowsLayer.fillColor = [UIColor blackColor].CGColor;
+    //y箭头颜色
+    arrowsLayer.fillColor = [UIColor grayColor].CGColor;
     arrowsLayer.path = [self drawArrows].CGPath;
     
     CABasicAnimation * animation = [self animationFromValue:[self arrowsNoFill] toValue:[self drawArrows] duration:_animationDuration];

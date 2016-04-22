@@ -74,12 +74,14 @@
 - (void)drawAxisLine{
     //x轴
     self.xAxisLine = [[ZFXAxisLine alloc] initWithFrame:self.bounds];
-    self.xAxisLine.backgroundColor = _axisLineBackgroundColor;
+    self.xAxisLine.backgroundColor = _axisLineBackgroundColor;//
     [self addSubview:self.xAxisLine];
     
     //y轴
     self.yAxisLine = [[ZFYAxisLine alloc] initWithFrame:CGRectMake(0, 0, ZFAxisLineStartXPos/* + YLineSectionLength*/, self.bounds.size.height)];
     self.yAxisLine.backgroundColor = _axisLineBackgroundColor;
+   // self.yAxisLine.backgroundColor = [UIColor redColor];
+
     self.yAxisLine.alpha = 1;
     [self addSubview:self.yAxisLine];
 }
@@ -92,14 +94,16 @@
 - (void)addUnitLabel{
     ZFLabel * lastLabel = (ZFLabel *)[self.yAxisLine viewWithTag:YLineValueLabelTag + _yLineSectionCount];
     
-    CGFloat width = self.yAxisLine.yLineStartXPos;
+    
+    CGFloat width = self.yAxisLine.yLineStartXPos +20 ;
+    
     CGFloat height = self.yAxisLine.yLineSectionHeightAverage;
     CGFloat xPos = 0;
     CGFloat yPos = CGRectGetMinY(lastLabel.frame) - height;
     
     self.unitLabel = [[ZFLabel alloc] initWithFrame:CGRectMake(xPos, yPos, width, height)];
-    self.unitLabel.text = [NSString stringWithFormat:@"(%@)",_unit];
-    self.unitLabel.font = [UIFont boldSystemFontOfSize:10];
+    self.unitLabel.text = [NSString stringWithFormat:@"%@",_unit];
+    self.unitLabel.font = [UIFont systemFontOfSize:10];
     [self.yAxisLine addSubview:self.unitLabel];
 }
 
@@ -209,7 +213,10 @@
 - (UIView *)sectionView:(NSInteger)i{
     CGFloat yStartPos = self.yAxisLine.yLineStartYPos - (self.yAxisLine.yLineHeight - ZFAxisLineGapFromYLineMaxValueToArrow) / _yLineSectionCount * (i + 1);
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(self.yAxisLine.yLineStartXPos, yStartPos, YLineSectionLength, YLineSectionHeight)];
-    view.backgroundColor = ZFBlack;
+    //
+    view.backgroundColor = ZFZhuClolor;
+   // view.backgroundColor = [UIColor redColor];
+
     view.alpha = 0.f;
     _sectionOriginX = view.frame.origin.x;
     

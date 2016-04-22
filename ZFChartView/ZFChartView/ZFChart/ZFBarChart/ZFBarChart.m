@@ -110,6 +110,8 @@
             if ([self.genericAxis.xLineValueArray[i] floatValue] / self.genericAxis.yLineMaxValue <= 1) {
                 bar.percent = [self.genericAxis.xLineValueArray[i] floatValue] / self.genericAxis.yLineMaxValue;
                 bar.barColor = _colorArray.firstObject;
+                //修改 bar 颜色
+                bar.barColor = [UIColor orangeColor];
             }else{
                 bar.percent = 1.f;
                 bar.barColor = _overMaxValueBarColor;

@@ -416,6 +416,7 @@
     _isShowSeparate = isShowSeparate;
     self.genericAxis.isShowSeparate = _isShowSeparate;
     self.genericAxis.sectionColor = ZFLightGray;
+    
 }
 
 @end

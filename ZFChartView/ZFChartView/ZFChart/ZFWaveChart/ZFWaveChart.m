@@ -34,6 +34,7 @@
     _valueOnChartFontSize = 10.f;
     _valueLabelPattern = kPopoverLabelPatternPopover;
     _valueTextColor = ZFBlack;
+    
     _overMaxValueTextColor = ZFRed;
     _unit = @"";
     _isShadowForValueLabel = YES;
@@ -70,7 +71,9 @@
 - (void)drawWavePath{
     self.wave = [[ZFWave alloc] initWithFrame:CGRectMake(self.genericAxis.axisStartXPos, self.genericAxis.yLineMaxValueYPos, self.genericAxis.xLineWidth, self.genericAxis.yLineMaxValueHeight)];
     self.wave.valuePointArray = _valuePointArray;
+    
     self.wave.pathColor = _pathColor;
+
     self.wave.padding = self.genericAxis.groupPadding;
     self.wave.wavePatternType = _wavePatternType;
     [self.genericAxis addSubview:self.wave];
@@ -270,6 +273,9 @@
     _isShowSeparate = isShowSeparate;
     self.genericAxis.isShowSeparate = _isShowSeparate;
     self.genericAxis.sectionColor = ZFLightGray;
+    
+  //  self.genericAxis.sectionColor = [UIColor redColor];
+
 }
 
 @end
