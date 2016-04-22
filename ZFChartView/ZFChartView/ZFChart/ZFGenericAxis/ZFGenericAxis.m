@@ -101,7 +101,7 @@
     CGFloat xPos = 0;
     CGFloat yPos = CGRectGetMinY(lastLabel.frame) - height;
     
-    self.unitLabel = [[ZFLabel alloc] initWithFrame:CGRectMake(xPos, yPos, width, height)];
+    self.unitLabel = [[ZFLabel alloc] initWithFrame:CGRectMake(xPos, yPos -20, width, height)];
     self.unitLabel.text = [NSString stringWithFormat:@"%@",_unit];
     self.unitLabel.font = [UIFont systemFontOfSize:10];
     [self.yAxisLine addSubview:self.unitLabel];

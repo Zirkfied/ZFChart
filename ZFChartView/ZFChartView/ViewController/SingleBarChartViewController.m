@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    ZFBarChart * barChart = [[ZFBarChart alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT)];
+    ZFBarChart * barChart = [[ZFBarChart alloc] initWithFrame:CGRectMake(0, 50, SCREEN_WIDTH, SCREEN_HEIGHT/2)];
     barChart.dataSource = self;
     barChart.delegate = self;
     barChart.topic = @"最高年化收益率";
@@ -40,7 +40,7 @@
 #pragma mark - ZFGenericChartDataSource
 
 - (NSArray *)valueArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[@"2", @"4", @"6", @"8", @"9", @"12"];
+    return @[@"2", @"3", @"4", @"5", @"6", @"7"];
 }
 
 - (NSArray *)nameArrayInGenericChart:(ZFGenericChart *)chart{
@@ -52,7 +52,7 @@
 }
 
 - (CGFloat)yLineMaxValueInGenericChart:(ZFGenericChart *)chart{
-    return 12;
+    return 8;
 }
 
 - (NSInteger)yLineSectionCountInGenericChart:(ZFGenericChart *)chart{
