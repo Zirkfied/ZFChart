@@ -104,7 +104,7 @@
             CGFloat width = _barWidth;
             CGFloat height = self.genericAxis.yLineMaxValueHeight;
             
-            ZFBar * bar = [[ZFBar alloc] initWithFrame:CGRectMake(xPos, yPos, width, height)];
+            ZFBar * bar = [[ZFBar alloc] initWithFrame:CGRectMake(xPos, yPos, width*2/3, height)];
             bar.groupAtIndex = 0;
             bar.barIndex = i;
             //当前数值超过y轴显示上限时，柱状改为红色
@@ -210,6 +210,8 @@
                 popoverLabel.groupIndex = groupIndex;
                 popoverLabel.labelIndex = barIndex;
                 [popoverLabel strokePath];
+                popoverLabel.backgroundColor = [UIColor cyanColor];
+
                 [self.genericAxis addSubview:popoverLabel];
                 [popoverLabel addTarget:self action:@selector(popoverAction:) forControlEvents:UIControlEventTouchUpInside];
             }

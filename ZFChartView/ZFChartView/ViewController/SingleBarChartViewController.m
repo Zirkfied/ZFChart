@@ -28,7 +28,8 @@
 //    barChart.isShowXLineValue = NO;
   //  barChart.backgroundColor = ZFGreen;
     barChart.valueLabelPattern = kPopoverLabelPatternPopover;
-//    barChart.isShowSeparate = YES;
+    //isShadowForValueLabel
+    barChart.isShadowForValueLabel = NO;
    // barChart.overMaxValueBarColor = [UIColor orangeColor];
     [self.view addSubview:barChart];
     
@@ -39,7 +40,7 @@
 #pragma mark - ZFGenericChartDataSource
 
 - (NSArray *)valueArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[@"2", @"3", @"4", @"5", @"6", @"7"];
+    return @[@"2.01", @"3.02", @"4.03", @"5.11", @"6.50", @"7.7"];
 }
 
 - (NSArray *)nameArrayInGenericChart:(ZFGenericChart *)chart{
@@ -55,7 +56,7 @@
 }
 
 - (NSInteger)yLineSectionCountInGenericChart:(ZFGenericChart *)chart{
-    return 10;
+    return 4;
 }
 
 #pragma mark - ZFBarChartDelegate
@@ -74,6 +75,7 @@
 
 - (void)barChart:(ZFBarChart *)barChart didSelectBarAtGroupIndex:(NSInteger)groupIndex barIndex:(NSInteger)barIndex{
     NSLog(@"第%ld组========第%ld个",(long)groupIndex,(long)barIndex);
+    
 }
 
 - (void)barChart:(ZFBarChart *)barChart didSelectPopoverLabelAtGroupIndex:(NSInteger)groupIndex labelIndex:(NSInteger)labelIndex{
