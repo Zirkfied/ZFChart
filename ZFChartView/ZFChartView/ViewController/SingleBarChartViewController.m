@@ -32,8 +32,7 @@
    // barChart.overMaxValueBarColor = [UIColor orangeColor];
     [self.view addSubview:barChart];
     
-    
-    
+
     [barChart strokePath];
 }
 
@@ -44,7 +43,7 @@
 }
 
 - (NSArray *)nameArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[@"7天", @"3个月", @"6个月", @"1年", @"2年", @"3年"];
+    return @[@"7天", @"3个月", @"6个月", @"一年", @"二年", @"三年"];
 }
 
 - (NSArray *)colorArrayInGenericChart:(ZFGenericChart *)chart{

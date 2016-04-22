@@ -110,7 +110,7 @@
 #pragma mark - 设置x轴标题Label
 
 /**
- *  设置x轴标题Label
+ *  设置x轴标题Label  x
  */
 - (void)setXLineNameLabel{
     if (self.xLineNameArray.count > 0) {
@@ -118,7 +118,7 @@
             CGFloat width = _groupWidth;
             CGFloat height = _xLineLabelHeight;
             CGFloat center_xPos = self.xAxisLine.xLineStartXPos + _groupPadding + (_groupWidth + _groupPadding) * i + width * 0.5;
-            CGFloat center_yPos = self.yAxisLine.yLineStartYPos + 20 + height * 0.5;
+            CGFloat center_yPos = self.yAxisLine.yLineStartYPos + height * 0.5;
             
             //label的中心点
             CGPoint label_center = CGPointMake(center_xPos, center_yPos);
@@ -128,6 +128,7 @@
             label.font = [UIFont systemFontOfSize:_xLineNameFontSize];
             label.numberOfLines = 0;
             label.center = label_center;
+            label.backgroundColor = [UIColor cyanColor];
             [self.xAxisLine addSubview:label];
         }
     }
