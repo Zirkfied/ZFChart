@@ -18,28 +18,33 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    ZFBarChart * barChart = [[ZFBarChart alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT)];
+    ZFBarChart * barChart = [[ZFBarChart alloc] initWithFrame:CGRectMake(0, 50, SCREEN_WIDTH, SCREEN_HEIGHT/2)];
     barChart.dataSource = self;
     barChart.delegate = self;
-    barChart.topic = @"xx小学各年级人数";
-    barChart.unit = @"人";
-    barChart.topicColor = ZFPurple;
+    barChart.topic = @"最高年化收益率";
+    barChart.unit = @"年收益率(％)";
+    barChart.topicColor = ZFOrange;
+    barChart.isShadow = NO;
 //    barChart.isShowXLineValue = NO;
-//    barChart.backgroundColor = ZFGreen;
-//    barChart.valueLabelPattern = kPopoverLabelPatternBlank;
-//    barChart.isShowSeparate = YES;
+  //  barChart.backgroundColor = ZFGreen;
+    barChart.valueLabelPattern = kPopoverLabelPatternPopover;
+    //isShadowForValueLabel
+    barChart.isShadowForValueLabel = NO;
+   // barChart.overMaxValueBarColor = [UIColor orangeColor];
     [self.view addSubview:barChart];
+    
+
     [barChart strokePath];
 }
 
 #pragma mark - ZFGenericChartDataSource
 
 - (NSArray *)valueArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[@"123", @"256", @"300", @"283", @"490", @"236"];
+    return @[@"2.01", @"3.02", @"4.03", @"5.11", @"6.50", @"7.7"];
 }
 
 - (NSArray *)nameArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[@"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级"];
+    return @[@"7天", @"3个月", @"6个月", @"一年", @"二年", @"三年"];
 }
 
 - (NSArray *)colorArrayInGenericChart:(ZFGenericChart *)chart{
@@ -47,11 +52,11 @@
 }
 
 - (CGFloat)yLineMaxValueInGenericChart:(ZFGenericChart *)chart{
-    return 500;
+    return 8;
 }
 
 - (NSInteger)yLineSectionCountInGenericChart:(ZFGenericChart *)chart{
-    return 10;
+    return 4;
 }
 
 #pragma mark - ZFBarChartDelegate
@@ -70,6 +75,7 @@
 
 - (void)barChart:(ZFBarChart *)barChart didSelectBarAtGroupIndex:(NSInteger)groupIndex barIndex:(NSInteger)barIndex{
     NSLog(@"第%ld组========第%ld个",(long)groupIndex,(long)barIndex);
+    
 }
 
 - (void)barChart:(ZFBarChart *)barChart didSelectPopoverLabelAtGroupIndex:(NSInteger)groupIndex labelIndex:(NSInteger)labelIndex{

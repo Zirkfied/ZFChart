@@ -75,6 +75,7 @@
  */
 - (void)drawGenericChart{
     self.genericAxis = [[ZFGenericAxis alloc] initWithFrame:self.bounds];
+    
     [self addSubview:self.genericAxis];
 }
 
@@ -105,7 +106,10 @@
             circle.circleColor = isOverrun ? _overMaxValueCircleColor : _colorArray.firstObject;
             circle.isShadow = _isShadow;
             [circle strokePath];
-            [self.genericAxis addSubview:circle];
+            
+            //暂时屏蔽
+            //[self.genericAxis addSubview:circle];
+            
             [self.circleArray addObject:circle];
             
             [circle addTarget:self action:@selector(circleAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -137,6 +141,7 @@
                     circle.isShadow = _isShadow;
                     [circle strokePath];
                     [self.genericAxis addSubview:circle];
+                    
                     [subArray addObject:circle];
                     
                     [circle addTarget:self action:@selector(circleAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -188,7 +193,11 @@
     popoverLabel.isShadow = _isShadowForValueLabel;
     popoverLabel.groupIndex = colorIndex;
     popoverLabel.labelIndex = index;
-    [self.genericAxis addSubview:popoverLabel];
+    
+    //暂时屏蔽
+    //[self.genericAxis addSubview:popoverLabel];
+    
+    
     [popoverLabel addTarget:self action:@selector(popoverAction:) forControlEvents:UIControlEventTouchUpInside];
     
     //_valueOnChartPosition为上下分布
@@ -373,7 +382,10 @@
     [self removeLabelOnChart];
     [self removeAllSubLayer];
     [self.genericAxis strokePath];
+    
+    //暂时屏蔽
     [self drawCircle];
+    
     [self drawLine];
     _isShowXLineValue ? [self setValueLabelOnChart] : nil;
     [self.genericAxis bringSubviewToFront:self.genericAxis.yAxisLine];
@@ -416,6 +428,7 @@
     _isShowSeparate = isShowSeparate;
     self.genericAxis.isShowSeparate = _isShowSeparate;
     self.genericAxis.sectionColor = ZFLightGray;
+    
 }
 
 @end

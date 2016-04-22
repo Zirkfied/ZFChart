@@ -70,8 +70,9 @@
         [self drawGenericChart];
         
         //标题Label
-        self.topicLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 30)];
-        self.topicLabel.font = [UIFont boldSystemFontOfSize:18.f];
+        self.topicLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width/4 ,0, self.frame.size.width/2, 30)];
+        self.topicLabel.font = [UIFont boldSystemFontOfSize:16.f];
+        self.topicLabel.backgroundColor = [UIColor cyanColor];
         self.topicLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:self.topicLabel];
     }
@@ -103,13 +104,15 @@
             CGFloat width = _barWidth;
             CGFloat height = self.genericAxis.yLineMaxValueHeight;
             
-            ZFBar * bar = [[ZFBar alloc] initWithFrame:CGRectMake(xPos, yPos, width, height)];
+            ZFBar * bar = [[ZFBar alloc] initWithFrame:CGRectMake(xPos, yPos, width*2/3, height)];
             bar.groupAtIndex = 0;
             bar.barIndex = i;
             //当前数值超过y轴显示上限时，柱状改为红色
             if ([self.genericAxis.xLineValueArray[i] floatValue] / self.genericAxis.yLineMaxValue <= 1) {
                 bar.percent = [self.genericAxis.xLineValueArray[i] floatValue] / self.genericAxis.yLineMaxValue;
                 bar.barColor = _colorArray.firstObject;
+                //修改 bar 颜色
+                bar.barColor = [UIColor orangeColor];
             }else{
                 bar.percent = 1.f;
                 bar.barColor = _overMaxValueBarColor;
@@ -207,6 +210,8 @@
                 popoverLabel.groupIndex = groupIndex;
                 popoverLabel.labelIndex = barIndex;
                 [popoverLabel strokePath];
+                popoverLabel.backgroundColor = [UIColor cyanColor];
+
                 [self.genericAxis addSubview:popoverLabel];
                 [popoverLabel addTarget:self action:@selector(popoverAction:) forControlEvents:UIControlEventTouchUpInside];
             }

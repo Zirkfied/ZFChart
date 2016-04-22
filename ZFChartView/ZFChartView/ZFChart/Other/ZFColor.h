@@ -15,6 +15,8 @@
 #define ZFClear [UIColor clearColor]
 #define ZFSkyBlue [UIColor colorWithRed:0 green:0.68 blue:1 alpha:1]
 
+#define ZFZhuClolor ZFColor(178, 179, 181, 1) 
+
 /**
  *  直接填写小数
  */

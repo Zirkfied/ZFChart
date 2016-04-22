@@ -21,12 +21,15 @@
     ZFLineChart * lineChart = [[ZFLineChart alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT)];
     lineChart.dataSource = self;
     lineChart.delegate = self;
-    lineChart.topic = @"xx小学各年级男女人数";
-    lineChart.unit = @"人";
+    lineChart.topic = @"近一个月涨跌幅－20.66%";
+    lineChart.unit = @"";
     lineChart.topicColor = ZFPurple;
 //    lineChart.backgroundColor = ZFGreen;
 //    lineChart.valueLabelPattern = kPopoverLabelPatternBlank;
-//    lineChart.isShowSeparate = YES;
+    lineChart.isShowSeparate = YES;
+    lineChart.isShadow = NO;
+    lineChart.isShadowForValueLabel = NO;
+    
     [self.view addSubview:lineChart];
     [lineChart strokePath];
 }
@@ -34,7 +37,7 @@
 #pragma mark - ZFGenericChartDataSource
 
 - (NSArray *)valueArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[@"123", @"256", @"300", @"283", @"490", @"236"];
+    return @[@"123", @"256", @"300", @"283", @"490", @"236",@"23",@"34",@"55",@"45",@"66" ];
 }
 
 - (NSArray *)nameArrayInGenericChart:(ZFGenericChart *)chart{

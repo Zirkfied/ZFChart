@@ -84,7 +84,8 @@
  */
 - (CAShapeLayer *)xAxisLineShapeLayer{
     CAShapeLayer * xAxisLineLayer = [CAShapeLayer layer];
-    xAxisLineLayer.fillColor = [UIColor blackColor].CGColor;
+    //x轴颜色
+    xAxisLineLayer.fillColor = ZFZhuClolor.CGColor;
     xAxisLineLayer.path = [self drawXAxisLine].CGPath;
     
     CABasicAnimation * animation = [self animationFromValue:[self axisLineNoFill] toValue:[self drawXAxisLine]];
@@ -132,7 +133,8 @@
  */
 - (CAShapeLayer *)arrowsShapeLayer{
     CAShapeLayer * arrowsLayer = [CAShapeLayer layer];
-    arrowsLayer.fillColor = [UIColor blackColor].CGColor;
+    //箭头 颜色
+    arrowsLayer.fillColor = [UIColor grayColor].CGColor;
     arrowsLayer.path = [self drawArrows].CGPath;
     
     CABasicAnimation * animation = [self animationFromValue:[self arrowsNoFill] toValue:[self drawArrows]];

@@ -74,12 +74,14 @@
 - (void)drawAxisLine{
     //x轴
     self.xAxisLine = [[ZFXAxisLine alloc] initWithFrame:self.bounds];
-    self.xAxisLine.backgroundColor = _axisLineBackgroundColor;
+    self.xAxisLine.backgroundColor = _axisLineBackgroundColor;//
     [self addSubview:self.xAxisLine];
     
     //y轴
     self.yAxisLine = [[ZFYAxisLine alloc] initWithFrame:CGRectMake(0, 0, ZFAxisLineStartXPos/* + YLineSectionLength*/, self.bounds.size.height)];
     self.yAxisLine.backgroundColor = _axisLineBackgroundColor;
+   // self.yAxisLine.backgroundColor = [UIColor redColor];
+
     self.yAxisLine.alpha = 1;
     [self addSubview:self.yAxisLine];
 }
@@ -92,21 +94,23 @@
 - (void)addUnitLabel{
     ZFLabel * lastLabel = (ZFLabel *)[self.yAxisLine viewWithTag:YLineValueLabelTag + _yLineSectionCount];
     
-    CGFloat width = self.yAxisLine.yLineStartXPos;
+    
+    CGFloat width = self.yAxisLine.yLineStartXPos +20 ;
+    
     CGFloat height = self.yAxisLine.yLineSectionHeightAverage;
     CGFloat xPos = 0;
     CGFloat yPos = CGRectGetMinY(lastLabel.frame) - height;
     
-    self.unitLabel = [[ZFLabel alloc] initWithFrame:CGRectMake(xPos, yPos, width, height)];
-    self.unitLabel.text = [NSString stringWithFormat:@"(%@)",_unit];
-    self.unitLabel.font = [UIFont boldSystemFontOfSize:10];
+    self.unitLabel = [[ZFLabel alloc] initWithFrame:CGRectMake(xPos, yPos -20, width, height)];
+    self.unitLabel.text = [NSString stringWithFormat:@"%@",_unit];
+    self.unitLabel.font = [UIFont systemFontOfSize:10];
     [self.yAxisLine addSubview:self.unitLabel];
 }
 
 #pragma mark - 设置x轴标题Label
 
 /**
- *  设置x轴标题Label
+ *  设置x轴标题Label  x
  */
 - (void)setXLineNameLabel{
     if (self.xLineNameArray.count > 0) {
@@ -114,7 +118,7 @@
             CGFloat width = _groupWidth;
             CGFloat height = _xLineLabelHeight;
             CGFloat center_xPos = self.xAxisLine.xLineStartXPos + _groupPadding + (_groupWidth + _groupPadding) * i + width * 0.5;
-            CGFloat center_yPos = self.yAxisLine.yLineStartYPos + 20 + height * 0.5;
+            CGFloat center_yPos = self.yAxisLine.yLineStartYPos + height * 0.5;
             
             //label的中心点
             CGPoint label_center = CGPointMake(center_xPos, center_yPos);
@@ -124,6 +128,7 @@
             label.font = [UIFont systemFontOfSize:_xLineNameFontSize];
             label.numberOfLines = 0;
             label.center = label_center;
+            label.backgroundColor = [UIColor cyanColor];
             [self.xAxisLine addSubview:label];
         }
     }
@@ -209,7 +214,10 @@
 - (UIView *)sectionView:(NSInteger)i{
     CGFloat yStartPos = self.yAxisLine.yLineStartYPos - (self.yAxisLine.yLineHeight - ZFAxisLineGapFromYLineMaxValueToArrow) / _yLineSectionCount * (i + 1);
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(self.yAxisLine.yLineStartXPos, yStartPos, YLineSectionLength, YLineSectionHeight)];
-    view.backgroundColor = ZFBlack;
+    //
+    view.backgroundColor = ZFZhuClolor;
+   // view.backgroundColor = [UIColor redColor];
+
     view.alpha = 0.f;
     _sectionOriginX = view.frame.origin.x;
     
