@@ -331,7 +331,8 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
            */
            @property (nonatomic, assign) BOOL isResetYLineMinValue;
           
-        9.每当更新数据后，需重新调用一次 - (void)strokePath 方法
+        9.每当更新数据后或更改属性设置，则需重新调用一次 - (void)strokePath 方法。
+          网络获取数据后，才调用 - (void)strokePath 方法
 
 
 ###更新日志
