@@ -348,20 +348,21 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
                    若更新，请删除旧版本的文件
                    
         2016.03.30 ①新增波浪图表(ZFWaveChart)
-                   ②柱状图(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)的valueLabel新增气泡样式，请查看ZFPopoverLabel.h的
-                    kPopoverLabelPattern枚举类型
+                   ②柱状图(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)的valueLabel新增气泡样式，
+                    请查看ZFPopoverLabel.h的kPopoverLabelPattern枚举类型
                    ③(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)新增坐标轴的分割线显示
                    ④优化线状图(LineChart)重绘时在真机上卡帧问题
                    ⑤修复其余Bug
                    
         2016.04.07 ①波浪图(ZFWaveChart)新增曲线样式
-                   ②柱状图(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)新增事件点击代理，点击bar,圆或popoverLaber进行后续操作，具
-                    体看Demo和对应的代理方法
+                   ②柱状图(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)新增事件点击代理，
+                    点击bar,圆或popoverLaber进行后续操作，具体看Demo和对应的代理方法
                     
         2016.04.29 ①新增是否以动画展示
                    ②新增y轴最小值自定义设置，具体用法看上其余说明或看Demo说明
                    ③新增坐标轴自定义颜色设置
-                   ④本次更新进行了进一步的封装，故柱状图(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)的通用属性设置现已全部挪动到他们的父类ZFGenericChart.h，各自专有的属性依旧在他们自身.h文件
+                   ④本次更新进行了进一步的封装，故柱状图(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)的通用属性设置
+                    现已全部挪动到他们的父类ZFGenericChart.h，各自专有的属性依旧在他们自身.h文件
         
         
 ##本人其他开源框架
