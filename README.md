@@ -42,16 +42,17 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         
         //y轴数值显示的上限(若不设置，默认返回数据源最大值)
         
-        - (CGFloat)yLineMaxValueInGenericChart:(ZFGenericChart *)chart{
-                return 500;
-        }
+        - (CGFloat)yLineMaxValueInGenericChart:(ZFGenericChart *)chart;
+        
+        //y轴数值显示的最小值(若不设置，默认返回数据源最小值)
+        //(PS:当 isResetYLineMinValue 为NO时，此方法无效)(When isResetYLineMinValue is NO, the method is invalid)
+        
+        - (CGFloat)yLineMinValueInGenericChart:(ZFGenericChart *)chart;
         
         
         //y轴数值显示的段数(若不设置,默认5段)
         
-        - (NSInteger)yLineSectionCountInGenericChart:(ZFGenericChart *)chart{
-                return 10;
-        }
+        - (NSInteger)yLineSectionCountInGenericChart:(ZFGenericChart *)chart;
         
         
 ## BarChart(柱状图)
@@ -303,11 +304,11 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         
         4.  饼图(ZFPieChart)只有DataSource数据源方法，没有Delegate的协议方法
         
-        5.  ZFGenericChartDataSource数据源方法请查看 ZFGenericChart.h
-            ZFBarChartDelegate协议方法 和 柱状图(ZFBarChart)其余属性 请查看 ZFBarChart.h
-            ZFLineChartDelegate协议方法 和 线状图(ZFLineChart)其余属性 请查看 ZFLineChart.h
+        5.  因再一次进行封装，柱状图(ZFBarChart)，线状图(ZFLineChart)，波浪图(ZFWaveChart)均继承ZFGenericChart，故ZFGenericChartDataSource数据源方法 和 通用属性请查看 ZFGenericChart.h
+            ZFBarChartDelegate协议方法 和 柱状图(ZFBarChart)专有属性 请查看 ZFBarChart.h
+            ZFLineChartDelegate协议方法 和 线状图(ZFLineChart)专有属性 请查看 ZFLineChart.h
             ZFPieChartDataSource数据源方法 和 饼图(ZFPieChart)其余属性 请查看 ZFPieChart.h
-            ZFWaveChartDelegate协议方法 和 波浪图(ZFWaveChart)其余属性 请查看 ZFWaveChart.h
+            ZFWaveChartDelegate协议方法 和 波浪图(ZFWaveChart)专有属性 请查看 ZFWaveChart.h
             
         6.其余属性请仔细查看以上5个.h文件的中文注释
         
@@ -315,6 +316,22 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
           kPopoverLabelPatternPopover(气泡样式)，若要改回原样式，则设置为kPopoverLabelPatternBlank；
           
           eg:  barChart.valueLabelPattern = kPopoverLabelPatternBlank;
+          
+        8.关于自定义设置y轴最小值说明：
+          /** 该属性是否重设y轴最小值，默认为NO(不设置，从0开始)，当设置为YES时，则有以下2种情况
+              ①若同时实现代理方法中的 - (CGFloat)yLineMinValueInGenericChart:(ZFGenericChart *)chart，则y轴最小值为该方法的返回值
+              ②若不实现①中的方法，则y轴最小值为数据源最小值
+ 
+ 
+              Default is No (Start to O). When set to YES, then there are 2 kinds of situations:
+              ①If at the same time to implement the method in ZFGenericChartDataSource:
+               ||- (CGFloat)yLineMinValueInGenericChart:(ZFGenericChart *)chart||,
+               then yLineMinValue is the return value of the method.
+              ②If not implemented the method in ①, then yLineMinValue is the minimum value of the dataSource.
+           */
+           @property (nonatomic, assign) BOOL isResetYLineMinValue;
+          
+        9.每当更新数据后，需重新调用一次 - (void)strokePath 方法
 
 
 ###更新日志
@@ -340,6 +357,11 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         2016.04.07 ①波浪图(ZFWaveChart)新增曲线样式
                    ②柱状图(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)新增事件点击代理，点击bar,圆或popoverLaber进行后续操作，具
                     体看Demo和对应的代理方法
+                    
+        2016.04.29 ①新增是否以动画展示
+                   ②新增y轴最小值自定义设置，具体用法看上其余说明或看Demo说明
+                   ③新增坐标轴自定义颜色设置
+                   ④本次更新进行了进一步的封装，故柱状图(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)的通用属性设置现已全部挪动到他们的父类ZFGenericChart.h，各自专有的属性依旧在他们自身.h文件
         
         
 ##本人其他开源框架
