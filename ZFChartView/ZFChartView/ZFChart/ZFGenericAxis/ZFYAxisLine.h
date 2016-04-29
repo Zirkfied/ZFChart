@@ -18,9 +18,12 @@
 @property (nonatomic, assign) CGFloat yLineWidth;
 /** y轴高度 */
 @property (nonatomic, assign) CGFloat yLineHeight;
-
 /** y轴数值显示的段数 */
 @property (nonatomic, assign) NSInteger yLineSectionCount;
+/** 是否带动画显示(默认为YES，带动画) */
+@property (nonatomic, assign) BOOL isAnimated;
+/** 坐标轴颜色(默认为黑色) */
+@property (nonatomic, strong) UIColor * axisColor;
 
 #warning message - readonly(只读)
 
@@ -34,8 +37,6 @@
 @property (nonatomic, assign, readonly) CGFloat yLineEndYPos;
 /** 计算y轴分段高度的平均值 */
 @property (nonatomic, assign, readonly) CGFloat yLineSectionHeightAverage;
-/** 分段线颜色 */
-@property (nonatomic, strong) UIColor * sectionColor;
 
 #pragma mark - public method
 

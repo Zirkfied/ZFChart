@@ -18,6 +18,10 @@
 @property (nonatomic, assign) NSInteger lineAtIndex;
 /** self在该线的下标位置 */
 @property (nonatomic, assign) NSInteger circleIndex;
+/** 是否带动画显示(默认为YES，带动画) */
+@property (nonatomic, assign) BOOL isAnimated;
+/** 图形bezierPath阴影颜色(barChart默认为深灰色, lineChart、waveChart默认为浅灰色) */
+@property (nonatomic, strong) UIColor * shadowColor;
 
 #pragma mark - public method
 

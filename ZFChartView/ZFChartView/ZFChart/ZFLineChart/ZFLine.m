@@ -9,6 +9,7 @@
 #import "ZFLine.h"
 #import <UIKit/UIKit.h>
 #import "ZFCircle.h"
+#import "ZFConst.h"
 
 @interface ZFLine()
 
@@ -27,11 +28,11 @@
     _isShadow = YES;
 }
 
-+ (instancetype)lineWithCircleArray:(NSMutableArray *)circleArray{
-    return [[ZFLine alloc] initWithCircleArray:circleArray];
++ (instancetype)lineWithCircleArray:(NSMutableArray *)circleArray isAnimated:(BOOL)isAnimated shadowColor:(UIColor *)shadowColor{
+    return [[ZFLine alloc] initWithCircleArray:circleArray isAnimated:isAnimated shadowColor:shadowColor];
 }
 
-- (instancetype)initWithCircleArray:(NSMutableArray *)circleArray{
+- (instancetype)initWithCircleArray:(NSMutableArray *)circleArray isAnimated:(BOOL)isAnimated shadowColor:(UIColor *)shadowColor{
     self = [super init];
     if (self) {
         [self commonInit];
@@ -43,12 +44,14 @@
         
         if (_isShadow) {
             self.shadowOpacity = 1.f;
-            self.shadowColor = [UIColor lightGrayColor].CGColor;
+            self.shadowColor = shadowColor.CGColor;
             self.shadowOffset = CGSizeMake(2, 1);
         }
         
-        CABasicAnimation * animation = [self animation];
-        [self addAnimation:animation forKey:nil];
+        if (isAnimated) {
+            CABasicAnimation * animation = [self animation];
+            [self addAnimation:animation forKey:nil];
+        }
     }
     return self;
 }

@@ -29,6 +29,7 @@
     _percent = 0;
     _animationDuration = 0.5f;
     _isShadow = YES;
+    _shadowColor = ZFLightGray;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -79,13 +80,15 @@
     layer.path = [self fill].CGPath;
     
     if (_isShadow) {
-        layer.shadowOpacity = 1.f;
-        layer.shadowColor = [UIColor darkGrayColor].CGColor;
+        layer.shadowOpacity = 0.5f;
+        layer.shadowColor = _shadowColor.CGColor;
         layer.shadowOffset = CGSizeMake(2, 1);
     }
     
-    CABasicAnimation * animation = [self animation];
-    [layer addAnimation:animation forKey:nil];
+    if (_isAnimated) {
+        CABasicAnimation * animation = [self animation];
+        [layer addAnimation:animation forKey:nil];
+    }
     
     return layer;
 }

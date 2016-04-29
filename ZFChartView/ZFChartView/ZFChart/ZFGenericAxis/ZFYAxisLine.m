@@ -46,7 +46,7 @@
     _arrowsWidthHalf = _arrowsWidth / 2.f;
     _lineWidthHalf = _yLineWidth / 2.f;
     _sectionLength = YLineSectionLength;
-    _sectionColor = ZFBlack;
+    _axisColor = ZFBlack;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -88,11 +88,13 @@
  */
 - (CAShapeLayer *)yAxisLineShapeLayer{
     CAShapeLayer * yAxisLineLayer = [CAShapeLayer layer];
-    yAxisLineLayer.fillColor = [UIColor blackColor].CGColor;
+    yAxisLineLayer.fillColor = _axisColor.CGColor;
     yAxisLineLayer.path = [self drawYAxisLine].CGPath;
     
-    CABasicAnimation * animation = [self animationFromValue:[self axisLineNoFill] toValue:[self drawYAxisLine] duration:_animationDuration];
-    [yAxisLineLayer addAnimation:animation forKey:nil];
+    if (_isAnimated) {
+        CABasicAnimation * animation = [self animationFromValue:[self axisLineNoFill] toValue:[self drawYAxisLine] duration:_animationDuration];
+        [yAxisLineLayer addAnimation:animation forKey:nil];
+    }
     
     return yAxisLineLayer;
 }
@@ -137,65 +139,15 @@
  */
 - (CAShapeLayer *)arrowsShapeLayer{
     CAShapeLayer * arrowsLayer = [CAShapeLayer layer];
-    arrowsLayer.fillColor = [UIColor blackColor].CGColor;
+    arrowsLayer.fillColor = _axisColor.CGColor;
     arrowsLayer.path = [self drawArrows].CGPath;
     
-    CABasicAnimation * animation = [self animationFromValue:[self arrowsNoFill] toValue:[self drawArrows] duration:_animationDuration];
-    [arrowsLayer addAnimation:animation forKey:nil];
+    if (_isAnimated) {
+        CABasicAnimation * animation = [self animationFromValue:[self arrowsNoFill] toValue:[self drawArrows] duration:_animationDuration];
+        [arrowsLayer addAnimation:animation forKey:nil];
+    }
     
     return arrowsLayer;
-}
-
-#pragma mark - y轴分段线
-
-/**
- *  y轴分段线起始位置 (未填充)
- *
- *  @param i 下标
- *
- *  @return UIBezierPath
- */
-- (UIBezierPath *)yAxisLineSectionNoFill:(NSInteger)i {
-    UIBezierPath * bezier = [UIBezierPath bezierPath];
-    CGFloat yStartPos = _yLineStartYPos - (_yLineHeight - ZFAxisLineGapFromYLineMaxValueToArrow) / _yLineSectionCount * (i + 1);
-    [bezier moveToPoint:CGPointMake(_yLineStartXPos, yStartPos)];
-    [bezier addLineToPoint:CGPointMake(_yLineStartXPos, yStartPos)];
-    
-    return bezier;
-}
-
-/**
- *  画y轴分段线
- *
- *  @param i 下标
- *
- *  @return UIBezierPath
- */
-- (UIBezierPath *)drawYAxisLineSection:(NSInteger)i {
-    UIBezierPath * bezier = [UIBezierPath bezierPath];
-    CGFloat yStartPos = _yLineStartYPos - (_yLineHeight - ZFAxisLineGapFromYLineMaxValueToArrow) / _yLineSectionCount * (i + 1);
-    [bezier moveToPoint:CGPointMake(_yLineStartXPos, yStartPos)];
-    [bezier addLineToPoint:CGPointMake(_yLineStartXPos + _sectionLength, yStartPos)];
-    
-    return bezier;
-}
-
-/**
- *  y轴分段线CAShapeLayer
- *
- *  @param i 下标
- *
- *  @return CAShapeLayer
- */
-- (CAShapeLayer *)yAxisLineSectionShapeLayer:(NSInteger)i {
-    CAShapeLayer * layer = [CAShapeLayer layer];
-    layer.strokeColor = _sectionColor.CGColor;
-    layer.path = [self drawYAxisLineSection:i].CGPath;
-    
-    CABasicAnimation * animation = [self animationFromValue:[self yAxisLineSectionNoFill:i] toValue:[self drawYAxisLineSection:i] duration:_animationDuration];
-    [layer addAnimation:animation forKey:nil];
-    
-    return layer;
 }
 
 /**
@@ -235,9 +187,13 @@
     [self removeAllSubLayers];
     [self.layer addSublayer:[self yAxisLineShapeLayer]];
     
-    //延迟0.5秒执行
-    self.timer = [NSTimer timerWithTimeInterval:_animationDuration target:self selector:@selector(timerAction:) userInfo:nil repeats:NO];
-    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
+    //有动画时,延迟0.5秒执行
+    if (_isAnimated) {
+        self.timer = [NSTimer timerWithTimeInterval:_animationDuration target:self selector:@selector(timerAction:) userInfo:nil repeats:NO];
+        [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
+    }else{//无动画
+        [self.layer addSublayer:[self arrowsShapeLayer]];
+    }
 }
 
 #pragma mark - 定时器

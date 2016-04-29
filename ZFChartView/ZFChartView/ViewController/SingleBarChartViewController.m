@@ -23,11 +23,17 @@
     barChart.delegate = self;
     barChart.topic = @"xx小学各年级人数";
     barChart.unit = @"人";
-    barChart.topicColor = ZFPurple;
+//    barChart.isAnimated = NO;
+//    barChart.isResetYLineMinValue = YES;
 //    barChart.isShowXLineValue = NO;
-//    barChart.backgroundColor = ZFGreen;
 //    barChart.valueLabelPattern = kPopoverLabelPatternBlank;
 //    barChart.isShowSeparate = YES;
+//    barChart.topicColor = ZFWhite;
+//    barChart.unitColor = ZFWhite;
+//    barChart.axisColor = ZFWhite;
+//    barChart.xLineNameColor = ZFWhite;
+//    barChart.yLineValueColor = ZFWhite;
+//    barChart.backgroundColor = ZFPurple;
     [self.view addSubview:barChart];
     [barChart strokePath];
 }
@@ -43,12 +49,16 @@
 }
 
 - (NSArray *)colorArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[ZFSkyBlue];
+    return @[ZFMagenta];
 }
 
 - (CGFloat)yLineMaxValueInGenericChart:(ZFGenericChart *)chart{
     return 500;
 }
+
+//- (CGFloat)yLineMinValueInGenericChart:(ZFGenericChart *)chart{
+//    return 50;
+//}
 
 - (NSInteger)yLineSectionCountInGenericChart:(ZFGenericChart *)chart{
     return 10;

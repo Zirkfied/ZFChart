@@ -78,12 +78,14 @@
         //动画的viewj加了阴影会有卡顿现象，添加这句解决
         layer.shadowPath = [self fill].CGPath;
         layer.shadowOpacity = 1.f;
-        layer.shadowColor = [UIColor lightGrayColor].CGColor;
+        layer.shadowColor = _shadowColor.CGColor;
         layer.shadowOffset = CGSizeMake(2, 1);
     }
     
-    CABasicAnimation * animation = [self animation];
-    [layer addAnimation:animation forKey:nil];
+    if (_isAnimated) {
+        CABasicAnimation * animation = [self animation];
+        [layer addAnimation:animation forKey:nil];
+    }
     
     return layer;
 }

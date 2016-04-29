@@ -25,6 +25,7 @@
 - (void)commonInit{
     self.alpha = 0.f;
     _animationDuration = 1.f;
+    _shadowColor = ZFLightGray;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -95,13 +96,13 @@
 
 - (CAShapeLayer *)shapeLayer{
     CAShapeLayer * shapeLayer = [CAShapeLayer layer];
-    shapeLayer.strokeColor = [UIColor lightGrayColor].CGColor;
-    shapeLayer.fillColor = [UIColor whiteColor].CGColor;
+    shapeLayer.strokeColor = ZFLightGray.CGColor;
+    shapeLayer.fillColor = ZFWhite.CGColor;
     
     if (_isShadow) {
-        shapeLayer.shadowColor = [UIColor lightGrayColor].CGColor;
+        shapeLayer.shadowColor = _shadowColor.CGColor;
         shapeLayer.shadowOffset = CGSizeMake(1.5, 1.5);
-        shapeLayer.shadowOpacity = 1.f;
+        shapeLayer.shadowOpacity = 0.7f;
     }
     
     if (_arrowsOrientation == kPopoverLaberArrowsOrientationOnTop) {
@@ -146,9 +147,13 @@
     }
     [self bringSubviewToFront:self.label];
     
-    [UIView animateWithDuration:_animationDuration animations:^{
+    if (_isAnimated) {
+        [UIView animateWithDuration:_animationDuration animations:^{
+            self.alpha = 1.f;
+        }];
+    }else{
         self.alpha = 1.f;
-    }];
+    }
 }
 
 #pragma mark - 重写setter,getter方法

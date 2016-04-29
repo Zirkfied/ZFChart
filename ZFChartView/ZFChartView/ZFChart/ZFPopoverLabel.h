@@ -36,10 +36,14 @@ typedef enum{
 @property (nonatomic, strong) UIFont * font;
 /** 文本颜色 */
 @property (nonatomic, strong) UIColor * textColor;
+/** label阴影颜色(默认为浅灰色) */
+@property (nonatomic, strong) UIColor * shadowColor;
 /** 样式 */
 @property (nonatomic, assign) kPopoverLabelPattern pattern;
 /** 是否带阴影效果(默认为YES) */
 @property (nonatomic, assign) BOOL isShadow;
+/** 是否带动画显示(默认为YES，带动画) */
+@property (nonatomic, assign) BOOL isAnimated;
 /** self所在第几组 */
 @property (nonatomic, assign) NSInteger groupIndex;
 /** self所在的位置下标 */

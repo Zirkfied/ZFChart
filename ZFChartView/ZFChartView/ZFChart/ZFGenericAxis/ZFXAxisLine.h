@@ -18,6 +18,11 @@
 @property (nonatomic, assign) CGFloat xLineWidth;
 /** x轴高度 */
 @property (nonatomic, assign) CGFloat xLineHeight;
+/** 是否带动画显示(默认为YES，带动画) */
+@property (nonatomic, assign) BOOL isAnimated;
+/** 坐标轴颜色(默认为黑色) */
+@property (nonatomic, strong) UIColor * axisColor;
+
 
 #warning message - readonly(只读)
 

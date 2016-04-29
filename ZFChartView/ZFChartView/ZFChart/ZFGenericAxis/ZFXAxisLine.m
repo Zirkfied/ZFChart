@@ -43,6 +43,7 @@
     _arrowsWidth = 10.f;
     _arrowsWidthHalf = _arrowsWidth / 2.f;
     _lineWidthHalf = _xLineHeight / 2.f;
+    _axisColor = ZFBlack;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -84,11 +85,13 @@
  */
 - (CAShapeLayer *)xAxisLineShapeLayer{
     CAShapeLayer * xAxisLineLayer = [CAShapeLayer layer];
-    xAxisLineLayer.fillColor = [UIColor blackColor].CGColor;
+    xAxisLineLayer.fillColor = _axisColor.CGColor;
     xAxisLineLayer.path = [self drawXAxisLine].CGPath;
     
-    CABasicAnimation * animation = [self animationFromValue:[self axisLineNoFill] toValue:[self drawXAxisLine]];
-    [xAxisLineLayer addAnimation:animation forKey:nil];
+    if (_isAnimated) {
+        CABasicAnimation * animation = [self animationFromValue:[self axisLineNoFill] toValue:[self drawXAxisLine]];
+        [xAxisLineLayer addAnimation:animation forKey:nil];
+    }
     
     return xAxisLineLayer;
 }
@@ -132,11 +135,13 @@
  */
 - (CAShapeLayer *)arrowsShapeLayer{
     CAShapeLayer * arrowsLayer = [CAShapeLayer layer];
-    arrowsLayer.fillColor = [UIColor blackColor].CGColor;
+    arrowsLayer.fillColor = _axisColor.CGColor;
     arrowsLayer.path = [self drawArrows].CGPath;
     
-    CABasicAnimation * animation = [self animationFromValue:[self arrowsNoFill] toValue:[self drawArrows]];
-    [arrowsLayer addAnimation:animation forKey:nil];
+    if (_isAnimated) {
+        CABasicAnimation * animation = [self animationFromValue:[self arrowsNoFill] toValue:[self drawArrows]];
+        [arrowsLayer addAnimation:animation forKey:nil];
+    }
     
     return arrowsLayer;
 }
@@ -180,9 +185,13 @@
     [self removeAllSubLayers];
     [self.layer addSublayer:[self xAxisLineShapeLayer]];
     
-    //延迟0.5秒执行
-    self.timer = [NSTimer timerWithTimeInterval:_animationDuration target:self selector:@selector(timerAction:) userInfo:nil repeats:NO];
-    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
+    //有动画时,延迟0.5秒执行
+    if (_isAnimated) {
+        self.timer = [NSTimer timerWithTimeInterval:_animationDuration target:self selector:@selector(timerAction:) userInfo:nil repeats:NO];
+        [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
+    }else{
+        [self.layer addSublayer:[self arrowsShapeLayer]];
+    }
 }
 
 #pragma mark - 定时器

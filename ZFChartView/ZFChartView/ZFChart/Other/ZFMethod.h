@@ -26,4 +26,9 @@
  */
 - (CGFloat)cachedYLineMaxValue:(NSMutableArray *)array;
 
+/**
+ *  获取数据源最小值，并赋值给y轴显示的最小值
+ */
+- (CGFloat)cachedYLineMinValue:(NSMutableArray *)array;
+
 @end

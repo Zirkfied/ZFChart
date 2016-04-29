@@ -7,11 +7,14 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
+#import <UIKit/UIKit.h>
 
 @interface ZFLine : CAShapeLayer
 
 /** 是否带阴影效果(默认为YES) */
 @property (nonatomic, assign) BOOL isShadow;
+
+#pragma mark - public method
 
 /**
  *  线
@@ -20,6 +23,6 @@
  *
  *  @return self
  */
-+ (instancetype)lineWithCircleArray:(NSMutableArray *)circleArray;
++ (instancetype)lineWithCircleArray:(NSMutableArray *)circleArray isAnimated:(BOOL)isAnimated shadowColor:(UIColor *)shadowColor;
 
 @end

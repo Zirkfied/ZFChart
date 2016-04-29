@@ -20,6 +20,8 @@ typedef enum{
 @property (nonatomic, assign) CGFloat padding;
 /** 波浪样式(默认为kWavePatternTypeForCurve) */
 @property (nonatomic, assign) kWavePatternType wavePatternType;
+/** 是否带动画显示(默认为YES，带动画) */
+@property (nonatomic, assign) BOOL isAnimated;
 
 #pragma mark - public method
 

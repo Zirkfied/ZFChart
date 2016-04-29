@@ -29,16 +29,14 @@
 @implementation ZFWaveChart
 
 - (void)commonInit{
+    [super commonInit];
+    
     _pathColor = ZFSkyBlue;
     _valuePosition = kChartValuePositionDefalut;
-    _valueOnChartFontSize = 10.f;
-    _valueLabelPattern = kPopoverLabelPatternPopover;
     _valueTextColor = ZFBlack;
     _overMaxValueTextColor = ZFRed;
-    _unit = @"";
-    _isShadowForValueLabel = YES;
     _wavePatternType = kWavePatternTypeForCurve;
-    _isShowXLineValue = YES;
+    _valueLabelToWaveLinePadding = 0.f;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -73,6 +71,7 @@
     self.wave.pathColor = _pathColor;
     self.wave.padding = self.genericAxis.groupPadding;
     self.wave.wavePatternType = _wavePatternType;
+    self.wave.isAnimated = self.isAnimated;
     [self.genericAxis addSubview:self.wave];
     [self.wave strokePath];
 }
@@ -88,15 +87,17 @@
         //当前点的位置
         NSDictionary * currentDict = _valuePointArray[i];
         
-        CGRect rect = [self.genericAxis.xLineValueArray[i] stringWidthRectWithSize:CGSizeMake(45, 30) fontOfSize:_valueOnChartFontSize isBold:NO];
+        CGRect rect = [self.genericAxis.xLineValueArray[i] stringWidthRectWithSize:CGSizeMake(45, 30) fontOfSize:self.valueOnChartFontSize isBold:NO];
         ZFPopoverLabel * popoverLabel = [[ZFPopoverLabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width + 10, rect.size.height + 10)];
         popoverLabel.text = self.genericAxis.xLineValueArray[i];
-        popoverLabel.font = [UIFont systemFontOfSize:_valueOnChartFontSize];
-        popoverLabel.pattern = _valueLabelPattern;
+        popoverLabel.font = [UIFont systemFontOfSize:self.valueOnChartFontSize];
+        popoverLabel.pattern = self.valueLabelPattern;
         popoverLabel.textColor = _valueTextColor;
-        popoverLabel.isShadow = _isShadowForValueLabel;
+        popoverLabel.isShadow = self.isShadowForValueLabel;
+        popoverLabel.isAnimated = self.isAnimated;
         popoverLabel.labelIndex = i;
-        CGFloat percent = [self.genericAxis.xLineValueArray[i] floatValue] / self.genericAxis.yLineMaxValue;
+        popoverLabel.shadowColor = self.valueLabelShadowColor;
+        CGFloat percent = ([self.genericAxis.xLineValueArray[i] floatValue] - self.genericAxis.yLineMinValue) / (self.genericAxis.yLineMaxValue - self.genericAxis.yLineMinValue);
         if (percent > 1) {
             popoverLabel.textColor = _overMaxValueTextColor;
         }
@@ -119,21 +120,21 @@
             
             if (end_YPos < 0) {
                 popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnTop;
-                popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue], [currentDict[@"yPos"] floatValue] + (rect.size.height + 10)*0.5);
+                popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue], [currentDict[@"yPos"] floatValue] + (rect.size.height + 10) * 0.5 + _valueLabelToWaveLinePadding);
             }else{
                 popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnBelow;
-                popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue], [currentDict[@"yPos"] floatValue] - (rect.size.height + 10)*0.5);
+                popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue], [currentDict[@"yPos"] floatValue] - (rect.size.height + 10) * 0.5 - _valueLabelToWaveLinePadding);
             }
             
         //_valueOnChartPosition为图表上方
         }else if (_valuePosition == kChartValuePositionOnTop){
             popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnBelow;
-            popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue], [currentDict[@"yPos"] floatValue] - (rect.size.height + 10)*0.5);
+            popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue], [currentDict[@"yPos"] floatValue] - (rect.size.height + 10) * 0.5 - _valueLabelToWaveLinePadding);
         
         //_valueOnChartPosition为图表下方
         }else if (_valuePosition == kChartValuePositionOnBelow){
             popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnTop;
-            popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue], [currentDict[@"yPos"] floatValue] + (rect.size.height + 10)*0.5);
+            popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue], [currentDict[@"yPos"] floatValue] + (rect.size.height + 10) * 0.5 + _valueLabelToWaveLinePadding);
         }
         
         [popoverLabel strokePath];
@@ -187,6 +188,20 @@
         self.genericAxis.yLineMaxValue = [[ZFMethod shareInstance] cachedYLineMaxValue:self.genericAxis.xLineValueArray];
     }
     
+    if (self.isResetYLineMinValue) {
+        if ([self.dataSource respondsToSelector:@selector(yLineMinValueInGenericChart:)]) {
+            if ([self.dataSource yLineMinValueInGenericChart:self] > [[ZFMethod shareInstance] cachedYLineMinValue:self.genericAxis.xLineValueArray]) {
+                self.genericAxis.yLineMinValue = [[ZFMethod shareInstance] cachedYLineMinValue:self.genericAxis.xLineValueArray];
+                
+            }else{
+                self.genericAxis.yLineMinValue = [self.dataSource yLineMinValueInGenericChart:self];
+            }
+            
+        }else{
+            self.genericAxis.yLineMinValue = [[ZFMethod shareInstance] cachedYLineMinValue:self.genericAxis.xLineValueArray];
+        }
+    }
+    
     if ([self.dataSource respondsToSelector:@selector(yLineSectionCountInGenericChart:)]) {
         self.genericAxis.yLineSectionCount = [self.dataSource yLineSectionCountInGenericChart:self];
     }
@@ -204,10 +219,12 @@
     }
     
     [self removeAllSubview];
+    self.genericAxis.xLineNameLabelToXAxisLinePadding = self.xLineNameLabelToXAxisLinePadding;
+    self.genericAxis.isAnimated = self.isAnimated;
     [self.genericAxis strokePath];
     _valuePointArray = [NSMutableArray arrayWithArray:[self cachedValuePointArray:self.genericAxis.xLineValueArray]];
     [self drawWavePath];
-    _isShowXLineValue ? [self setValueLabelOnChart] : nil;
+    self.isShowXLineValue ? [self setValueLabelOnChart] : nil;
     [self.genericAxis bringSubviewToFront:self.genericAxis.yAxisLine];
     [self.genericAxis bringSectionToFront];
 }
@@ -218,7 +235,7 @@
 - (NSMutableArray *)cachedValuePointArray:(NSMutableArray *)valueArray{
     NSMutableArray * valuePointArray = [NSMutableArray array];
     for (NSInteger i = 0; i < valueArray.count; i++) {
-        CGFloat percent = [valueArray[i] floatValue] / self.genericAxis.yLineMaxValue;
+        CGFloat percent = ([valueArray[i] floatValue] - self.genericAxis.yLineMinValue) / (self.genericAxis.yLineMaxValue - self.genericAxis.yLineMinValue);
         if (percent > 1) {
             percent = 1;
         }
@@ -237,39 +254,51 @@
 #pragma mark - 重写setter,getter方法
 
 - (void)setTopic:(NSString *)topic{
-    _topic = topic;
-    self.topicLabel.text = _topic;
+    self.topicLabel.text = topic;
 }
 
 - (void)setUnit:(NSString *)unit{
-    _unit = unit;
-    self.genericAxis.unit = _unit;
+    self.genericAxis.unit = unit;
 }
 
 - (void)setTopicColor:(UIColor *)topicColor{
-    _topicColor = topicColor;
-    self.topicLabel.textColor = _topicColor;
+    self.topicLabel.textColor = topicColor;
+}
+
+- (void)setUnitColor:(UIColor *)unitColor{
+    self.genericAxis.unitColor = unitColor;
 }
 
 - (void)setXLineNameFontSize:(CGFloat)xLineNameFontSize{
-    _xLineNameFontSize = xLineNameFontSize;
-    self.genericAxis.xLineNameFontSize = _xLineNameFontSize;
+    self.genericAxis.xLineNameFontSize = xLineNameFontSize;
 }
 
 - (void)setYLineValueFontSize:(CGFloat)yLineValueFontSize{
-    _yLineValueFontSize = yLineValueFontSize;
-    self.genericAxis.yLineValueFontSize = _yLineValueFontSize;
+    self.genericAxis.yLineValueFontSize = yLineValueFontSize;
+}
+
+- (void)setXLineNameColor:(UIColor *)xLineNameColor{
+    self.genericAxis.xLineNameColor = xLineNameColor;
+}
+
+- (void)setYLineValueColor:(UIColor *)yLineValueColor{
+    self.genericAxis.yLineValueColor = yLineValueColor;
 }
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor{
-    _backgroundColor = !backgroundColor ? ZFWhite : backgroundColor;
-    self.genericAxis.axisLineBackgroundColor = _backgroundColor;
+    self.genericAxis.axisLineBackgroundColor = backgroundColor;;
+}
+
+- (void)setAxisColor:(UIColor *)axisColor{
+    self.genericAxis.axisColor = axisColor;
+}
+
+- (void)setSeparateColor:(UIColor *)separateColor{
+    self.genericAxis.separateColor = separateColor;
 }
 
 - (void)setIsShowSeparate:(BOOL)isShowSeparate{
-    _isShowSeparate = isShowSeparate;
-    self.genericAxis.isShowSeparate = _isShowSeparate;
-    self.genericAxis.sectionColor = ZFLightGray;
+    self.genericAxis.isShowSeparate = isShowSeparate;
 }
 
 @end

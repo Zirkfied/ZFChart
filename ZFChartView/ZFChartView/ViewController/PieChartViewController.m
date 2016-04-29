@@ -23,6 +23,7 @@
 //    pieChart.piePatternType = kPieChartPatternTypeForCircle;
 //    pieChart.percentType = kPercentTypeInteger;
 //    pieChart.isShadow = NO;
+//    pieChart.isAnimated = NO;
     pieChart.isShowDetail = YES;
     pieChart.topic = @"xx小学各年级男女人数占比";
     [pieChart strokePath];
@@ -32,6 +33,7 @@
 #pragma mark - ZFPieChartDataSource
 
 - (NSArray *)valueArrayInPieChart:(ZFPieChart *)chart{
+//    return @[@"200", @"256", @"300", @"283", @"490", @"236"];
     return @[@"200", @"256", @"300", @"283", @"490", @"236"];
 }
 

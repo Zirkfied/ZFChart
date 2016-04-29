@@ -32,13 +32,16 @@
     waveChart.delegate = self;
     waveChart.topic = @"xx小学各年级人数";
     waveChart.unit = @"人";
-    waveChart.isShowSeparate = YES;
+//    waveChart.isShowSeparate = YES;
     waveChart.topicColor = ZFPurple;
+//    waveChart.isAnimated = NO;
+//    waveChart.isResetYLineMinValue = YES;
 //    waveChart.isShowXLineValue = NO;
 //    waveChart.isShadowForValueLabel = NO;
 //    waveChart.valuePosition = kChartValuePositionOnBelow;
 //    waveChart.valueLabelPattern = kPopoverLabelPatternBlank;
 //    waveChart.wavePatternType = kWavePatternTypeForSharp;
+//    waveChart.valueLabelToWaveLinePadding = 20.f;
     [waveChart strokePath];
     [self.view addSubview:waveChart];
 }
@@ -57,6 +60,10 @@
     return 500;
 }
 
+//- (CGFloat)yLineMinValueInGenericChart:(ZFGenericChart *)chart{
+//    return 100;
+//}
+
 - (NSInteger)yLineSectionCountInGenericChart:(ZFGenericChart *)chart{
     return 10;
 }
@@ -71,9 +78,9 @@
 //    return 20.f;
 //}
 //
-//- (UIColor *)pathColorInWaveChart:(ZFWaveChart *)waveChart{
-//    return ZFOrange;
-//}
+- (UIColor *)pathColorInWaveChart:(ZFWaveChart *)waveChart{
+    return ZFGrassGreen;
+}
 
 - (void)waveChart:(ZFWaveChart *)waveChart popoverLabelAtIndex:(NSInteger)index{
     NSLog(@"第%ld个Label",(long)index);

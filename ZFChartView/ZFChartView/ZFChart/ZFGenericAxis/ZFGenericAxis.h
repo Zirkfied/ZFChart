@@ -20,8 +20,10 @@
 @property (nonatomic, strong) NSMutableArray * xLineValueArray;
 /** x轴名字数组 */
 @property (nonatomic, strong) NSMutableArray * xLineNameArray;
-/** y轴数值显示的上限 */
+/** y轴数值显示的最大值 */
 @property (nonatomic, assign) float yLineMaxValue;
+/** y轴数值显示的最小值 */
+@property (nonatomic, assign) float yLineMinValue;
 /** y轴数值显示的段数 */
 @property (nonatomic, assign) NSInteger yLineSectionCount;
 /** x轴上名称字体大小(默认为10.f) */
@@ -32,14 +34,26 @@
 @property (nonatomic, assign) CGFloat groupWidth;
 /** 组与组之间的间距 */
 @property (nonatomic, assign) CGFloat groupPadding;
+/** x轴名称label与x轴之间的距离(默认为20.f) */
+@property (nonatomic, assign) CGFloat xLineNameLabelToXAxisLinePadding;
 /** y轴单位 */
 @property (nonatomic, copy) NSString * unit;
+/** y轴单位颜色(默认为黑色) */
+@property (nonatomic, strong) UIColor * unitColor;
+/** x轴标题颜色(默认为黑色) */
+@property (nonatomic, strong) UIColor * xLineNameColor;
+/** y轴value颜色(默认为黑色) */
+@property (nonatomic, strong) UIColor * yLineValueColor;
 /** 坐标轴背景颜色 */
 @property (nonatomic, strong) UIColor * axisLineBackgroundColor;
+/** 坐标轴颜色(默认为黑色) */
+@property (nonatomic, strong) UIColor * axisColor;
 /** 是否显示分割线 */
 @property (nonatomic, assign) BOOL isShowSeparate;
-/** 分段线颜色 */
-@property (nonatomic, strong) UIColor * sectionColor;
+/** 是否带动画显示(默认为YES，带动画) */
+@property (nonatomic, assign) BOOL isAnimated;
+/** 分割线颜色(默认为浅灰色) */
+@property (nonatomic, strong) UIColor * separateColor;
 
 
 #warning message - readonly(只读)

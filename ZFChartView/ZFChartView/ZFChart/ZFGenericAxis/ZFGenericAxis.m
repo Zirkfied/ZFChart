@@ -41,6 +41,7 @@
  *  初始化默认变量
  */
 - (void)commonInit{
+    _yLineMinValue = 0;
     _yLineSectionCount = 5;
     _xLineLabelHeight = 30.f;
     _xLineNameFontSize = 10.f;
@@ -48,8 +49,13 @@
     _animationDuration = 1.f;
     _groupWidth = XLineItemWidth;
     _groupPadding = XLinePaddingForGroupsLength;
+    _unitColor = ZFBlack;
+    _xLineNameColor = ZFBlack;
+    _yLineValueColor = ZFBlack;
     _axisLineBackgroundColor = ZFWhite;
+    _axisColor = ZFBlack;
     _isShowSeparate = NO;
+    _separateColor = ZFLightGray;
     
     self.delegate = self;
     self.showsHorizontalScrollIndicator = NO;
@@ -99,6 +105,7 @@
     
     self.unitLabel = [[ZFLabel alloc] initWithFrame:CGRectMake(xPos, yPos, width, height)];
     self.unitLabel.text = [NSString stringWithFormat:@"(%@)",_unit];
+    self.unitLabel.textColor = _unitColor;
     self.unitLabel.font = [UIFont boldSystemFontOfSize:10];
     [self.yAxisLine addSubview:self.unitLabel];
 }
@@ -114,13 +121,14 @@
             CGFloat width = _groupWidth;
             CGFloat height = _xLineLabelHeight;
             CGFloat center_xPos = self.xAxisLine.xLineStartXPos + _groupPadding + (_groupWidth + _groupPadding) * i + width * 0.5;
-            CGFloat center_yPos = self.yAxisLine.yLineStartYPos + 20 + height * 0.5;
+            CGFloat center_yPos = self.yAxisLine.yLineStartYPos + _xLineNameLabelToXAxisLinePadding + height * 0.5;
             
             //label的中心点
             CGPoint label_center = CGPointMake(center_xPos, center_yPos);
             CGRect rect = [self.xLineNameArray[i] stringWidthRectWithSize:CGSizeMake(width + _groupPadding * 0.5, height) fontOfSize:_xLineNameFontSize isBold:NO];
             ZFLabel * label = [[ZFLabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
             label.text = self.xLineNameArray[i];
+            label.textColor = _xLineNameColor;
             label.font = [UIFont systemFontOfSize:_xLineNameFontSize];
             label.numberOfLines = 0;
             label.center = label_center;
@@ -144,8 +152,9 @@
         
         ZFLabel * label = [[ZFLabel alloc] initWithFrame:CGRectMake(0, yStartPos, width, height)];
         //平均值
-        float valueAverage = _yLineMaxValue / _yLineSectionCount;
-        label.text = [NSString stringWithFormat:@"%.0f",valueAverage * i];
+        float valueAverage = (_yLineMaxValue - _yLineMinValue) / _yLineSectionCount;
+        label.text = [NSString stringWithFormat:@"%.0f",valueAverage * i + _yLineMinValue];
+        label.textColor = _yLineValueColor;
         label.font = [UIFont systemFontOfSize:_yLineValueFontSize];
         label.tag = YLineValueLabelTag + i;
         [self.yAxisLine addSubview:label];
@@ -195,7 +204,7 @@
  */
 - (CAShapeLayer *)yAxisLineSectionShapeLayer:(NSInteger)i sectionLength:(CGFloat)sectionLength sectionColor:(UIColor *)sectionColor{
     CAShapeLayer * layer = [CAShapeLayer layer];
-    layer.strokeColor = sectionColor.CGColor;
+    layer.strokeColor = _separateColor.CGColor;
     layer.path = [self drawYAxisLineSection:i sectionLength:sectionLength].CGPath;
     
     return layer;
@@ -209,13 +218,17 @@
 - (UIView *)sectionView:(NSInteger)i{
     CGFloat yStartPos = self.yAxisLine.yLineStartYPos - (self.yAxisLine.yLineHeight - ZFAxisLineGapFromYLineMaxValueToArrow) / _yLineSectionCount * (i + 1);
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(self.yAxisLine.yLineStartXPos, yStartPos, YLineSectionLength, YLineSectionHeight)];
-    view.backgroundColor = ZFBlack;
+    view.backgroundColor = _axisColor;
     view.alpha = 0.f;
     _sectionOriginX = view.frame.origin.x;
     
-    [UIView animateWithDuration:_animationDuration animations:^{
+    if (_isAnimated) {
+        [UIView animateWithDuration:_animationDuration animations:^{
+            view.alpha = 1.f;
+        }];
+    }else{
         view.alpha = 1.f;
-    }];
+    }
     
     return view;
 }
@@ -263,6 +276,8 @@
         self.xAxisLine.xLineWidth = self.xLineNameArray.count * (_groupWidth + _groupPadding) + _groupPadding;
     }
     
+    self.xAxisLine.isAnimated = _isAnimated;
+    self.yAxisLine.isAnimated = _isAnimated;
     [self.xAxisLine strokePath];
     [self.yAxisLine strokePath];
     [self setXLineNameLabel];
@@ -315,6 +330,13 @@
     self.xAxisLine.backgroundColor = _axisLineBackgroundColor;
 }
 
+/** 设置坐标轴颜色 */
+- (void)setAxisColor:(UIColor *)axisColor{
+    _axisColor = axisColor;
+    _xAxisLine.axisColor = _axisColor;
+    _yAxisLine.axisColor = _axisColor;
+}
+
 /**
  *  获取坐标轴起点x值
  */
@@ -348,14 +370,6 @@
  */
 - (CGFloat)xLineWidth{
     return self.xAxisLine.xLineWidth;
-}
-
-/**
- *  分段线颜色 
- */
-- (void)setSectionColor:(UIColor *)sectionColor{
-    _sectionColor = sectionColor;
-    self.yAxisLine.sectionColor = _sectionColor;
 }
 
 @end

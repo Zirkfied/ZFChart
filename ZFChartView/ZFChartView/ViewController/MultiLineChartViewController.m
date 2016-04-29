@@ -23,13 +23,22 @@
     lineChart.delegate = self;
     lineChart.topic = @"xx小学各年级男女人数";
     lineChart.unit = @"人";
-    lineChart.topicColor = ZFPurple;
+    lineChart.topicColor = ZFWhite;
     lineChart.isShowSeparate = YES;
+//    lineChart.isAnimated = NO;
+    lineChart.isResetYLineMinValue = YES;
 //    lineChart.isShowXLineValue = NO;
 //    lineChart.isShadowForValueLabel = NO;
-//    lineChart.isShadow = NO;
-//    lineChart.backgroundColor = ZFGreen;
+    lineChart.isShadow = NO;
 //    lineChart.valueLabelPattern = kPopoverLabelPatternBlank;
+//    lineChart.valueCenterToCircleCenterPadding = 0;
+//    lineChart.separateColor = ZFYellow;
+    lineChart.unitColor = ZFWhite;
+    lineChart.backgroundColor = ZFPurple;
+    lineChart.axisColor = ZFWhite;
+    lineChart.xLineNameColor = ZFWhite;
+    lineChart.yLineValueColor = ZFWhite;
+    lineChart.xLineNameLabelToXAxisLinePadding = 40;
     [self.view addSubview:lineChart];
     [lineChart strokePath];
 }
@@ -37,7 +46,7 @@
 #pragma mark - ZFGenericChartDataSource
 
 - (NSArray *)valueArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[@[@"123", @"300", @"490", @"380", @"167", @"451"], @[@"380", @"200", @"326", @"240", @"50", @"137"], @[@"256", @"300", @"89", @"430", @"256", @"256"]];
+    return @[@[@"-52", @"300", @"490", @"380", @"167", @"451"], @[@"380", @"200", @"326", @"240", @"-258", @"137"], @[@"256", @"300", @"-89", @"430", @"256", @"256"]];
 }
 
 - (NSArray *)nameArrayInGenericChart:(ZFGenericChart *)chart{
@@ -51,6 +60,10 @@
 - (CGFloat)yLineMaxValueInGenericChart:(ZFGenericChart *)chart{
     return 500;
 }
+
+//- (CGFloat)yLineMinValueInGenericChart:(ZFGenericChart *)chart{
+//    return -150;
+//}
 
 - (NSInteger)yLineSectionCountInGenericChart:(ZFGenericChart *)chart{
     return 10;

@@ -74,8 +74,10 @@
     shapeLayer.lineJoin = kCALineJoinRound;
     shapeLayer.lineCap = kCALineCapRound;
     
-    CABasicAnimation * animation = [self animation];
-    [shapeLayer addAnimation:animation forKey:nil];
+    if (_isAnimated) {
+        CABasicAnimation * animation = [self animation];
+        [shapeLayer addAnimation:animation forKey:nil];
+    }
     
     return shapeLayer;
 }

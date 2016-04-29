@@ -65,39 +65,16 @@
 @interface ZFBarChart : ZFGenericChart
 
 @property (nonatomic, weak) id<ZFBarChartDelegate> delegate;
-
-/** 主题 */
-@property (nonatomic, copy) NSString * topic;
-/** y轴单位 */
-@property (nonatomic, copy) NSString * unit;
-/** 图表上label字体大小(默认为10.f) */
-@property (nonatomic, assign) CGFloat valueOnChartFontSize;
-/** x轴上名称字体大小(默认为10.f) */
-@property (nonatomic, assign) CGFloat xLineNameFontSize;
-/** y轴上数值字体大小(默认为10.f) */
-@property (nonatomic, assign) CGFloat yLineValueFontSize;
 /** 是否带阴影效果(默认为YES) */
 @property (nonatomic, assign) BOOL isShadow;
-/** 主题文字颜色(默认黑色) */
-@property (nonatomic, strong) UIColor * topicColor;
 /** 超过y轴显示最大值时柱状条bar颜色(默认为红色) */
 @property (nonatomic, strong) UIColor * overMaxValueBarColor;
-/** 背景颜色(默认为白色) */
-@property (nonatomic, strong) UIColor * backgroundColor;
-/** valueLabel样式(默认为kPopoverLabelPatternPopover) */
-@property (nonatomic, assign) kPopoverLabelPattern valueLabelPattern;
-/** 是否显示分割线(默认为NO) */
-@property (nonatomic, assign) BOOL isShowSeparate;
-/** valueLabel当为气泡样式时，是否带阴影效果(默认为YES) */
-@property (nonatomic, assign) BOOL isShadowForValueLabel;
-/** 是否显示x轴的value(默认为YES，当需要自定义value显示样式时，可设置为NO) */
-@property (nonatomic, assign) BOOL isShowXLineValue;
 
 
 #pragma mark - public method
 
 /**
- *  重绘
+ *  重绘(每次更新数据后都需要再调一次此方法)
  */
 - (void)strokePath;
 

@@ -15,11 +15,11 @@
 
 @implementation ZFPie
 
-+ (instancetype)pieWithCenter:(CGPoint)center radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle color:(UIColor *)color duration:(CFTimeInterval)duration piePatternType:(kPiePatternType)piePatternType{
-    return [[ZFPie alloc] initWithCenter:(CGPoint)center radius:(CGFloat)radius startAngle:startAngle endAngle:endAngle color:color duration:duration piePatternType:piePatternType];
++ (instancetype)pieWithCenter:(CGPoint)center radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle color:(UIColor *)color duration:(CFTimeInterval)duration piePatternType:(kPiePatternType)piePatternType isAnimated:(BOOL)isAnimated{
+    return [[ZFPie alloc] initWithCenter:(CGPoint)center radius:(CGFloat)radius startAngle:startAngle endAngle:endAngle color:color duration:duration piePatternType:piePatternType isAnimated:isAnimated];
 }
 
-- (instancetype)initWithCenter:(CGPoint)center radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle color:(UIColor *)color duration:(CFTimeInterval)duration piePatternType:(kPiePatternType)piePatternType{
+- (instancetype)initWithCenter:(CGPoint)center radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle color:(UIColor *)color duration:(CFTimeInterval)duration piePatternType:(kPiePatternType)piePatternType isAnimated:(BOOL)isAnimated{
     self = [super init];
     if (self) {
         self.fillColor = nil;
@@ -32,8 +32,10 @@
             self.lineWidth = radius * 2;
         }
         
-        CABasicAnimation * animation = [self animationWithDuration:duration];
-        [self addAnimation:animation forKey:nil];
+        if (isAnimated) {
+            CABasicAnimation * animation = [self animationWithDuration:duration];
+            [self addAnimation:animation forKey:nil];
+        }
     }
     return self;
 }

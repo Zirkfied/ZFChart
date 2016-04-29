@@ -96,6 +96,7 @@
     _isShadow = YES;
     _isShowPercent = YES;
     _isShowDetail = NO;
+    _isAnimated = YES;
     _startAngle = ZFRadian(-90);
     _totalDuration = 0.75f;
     _percentOnChartFontSize = 10.f;
@@ -185,7 +186,7 @@
  */
 - (CAShapeLayer *)pieShapeLayerWithCenter:(CGPoint)center startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle color:(UIColor *)color duration:(CFTimeInterval)duration piePatternType:(kPiePatternType)piePatternType{
     
-    ZFPie * pie = [ZFPie pieWithCenter:center radius:_radius startAngle:startAngle endAngle:endAngle color:color duration:duration piePatternType:piePatternType];
+    ZFPie * pie = [ZFPie pieWithCenter:center radius:_radius startAngle:startAngle endAngle:endAngle color:color duration:duration piePatternType:piePatternType isAnimated:_isAnimated];
     pie.isShadow = _isShadow;
     _lineWidth = pie.lineWidth;
     return pie;
@@ -275,9 +276,14 @@
     }
     
     for (NSInteger i = 0; i < _valueArray.count; i++) {
-        NSDictionary * userInfo = @{@"index":@(i)};
-        NSTimer * timer = [NSTimer timerWithTimeInterval:[self.startTimeArray[i] floatValue] target:self selector:@selector(timerAction:) userInfo:userInfo repeats:NO];
-        [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+        //有动画
+        if (_isAnimated) {
+            NSDictionary * userInfo = @{@"index":@(i)};
+            NSTimer * timer = [NSTimer timerWithTimeInterval:[self.startTimeArray[i] floatValue] target:self selector:@selector(timerAction:) userInfo:userInfo repeats:NO];
+            [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+        }else{//无动画
+            [self showEachPieShapeLayer:i];
+        }
     }
     
     if (_nameArray) {
@@ -289,10 +295,21 @@
 
 - (void)timerAction:(NSTimer *)sender{
     _index = [[sender.userInfo objectForKey:@"index"] integerValue];
+    [self showEachPieShapeLayer:_index];
     
+    [sender invalidate];
+    sender = nil;
+}
+
+#pragma mark - 添加饼图
+
+/**
+ *  添加饼图每个shapeLayer
+ */
+- (void)showEachPieShapeLayer:(NSInteger)i{
     //计算每个item所占角度大小
-    CGFloat angle = [self countAngle:[_valueArray[_index] floatValue]];
-    [self.layer addSublayer:[self pieShapeLayerWithCenter:_pieCenter startAngle:_startAngle endAngle:_startAngle + angle color:_colorArray[_index] duration:[self countDuration:_index] piePatternType:_piePatternType]];
+    CGFloat angle = [self countAngle:[_valueArray[i] floatValue]];
+    [self.layer addSublayer:[self pieShapeLayerWithCenter:_pieCenter startAngle:_startAngle endAngle:_startAngle + angle color:_colorArray[i] duration:[self countDuration:i] piePatternType:_piePatternType]];
     _centerPoint = [self getBezierPathCenterPointWithStartAngle:_startAngle endAngle:_startAngle + angle];
     
     [_startAngleArray addObject:@(_startAngle)];
@@ -300,10 +317,7 @@
     //临时记录下一个path的开始角度
     _startAngle += angle;
     
-    _isShowPercent ? [self creatPercentLabel] : nil;
-    
-    [sender invalidate];
-    sender = nil;
+    _isShowPercent ? [self creatPercentLabel:i] : nil;
 }
 
 #pragma mark - UIResponder
@@ -340,6 +354,8 @@
         }
     }
 }
+
+#pragma mark - 显示半透明Path Action
 
 /**
  *  显示半透明Path Action
@@ -420,8 +436,8 @@
 /**
  *  添加百分比Label
  */
-- (void)creatPercentLabel{
-    NSString * string = [self getPercent:_index];
+- (void)creatPercentLabel:(NSInteger)i{
+    NSString * string = [self getPercent:i];
     CGRect rect = [string stringWidthRectWithSize:CGSizeMake(0, 0) fontOfSize:_percentOnChartFontSize isBold:YES];
     UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
     label.text = string;
@@ -429,16 +445,16 @@
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont boldSystemFontOfSize:_percentOnChartFontSize];
     label.center = _centerPoint;
-    label.tag = PieChartPercentLabelTag + _index;
+    label.tag = PieChartPercentLabelTag + i;
     [self addSubview:label];
     
-    [UIView animateWithDuration:[self countDuration:_index] animations:^{
+    [UIView animateWithDuration:[self countDuration:i] animations:^{
         label.alpha = 1.f;
     }];
     
     //获取r,g,b三色值
-    CGFloat red = [_colorArray[_index] red];
-    CGFloat green = [_colorArray[_index] green];
+    CGFloat red = [_colorArray[i] red];
+    CGFloat green = [_colorArray[i] green];
     //path颜色为深色时，更改文字颜色
     if ((red < 180.f && green < 180.f)) {
         label.textColor = [UIColor whiteColor];

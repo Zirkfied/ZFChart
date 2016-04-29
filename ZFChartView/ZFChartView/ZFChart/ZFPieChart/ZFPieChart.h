@@ -72,12 +72,14 @@ typedef enum{
 @property (nonatomic, assign) BOOL isShadow;
 /** 显示详细信息(默认为NO) */
 @property (nonatomic, assign) BOOL isShowDetail;
+/** 是否带动画显示(默认为YES，带动画) */
+@property (nonatomic, assign) BOOL isAnimated;
 
 
 #pragma mark - public method
 
 /**
- *  重绘
+ *  重绘(每次更新数据后都需要再调一次此方法)
  */
 - (void)strokePath;
 

@@ -40,16 +40,14 @@
 }
 
 - (void)commonInit{
-    _valueOnChartFontSize = 10.f;
+    [super commonInit];
+    
     _valueCenterToCircleCenterPadding = 25.f;
     _valuePosition = kChartValuePositionDefalut;
     _isShadow = YES;
     _overMaxValueCircleColor = ZFRed;
     _lineWidth = 2.f;
-    _valueLabelPattern = kPopoverLabelPatternPopover;
-    _unit = @"";
-    _isShadowForValueLabel = YES;
-    _isShowXLineValue = YES;
+    self.shadowColor = ZFLightGray;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -88,7 +86,7 @@
     if ([subObject isKindOfClass:[NSString class]]) {
         for (NSInteger i = 0; i < self.genericAxis.xLineValueArray.count; i++) {
             BOOL isOverrun = NO;//记录是否超出上限
-            CGFloat percent = [self.genericAxis.xLineValueArray[i] floatValue] / self.genericAxis.yLineMaxValue;
+            CGFloat percent = ([self.genericAxis.xLineValueArray[i] floatValue] - self.genericAxis.yLineMinValue) / (self.genericAxis.yLineMaxValue - self.genericAxis.yLineMinValue);
             if (percent > 1) {
                 percent = 1.f;
                 isOverrun = YES;
@@ -104,6 +102,8 @@
             circle.center = CGPointMake(center_xPos, center_yPos);
             circle.circleColor = isOverrun ? _overMaxValueCircleColor : _colorArray.firstObject;
             circle.isShadow = _isShadow;
+            circle.isAnimated = self.isAnimated;
+            circle.shadowColor = self.shadowColor;
             [circle strokePath];
             [self.genericAxis addSubview:circle];
             [self.circleArray addObject:circle];
@@ -119,7 +119,7 @@
                 //第几个圆
                 for (NSInteger circleIndex = 0; circleIndex < [subObject count]; circleIndex++) {
                     BOOL isOverrun = NO;//记录是否超出上限
-                    CGFloat percent = [self.genericAxis.xLineValueArray[lineIndex][circleIndex] floatValue] / self.genericAxis.yLineMaxValue;
+                    CGFloat percent = ([self.genericAxis.xLineValueArray[lineIndex][circleIndex] floatValue] - self.genericAxis.yLineMinValue) / (self.genericAxis.yLineMaxValue - self.genericAxis.yLineMinValue);
                     if (percent > 1) {
                         percent = 1.f;
                         isOverrun = YES;
@@ -135,6 +135,8 @@
                     circle.center = CGPointMake(center_xPos, center_yPos);
                     circle.circleColor = isOverrun ? _overMaxValueCircleColor : _colorArray[lineIndex];
                     circle.isShadow = _isShadow;
+                    circle.isAnimated = self.isAnimated;
+                    circle.shadowColor = self.shadowColor;
                     [circle strokePath];
                     [self.genericAxis addSubview:circle];
                     [subArray addObject:circle];
@@ -179,15 +181,17 @@
     //当前的圆
     ZFCircle * circle = circleArray[index];
     
-    CGRect rect = [valueArray[index] stringWidthRectWithSize:CGSizeMake(45, 30) fontOfSize:_valueOnChartFontSize isBold:NO];
+    CGRect rect = [valueArray[index] stringWidthRectWithSize:CGSizeMake(45, 30) fontOfSize:self.valueOnChartFontSize isBold:NO];
     ZFPopoverLabel * popoverLabel = [[ZFPopoverLabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width + 10, rect.size.height + 10)];
     popoverLabel.text = valueArray[index];
-    popoverLabel.font = [UIFont systemFontOfSize:_valueOnChartFontSize];
+    popoverLabel.font = [UIFont systemFontOfSize:self.valueOnChartFontSize];
     popoverLabel.textColor = _colorArray[colorIndex];
-    popoverLabel.pattern = _valueLabelPattern;
-    popoverLabel.isShadow = _isShadowForValueLabel;
+    popoverLabel.pattern = self.valueLabelPattern;
+    popoverLabel.isShadow = self.isShadowForValueLabel;
+    popoverLabel.isAnimated = self.isAnimated;
     popoverLabel.groupIndex = colorIndex;
     popoverLabel.labelIndex = index;
+    popoverLabel.shadowColor = self.valueLabelShadowColor;
     [self.genericAxis addSubview:popoverLabel];
     [popoverLabel addTarget:self action:@selector(popoverAction:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -249,7 +253,7 @@
  *  @return CAShapeLayer
  */
 - (CAShapeLayer *)lineShapeLayer:(NSMutableArray *)array index:(NSInteger)index{
-    ZFLine * layer = [ZFLine lineWithCircleArray:array];
+    ZFLine * layer = [ZFLine lineWithCircleArray:array isAnimated:self.isAnimated shadowColor:self.shadowColor];
     layer.strokeColor = [_colorArray[index] CGColor];
     layer.lineWidth = _lineWidth;
     layer.isShadow = _isShadow;
@@ -347,6 +351,20 @@
         self.genericAxis.yLineMaxValue = [[ZFMethod shareInstance] cachedYLineMaxValue:self.genericAxis.xLineValueArray];
     }
     
+    if (self.isResetYLineMinValue) {
+        if ([self.dataSource respondsToSelector:@selector(yLineMinValueInGenericChart:)]) {
+            if ([self.dataSource yLineMinValueInGenericChart:self] > [[ZFMethod shareInstance] cachedYLineMinValue:self.genericAxis.xLineValueArray]) {
+                self.genericAxis.yLineMinValue = [[ZFMethod shareInstance] cachedYLineMinValue:self.genericAxis.xLineValueArray];
+                
+            }else{
+                self.genericAxis.yLineMinValue = [self.dataSource yLineMinValueInGenericChart:self];
+            }
+            
+        }else{
+            self.genericAxis.yLineMinValue = [[ZFMethod shareInstance] cachedYLineMinValue:self.genericAxis.xLineValueArray];
+        }
+    }
+    
     if ([self.dataSource respondsToSelector:@selector(yLineSectionCountInGenericChart:)]) {
         self.genericAxis.yLineSectionCount = [self.dataSource yLineSectionCountInGenericChart:self];
     }
@@ -372,10 +390,12 @@
     [self removeAllCircle];
     [self removeLabelOnChart];
     [self removeAllSubLayer];
+    self.genericAxis.xLineNameLabelToXAxisLinePadding = self.xLineNameLabelToXAxisLinePadding;
+    self.genericAxis.isAnimated = self.isAnimated;
     [self.genericAxis strokePath];
     [self drawCircle];
     [self drawLine];
-    _isShowXLineValue ? [self setValueLabelOnChart] : nil;
+    self.isShowXLineValue ? [self setValueLabelOnChart] : nil;
     [self.genericAxis bringSubviewToFront:self.genericAxis.yAxisLine];
     [self.genericAxis bringSectionToFront];
 }
@@ -383,39 +403,51 @@
 #pragma mark - 重写setter,getter方法
 
 - (void)setTopic:(NSString *)topic{
-    _topic = topic;
-    self.topicLabel.text = _topic;
+    self.topicLabel.text = topic;
 }
 
 - (void)setUnit:(NSString *)unit{
-    _unit = unit;
-    self.genericAxis.unit = _unit;
+    self.genericAxis.unit = unit;
 }
 
 - (void)setTopicColor:(UIColor *)topicColor{
-    _topicColor = topicColor;
-    self.topicLabel.textColor = _topicColor;
+    self.topicLabel.textColor = topicColor;
+}
+
+- (void)setUnitColor:(UIColor *)unitColor{
+    self.genericAxis.unitColor = unitColor;
 }
 
 - (void)setXLineNameFontSize:(CGFloat)xLineNameFontSize{
-    _xLineNameFontSize = xLineNameFontSize;
-    self.genericAxis.xLineNameFontSize = _xLineNameFontSize;
+    self.genericAxis.xLineNameFontSize = xLineNameFontSize;
 }
 
 - (void)setYLineValueFontSize:(CGFloat)yLineValueFontSize{
-    _yLineValueFontSize = yLineValueFontSize;
-    self.genericAxis.yLineValueFontSize = _yLineValueFontSize;
+    self.genericAxis.yLineValueFontSize = yLineValueFontSize;
+}
+
+- (void)setXLineNameColor:(UIColor *)xLineNameColor{
+    self.genericAxis.xLineNameColor = xLineNameColor;
+}
+
+- (void)setYLineValueColor:(UIColor *)yLineValueColor{
+    self.genericAxis.yLineValueColor = yLineValueColor;
 }
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor{
-    _backgroundColor = !backgroundColor ? ZFWhite : backgroundColor;
-    self.genericAxis.axisLineBackgroundColor = _backgroundColor;
+    self.genericAxis.axisLineBackgroundColor = backgroundColor;;
+}
+
+- (void)setAxisColor:(UIColor *)axisColor{
+    self.genericAxis.axisColor = axisColor;
+}
+
+- (void)setSeparateColor:(UIColor *)separateColor{
+    self.genericAxis.separateColor = separateColor;
 }
 
 - (void)setIsShowSeparate:(BOOL)isShowSeparate{
-    _isShowSeparate = isShowSeparate;
-    self.genericAxis.isShowSeparate = _isShowSeparate;
-    self.genericAxis.sectionColor = ZFLightGray;
+    self.genericAxis.isShowSeparate = isShowSeparate;
 }
 
 @end
