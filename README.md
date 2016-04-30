@@ -309,15 +309,13 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
             ZFLineChartDelegate协议方法 和 线状图(ZFLineChart)专有属性 请查看 ZFLineChart.h
             ZFPieChartDataSource数据源方法 和 饼图(ZFPieChart)其余属性 请查看 ZFPieChart.h
             ZFWaveChartDelegate协议方法 和 波浪图(ZFWaveChart)专有属性 请查看 ZFWaveChart.h
-            
-        6.其余属性请仔细查看以上5个.h文件的中文注释
         
-        7.(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)的valueLabel新增气泡样式，对应属性valueLabelPattern，现已默认为
+        6.(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)的valueLabel新增气泡样式，对应属性valueLabelPattern，现已默认为
           kPopoverLabelPatternPopover(气泡样式)，若要改回原样式，则设置为kPopoverLabelPatternBlank；
           
           eg:  barChart.valueLabelPattern = kPopoverLabelPatternBlank;
           
-        8.关于自定义设置y轴最小值说明：
+        7.关于自定义设置y轴最小值说明：
           /** 该属性是否重设y轴最小值，默认为NO(不设置，从0开始)，当设置为YES时，则有以下2种情况
               ①若同时实现代理方法中的 - (CGFloat)yLineMinValueInGenericChart:(ZFGenericChart *)chart，则y轴最小值为该方法的返回值
               ②若不实现①中的方法，则y轴最小值为数据源最小值
@@ -331,7 +329,7 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
            */
            @property (nonatomic, assign) BOOL isResetYLineMinValue;
           
-        9.每当更新数据后或更改属性设置，则需重新调用一次 - (void)strokePath 方法。
+        8.每当更新数据后或更改属性设置，则需重新调用一次 - (void)strokePath 方法。
           网络获取数据后，才调用 - (void)strokePath 方法
 
 
