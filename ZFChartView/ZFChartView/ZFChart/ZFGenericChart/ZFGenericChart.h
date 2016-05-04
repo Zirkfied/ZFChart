@@ -52,7 +52,7 @@
 /**
  *  y轴数值显示的最小值(若不设置，默认返回数据源最小值)
  *  
- *  (PS:当 isResetYLineMinValue 为NO时，此方法无效)(When isResetYLineMinValue is NO, the method is invalid)
+ *  (PS:当 isResetYLineMinValue 为NO时，此方法无效)
  */
 - (CGFloat)yLineMinValueInGenericChart:(ZFGenericChart *)chart;
 
@@ -105,15 +105,8 @@
 
 
 /** 是否设置y轴最小值，默认为NO(不设置，从0开始)，当设置为YES时，则有以下2种情况
-    ①若同时实现代理方法中的 - (CGFloat)yLineMinValueInGenericChart:(ZFGenericChart *)chart，则y轴最小值为该方法的返回值
-    ②若不实现①中的方法，则y轴最小值为数据源最小值
- 
- 
-    Default is No (Start to O). When set to YES, then there are 2 kinds of situations:
-    ①If at the same time to implement the method in ZFGenericChartDataSource:
-        ||- (CGFloat)yLineMinValueInGenericChart:(ZFGenericChart *)chart||,
-        then yLineMinValue is the return value of the method.
-    ②If not implemented the method in ①, then yLineMinValue is the minimum value of the dataSource.
+ ①若同时实现代理方法中的 - (CGFloat)yLineMinValueInGenericChart:(ZFGenericChart *)chart，则y轴最小值为该方法的返回值
+ ②若不实现①中的方法，则y轴最小值为数据源最小值
  */
 @property (nonatomic, assign) BOOL isResetYLineMinValue;
 /** 是否带动画显示(默认为YES，带动画) */

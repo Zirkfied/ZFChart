@@ -14,8 +14,6 @@
 
 @interface ZFGenericAxis()<UIScrollViewDelegate>
 
-/** y轴分段线原始x点位置 */
-@property (nonatomic, assign) CGFloat sectionOriginX;
 /** x轴label高度 */
 @property (nonatomic, assign) CGFloat xLineLabelHeight;
 /** 动画时间 */
@@ -217,10 +215,9 @@
  */
 - (UIView *)sectionView:(NSInteger)i{
     CGFloat yStartPos = self.yAxisLine.yLineStartYPos - (self.yAxisLine.yLineHeight - ZFAxisLineGapFromYLineMaxValueToArrow) / _yLineSectionCount * (i + 1);
-    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(self.yAxisLine.yLineStartXPos, yStartPos, YLineSectionLength, YLineSectionHeight)];
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(self.yAxisLine.yLineStartXPos + self.contentOffset.x, yStartPos, YLineSectionLength, YLineSectionHeight)];
     view.backgroundColor = _axisColor;
     view.alpha = 0.f;
-    _sectionOriginX = view.frame.origin.x;
     
     if (_isAnimated) {
         [UIView animateWithDuration:_animationDuration animations:^{
@@ -259,6 +256,11 @@
             [layer removeFromSuperlayer];
         }
     }
+    
+    for (UIView * view in self.sectionArray) {
+        [view removeFromSuperview];
+    }
+    [self.sectionArray removeAllObjects];
 }
 
 #pragma mark - public method
@@ -316,7 +318,7 @@
     if (!_isShowSeparate) {
         for (NSInteger i = 0; i < self.sectionArray.count; i++) {
             UIView * sectionView = self.sectionArray[i];
-            sectionView.frame = CGRectMake(_sectionOriginX + scrollView.contentOffset.x, sectionView.frame.origin.y, sectionView.frame.size.width, sectionView.frame.size.height);
+            sectionView.frame = CGRectMake(self.yAxisLine.yLineStartXPos + self.contentOffset.x, sectionView.frame.origin.y, sectionView.frame.size.width, sectionView.frame.size.height);
         }
     }
 }
