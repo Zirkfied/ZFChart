@@ -27,7 +27,12 @@
         self.path = [self bezierWithCenter:center radius:radius startAngle:startAngle endAngle:endAngle color:color].CGPath;
         
         if (piePatternType == kPieChartPatternTypeForCirque) {
-            self.lineWidth = radius;
+            
+            //圆环宽度518
+            //mxt518
+           // self.lineWidth = radius;
+            self.lineWidth = 30;
+
         }else if (piePatternType == kPieChartPatternTypeForCircle){
             self.lineWidth = radius * 2;
         }
