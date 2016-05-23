@@ -67,7 +67,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self commonInit];
-        [self drawGenericChart];
+        [self drawGenericChart];//画坐标轴
         
         //标题Label
         self.topicLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width/4 ,0, self.frame.size.width/2, 30)];
