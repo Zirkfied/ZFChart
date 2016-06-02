@@ -40,19 +40,19 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         }
         
         
-        //y轴数值显示的上限(若不设置，默认返回数据源最大值)
+        //y轴(普通图表) 或 x轴(横向图表) 数值显示的最大值(若不设置，默认返回数据源最大值)
         
-        - (CGFloat)yLineMaxValueInGenericChart:(ZFGenericChart *)chart;
+        - (CGFloat)axisLineMaxValueInGenericChart:(ZFGenericChart *)chart;
         
-        //y轴数值显示的最小值(若不设置，默认返回数据源最小值)
-        //(PS:当 isResetYLineMinValue 为NO时，此方法无效)(When isResetYLineMinValue is NO, the method is invalid)
+        //y轴(普通图表) 或 x轴(横向图表) 数值显示的最小值(若不设置，默认返回数据源最小值)
+        //(PS:当 isResetAxisLineMinValue 为NO时，此方法无效)(When isResetAxisLineMinValue is NO, the method is invalid)
         
-        - (CGFloat)yLineMinValueInGenericChart:(ZFGenericChart *)chart;
+        - (CGFloat)axisLineMinValueInGenericChart:(ZFGenericChart *)chart;
         
         
-        //y轴数值显示的段数(若不设置,默认5段)
+        //y轴(普通图表) 或 x轴(横向图表) 数值显示的段数(若不设置,默认5段)
         
-        - (NSInteger)yLineSectionCountInGenericChart:(ZFGenericChart *)chart;
+        - (NSInteger)axisLineSectionCountInGenericChart:(ZFGenericChart *)chart;
         
         
 ## BarChart(柱状图)
@@ -323,11 +323,11 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
  
               Default is No (Start to O). When set to YES, then there are 2 kinds of situations:
               ①If at the same time to implement the method in ZFGenericChartDataSource:
-               ||- (CGFloat)yLineMinValueInGenericChart:(ZFGenericChart *)chart||,
-               then yLineMinValue is the return value of the method.
-              ②If not implemented the method in ①, then yLineMinValue is the minimum value of the dataSource.
+               ||- (CGFloat)axisLineMinValueInGenericChart:(ZFGenericChart *)chart||,
+               then axisLineMinValue is the return value of the method.
+              ②If not implemented the method in ①, then axisLineMinValue is the minimum value of the dataSource.
            */
-           @property (nonatomic, assign) BOOL isResetYLineMinValue;
+           @property (nonatomic, assign) BOOL isResetAxisLineMinValue;
           
         8.每当更新数据后或更改属性设置，则需重新调用一次 - (void)strokePath 方法。
           网络获取数据后，才调用 - (void)strokePath 方法
