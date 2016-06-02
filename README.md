@@ -278,6 +278,20 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         
         //设置波浪样式，默认为(kWavePatternTypeForCurve)
         waveChart.wavePatternType = kWavePatternTypeForSharp
+        
+        
+        
+## HorizontalBarChart(横向柱状图)
+        须遵循ZFGenericChartDataSource数据源协议
+        delegate是ZFHorizontalBarChartDelegate
+
+        ZFHorizontalBarChart * barChart = [[ZFHorizontalBarChart alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT)];
+        barChart.dataSource = self;
+        barChart.delegate = self;
+        barChart.topic = @"xx小学各年级人数";
+        barChart.unit = @"人";
+        [barChart strokePath];
+        [self.view addSubview:barChart];
 
 ###其余说明
 ####    
@@ -293,24 +307,29 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
 
         波浪图(ZFWaveChart)
 ![](https://github.com/Zirkfied/Library/blob/master/WaveChart.png)
+
+        横向柱状图(ZFHorizontalBarChart)
+![](https://github.com/Zirkfied/Library/blob/master/HorizontalBarChart.png)
           
-        2.  ZFGenericChartDataSource是柱状图(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)的数据源方法
+        2.  ZFGenericChartDataSource是柱状图(ZFBarChart, ZFHorizontalBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)的数据源方法
             ZFPieChartDataSource是饼图(ZFPieChart)的数据源方法
             根据自身使用的图表遵循对应的数据源
         
         3.  ZFBarChartDelegate是柱状图(ZFBarChart)的部分常量设置的协议方法
             ZFLineChartDelegate是线状图(ZFLineChart)的部分常量设置的协议方法
             ZFWaveChartDelegate是波浪图(ZFWaveChart)的部分常量设置的协议方法
+            ZFHorizontalBarChartDelegate是柱状图(ZFHorizontalBarChart)的部分常量设置的协议方法
         
         4.  饼图(ZFPieChart)只有DataSource数据源方法，没有Delegate的协议方法
         
-        5.  因再一次进行封装，柱状图(ZFBarChart)，线状图(ZFLineChart)，波浪图(ZFWaveChart)均继承ZFGenericChart，故ZFGenericChartDataSource数据源方法 和 通用属性请查看 ZFGenericChart.h
+        5.  因再一次进行封装，柱状图(ZFBarChart, ZFHorizontalBarChart)，线状图(ZFLineChart)，波浪图(ZFWaveChart)均继承ZFGenericChart，故ZFGenericChartDataSource数据源方法 和 通用属性请查看 ZFGenericChart.h
             ZFBarChartDelegate协议方法 和 柱状图(ZFBarChart)专有属性 请查看 ZFBarChart.h
             ZFLineChartDelegate协议方法 和 线状图(ZFLineChart)专有属性 请查看 ZFLineChart.h
             ZFPieChartDataSource数据源方法 和 饼图(ZFPieChart)其余属性 请查看 ZFPieChart.h
             ZFWaveChartDelegate协议方法 和 波浪图(ZFWaveChart)专有属性 请查看 ZFWaveChart.h
+            ZFHorizontalBarChartDelegate协议方法 和 横向柱状图(ZFHorizontalBarChart)专有属性 请查看 ZFHorizontalBarChart.h
         
-        6.(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)的valueLabel新增气泡样式，对应属性valueLabelPattern，现已默认为
+        6.柱状图(ZFBarChart, ZFHorizontalBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)的valueLabel新增气泡样式，对应属性valueLabelPattern，现已默认为
           kPopoverLabelPatternPopover(气泡样式)，若要改回原样式，则设置为kPopoverLabelPatternBlank；
           
           eg:  barChart.valueLabelPattern = kPopoverLabelPatternBlank;
@@ -362,6 +381,9 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
                    ③新增坐标轴自定义颜色设置
                    ④本次更新进行了进一步的封装，故柱状图(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)的通用属性设置
                     现已全部挪动到他们的父类ZFGenericChart.h，各自专有的属性依旧在他们自身.h文件
+                    
+        2016.06.02 ①新增横向柱状图(ZFHorizontalBarChart)
+                   ②部分数据源方法名和属性名称进行了修改，替换时注意修改对应属性
         
         
 ##本人其他开源框架
