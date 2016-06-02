@@ -293,6 +293,11 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         [barChart strokePath];
         [self.view addSubview:barChart];
 
+
+####效果展示
+
+![](https://github.com/Zirkfied/Library/blob/master/HorizontalBarChart.gif)
+
 ###其余说明
 ####    
         1.可根据自身图表需求进行框架瘦身
