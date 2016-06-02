@@ -22,6 +22,8 @@
 @property (nonatomic, assign) BOOL isAnimated;
 /** 图形bezierPath阴影颜色(barChart默认为深灰色, lineChart、waveChart默认为浅灰色) */
 @property (nonatomic, strong) UIColor * shadowColor;
+/** 图表透明度(范围0 ~ 1, 默认为1.f) */
+@property (nonatomic, assign) CGFloat opacity;
 
 #pragma mark - public method
 

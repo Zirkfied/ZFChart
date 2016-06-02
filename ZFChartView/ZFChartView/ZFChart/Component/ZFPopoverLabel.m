@@ -7,7 +7,6 @@
 //
 
 #import "ZFPopoverLabel.h"
-#import "ZFConst.h"
 #import "UIView+Zirkfied.h"
 
 #define TriAngleHalfLength 2
@@ -17,6 +16,8 @@
 @property (nonatomic, strong) UILabel * label;
 /** 动画时间 */
 @property (nonatomic, assign) CGFloat animationDuration;
+/** 坐标轴方向 */
+@property (nonatomic, assign) kAxisDirection direction;
 
 @end
 
@@ -28,9 +29,10 @@
     _shadowColor = ZFLightGray;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame{
+- (instancetype)initWithFrame:(CGRect)frame direction:(kAxisDirection)direction{
     self = [super initWithFrame:frame];
     if (self) {
+        _direction = direction;
         [self commonInit];
         [self addUI];
     }
@@ -43,6 +45,8 @@
     self.label.textAlignment = NSTextAlignmentCenter;
     [self addSubview:self.label];
 }
+
+#pragma mark - 坐标轴为垂直方向的样式
 
 /**
  *  箭头在上方的bezierPath
@@ -117,6 +121,21 @@
     return shapeLayer;
 }
 
+#pragma mark - 坐标轴为水平方向的样式
+
+/**
+ *  水平label样式
+ */
+- (void)horizontalPattern{
+    self.label.frame = self.bounds;
+    
+    if (_pattern == kPopoverLabelPatternPopover) {
+        [self setBorderCornerRadius:4.0f andBorderWidth:0.6f andBorderColor:ZFLightGray];
+        [self setShadow:_shadowColor];
+        self.backgroundColor = ZFWhite;
+    }
+}
+
 #pragma mark - 清除所有subLayers
 
 /**
@@ -137,16 +156,24 @@
  *  重绘
  */
 - (void)strokePath{
-    [self removeAllLayer];
-    _pattern == kPopoverLabelPatternPopover ? [self.layer addSublayer:[self shapeLayer]] : nil;
+    //坐标轴为垂直方向
+    if (_direction == kAxisDirectionVertical) {
+        [self removeAllLayer];
+        _pattern == kPopoverLabelPatternPopover ? [self.layer addSublayer:[self shapeLayer]] : nil;
+        
+        if (_arrowsOrientation == kPopoverLaberArrowsOrientationOnTop) {
+            self.label.frame = CGRectMake(2, TriAngleHalfLength * ZFTan(60) + 2, self.frame.size.width - 4, self.frame.size.height - TriAngleHalfLength * ZFTan(60) - 5);
+        }else if (_arrowsOrientation == kPopoverLaberArrowsOrientationOnBelow){
+            self.label.frame = CGRectMake(2, 2, self.frame.size.width - 4, self.frame.size.height - TriAngleHalfLength * ZFTan(60) - 5);
+        }
+        [self bringSubviewToFront:self.label];
     
-    if (_arrowsOrientation == kPopoverLaberArrowsOrientationOnTop) {
-        self.label.frame = CGRectMake(2, TriAngleHalfLength * ZFTan(60) + 2, self.frame.size.width - 4, self.frame.size.height - TriAngleHalfLength * ZFTan(60) - 5);
-    }else if (_arrowsOrientation == kPopoverLaberArrowsOrientationOnBelow){
-        self.label.frame = CGRectMake(2, 2, self.frame.size.width - 4, self.frame.size.height - TriAngleHalfLength * ZFTan(60) - 5);
+    //坐标轴为水平方向
+    }else{
+        [self horizontalPattern];
     }
-    [self bringSubviewToFront:self.label];
     
+    //动画渐现
     if (_isAnimated) {
         [UIView animateWithDuration:_animationDuration animations:^{
             self.alpha = 1.f;

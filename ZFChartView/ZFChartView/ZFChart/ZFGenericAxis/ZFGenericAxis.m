@@ -14,8 +14,6 @@
 
 @interface ZFGenericAxis()<UIScrollViewDelegate>
 
-/** x轴label高度 */
-@property (nonatomic, assign) CGFloat xLineLabelHeight;
 /** 动画时间 */
 @property (nonatomic, assign) CGFloat animationDuration;
 /** y轴单位Label */
@@ -41,12 +39,11 @@
 - (void)commonInit{
     _yLineMinValue = 0;
     _yLineSectionCount = 5;
-    _xLineLabelHeight = 30.f;
     _xLineNameFontSize = 10.f;
     _yLineValueFontSize = 10.f;
     _animationDuration = 1.f;
-    _groupWidth = XLineItemWidth;
-    _groupPadding = XLinePaddingForGroupsLength;
+    _groupWidth = ZFAxisLineItemWidth;
+    _groupPadding = ZFAxisLinePaddingForGroupsLength;
     _unitColor = ZFBlack;
     _xLineNameColor = ZFBlack;
     _yLineValueColor = ZFBlack;
@@ -77,14 +74,13 @@
  */
 - (void)drawAxisLine{
     //x轴
-    self.xAxisLine = [[ZFXAxisLine alloc] initWithFrame:self.bounds];
+    self.xAxisLine = [[ZFXAxisLine alloc] initWithFrame:self.bounds direction:kAxisDirectionVertical];
     self.xAxisLine.backgroundColor = _axisLineBackgroundColor;
     [self addSubview:self.xAxisLine];
     
     //y轴
-    self.yAxisLine = [[ZFYAxisLine alloc] initWithFrame:CGRectMake(0, 0, ZFAxisLineStartXPos/* + YLineSectionLength*/, self.bounds.size.height)];
+    self.yAxisLine = [[ZFYAxisLine alloc] initWithFrame:CGRectMake(0, 0, ZFAxisLineStartXPos, self.bounds.size.height) direction:kAxisDirectionVertical];
     self.yAxisLine.backgroundColor = _axisLineBackgroundColor;
-    self.yAxisLine.alpha = 1;
     [self addSubview:self.yAxisLine];
 }
 
@@ -94,18 +90,20 @@
  *  y轴单位Label
  */
 - (void)addUnitLabel{
-    ZFLabel * lastLabel = (ZFLabel *)[self.yAxisLine viewWithTag:YLineValueLabelTag + _yLineSectionCount];
+    if (_unit) {
+        ZFLabel * lastLabel = (ZFLabel *)[self.yAxisLine viewWithTag:ZFAxisLineValueLabelTag + _yLineSectionCount];
     
-    CGFloat width = self.yAxisLine.yLineStartXPos;
-    CGFloat height = self.yAxisLine.yLineSectionHeightAverage;
-    CGFloat xPos = 0;
-    CGFloat yPos = CGRectGetMinY(lastLabel.frame) - height;
+        CGFloat width = self.yAxisLine.yLineStartXPos;
+        CGFloat height = self.yAxisLine.yLineSectionHeightAverage;
+        CGFloat xPos = 0;
+        CGFloat yPos = CGRectGetMinY(lastLabel.frame) - height;
     
-    self.unitLabel = [[ZFLabel alloc] initWithFrame:CGRectMake(xPos, yPos, width, height)];
-    self.unitLabel.text = [NSString stringWithFormat:@"(%@)",_unit];
-    self.unitLabel.textColor = _unitColor;
-    self.unitLabel.font = [UIFont boldSystemFontOfSize:10];
-    [self.yAxisLine addSubview:self.unitLabel];
+        self.unitLabel = [[ZFLabel alloc] initWithFrame:CGRectMake(xPos, yPos, width, height)];
+        self.unitLabel.text = [NSString stringWithFormat:@"(%@)",_unit];
+        self.unitLabel.textColor = _unitColor;
+        self.unitLabel.font = [UIFont boldSystemFontOfSize:10];
+        [self.yAxisLine addSubview:self.unitLabel];
+    }
 }
 
 #pragma mark - 设置x轴标题Label
@@ -117,10 +115,10 @@
     if (self.xLineNameArray.count > 0) {
         for (NSInteger i = 0; i < self.xLineNameArray.count; i++) {
             CGFloat width = _groupWidth;
-            CGFloat height = _xLineLabelHeight;
+            CGFloat height = self.frame.size.height - self.xAxisLine.xLineStartYPos - _xLineNameLabelToXAxisLinePadding;
             CGFloat center_xPos = self.xAxisLine.xLineStartXPos + _groupPadding + (_groupWidth + _groupPadding) * i + width * 0.5;
             CGFloat center_yPos = self.yAxisLine.yLineStartYPos + _xLineNameLabelToXAxisLinePadding + height * 0.5;
-            
+
             //label的中心点
             CGPoint label_center = CGPointMake(center_xPos, center_yPos);
             CGRect rect = [self.xLineNameArray[i] stringWidthRectWithSize:CGSizeMake(width + _groupPadding * 0.5, height) fontOfSize:_xLineNameFontSize isBold:NO];
@@ -128,7 +126,6 @@
             label.text = self.xLineNameArray[i];
             label.textColor = _xLineNameColor;
             label.font = [UIFont systemFontOfSize:_xLineNameFontSize];
-            label.numberOfLines = 0;
             label.center = label_center;
             [self.xAxisLine addSubview:label];
         }
@@ -154,7 +151,7 @@
         label.text = [NSString stringWithFormat:@"%.0f",valueAverage * i + _yLineMinValue];
         label.textColor = _yLineValueColor;
         label.font = [UIFont systemFontOfSize:_yLineValueFontSize];
-        label.tag = YLineValueLabelTag + i;
+        label.tag = ZFAxisLineValueLabelTag + i;
         [self.yAxisLine addSubview:label];
     }
 }
@@ -170,7 +167,7 @@
  */
 - (UIBezierPath *)yAxisLineSectionNoFill:(NSInteger)i {
     UIBezierPath * bezier = [UIBezierPath bezierPath];
-    CGFloat yStartPos = self.yAxisLine.yLineStartYPos - (self.yAxisLine.yLineHeight - ZFAxisLineGapFromYLineMaxValueToArrow) / _yLineSectionCount * (i + 1);
+    CGFloat yStartPos = self.yAxisLine.yLineStartYPos - (self.yAxisLine.yLineHeight - ZFAxisLineGapFromAxisLineMaxValueToArrow) / _yLineSectionCount * (i + 1);
     [bezier moveToPoint:CGPointMake(self.yAxisLine.yLineStartXPos, yStartPos)];
     [bezier addLineToPoint:CGPointMake(self.yAxisLine.yLineStartXPos, yStartPos)];
     
@@ -186,7 +183,7 @@
  */
 - (UIBezierPath *)drawYAxisLineSection:(NSInteger)i sectionLength:(CGFloat)sectionLength{
     UIBezierPath * bezier = [UIBezierPath bezierPath];
-    CGFloat yStartPos = self.yAxisLine.yLineStartYPos - (self.yAxisLine.yLineHeight - ZFAxisLineGapFromYLineMaxValueToArrow) / _yLineSectionCount * (i + 1);
+    CGFloat yStartPos = self.yAxisLine.yLineStartYPos - (self.yAxisLine.yLineHeight - ZFAxisLineGapFromAxisLineMaxValueToArrow) / _yLineSectionCount * (i + 1);
     [bezier moveToPoint:CGPointMake(self.yAxisLine.yLineStartXPos, yStartPos)];
     [bezier addLineToPoint:CGPointMake(self.yAxisLine.yLineStartXPos + sectionLength, yStartPos)];
     
@@ -214,8 +211,8 @@
  *  y轴分段线
  */
 - (UIView *)sectionView:(NSInteger)i{
-    CGFloat yStartPos = self.yAxisLine.yLineStartYPos - (self.yAxisLine.yLineHeight - ZFAxisLineGapFromYLineMaxValueToArrow) / _yLineSectionCount * (i + 1);
-    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(self.yAxisLine.yLineStartXPos + self.contentOffset.x, yStartPos, YLineSectionLength, YLineSectionHeight)];
+    CGFloat yStartPos = self.yAxisLine.yLineStartYPos - (self.yAxisLine.yLineHeight - ZFAxisLineGapFromAxisLineMaxValueToArrow) / _yLineSectionCount * (i + 1);
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(self.yAxisLine.yLineStartXPos + self.contentOffset.x, yStartPos, ZFAxisLineSectionLength, ZFAxisLineSectionHeight)];
     view.backgroundColor = _axisColor;
     view.alpha = 0.f;
     
@@ -233,9 +230,9 @@
 #pragma mark - 清除控件
 
 /**
- *  清除之前所有Label
+ *  清除之前所有控件
  */
-- (void)removeAllLabel{
+- (void)removeAllSubviews{
     NSArray * subviews1 = [NSArray arrayWithArray:self.xAxisLine.subviews];
     for (UIView * view in subviews1) {
         if ([view isKindOfClass:[ZFLabel class]]) {
@@ -269,7 +266,7 @@
  *  重绘
  */
 - (void)strokePath{
-    [self removeAllLabel];
+    [self removeAllSubviews];
     [self.sectionArray removeAllObjects];
     self.yAxisLine.yLineSectionCount = _yLineSectionCount;
     
@@ -357,14 +354,14 @@
  *  获取y轴最大上限值y值
  */
 - (CGFloat)yLineMaxValueYPos{
-    return self.yAxisLine.yLineEndYPos + ZFAxisLineGapFromYLineMaxValueToArrow;
+    return self.yAxisLine.yLineEndYPos + ZFAxisLineGapFromAxisLineMaxValueToArrow;
 }
 
 /**
  *  获取y轴最大上限值与0值的高度
  */
 - (CGFloat)yLineMaxValueHeight{
-    return self.yAxisLine.yLineStartYPos - (self.yAxisLine.yLineEndYPos + ZFAxisLineGapFromYLineMaxValueToArrow);
+    return self.yAxisLine.yLineStartYPos - (self.yAxisLine.yLineEndYPos + ZFAxisLineGapFromAxisLineMaxValueToArrow);
 }
 
 /** 

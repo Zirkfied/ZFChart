@@ -104,6 +104,7 @@
             circle.isShadow = _isShadow;
             circle.isAnimated = self.isAnimated;
             circle.shadowColor = self.shadowColor;
+            circle.opacity = self.opacity;
             [circle strokePath];
             [self.genericAxis addSubview:circle];
             [self.circleArray addObject:circle];
@@ -137,6 +138,7 @@
                     circle.isShadow = _isShadow;
                     circle.isAnimated = self.isAnimated;
                     circle.shadowColor = self.shadowColor;
+                    circle.opacity = self.opacity;
                     [circle strokePath];
                     [self.genericAxis addSubview:circle];
                     [subArray addObject:circle];
@@ -182,7 +184,7 @@
     ZFCircle * circle = circleArray[index];
     
     CGRect rect = [valueArray[index] stringWidthRectWithSize:CGSizeMake(45, 30) fontOfSize:self.valueOnChartFontSize isBold:NO];
-    ZFPopoverLabel * popoverLabel = [[ZFPopoverLabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width + 10, rect.size.height + 10)];
+    ZFPopoverLabel * popoverLabel = [[ZFPopoverLabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width + 10, rect.size.height + 10) direction:kAxisDirectionVertical];
     popoverLabel.text = valueArray[index];
     popoverLabel.font = [UIFont systemFontOfSize:self.valueOnChartFontSize];
     popoverLabel.textColor = _colorArray[colorIndex];
@@ -257,6 +259,7 @@
     layer.strokeColor = [_colorArray[index] CGColor];
     layer.lineWidth = _lineWidth;
     layer.isShadow = _isShadow;
+    layer.opacity = self.opacity;
     
     return layer;
 }
@@ -345,19 +348,19 @@
         _colorArray = [NSMutableArray arrayWithArray:[[ZFMethod shareInstance] cachedColor:self.genericAxis.xLineValueArray]];
     }
     
-    if ([self.dataSource respondsToSelector:@selector(yLineMaxValueInGenericChart:)]) {
-        self.genericAxis.yLineMaxValue = [self.dataSource yLineMaxValueInGenericChart:self];
+    if ([self.dataSource respondsToSelector:@selector(axisLineMaxValueInGenericChart:)]) {
+        self.genericAxis.yLineMaxValue = [self.dataSource axisLineMaxValueInGenericChart:self];
     }else{
         self.genericAxis.yLineMaxValue = [[ZFMethod shareInstance] cachedYLineMaxValue:self.genericAxis.xLineValueArray];
     }
     
-    if (self.isResetYLineMinValue) {
-        if ([self.dataSource respondsToSelector:@selector(yLineMinValueInGenericChart:)]) {
-            if ([self.dataSource yLineMinValueInGenericChart:self] > [[ZFMethod shareInstance] cachedYLineMinValue:self.genericAxis.xLineValueArray]) {
+    if (self.isResetAxisLineMinValue) {
+        if ([self.dataSource respondsToSelector:@selector(axisLineMinValueInGenericChart:)]) {
+            if ([self.dataSource axisLineMinValueInGenericChart:self] > [[ZFMethod shareInstance] cachedYLineMinValue:self.genericAxis.xLineValueArray]) {
                 self.genericAxis.yLineMinValue = [[ZFMethod shareInstance] cachedYLineMinValue:self.genericAxis.xLineValueArray];
                 
             }else{
-                self.genericAxis.yLineMinValue = [self.dataSource yLineMinValueInGenericChart:self];
+                self.genericAxis.yLineMinValue = [self.dataSource axisLineMinValueInGenericChart:self];
             }
             
         }else{
@@ -365,8 +368,8 @@
         }
     }
     
-    if ([self.dataSource respondsToSelector:@selector(yLineSectionCountInGenericChart:)]) {
-        self.genericAxis.yLineSectionCount = [self.dataSource yLineSectionCountInGenericChart:self];
+    if ([self.dataSource respondsToSelector:@selector(axisLineSectionCountInGenericChart:)]) {
+        self.genericAxis.yLineSectionCount = [self.dataSource axisLineSectionCountInGenericChart:self];
     }
     
     if ([self.delegate respondsToSelector:@selector(groupWidthInLineChart:)]) {
@@ -395,7 +398,7 @@
     [self.genericAxis strokePath];
     [self drawCircle];
     [self drawLine];
-    self.isShowXLineValue ? [self setValueLabelOnChart] : nil;
+    self.isShowAxisLineValue ? [self setValueLabelOnChart] : nil;
     [self.genericAxis bringSubviewToFront:self.genericAxis.yAxisLine];
     [self.genericAxis bringSectionToFront];
 }
@@ -418,20 +421,20 @@
     self.genericAxis.unitColor = unitColor;
 }
 
-- (void)setXLineNameFontSize:(CGFloat)xLineNameFontSize{
-    self.genericAxis.xLineNameFontSize = xLineNameFontSize;
+- (void)setAxisLineNameFontSize:(CGFloat)axisLineNameFontSize{
+    self.genericAxis.xLineNameFontSize = axisLineNameFontSize;
 }
 
-- (void)setYLineValueFontSize:(CGFloat)yLineValueFontSize{
-    self.genericAxis.yLineValueFontSize = yLineValueFontSize;
+- (void)setAxisLineValueFontSize:(CGFloat)axisLineValueFontSize{
+    self.genericAxis.yLineValueFontSize = axisLineValueFontSize;
 }
 
-- (void)setXLineNameColor:(UIColor *)xLineNameColor{
-    self.genericAxis.xLineNameColor = xLineNameColor;
+- (void)setAxisLineNameColor:(UIColor *)axisLineNameColor{
+    self.genericAxis.xLineNameColor = axisLineNameColor;
 }
 
-- (void)setYLineValueColor:(UIColor *)yLineValueColor{
-    self.genericAxis.yLineValueColor = yLineValueColor;
+- (void)setAxisLineValueColor:(UIColor *)axisLineValueColor{
+    self.genericAxis.yLineValueColor = axisLineValueColor;
 }
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor{

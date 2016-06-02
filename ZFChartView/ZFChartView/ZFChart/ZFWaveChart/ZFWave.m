@@ -63,7 +63,7 @@
     [bezier addLineToPoint:CGPointMake(self.frame.size.width, self.frame.size.height)];
     [bezier closePath];
     
-    return bezier = _wavePatternType == kWavePatternTypeForCurve ? [bezier smoothedPathWithGranularity:_padding] : bezier;;
+    return bezier = _wavePatternType == kWavePatternTypeForCurve ? [bezier smoothedPathWithGranularity:_padding] : bezier;
 }
 
 - (CAShapeLayer *)shapeLayer{
@@ -73,6 +73,7 @@
     shapeLayer.path = [self fill].CGPath;
     shapeLayer.lineJoin = kCALineJoinRound;
     shapeLayer.lineCap = kCALineCapRound;
+    shapeLayer.opacity = _opacity;
     
     if (_isAnimated) {
         CABasicAnimation * animation = [self animation];

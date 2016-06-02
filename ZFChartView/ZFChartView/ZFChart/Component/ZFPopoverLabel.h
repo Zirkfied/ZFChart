@@ -9,6 +9,7 @@
 //气泡Label
 
 #import <UIKit/UIKit.h>
+#import "ZFConst.h"
 
 /**
  *  ZFPopoverLabel箭头方向
@@ -48,6 +49,11 @@ typedef enum{
 @property (nonatomic, assign) NSInteger groupIndex;
 /** self所在的位置下标 */
 @property (nonatomic, assign) NSInteger labelIndex;
+
+
+#pragma mark - public method
+
+- (instancetype)initWithFrame:(CGRect)frame direction:(kAxisDirection)direction;
 
 /**
  *  重绘

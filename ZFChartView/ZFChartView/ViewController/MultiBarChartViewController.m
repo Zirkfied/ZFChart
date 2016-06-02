@@ -11,10 +11,6 @@
 
 @interface MultiBarChartViewController ()<ZFGenericChartDataSource, ZFBarChartDelegate>
 
-@property (nonatomic, strong) NSMutableArray * array1;
-@property (nonatomic, strong) NSMutableArray * array2;
-@property (nonatomic, strong) NSMutableArray * totalArray;
-
 @end
 
 @implementation MultiBarChartViewController
@@ -29,14 +25,15 @@
     barChart.unit = @"人";
     barChart.topicColor = ZFWhite;
 //    barChart.isAnimated = NO;
-//    barChart.isResetYLineMinValue = YES;
+//    barChart.isResetAxisLineMinValue = YES;
 //    barChart.isShadowForValueLabel = NO;
 //    barChart.valueLabelPattern = kPopoverLabelPatternBlank;
+    barChart.isShowSeparate = YES;
     barChart.unitColor = ZFWhite;
     barChart.backgroundColor = ZFPurple;
     barChart.axisColor = ZFWhite;
-    barChart.xLineNameColor = ZFWhite;
-    barChart.yLineValueColor = ZFWhite;
+    barChart.axisLineNameColor = ZFWhite;
+    barChart.axisLineValueColor = ZFWhite;
     [barChart strokePath];
     [self.view addSubview:barChart];
 }
@@ -45,8 +42,6 @@
 
 - (NSArray *)valueArrayInGenericChart:(ZFGenericChart *)chart{
     return @[@[@"123", @"300", @"490", @"380", @"167", @"235"], @[@"256", @"283", @"236", @"240", @"183", @"200"], @[@"256", @"256", @"256", @"256", @"256", @"256"]];
-    
-    return _totalArray;
 }
 
 - (NSArray *)nameArrayInGenericChart:(ZFGenericChart *)chart{
@@ -57,15 +52,15 @@
     return @[ZFColor(71, 204, 255, 1), ZFColor(253, 203, 76, 1), ZFColor(16, 140, 39, 1)];
 }
 
-- (CGFloat)yLineMaxValueInGenericChart:(ZFGenericChart *)chart{
+- (CGFloat)axisLineMaxValueInGenericChart:(ZFGenericChart *)chart{
     return 500;
 }
 
-//- (CGFloat)yLineMinValueInGenericChart:(ZFGenericChart *)chart{
+//- (CGFloat)axisLineMinValueInGenericChart:(ZFGenericChart *)chart{
 //    return 100;
 //}
 
-- (NSInteger)yLineSectionCountInGenericChart:(ZFGenericChart *)chart{
+- (NSInteger)axisLineSectionCountInGenericChart:(ZFGenericChart *)chart{
     return 10;
 }
 
@@ -83,9 +78,9 @@
 //    return 5.f;
 //}
 
-- (id)valueTextColorArrayInChart:(ZFBarChart *)chart{
+- (id)valueTextColorArrayInBarChart:(ZFBarChart *)barChart{
     return ZFBlue;
-    return @[ZFColor(71, 204, 255, 1), ZFColor(253, 203, 76, 1), ZFColor(16, 140, 39, 1)];
+//    return @[ZFColor(71, 204, 255, 1), ZFColor(253, 203, 76, 1), ZFColor(16, 140, 39, 1)];
 }
 
 - (void)barChart:(ZFBarChart *)barChart didSelectBarAtGroupIndex:(NSInteger)groupIndex barIndex:(NSInteger)barIndex{

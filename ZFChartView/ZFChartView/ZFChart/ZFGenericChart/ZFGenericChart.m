@@ -16,13 +16,13 @@
  */
 - (void)commonInit{
     _topic = @"";
-    _unit = @"";
     _isAnimated = YES;
     _isShadowForValueLabel = YES;
+    _opacity = 1.f;
     _valueOnChartFontSize = 10.f;
     _xLineNameLabelToXAxisLinePadding = 20.f;
     _valueLabelPattern = kPopoverLabelPatternPopover;
-    _isShowXLineValue = YES;
+    _isShowAxisLineValue = YES;
 }
 
 @end

@@ -11,25 +11,25 @@
 /**
  *  随机颜色
  */
-#define ZFRandomColor ZFColor(arc4random() % 256, arc4random() % 256, arc4random() % 256, 1)
+#define ZFRandomColor   ZFColor(arc4random() % 256, arc4random() % 256, arc4random() % 256, 1)
 
-#define ZFBlack [UIColor blackColor]
-#define ZFDarkGray [UIColor darkGrayColor]
-#define ZFLightGray [UIColor lightGrayColor]
-#define ZFWhite [UIColor whiteColor]
-#define ZFGray [UIColor grayColor]
-#define ZFRed [UIColor redColor]
-#define ZFGreen [UIColor greenColor]
-#define ZFBlue [UIColor blueColor]
-#define ZFCyan [UIColor cyanColor]
-#define ZFYellow [UIColor yellowColor]
-#define ZFMagenta [UIColor magentaColor]
-#define ZFOrange [UIColor orangeColor]
-#define ZFPurple [UIColor purpleColor]
-#define ZFBrown [UIColor brownColor]
-#define ZFClear [UIColor clearColor]
-#define ZFSkyBlue ZFDecimalColor(0, 0.68, 1, 1)
-#define ZFLightBlue ZFColor(125, 231, 255, 1)
-#define ZFFicelle ZFColor(247, 247, 247, 1)
-#define ZFTaupe ZFColor(238, 239, 241, 1)
-#define ZFGrassGreen ZFColor(254, 200, 122, 1)
+#define ZFBlack         [UIColor blackColor]
+#define ZFDarkGray      [UIColor darkGrayColor]
+#define ZFLightGray     [UIColor lightGrayColor]
+#define ZFWhite         [UIColor whiteColor]
+#define ZFGray          [UIColor grayColor]
+#define ZFRed           [UIColor redColor]
+#define ZFGreen         [UIColor greenColor]
+#define ZFBlue          [UIColor blueColor]
+#define ZFCyan          [UIColor cyanColor]
+#define ZFYellow        [UIColor yellowColor]
+#define ZFMagenta       [UIColor magentaColor]
+#define ZFOrange        [UIColor orangeColor]
+#define ZFPurple        [UIColor purpleColor]
+#define ZFBrown         [UIColor brownColor]
+#define ZFClear         [UIColor clearColor]
+#define ZFSkyBlue       ZFDecimalColor(0, 0.68, 1, 1)
+#define ZFLightBlue     ZFColor(125, 231, 255, 1)
+#define ZFFicelle       ZFColor(247, 247, 247, 1)
+#define ZFTaupe         ZFColor(238, 239, 241, 1)
+#define ZFGrassGreen    ZFColor(254, 200, 122, 1)

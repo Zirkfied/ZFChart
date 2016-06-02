@@ -50,39 +50,39 @@
 extern CGFloat const ZFAxisLineStartXPos;
 
 /**
- *  y轴label tag值
+ *  坐标轴 label tag值
  */
-extern NSInteger const YLineValueLabelTag;
+extern NSInteger const ZFAxisLineValueLabelTag;
 
 /**
- *  x轴item宽度
+ *  坐标轴 item宽度
  */
-extern CGFloat const XLineItemWidth;
+extern CGFloat const ZFAxisLineItemWidth;
 
 /**
- *  x轴组与组之间间距
+ *  坐标轴 组与组之间的间距
  */
-extern CGFloat const XLinePaddingForGroupsLength;
+extern CGFloat const ZFAxisLinePaddingForGroupsLength;
 
 /**
- *  x轴bar与bar之间间距
+ *  坐标轴 bar与bar之间间距
  */
-extern CGFloat const XLinePaddingForBarLength;
+extern CGFloat const ZFAxisLinePaddingForBarLength;
 
 /**
- *  坐标y轴最大上限值到箭头的间隔距离
+ *  坐标轴最大上限值到箭头的间隔距离
  */
-extern CGFloat const ZFAxisLineGapFromYLineMaxValueToArrow;
+extern CGFloat const ZFAxisLineGapFromAxisLineMaxValueToArrow;
 
 /**
- *  y轴分段线长度
+ *  坐标轴分段线长度
  */
-extern CGFloat const YLineSectionLength;
+extern CGFloat const ZFAxisLineSectionLength;
 
 /**
- *  y轴分段线高度
+ *  坐标轴分段线高度
  */
-extern CGFloat const YLineSectionHeight;
+extern CGFloat const ZFAxisLineSectionHeight;
 
 /**
  *  开始系数(上方)
@@ -93,6 +93,11 @@ extern CGFloat const StartRatio;
  *  结束系数(下方)
  */
 extern CGFloat const EndRatio;
+
+/**
+ *  横向坐标轴结束系数(下方)
+ */
+extern CGFloat const HorizontalEndRatio;
 
 /**
  *  线状图圆的半径
@@ -140,6 +145,13 @@ typedef enum{
     kChartValuePositionOnBelow = 2//下方
 }kChartValuePosition;
 
+/**
+ *  横向或竖向坐标轴
+ */
+typedef enum{
+    kAxisDirectionVertical = 0,//垂直方向
+    kAxisDirectionHorizontal = 1//水平方向
+}kAxisDirection;
 
 @interface ZFConst : NSObject
 

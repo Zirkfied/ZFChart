@@ -7,7 +7,6 @@
 //
 
 #import "ZFXAxisLine.h"
-#import "ZFConst.h"
 
 @interface ZFXAxisLine()
 
@@ -22,6 +21,10 @@
 @property (nonatomic, assign) CGFloat arrowsWidthHalf;
 /** 坐标轴线宽的一半 */
 @property (nonatomic, assign) CGFloat lineWidthHalf;
+/** 记录坐标轴方向 */
+@property (nonatomic, assign) kAxisDirection direction;
+/** x轴箭头的顶点与self的间距 */
+@property (nonatomic, assign) CGFloat xLineRightGap;
 
 @end
 
@@ -31,12 +34,13 @@
  *  初始化默认变量
  */
 - (void)commonInit{
-    _xLineWidth = self.frame.size.width - ZFAxisLineStartXPos - 20.f;
+    _xLineRightGap = _direction == kAxisDirectionVertical ? 20.f : 40.f;
+    _xLineWidth = self.frame.size.width - ZFAxisLineStartXPos - _xLineRightGap;
     _xLineHeight = 1.f;
     
     _xLineStartXPos = ZFAxisLineStartXPos;
-    _xLineStartYPos = self.frame.size.height * EndRatio;
-    _xLineEndXPos = self.frame.size.width - 20;
+    _xLineStartYPos = _direction == kAxisDirectionVertical ? self.frame.size.height * EndRatio : 0;
+    _xLineEndXPos = self.frame.size.width - _xLineRightGap;
     _xLineEndYPos = _xLineStartYPos;
     
     _animationDuration = 0.5f;
@@ -46,9 +50,10 @@
     _axisColor = ZFBlack;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame{
+- (instancetype)initWithFrame:(CGRect)frame direction:(kAxisDirection)direction{
     self = [super initWithFrame:frame];
     if (self) {
+        _direction = direction;
         [self commonInit];
     }
     return self;
@@ -206,14 +211,18 @@
 #pragma mark - 重写setter,getter方法
 
 - (void)setXLineWidth:(CGFloat)xLineWidth{
-    if (xLineWidth < self.frame.size.width - ZFAxisLineStartXPos - 20.f) {
-        _xLineWidth = self.frame.size.width - ZFAxisLineStartXPos - 20.f;
-    }else{
+    if (xLineWidth > _xLineWidth) {
         _xLineWidth = xLineWidth;
         _xLineEndXPos = _xLineStartXPos + _xLineWidth;
+        self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, _xLineEndXPos + 20.f, self.frame.size.height);
     }
-    
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, _xLineEndXPos + 20.f, self.frame.size.height);
+}
+
+/**
+ *  计算x轴分段宽度的平均值
+ */
+- (CGFloat)xLineSectionWidthAverage{
+    return ((_xLineWidth - ZFAxisLineGapFromAxisLineMaxValueToArrow) / _xLineSectionCount);
 }
 
 @end

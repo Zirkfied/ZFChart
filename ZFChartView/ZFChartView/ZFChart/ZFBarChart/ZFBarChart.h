@@ -38,7 +38,7 @@
  *                                                    为数组对应下标的颜色，样式看Github文档
  *
  */
-- (id)valueTextColorArrayInChart:(ZFBarChart *)chart;
+- (id)valueTextColorArrayInBarChart:(ZFBarChart *)barChart;
 
 /**
  *  用于编写点击bar后需要执行后续代码

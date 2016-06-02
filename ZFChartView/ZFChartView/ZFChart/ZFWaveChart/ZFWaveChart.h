@@ -16,7 +16,6 @@
 @protocol ZFWaveChartDelegate <NSObject>
 
 @optional
-
 /**
  *  组宽(若不设置，默认为25.f)
  */

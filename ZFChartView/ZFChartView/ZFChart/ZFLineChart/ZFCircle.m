@@ -72,6 +72,7 @@
     layer.fillColor = _circleColor.CGColor;
     layer.strokeColor = _circleColor.CGColor;
     layer.path = [self fill].CGPath;
+    layer.opacity = _opacity;
     self.shapeLayer = layer;
     
     if (_isShadow) {

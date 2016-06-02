@@ -19,4 +19,9 @@
  */
 -(void)setBorderCornerRadius:(CGFloat)cornerRadius andBorderWidth:(CGFloat)borderWidth andBorderColor:(UIColor *)color;
 
+/**
+ *  设置阴影
+ */
+- (void)setShadow:(UIColor *)color;
+
 @end

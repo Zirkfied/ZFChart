@@ -26,8 +26,8 @@
     lineChart.topicColor = ZFWhite;
     lineChart.isShowSeparate = YES;
 //    lineChart.isAnimated = NO;
-    lineChart.isResetYLineMinValue = YES;
-//    lineChart.isShowXLineValue = NO;
+    lineChart.isResetAxisLineMinValue = YES;
+//    lineChart.isShowAxisLineValue = NO;
 //    lineChart.isShadowForValueLabel = NO;
     lineChart.isShadow = NO;
 //    lineChart.valueLabelPattern = kPopoverLabelPatternBlank;
@@ -36,8 +36,8 @@
     lineChart.unitColor = ZFWhite;
     lineChart.backgroundColor = ZFPurple;
     lineChart.axisColor = ZFWhite;
-    lineChart.xLineNameColor = ZFWhite;
-    lineChart.yLineValueColor = ZFWhite;
+    lineChart.axisLineNameColor = ZFWhite;
+    lineChart.axisLineValueColor = ZFWhite;
     lineChart.xLineNameLabelToXAxisLinePadding = 40;
     [self.view addSubview:lineChart];
     [lineChart strokePath];
@@ -57,15 +57,15 @@
     return @[ZFSkyBlue, ZFOrange, ZFMagenta];
 }
 
-- (CGFloat)yLineMaxValueInGenericChart:(ZFGenericChart *)chart{
+- (CGFloat)axisLineMaxValueInGenericChart:(ZFGenericChart *)chart{
     return 500;
 }
 
-//- (CGFloat)yLineMinValueInGenericChart:(ZFGenericChart *)chart{
+//- (CGFloat)axisLineMinValueInGenericChart:(ZFGenericChart *)chart{
 //    return -150;
 //}
 
-- (NSInteger)yLineSectionCountInGenericChart:(ZFGenericChart *)chart{
+- (NSInteger)axisLineSectionCountInGenericChart:(ZFGenericChart *)chart{
     return 10;
 }
 

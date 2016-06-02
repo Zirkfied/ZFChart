@@ -61,7 +61,7 @@
 
 @property (nonatomic, weak) id<ZFLineChartDelegate> delegate;
 
-/** 图表上valueLabel中心点到对应圆的中心点的距离 */
+/** 图表上valueLabel中心点到对应圆的中心点的距离(默认为25.f) */
 @property (nonatomic, assign) CGFloat valueCenterToCircleCenterPadding;
 /** 图表上value位置(默认为kChartValuePositionDefalut) */
 @property (nonatomic, assign) kChartValuePosition valuePosition;

@@ -1,14 +1,14 @@
 //
-//  ZFBar.h
-//  ZFChart
+//  ZFHorizontalBar.h
+//  ZFChartView
 //
-//  Created by apple on 16/1/26.
+//  Created by apple on 16/5/31.
 //  Copyright © 2016年 apple. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface ZFBar : UIControl
+@interface ZFHorizontalBar : UIControl
 
 /** bar颜色 */
 @property (nonatomic, strong) UIColor * barColor;
@@ -30,8 +30,8 @@
 
 #warning message - readonly(只读)
 
-/** bar终点Y值 */
-@property (nonatomic, assign, readonly) CGFloat endYPos;
+/** bar终点X值 */
+@property (nonatomic, assign, readonly) CGFloat endXPos;
 
 
 #pragma mark - public method

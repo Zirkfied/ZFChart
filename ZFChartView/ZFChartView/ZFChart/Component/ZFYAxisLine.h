@@ -11,6 +11,7 @@
  */
 
 #import <UIKit/UIKit.h>
+#import "ZFConst.h"
 
 @interface ZFYAxisLine : UIView
 
@@ -37,8 +38,20 @@
 @property (nonatomic, assign, readonly) CGFloat yLineEndYPos;
 /** 计算y轴分段高度的平均值 */
 @property (nonatomic, assign, readonly) CGFloat yLineSectionHeightAverage;
+/** y轴箭头顶点yPos */
+@property (nonatomic, assign, readonly) CGFloat yLineArrowTopYPos;
 
 #pragma mark - public method
+
+/**
+ *  初始化方法
+ *
+ *  @param frame     frame
+ *  @param direction kAxisDirection
+ *
+ *  @return self
+ */
+- (instancetype)initWithFrame:(CGRect)frame direction:(kAxisDirection)direction;
 
 /**
  *  重绘

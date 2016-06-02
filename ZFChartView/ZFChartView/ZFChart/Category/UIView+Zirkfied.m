@@ -23,4 +23,15 @@
     self.layer.borderColor = color.CGColor;
 }
 
+/**
+ *  设置阴影
+ */
+- (void)setShadow:(UIColor *)color{
+    self.layer.shadowPath =[UIBezierPath bezierPathWithRect:self.layer.bounds].CGPath;
+    self.layer.shadowColor = color.CGColor;//阴影的颜色
+    self.layer.shadowOpacity = 0.5f;   // 阴影透明度
+    self.layer.shadowOffset = CGSizeMake(2,2); // 阴影的范围
+    self.layer.shadowRadius = 2;  // 阴影扩散的范围控制
+}
+
 @end

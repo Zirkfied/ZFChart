@@ -17,7 +17,10 @@ typedef enum{
 
 @property (nonatomic, strong) UIColor * pathColor;
 @property (nonatomic, strong) NSMutableArray * valuePointArray;
+/** 间距 */
 @property (nonatomic, assign) CGFloat padding;
+/** 图表透明度(范围0 ~ 1, 默认为1.f) */
+@property (nonatomic, assign) CGFloat opacity;
 /** 波浪样式(默认为kWavePatternTypeForCurve) */
 @property (nonatomic, assign) kWavePatternType wavePatternType;
 /** 是否带动画显示(默认为YES，带动画) */

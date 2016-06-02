@@ -72,6 +72,7 @@
     self.wave.padding = self.genericAxis.groupPadding;
     self.wave.wavePatternType = _wavePatternType;
     self.wave.isAnimated = self.isAnimated;
+    self.wave.opacity = self.opacity;
     [self.genericAxis addSubview:self.wave];
     [self.wave strokePath];
 }
@@ -88,7 +89,7 @@
         NSDictionary * currentDict = _valuePointArray[i];
         
         CGRect rect = [self.genericAxis.xLineValueArray[i] stringWidthRectWithSize:CGSizeMake(45, 30) fontOfSize:self.valueOnChartFontSize isBold:NO];
-        ZFPopoverLabel * popoverLabel = [[ZFPopoverLabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width + 10, rect.size.height + 10)];
+        ZFPopoverLabel * popoverLabel = [[ZFPopoverLabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width + 10, rect.size.height + 10) direction:kAxisDirectionVertical];
         popoverLabel.text = self.genericAxis.xLineValueArray[i];
         popoverLabel.font = [UIFont systemFontOfSize:self.valueOnChartFontSize];
         popoverLabel.pattern = self.valueLabelPattern;
@@ -182,19 +183,19 @@
         self.genericAxis.xLineNameArray = [NSMutableArray arrayWithArray:[self.dataSource nameArrayInGenericChart:self]];
     }
     
-    if ([self.dataSource respondsToSelector:@selector(yLineMaxValueInGenericChart:)]) {
-        self.genericAxis.yLineMaxValue = [self.dataSource yLineMaxValueInGenericChart:self];
+    if ([self.dataSource respondsToSelector:@selector(axisLineMaxValueInGenericChart:)]) {
+        self.genericAxis.yLineMaxValue = [self.dataSource axisLineMaxValueInGenericChart:self];
     }else{
         self.genericAxis.yLineMaxValue = [[ZFMethod shareInstance] cachedYLineMaxValue:self.genericAxis.xLineValueArray];
     }
     
-    if (self.isResetYLineMinValue) {
-        if ([self.dataSource respondsToSelector:@selector(yLineMinValueInGenericChart:)]) {
-            if ([self.dataSource yLineMinValueInGenericChart:self] > [[ZFMethod shareInstance] cachedYLineMinValue:self.genericAxis.xLineValueArray]) {
+    if (self.isResetAxisLineMinValue) {
+        if ([self.dataSource respondsToSelector:@selector(axisLineMinValueInGenericChart:)]) {
+            if ([self.dataSource axisLineMinValueInGenericChart:self] > [[ZFMethod shareInstance] cachedYLineMinValue:self.genericAxis.xLineValueArray]) {
                 self.genericAxis.yLineMinValue = [[ZFMethod shareInstance] cachedYLineMinValue:self.genericAxis.xLineValueArray];
                 
             }else{
-                self.genericAxis.yLineMinValue = [self.dataSource yLineMinValueInGenericChart:self];
+                self.genericAxis.yLineMinValue = [self.dataSource axisLineMinValueInGenericChart:self];
             }
             
         }else{
@@ -202,8 +203,8 @@
         }
     }
     
-    if ([self.dataSource respondsToSelector:@selector(yLineSectionCountInGenericChart:)]) {
-        self.genericAxis.yLineSectionCount = [self.dataSource yLineSectionCountInGenericChart:self];
+    if ([self.dataSource respondsToSelector:@selector(axisLineSectionCountInGenericChart:)]) {
+        self.genericAxis.yLineSectionCount = [self.dataSource axisLineSectionCountInGenericChart:self];
     }
     
     if ([self.delegate respondsToSelector:@selector(groupWidthInWaveChart:)]) {
@@ -224,7 +225,7 @@
     [self.genericAxis strokePath];
     _valuePointArray = [NSMutableArray arrayWithArray:[self cachedValuePointArray:self.genericAxis.xLineValueArray]];
     [self drawWavePath];
-    self.isShowXLineValue ? [self setValueLabelOnChart] : nil;
+    self.isShowAxisLineValue ? [self setValueLabelOnChart] : nil;
     [self.genericAxis bringSubviewToFront:self.genericAxis.yAxisLine];
     [self.genericAxis bringSectionToFront];
 }
@@ -269,20 +270,20 @@
     self.genericAxis.unitColor = unitColor;
 }
 
-- (void)setXLineNameFontSize:(CGFloat)xLineNameFontSize{
-    self.genericAxis.xLineNameFontSize = xLineNameFontSize;
+- (void)setAxisLineNameFontSize:(CGFloat)axisLineNameFontSize{
+    self.genericAxis.xLineNameFontSize = axisLineNameFontSize;
 }
 
-- (void)setYLineValueFontSize:(CGFloat)yLineValueFontSize{
-    self.genericAxis.yLineValueFontSize = yLineValueFontSize;
+- (void)setAxisLineValueFontSize:(CGFloat)axisLineValueFontSize{
+    self.genericAxis.yLineValueFontSize = axisLineValueFontSize;
 }
 
-- (void)setXLineNameColor:(UIColor *)xLineNameColor{
-    self.genericAxis.xLineNameColor = xLineNameColor;
+- (void)setAxisLineNameColor:(UIColor *)axisLineNameColor{
+    self.genericAxis.xLineNameColor = axisLineNameColor;
 }
 
-- (void)setYLineValueColor:(UIColor *)yLineValueColor{
-    self.genericAxis.yLineValueColor = yLineValueColor;
+- (void)setAxisLineValueColor:(UIColor *)axisLineValueColor{
+    self.genericAxis.yLineValueColor = axisLineValueColor;
 }
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor{

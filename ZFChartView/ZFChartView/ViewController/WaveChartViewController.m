@@ -35,8 +35,8 @@
 //    waveChart.isShowSeparate = YES;
     waveChart.topicColor = ZFPurple;
 //    waveChart.isAnimated = NO;
-//    waveChart.isResetYLineMinValue = YES;
-//    waveChart.isShowXLineValue = NO;
+//    waveChart.isResetAxisLineMinValue = YES;
+//    waveChart.isShowAxisLineValue = NO;
 //    waveChart.isShadowForValueLabel = NO;
 //    waveChart.valuePosition = kChartValuePositionOnBelow;
 //    waveChart.valueLabelPattern = kPopoverLabelPatternBlank;
@@ -56,15 +56,15 @@
     return @[@"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级", @"初一", @"初二", @"初三", @"高一", @"高二", @"高三"];
 }
 
-- (CGFloat)yLineMaxValueInGenericChart:(ZFGenericChart *)chart{
+- (CGFloat)axisLineMaxValueInGenericChart:(ZFGenericChart *)chart{
     return 500;
 }
 
-//- (CGFloat)yLineMinValueInGenericChart:(ZFGenericChart *)chart{
+//- (CGFloat)axisLineMinValueInGenericChart:(ZFGenericChart *)chart{
 //    return 100;
 //}
 
-- (NSInteger)yLineSectionCountInGenericChart:(ZFGenericChart *)chart{
+- (NSInteger)axisLineSectionCountInGenericChart:(ZFGenericChart *)chart{
     return 10;
 }
 

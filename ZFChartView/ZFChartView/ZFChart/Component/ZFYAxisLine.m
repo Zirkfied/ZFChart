@@ -7,7 +7,6 @@
 //
 
 #import "ZFYAxisLine.h"
-#import "ZFConst.h"
 
 @interface ZFYAxisLine()
 
@@ -24,6 +23,8 @@
 @property (nonatomic, assign) CGFloat lineWidthHalf;
 /** 分段线长度 */
 @property (nonatomic, assign) CGFloat sectionLength;
+/** 记录坐标轴方向 */
+@property (nonatomic, assign) kAxisDirection direction;
 
 @end
 
@@ -34,10 +35,10 @@
  */
 - (void)commonInit{
     _yLineWidth = 1.f;
-    _yLineHeight = self.frame.size.height * (EndRatio - StartRatio);
+    _yLineHeight = _direction == kAxisDirectionVertical ? self.frame.size.height * (EndRatio - StartRatio) : self.frame.size.height * (HorizontalEndRatio - StartRatio);
     
     _yLineStartXPos = ZFAxisLineStartXPos;
-    _yLineStartYPos = self.frame.size.height * EndRatio;
+    _yLineStartYPos = _direction == kAxisDirectionVertical ? self.frame.size.height * EndRatio : self.frame.size.height * HorizontalEndRatio;
     _yLineEndXPos = ZFAxisLineStartXPos;
     _yLineEndYPos = self.frame.size.height * StartRatio;
     
@@ -45,13 +46,14 @@
     _arrowsWidth = 10.f;
     _arrowsWidthHalf = _arrowsWidth / 2.f;
     _lineWidthHalf = _yLineWidth / 2.f;
-    _sectionLength = YLineSectionLength;
+    _sectionLength = ZFAxisLineSectionLength;
     _axisColor = ZFBlack;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame{
+- (instancetype)initWithFrame:(CGRect)frame direction:(kAxisDirection)direction{
     self = [super initWithFrame:frame];
     if (self) {
+        _direction = direction;
         [self commonInit];
     }
     return self;
@@ -207,11 +209,32 @@
 
 #pragma mark - 重写setter,getter方法
 
+- (void)setYLineHeight:(CGFloat)yLineHeight{
+    if (yLineHeight > _yLineStartYPos - _yLineEndYPos) {
+        _yLineHeight = yLineHeight;
+        //底部高度(x轴到底部的高度)
+        CGFloat bottomHeight = self.frame.size.height - _yLineStartYPos;
+        //计算self的新高度
+        CGFloat height = (self.frame.size.height - _yLineStartYPos) + _yLineHeight + _yLineEndYPos;
+        //重设self的frame
+        self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, height);
+        //计算y轴新的StartYPos
+        _yLineStartYPos = self.frame.size.height - bottomHeight;
+    }
+}
+
 /**
  *  计算y轴分段高度的平均值
  */
 - (CGFloat)yLineSectionHeightAverage{
-    return ((_yLineHeight - ZFAxisLineGapFromYLineMaxValueToArrow) / _yLineSectionCount);
+    return ((_yLineHeight - ZFAxisLineGapFromAxisLineMaxValueToArrow) / _yLineSectionCount);
+}
+
+/**
+ *  y轴箭头顶点yPos
+ */
+- (CGFloat)yLineArrowTopYPos{
+    return _yLineEndYPos - _arrowsWidthHalf * ZFTan(60);
 }
 
 @end

@@ -103,6 +103,7 @@
     _extendLength = _radius * ZFPieChartCirqueRatio;
     _originHeight = self.frame.size.height;
     _pieCenter = CGPointMake(self.center.x, CGRectGetHeight(self.topicLabel.frame) + NAVIGATIONBAR_HEIGHT + _radius);
+    _opacity = 1.f;
     self.backgroundColor = ZFWhite;
     self.bounces = NO;
     self.showsHorizontalScrollIndicator = NO;
@@ -188,6 +189,7 @@
     
     ZFPie * pie = [ZFPie pieWithCenter:center radius:_radius startAngle:startAngle endAngle:endAngle color:color duration:duration piePatternType:piePatternType isAnimated:_isAnimated];
     pie.isShadow = _isShadow;
+    pie.opacity = _opacity;
     _lineWidth = pie.lineWidth;
     return pie;
 }

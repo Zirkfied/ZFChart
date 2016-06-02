@@ -12,3 +12,4 @@
 #import "ZFLineChart.h"
 #import "ZFPieChart.h"
 #import "ZFWaveChart.h"
+#import "ZFHorizontalBarChart.h"

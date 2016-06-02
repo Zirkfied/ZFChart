@@ -24,10 +24,10 @@
     lineChart.topic = @"xx小学各年级男女人数";
     lineChart.unit = @"人";
     lineChart.topicColor = ZFPurple;
-    lineChart.isResetYLineMinValue = YES;
+    lineChart.isResetAxisLineMinValue = YES;
 //    lineChart.isAnimated = NO;
 //    lineChart.valueLabelPattern = kPopoverLabelPatternBlank;
-//    lineChart.isShowSeparate = YES;
+    lineChart.isShowSeparate = YES;
 //    lineChart.valueCenterToCircleCenterPadding = 0;
     [self.view addSubview:lineChart];
     [lineChart strokePath];
@@ -47,15 +47,15 @@
     return @[ZFMagenta];
 }
 
-- (CGFloat)yLineMaxValueInGenericChart:(ZFGenericChart *)chart{
+- (CGFloat)axisLineMaxValueInGenericChart:(ZFGenericChart *)chart{
     return 500;
 }
 
-- (CGFloat)yLineMinValueInGenericChart:(ZFGenericChart *)chart{
+- (CGFloat)axisLineMinValueInGenericChart:(ZFGenericChart *)chart{
     return -200;
 }
 
-- (NSInteger)yLineSectionCountInGenericChart:(ZFGenericChart *)chart{
+- (NSInteger)axisLineSectionCountInGenericChart:(ZFGenericChart *)chart{
     return 10;
 }
 

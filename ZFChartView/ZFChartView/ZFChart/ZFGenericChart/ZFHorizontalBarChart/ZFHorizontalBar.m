@@ -1,30 +1,30 @@
 //
-//  ZFBar.m
-//  ZFChart
+//  ZFHorizontalBar.m
+//  ZFChartView
 //
-//  Created by apple on 16/1/26.
+//  Created by apple on 16/5/31.
 //  Copyright © 2016年 apple. All rights reserved.
 //
 
-#import "ZFBar.h"
-#import "ZFConst.h"
+#import "ZFHorizontalBar.h"
+#import "ZFColor.h"
 
-@interface ZFBar()
+@interface ZFHorizontalBar()
 
 /** bar高度上限 */
-@property (nonatomic, assign) CGFloat barHeightLimit;
+@property (nonatomic, assign) CGFloat barWidthLimit;
 /** 动画时间 */
 @property (nonatomic, assign) CGFloat animationDuration;
 
 @end
 
-@implementation ZFBar
+@implementation ZFHorizontalBar
 
 /**
  *  初始化默认变量
  */
 - (void)commonInit{
-    _barHeightLimit = self.frame.size.height;
+    _barWidthLimit = self.frame.size.width;
     _percent = 0;
     _animationDuration = 0.5f;
     _isShadow = YES;
@@ -48,7 +48,7 @@
  *  @return UIBezierPath
  */
 - (UIBezierPath *)noFill{
-    UIBezierPath * bezier = [UIBezierPath bezierPathWithRect:CGRectMake(0, _barHeightLimit, self.frame.size.width, 0)];
+    UIBezierPath * bezier = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, 0, self.frame.size.height)];
     [bezier fill];
     return bezier;
 }
@@ -59,10 +59,10 @@
  *  @return UIBezierPath
  */
 - (UIBezierPath *)fill{
-    CGFloat currentHeight = _barHeightLimit * self.percent;
-    _endYPos = _barHeightLimit - currentHeight;
+    CGFloat currentWidth = _barWidthLimit * self.percent;
+    _endXPos = currentWidth;
     
-    UIBezierPath * bezier = [UIBezierPath bezierPathWithRect:CGRectMake(0, _endYPos, self.frame.size.width, currentHeight)];
+    UIBezierPath * bezier = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, currentWidth, self.frame.size.height)];
     [bezier fill];
     return bezier;
 }
