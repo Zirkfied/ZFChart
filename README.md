@@ -296,7 +296,7 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
 
 ####效果展示
 
-![](https://github.com/Zirkfied/Library/blob/master/HorizontalBarChart.gif)
+![image](https://github.com/Zirkfied/Library/blob/master/HorizontalBarChart.gif)
 
 ###其余说明
 ####    
