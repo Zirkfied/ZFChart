@@ -163,8 +163,8 @@
     fillAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     fillAnimation.fillMode = kCAFillModeForwards;
     fillAnimation.removedOnCompletion = NO;
-    fillAnimation.fromValue = (id)fromValue.CGPath;
-    fillAnimation.toValue = (id)toValue.CGPath;
+    fillAnimation.fromValue = (__bridge id)(fromValue.CGPath);
+    fillAnimation.toValue = (__bridge id)(toValue.CGPath);
     
     return fillAnimation;
 }

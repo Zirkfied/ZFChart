@@ -52,7 +52,8 @@
 /**
  *  y轴(普通图表) 或 x轴(横向图表) 数值显示的最小值(若不设置，默认返回数据源最小值)
  *  
- *  (PS:当 isResetAxisLineMinValue 为NO时，此方法无效)
+ *  (PS: 当 isResetAxisLineMinValue 为NO时，此方法无效)
+ *  (PS: When isResetAxisLineMinValue is NO, the method is invalid)
  */
 - (CGFloat)axisLineMinValueInGenericChart:(ZFGenericChart *)chart;
 

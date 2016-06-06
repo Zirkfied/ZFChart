@@ -197,7 +197,7 @@
     UIBezierPath * bezier = [UIBezierPath bezierPath];
     CGFloat xStartPos = self.xAxisLine.xLineStartXPos + (self.xAxisLine.xLineWidth - ZFAxisLineGapFromAxisLineMaxValueToArrow) / _xLineSectionCount * (i + 1);
     [bezier moveToPoint:CGPointMake(xStartPos, self.yAxisLine.yLineStartYPos + self.contentOffset.y)];
-    [bezier addLineToPoint:CGPointMake(xStartPos, self.yAxisLine.yLineEndYPos/*self.yAxisLine.yLineStartYPos + self.contentOffset.y - ZFAxisLineSectionLength*/)];
+    [bezier addLineToPoint:CGPointMake(xStartPos, self.yAxisLine.yLineEndYPos)];
     
     return bezier;
 }
