@@ -20,7 +20,7 @@
     _isShadowForValueLabel = YES;
     _opacity = 1.f;
     _valueOnChartFontSize = 10.f;
-    _xLineNameLabelToXAxisLinePadding = 20.f;
+    _xLineNameLabelToXAxisLinePadding = 0.f;
     _valueLabelPattern = kPopoverLabelPatternPopover;
     _isShowAxisLineValue = YES;
 }

@@ -100,7 +100,7 @@
 @property (nonatomic, assign) CGFloat axisLineNameFontSize;
 /** y轴(普通图表) 或 x轴(横向图表) 上数值字体大小(默认为10.f) */
 @property (nonatomic, assign) CGFloat axisLineValueFontSize;
-/** x轴名称label与x轴之间的距离(默认为20.f)(横向图表无效) */
+/** x轴名称label与x轴之间的距离(默认为0.f)(横向图表无效) */
 @property (nonatomic, assign) CGFloat xLineNameLabelToXAxisLinePadding;
 /** x轴valueLabel样式(默认为kPopoverLabelPatternPopover)(横向图表无效) */
 @property (nonatomic, assign) kPopoverLabelPattern valueLabelPattern;

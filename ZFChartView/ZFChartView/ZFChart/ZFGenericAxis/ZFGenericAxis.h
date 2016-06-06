@@ -34,7 +34,7 @@
 @property (nonatomic, assign) CGFloat groupWidth;
 /** 组与组之间的间距 */
 @property (nonatomic, assign) CGFloat groupPadding;
-/** x轴名称label与x轴之间的距离(默认为20.f) */
+/** x轴名称label与x轴之间的距离(默认为0.f) */
 @property (nonatomic, assign) CGFloat xLineNameLabelToXAxisLinePadding;
 /** y轴单位 */
 @property (nonatomic, copy) NSString * unit;

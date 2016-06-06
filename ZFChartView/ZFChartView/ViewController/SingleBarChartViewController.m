@@ -34,7 +34,6 @@
 //    barChart.axisLineNameColor = ZFWhite;
 //    barChart.axisLineValueColor = ZFWhite;
 //    barChart.backgroundColor = ZFPurple;
-    barChart.xLineNameLabelToXAxisLinePadding = -40.f;
     [self.view addSubview:barChart];
     [barChart strokePath];
 }
@@ -46,7 +45,7 @@
 }
 
 - (NSArray *)nameArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[@"一年级一年级一年级一年级一年级一年级一年级一年级一年级一年级一年级一年级一年级一年级一年级一年级一年级一年级一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级"];
+    return @[@"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级"];
 }
 
 - (NSArray *)colorArrayInGenericChart:(ZFGenericChart *)chart{

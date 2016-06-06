@@ -68,7 +68,6 @@
  */
 - (UIBezierPath *)axisLineNoFill{
     UIBezierPath * bezier = [UIBezierPath bezierPathWithRect:CGRectMake(_xLineStartXPos, _xLineStartYPos, _xLineHeight, _xLineHeight)];
-    [bezier stroke];
     return bezier;
 }
 
@@ -79,7 +78,6 @@
  */
 - (UIBezierPath *)drawXAxisLine{
     UIBezierPath * bezier = [UIBezierPath bezierPathWithRect:CGRectMake(_xLineStartXPos, _xLineStartYPos, _xLineWidth, _xLineHeight)];
-    [bezier stroke];
     return bezier;
 }
 
@@ -112,7 +110,6 @@
     UIBezierPath * bezier = [UIBezierPath bezierPath];
     [bezier moveToPoint:CGPointMake(_xLineStartXPos + _xLineWidth, _xLineEndYPos + _arrowsWidthHalf + _lineWidthHalf)];
     [bezier addLineToPoint:CGPointMake(_xLineStartXPos + _xLineWidth, _xLineEndYPos - _arrowsWidthHalf + _lineWidthHalf)];
-    [bezier stroke];
     
     return bezier;
 }
