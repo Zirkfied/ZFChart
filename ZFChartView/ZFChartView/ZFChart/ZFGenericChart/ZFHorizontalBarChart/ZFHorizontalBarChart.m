@@ -9,7 +9,6 @@
 #import "ZFHorizontalBarChart.h"
 #import "ZFHorizontalBar.h"
 #import "ZFHorizontalAxis.h"
-#import "ZFConst.h"
 #import "NSString+Zirkfied.h"
 #import "ZFMethod.h"
 
@@ -370,6 +369,7 @@
     [self removeAllBar];
     [self removeLabelOnChart];
     self.horizontalAxis.isAnimated = self.isAnimated;
+    self.horizontalAxis.axisLineValueType = self.axisLineValueType;
     [self.horizontalAxis strokePath];
     [self drawBar:self.horizontalAxis.yLineValueArray];
     self.isShowAxisLineValue ? [self setValueLabelOnChart:self.horizontalAxis.yLineValueArray] : nil;

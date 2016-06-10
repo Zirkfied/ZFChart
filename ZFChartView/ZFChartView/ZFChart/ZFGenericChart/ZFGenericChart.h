@@ -104,6 +104,8 @@
 @property (nonatomic, assign) CGFloat xLineNameLabelToXAxisLinePadding;
 /** x轴valueLabel样式(默认为kPopoverLabelPatternPopover)(横向图表无效) */
 @property (nonatomic, assign) kPopoverLabelPattern valueLabelPattern;
+/** 坐标轴数值的显示类型(保留有效小数或显示整数形式) */
+@property (nonatomic, assign) kAxisLineValueType axisLineValueType;
 
 
 /** 该属性是否重设坐标轴最小值，默认为NO(不设置，从0开始)，当设置为YES时，则有以下2种情况

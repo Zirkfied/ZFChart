@@ -153,6 +153,14 @@ typedef enum{
     kAxisDirectionHorizontal = 1//水平方向
 }kAxisDirection;
 
+/**
+ *  坐标轴
+ */
+typedef enum{
+    kAxisLineValueTypeDecimal = 0,//保留有效小数
+    kAxisLineValueTypeInteger = 1,//取整数形式(四舍五入)(默认)
+}kAxisLineValueType;
+
 @interface ZFConst : NSObject
 
 @end

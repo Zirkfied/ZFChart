@@ -148,7 +148,15 @@
         ZFLabel * label = [[ZFLabel alloc] initWithFrame:CGRectMake(0, yStartPos, width, height)];
         //平均值
         float valueAverage = (_yLineMaxValue - _yLineMinValue) / _yLineSectionCount;
-        label.text = [NSString stringWithFormat:@"%.0f",valueAverage * i + _yLineMinValue];
+        
+        if (_axisLineValueType == kAxisLineValueTypeInteger) {
+            label.text = [NSString stringWithFormat:@"%.0f", valueAverage * i + _yLineMinValue];
+            
+        }else if (_axisLineValueType == kAxisLineValueTypeDecimal){
+            label.text = [NSString stringWithFormat:@"%@", @(valueAverage * i + _yLineMinValue)];
+            
+        }
+        
         label.textColor = _yLineValueColor;
         label.font = [UIFont systemFontOfSize:_yLineValueFontSize];
         label.tag = ZFAxisLineValueLabelTag + i;

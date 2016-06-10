@@ -41,17 +41,12 @@
 @end
 
 
-
-
+/**
+ *   百分比类型
+ */
 typedef enum{
-    /**
-     *  保留2位小数形式(默认)
-     */
-    kPercentTypeDecimal = 0,
-    /**
-     *  取整数形式(四舍五入)
-     */
-    kPercentTypeInteger = 1
+    kPercentTypeDecimal = 0,//保留2位小数形式(默认)
+    kPercentTypeInteger = 1//取整数形式(四舍五入)
 }kPercentType;
 
 @interface ZFPieChart : UIScrollView

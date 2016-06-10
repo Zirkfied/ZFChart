@@ -54,6 +54,8 @@
 @property (nonatomic, assign) BOOL isAnimated;
 /** 分割线颜色(默认为浅灰色) */
 @property (nonatomic, strong) UIColor * separateColor;
+/** 坐标轴数值的显示类型(保留有效小数或显示整数形式) */
+@property (nonatomic, assign) kAxisLineValueType axisLineValueType;
 
 
 #warning message - readonly(只读)

@@ -395,6 +395,7 @@
     [self removeAllSubLayer];
     self.genericAxis.xLineNameLabelToXAxisLinePadding = self.xLineNameLabelToXAxisLinePadding;
     self.genericAxis.isAnimated = self.isAnimated;
+    self.genericAxis.axisLineValueType = self.axisLineValueType;
     [self.genericAxis strokePath];
     [self drawCircle];
     [self drawLine];

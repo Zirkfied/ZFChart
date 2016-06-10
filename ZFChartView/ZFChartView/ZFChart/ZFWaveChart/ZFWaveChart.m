@@ -222,6 +222,7 @@
     [self removeAllSubview];
     self.genericAxis.xLineNameLabelToXAxisLinePadding = self.xLineNameLabelToXAxisLinePadding;
     self.genericAxis.isAnimated = self.isAnimated;
+    self.genericAxis.axisLineValueType = self.axisLineValueType;
     [self.genericAxis strokePath];
     _valuePointArray = [NSMutableArray arrayWithArray:[self cachedValuePointArray:self.genericAxis.xLineValueArray]];
     [self drawWavePath];

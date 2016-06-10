@@ -7,7 +7,7 @@
 //
 
 #import "ZFGenericChart.h"
-
+#import "ZFConst.h"
 @class ZFHorizontalBarChart;
 
 /*********************  ZFHorizontalBarChartDelegate(ZFHorizontalBarChart协议方法)  *********************/

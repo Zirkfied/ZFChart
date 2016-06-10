@@ -22,6 +22,7 @@
     _valueOnChartFontSize = 10.f;
     _xLineNameLabelToXAxisLinePadding = 0.f;
     _valueLabelPattern = kPopoverLabelPatternPopover;
+    _axisLineValueType = kAxisLineValueTypeInteger;
     _isShowAxisLineValue = YES;
 }
 

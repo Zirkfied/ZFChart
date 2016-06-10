@@ -9,7 +9,6 @@
 #import "ZFBarChart.h"
 #import "ZFBar.h"
 #import "ZFGenericAxis.h"
-#import "ZFConst.h"
 #import "NSString+Zirkfied.h"
 #import "ZFMethod.h"
 
@@ -368,6 +367,7 @@
     [self removeLabelOnChart];
     self.genericAxis.xLineNameLabelToXAxisLinePadding = self.xLineNameLabelToXAxisLinePadding;
     self.genericAxis.isAnimated = self.isAnimated;
+    self.genericAxis.axisLineValueType = self.axisLineValueType;
     [self.genericAxis strokePath];
     [self drawBar:self.genericAxis.xLineValueArray];
     self.isShowAxisLineValue ? [self setValueLabelOnChart:self.genericAxis.xLineValueArray] : nil;

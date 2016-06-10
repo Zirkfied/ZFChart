@@ -34,8 +34,6 @@
 @property (nonatomic, assign) CGFloat groupHeight;
 /** 组与组之间的间距 */
 @property (nonatomic, assign) CGFloat groupPadding;
-///** y轴名称label与y轴之间的距离(默认为0.f) */
-//@property (nonatomic, assign) CGFloat yLineNameLabelToYAxisLinePadding;
 /** x轴单位 */
 @property (nonatomic, copy) NSString * unit;
 /** x轴单位颜色(默认为黑色) */
@@ -54,6 +52,8 @@
 @property (nonatomic, assign) BOOL isAnimated;
 /** 分割线颜色(默认为浅灰色) */
 @property (nonatomic, strong) UIColor * separateColor;
+/** 坐标轴数值的显示类型(保留有效小数或显示整数形式) */
+@property (nonatomic, assign) kAxisLineValueType axisLineValueType;
 
 
 #warning message - readonly(只读)

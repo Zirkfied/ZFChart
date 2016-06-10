@@ -8,6 +8,7 @@
 
 #import "ZFGenericChart.h"
 #import "ZFPopoverLabel.h"
+#import "ZFConst.h"
 @class ZFBarChart;
 
 /*********************  ZFBarChartDelegate(ZFBarChart协议方法)  *********************/
