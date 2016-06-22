@@ -19,10 +19,6 @@
 		180260D31CA236D80084DFFA /* SingleLineChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180260CC1CA236D80084DFFA /* SingleLineChartViewController.m */; };
 		180260D41CA236D80084DFFA /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180260CE1CA236D80084DFFA /* TableViewController.m */; };
 		1808700D1CB4DF0B00C64C74 /* UIBezierPath+Zirkfied.m in Sources */ = {isa = PBXBuildFile; fileRef = 1808700C1CB4DF0B00C64C74 /* UIBezierPath+Zirkfied.m */; };
-		180921621CFD906000A5AC6D /* ZFHorizontalBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 180921611CFD906000A5AC6D /* ZFHorizontalBarChart.m */; };
-		180921631CFD906000A5AC6D /* ZFHorizontalBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 180921611CFD906000A5AC6D /* ZFHorizontalBarChart.m */; };
-		180921661CFD909F00A5AC6D /* ZFHorizontalBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 180921651CFD909F00A5AC6D /* ZFHorizontalBar.m */; };
-		180921671CFD909F00A5AC6D /* ZFHorizontalBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 180921651CFD909F00A5AC6D /* ZFHorizontalBar.m */; };
 		180E96DE1C97959E0056C716 /* ZFBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E96DD1C97959E0056C716 /* ZFBarChart.m */; };
 		180E96E11C9795EC0056C716 /* ZFBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E96E01C9795EC0056C716 /* ZFBar.m */; };
 		18308C291CFBC63C00E2F7D9 /* ZFHorizontalAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = 18308C281CFBC63C00E2F7D9 /* ZFHorizontalAxis.m */; };
@@ -45,6 +41,8 @@
 		18850E0F1CFEBF5C002DB7FA /* MultiHorizontalBarChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18850E0E1CFEBF5C002DB7FA /* MultiHorizontalBarChartViewController.m */; };
 		18850E101CFEBF5C002DB7FA /* MultiHorizontalBarChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18850E0E1CFEBF5C002DB7FA /* MultiHorizontalBarChartViewController.m */; };
 		18B6A4801C9D3D7C00FEC918 /* ZFLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B6A47F1C9D3D7C00FEC918 /* ZFLine.m */; };
+		18C0A8B91D1A66CF000FE955 /* ZFHorizontalBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C0A8B61D1A66CF000FE955 /* ZFHorizontalBar.m */; };
+		18C0A8BA1D1A66CF000FE955 /* ZFHorizontalBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C0A8B81D1A66CF000FE955 /* ZFHorizontalBarChart.m */; };
 		18E22AA41C9B8CEE00DC023B /* ZFLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E22AA31C9B8CEE00DC023B /* ZFLineChart.m */; };
 		18E41DBA1C96ACC700402ACF /* NSString+Zirkfied.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E41DB51C96ACC700402ACF /* NSString+Zirkfied.m */; };
 		18E41DBB1C96ACC700402ACF /* UIColor+Zirkfied.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E41DB71C96ACC700402ACF /* UIColor+Zirkfied.m */; };
@@ -101,10 +99,6 @@
 		180260CE1CA236D80084DFFA /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		1808700B1CB4DF0B00C64C74 /* UIBezierPath+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+Zirkfied.h"; sourceTree = "<group>"; };
 		1808700C1CB4DF0B00C64C74 /* UIBezierPath+Zirkfied.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+Zirkfied.m"; sourceTree = "<group>"; };
-		180921601CFD906000A5AC6D /* ZFHorizontalBarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFHorizontalBarChart.h; sourceTree = "<group>"; };
-		180921611CFD906000A5AC6D /* ZFHorizontalBarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFHorizontalBarChart.m; sourceTree = "<group>"; };
-		180921641CFD909F00A5AC6D /* ZFHorizontalBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFHorizontalBar.h; sourceTree = "<group>"; };
-		180921651CFD909F00A5AC6D /* ZFHorizontalBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFHorizontalBar.m; sourceTree = "<group>"; };
 		180E96DC1C97959E0056C716 /* ZFBarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFBarChart.h; sourceTree = "<group>"; };
 		180E96DD1C97959E0056C716 /* ZFBarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFBarChart.m; sourceTree = "<group>"; };
 		180E96DF1C9795EC0056C716 /* ZFBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFBar.h; sourceTree = "<group>"; };
@@ -135,6 +129,10 @@
 		18850E0E1CFEBF5C002DB7FA /* MultiHorizontalBarChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiHorizontalBarChartViewController.m; sourceTree = "<group>"; };
 		18B6A47E1C9D3D7C00FEC918 /* ZFLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFLine.h; sourceTree = "<group>"; };
 		18B6A47F1C9D3D7C00FEC918 /* ZFLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFLine.m; sourceTree = "<group>"; };
+		18C0A8B51D1A66CF000FE955 /* ZFHorizontalBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFHorizontalBar.h; sourceTree = "<group>"; };
+		18C0A8B61D1A66CF000FE955 /* ZFHorizontalBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFHorizontalBar.m; sourceTree = "<group>"; };
+		18C0A8B71D1A66CF000FE955 /* ZFHorizontalBarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFHorizontalBarChart.h; sourceTree = "<group>"; };
+		18C0A8B81D1A66CF000FE955 /* ZFHorizontalBarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFHorizontalBarChart.m; sourceTree = "<group>"; };
 		18E22AA21C9B8CEE00DC023B /* ZFLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFLineChart.h; sourceTree = "<group>"; };
 		18E22AA31C9B8CEE00DC023B /* ZFLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFLineChart.m; sourceTree = "<group>"; };
 		18E41DB41C96ACC700402ACF /* NSString+Zirkfied.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Zirkfied.h"; sourceTree = "<group>"; };
@@ -242,18 +240,6 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		1809215F1CFD901500A5AC6D /* ZFHorizontalBarChart */ = {
-			isa = PBXGroup;
-			children = (
-				180921601CFD906000A5AC6D /* ZFHorizontalBarChart.h */,
-				180921611CFD906000A5AC6D /* ZFHorizontalBarChart.m */,
-				180921641CFD909F00A5AC6D /* ZFHorizontalBar.h */,
-				180921651CFD909F00A5AC6D /* ZFHorizontalBar.m */,
-			);
-			name = ZFHorizontalBarChart;
-			path = ZFGenericChart/ZFHorizontalBarChart;
-			sourceTree = "<group>";
-		};
 		180E96DB1C97959E0056C716 /* ZFBarChart */ = {
 			isa = PBXGroup;
 			children = (
@@ -300,6 +286,18 @@
 				187D922D1C9FFD6E00AD7370 /* ZFTranslucencePath.m */,
 			);
 			path = ZFPieChart;
+			sourceTree = "<group>";
+		};
+		18C0A8B41D1A66CF000FE955 /* ZFHorizontalBarChart */ = {
+			isa = PBXGroup;
+			children = (
+				18C0A8B51D1A66CF000FE955 /* ZFHorizontalBar.h */,
+				18C0A8B61D1A66CF000FE955 /* ZFHorizontalBar.m */,
+				18C0A8B71D1A66CF000FE955 /* ZFHorizontalBarChart.h */,
+				18C0A8B81D1A66CF000FE955 /* ZFHorizontalBarChart.m */,
+			);
+			name = ZFHorizontalBarChart;
+			path = ../ZFHorizontalBarChart;
 			sourceTree = "<group>";
 		};
 		18E41DB31C96ACC700402ACF /* Category */ = {
@@ -392,7 +390,7 @@
 				18EEE4DF1C9A7894004724BF /* ZFLineChart */,
 				187D92271C9FFD6E00AD7370 /* ZFPieChart */,
 				1801F8181CA6679600DA2D53 /* ZFWaveChart */,
-				1809215F1CFD901500A5AC6D /* ZFHorizontalBarChart */,
+				18C0A8B41D1A66CF000FE955 /* ZFHorizontalBarChart */,
 			);
 			path = ZFChart;
 			sourceTree = "<group>";
@@ -554,12 +552,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				1856ABE21D0008CC001CABE7 /* ZFLabel.m in Sources */,
+				18C0A8B91D1A66CF000FE955 /* ZFHorizontalBar.m in Sources */,
 				1808700D1CB4DF0B00C64C74 /* UIBezierPath+Zirkfied.m in Sources */,
 				1801F81B1CA6689000DA2D53 /* ZFWaveChart.m in Sources */,
 				18E41DBC1C96ACC700402ACF /* UIView+Zirkfied.m in Sources */,
 				1856ABE61D0008CC001CABE7 /* ZFXAxisLine.m in Sources */,
 				18E41DBB1C96ACC700402ACF /* UIColor+Zirkfied.m in Sources */,
-				180921621CFD906000A5AC6D /* ZFHorizontalBarChart.m in Sources */,
 				187D922F1C9FFD6E00AD7370 /* ZFPieChart.m in Sources */,
 				18E22AA41C9B8CEE00DC023B /* ZFLineChart.m in Sources */,
 				187006A51C9AAED300BEF5FB /* ZFMethod.m in Sources */,
@@ -567,6 +565,7 @@
 				187006A81C9AB54D00BEF5FB /* ZFCircle.m in Sources */,
 				187D922E1C9FFD6E00AD7370 /* ZFPie.m in Sources */,
 				180260D41CA236D80084DFFA /* TableViewController.m in Sources */,
+				18C0A8BA1D1A66CF000FE955 /* ZFHorizontalBarChart.m in Sources */,
 				18308C291CFBC63C00E2F7D9 /* ZFHorizontalAxis.m in Sources */,
 				18E41DBA1C96ACC700402ACF /* NSString+Zirkfied.m in Sources */,
 				18E4D5C51C93C890002A047B /* AppDelegate.m in Sources */,
@@ -578,7 +577,6 @@
 				1801F81E1CA6698500DA2D53 /* ZFWave.m in Sources */,
 				180260D31CA236D80084DFFA /* SingleLineChartViewController.m in Sources */,
 				187D92301C9FFD6E00AD7370 /* ZFTranslucencePath.m in Sources */,
-				180921661CFD909F00A5AC6D /* ZFHorizontalBar.m in Sources */,
 				180260D21CA236D80084DFFA /* SingleBarChartViewController.m in Sources */,
 				180260D11CA236D80084DFFA /* PieChartViewController.m in Sources */,
 				18850E0F1CFEBF5C002DB7FA /* MultiHorizontalBarChartViewController.m in Sources */,
@@ -596,11 +594,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				180921631CFD906000A5AC6D /* ZFHorizontalBarChart.m in Sources */,
 				18308C2A1CFBC63C00E2F7D9 /* ZFHorizontalAxis.m in Sources */,
 				1856ABE31D0008CC001CABE7 /* ZFLabel.m in Sources */,
 				18308C2E1CFBD9E900E2F7D9 /* SingleHorizontalBarChartViewController.m in Sources */,
-				180921671CFD909F00A5AC6D /* ZFHorizontalBar.m in Sources */,
 				18E4D5DB1C93C891002A047B /* ZFChartViewTests.m in Sources */,
 				1856ABE71D0008CC001CABE7 /* ZFXAxisLine.m in Sources */,
 				1856ABE51D0008CC001CABE7 /* ZFPopoverLabel.m in Sources */,
