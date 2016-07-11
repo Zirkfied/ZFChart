@@ -34,13 +34,13 @@
  *  初始化默认变量
  */
 - (void)commonInit{
-    _yLineWidth = 1.f;
-    _yLineHeight = _direction == kAxisDirectionVertical ? self.frame.size.height * (EndRatio - StartRatio) : self.frame.size.height * (HorizontalEndRatio - StartRatio);
-    
     _yLineStartXPos = ZFAxisLineStartXPos;
     _yLineStartYPos = _direction == kAxisDirectionVertical ? self.frame.size.height * EndRatio : self.frame.size.height * HorizontalEndRatio;
     _yLineEndXPos = ZFAxisLineStartXPos;
-    _yLineEndYPos = self.frame.size.height * StartRatio;
+    _yLineEndYPos = self.frame.size.height * StartRatio < TOPIC_HEIGHT + 20 ? TOPIC_HEIGHT + 20 : self.frame.size.height * StartRatio;
+    
+    _yLineWidth = 1.f;
+    _yLineHeight = _yLineStartYPos - _yLineEndYPos;
     
     _animationDuration = 0.5f;
     _arrowsWidth = 10.f;

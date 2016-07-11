@@ -66,7 +66,7 @@
         [self drawGenericChart];
         
         //标题Label
-        self.topicLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 30)];
+        self.topicLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, TOPIC_HEIGHT)];
         self.topicLabel.font = [UIFont boldSystemFontOfSize:18.f];
         self.topicLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:self.topicLabel];

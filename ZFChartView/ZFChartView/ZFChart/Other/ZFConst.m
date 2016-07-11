@@ -27,6 +27,7 @@ NSInteger const PieChartDetailBackgroundTag = 500;
 
 CGFloat const NAVIGATIONBAR_HEIGHT = 64.f;
 CGFloat const TABBAR_HEIGHT = 49.f;
+CGFloat const TOPIC_HEIGHT = 30.f;
 
 @implementation ZFConst
 

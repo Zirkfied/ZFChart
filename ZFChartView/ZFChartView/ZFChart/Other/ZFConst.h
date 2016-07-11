@@ -134,6 +134,10 @@ extern CGFloat const NAVIGATIONBAR_HEIGHT;
  */
 extern CGFloat const TABBAR_HEIGHT;
 
+/**
+ *  topic高度
+ */
+extern CGFloat const TOPIC_HEIGHT;
 
 
 /**
