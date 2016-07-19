@@ -87,17 +87,17 @@ extern CGFloat const ZFAxisLineSectionHeight;
 /**
  *  开始系数(上方)
  */
-extern CGFloat const StartRatio;
+extern CGFloat const ZFAxisLineStartRatio;
 
 /**
  *  结束系数(下方)
  */
-extern CGFloat const EndRatio;
+extern CGFloat const ZFAxisLineVerticalEndRatio;
 
 /**
  *  横向坐标轴结束系数(下方)
  */
-extern CGFloat const HorizontalEndRatio;
+extern CGFloat const ZFAxisLineHorizontalEndRatio;
 
 /**
  *  线状图圆的半径
@@ -105,24 +105,9 @@ extern CGFloat const HorizontalEndRatio;
 extern CGFloat const ZFLineChartCircleRadius;
 
 /**
- *  饼图整圆样式半径系数
- */
-extern CGFloat const ZFPieChartCircleRatio;
-
-/**
- *  饼图圆环样式半径系数
- */
-extern CGFloat const ZFPieChartCirqueRatio;
-
-/**
  *  饼图百分比label Tag值
  */
-extern NSInteger const PieChartPercentLabelTag;
-
-/**
- *  饼图详情背景容器 Tag值
- */
-extern NSInteger const PieChartDetailBackgroundTag;
+extern NSInteger const ZFPieChartPercentLabelTag;
 
 /**
  *  导航栏高度

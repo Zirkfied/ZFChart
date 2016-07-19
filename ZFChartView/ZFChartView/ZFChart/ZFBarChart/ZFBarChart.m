@@ -16,8 +16,6 @@
 
 /** 通用坐标轴图表 */
 @property (nonatomic, strong) ZFGenericAxis * genericAxis;
-/** 主题Label */
-@property (nonatomic, strong) UILabel * topicLabel;
 /** 存储柱状条的数组 */
 @property (nonatomic, strong) NSMutableArray * barArray;
 /** 颜色数组 */
@@ -49,6 +47,9 @@
     return _valueTextColorArray;
 }
 
+/**
+ *  初始化变量
+ */
 - (void)commonInit{
     [super commonInit];
 
@@ -64,12 +65,6 @@
     if (self) {
         [self commonInit];
         [self drawGenericChart];
-        
-        //标题Label
-        self.topicLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, TOPIC_HEIGHT)];
-        self.topicLabel.font = [UIFont boldSystemFontOfSize:18.f];
-        self.topicLabel.textAlignment = NSTextAlignmentCenter;
-        [self addSubview:self.topicLabel];
     }
     
     return self;
@@ -373,6 +368,7 @@
     self.isShowAxisLineValue ? [self setValueLabelOnChart:self.genericAxis.xLineValueArray] : nil;
     [self.genericAxis bringSubviewToFront:self.genericAxis.yAxisLine];
     [self.genericAxis bringSectionToFront];
+    [self bringSubviewToFront:self.topicLabel];
 }
 
 /**
@@ -389,16 +385,13 @@
 
 #pragma mark - 重写setter,getter方法
 
-- (void)setTopic:(NSString *)topic{
-    self.topicLabel.text = topic;
+- (void)setFrame:(CGRect)frame{
+    [super setFrame:frame];
+    self.genericAxis.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
 }
 
 - (void)setUnit:(NSString *)unit{
     self.genericAxis.unit = unit;
-}
-
-- (void)setTopicColor:(UIColor *)topicColor{
-    self.topicLabel.textColor = topicColor;
 }
 
 - (void)setUnitColor:(UIColor *)unitColor{

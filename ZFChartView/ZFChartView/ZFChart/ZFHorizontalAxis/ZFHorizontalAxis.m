@@ -83,7 +83,7 @@
     [self addSubview:self.yAxisLine];
     
     //x轴
-    self.xAxisLine = [[ZFXAxisLine alloc] initWithFrame:CGRectMake(0, self.bounds.size.height * HorizontalEndRatio, self.bounds.size.width, self.bounds.size.height - self.bounds.size.height * HorizontalEndRatio) direction:kAxisDirectionHorizontal];
+    self.xAxisLine = [[ZFXAxisLine alloc] initWithFrame:CGRectMake(0, self.bounds.size.height * ZFAxisLineHorizontalEndRatio, self.bounds.size.width, self.bounds.size.height - self.bounds.size.height * ZFAxisLineHorizontalEndRatio) direction:kAxisDirectionHorizontal];
     self.xAxisLine.backgroundColor = _axisLineBackgroundColor;
     [self addSubview:self.xAxisLine];
     
@@ -102,7 +102,7 @@
     if (_unit) {
         ZFLabel * lastLabel = (ZFLabel *)[self.xAxisLine viewWithTag:ZFAxisLineValueLabelTag + _xLineSectionCount];
         
-        CGFloat width = self.bounds.size.width - CGRectGetMaxX(lastLabel.frame);
+        CGFloat width = self.xAxisLine.bounds.size.width - CGRectGetMaxX(lastLabel.frame);
         CGFloat height = self.xAxisLine.bounds.size.height;
         CGFloat xPos = CGRectGetMaxX(lastLabel.frame);
         CGFloat yPos = 0;
@@ -151,7 +151,7 @@
  */
 - (void)setXLineValueLabel{
     for (NSInteger i = 0; i <= _xLineSectionCount; i++) {
-        CGFloat width = self.xAxisLine.xLineSectionWidthAverage - 10;
+        CGFloat width = self.xAxisLine.xLineSectionWidthAverage - 10 < 60 ? self.xAxisLine.xLineSectionWidthAverage - 10 : 60;
         CGFloat height = self.xAxisLine.frame.size.height;
         CGFloat center_xPos = self.xAxisLine.xLineStartXPos + self.xAxisLine.xLineSectionWidthAverage * i;
         CGFloat center_yPos = height * 0.5;
@@ -291,7 +291,7 @@
     self.xAxisLine.xLineSectionCount = _xLineSectionCount;
     
     if (self.yLineNameArray.count > 0) {
-        //根据item个数,设置x轴长度
+        //根据item个数,设置y轴高度
         self.yAxisLine.yLineHeight = self.yLineNameArray.count * (_groupHeight + _groupPadding) + _groupPadding;
         self.xAxisLine.frame = CGRectMake(self.xAxisLine.frame.origin.x, self.yAxisLine.yLineStartYPos, self.xAxisLine.frame.size.width, self.xAxisLine.frame.size.height);
         _tempXAxisLineOriginYPos = self.xAxisLine.frame.origin.y;
@@ -349,6 +349,13 @@
 }
 
 #pragma mark - 重写setter,getter方法
+
+- (void)setFrame:(CGRect)frame{
+    [super setFrame:frame];
+    self.xAxisLine.frame = CGRectMake(0, self.bounds.size.height * ZFAxisLineHorizontalEndRatio, self.bounds.size.width, self.bounds.size.height - self.bounds.size.height * ZFAxisLineHorizontalEndRatio);    
+    self.yAxisLine.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
+    self.maskView.frame = CGRectMake(0, 0, self.frame.size.width, self.yAxisLine.yLineArrowTopYPos);
+}
 
 /** y轴背景颜色 */
 - (void)setAxisLineBackgroundColor:(UIColor *)axisLineBackgroundColor{

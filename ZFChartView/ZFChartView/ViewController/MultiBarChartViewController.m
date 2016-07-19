@@ -11,31 +11,47 @@
 
 @interface MultiBarChartViewController ()<ZFGenericChartDataSource, ZFBarChartDelegate>
 
+@property (nonatomic, strong) ZFBarChart * barChart;
+
+@property (nonatomic, assign) CGFloat height;
+
 @end
 
 @implementation MultiBarChartViewController
 
+- (void)setUp{
+    if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight){
+        //首次进入控制器为横屏时
+        _height = SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT * 0.5;
+        
+    }else{
+        //首次进入控制器为竖屏时
+        _height = SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT;
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setUp];
     
-    ZFBarChart * barChart = [[ZFBarChart alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT)];
-    barChart.dataSource = self;
-    barChart.delegate = self;
-    barChart.topic = @"xx小学各年级男女人数";
-    barChart.unit = @"人";
-    barChart.topicColor = ZFWhite;
-//    barChart.isAnimated = NO;
-//    barChart.isResetAxisLineMinValue = YES;
-//    barChart.isShadowForValueLabel = NO;
-//    barChart.valueLabelPattern = kPopoverLabelPatternBlank;
-    barChart.isShowSeparate = YES;
-    barChart.unitColor = ZFWhite;
-    barChart.backgroundColor = ZFPurple;
-    barChart.axisColor = ZFWhite;
-    barChart.axisLineNameColor = ZFWhite;
-    barChart.axisLineValueColor = ZFWhite;
-    [barChart strokePath];
-    [self.view addSubview:barChart];
+    self.barChart = [[ZFBarChart alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, _height)];
+    self.barChart.dataSource = self;
+    self.barChart.delegate = self;
+    self.barChart.topicLabel.text = @"xx小学各年级男女人数";
+    self.barChart.unit = @"人";
+    self.barChart.topicLabel.textColor = ZFWhite;
+//    self.barChart.isAnimated = NO;
+//    self.barChart.isResetAxisLineMinValue = YES;
+//    self.barChart.isShadowForValueLabel = NO;
+//    self.barChart.valueLabelPattern = kPopoverLabelPatternBlank;
+    self.barChart.isShowSeparate = YES;
+    self.barChart.unitColor = ZFWhite;
+    self.barChart.backgroundColor = ZFPurple;
+    self.barChart.axisColor = ZFWhite;
+    self.barChart.axisLineNameColor = ZFWhite;
+    self.barChart.axisLineValueColor = ZFWhite;
+    [self.barChart strokePath];
+    [self.view addSubview:self.barChart];
 }
 
 #pragma mark - ZFGenericChartDataSource
@@ -92,6 +108,19 @@
 - (void)barChart:(ZFBarChart *)barChart didSelectPopoverLabelAtGroupIndex:(NSInteger)groupIndex labelIndex:(NSInteger)labelIndex{
     //理由同上
     NSLog(@"第%ld组========第%ld个",(long)groupIndex,(long)labelIndex);
+}
+
+#pragma mark - 横竖屏适配(若需要同时横屏,竖屏适配，则添加以下代码，反之不需添加)
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator>)coordinator NS_AVAILABLE_IOS(8_0){
+    
+    if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight){
+        self.barChart.frame = CGRectMake(0, 0, size.width, size.height - NAVIGATIONBAR_HEIGHT * 0.5);
+    }else{
+        self.barChart.frame = CGRectMake(0, 0, size.width, size.height + NAVIGATIONBAR_HEIGHT * 0.5);
+    }
+    
+    [self.barChart strokePath];
 }
 
 @end

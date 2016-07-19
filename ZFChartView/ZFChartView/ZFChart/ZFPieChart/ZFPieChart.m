@@ -17,8 +17,6 @@
 
 /** 存储value的数组 */
 @property (nonatomic, strong) NSMutableArray * valueArray;
-/** 存储名称的数组 */
-@property (nonatomic, strong) NSMutableArray * nameArray;
 /** 存储颜色的数组 */
 @property (nonatomic, strong) NSMutableArray * colorArray;
 /** 存储开始角度的数组 */
@@ -31,8 +29,6 @@
 @property (nonatomic, assign) CFTimeInterval totalDuration;
 /** 半径 */
 @property (nonatomic, assign) CGFloat radius;
-/** 半径最大上限 */
-@property (nonatomic, assign) CGFloat maxRadius;
 /** 总数 */
 @property (nonatomic, assign) CGFloat totalValue;
 /** 记录每个圆弧开始的角度 */
@@ -49,10 +45,8 @@
 @property (nonatomic, assign) CGFloat extendLength;
 /** 记录self初始高度 */
 @property (nonatomic, assign) CGFloat originHeight;
-
-
-/** 主题Label */
-@property (nonatomic, strong) UILabel * topicLabel;
+/** 记录半径平均分段数 */
+@property (nonatomic, assign) CGFloat radiusSegments;
 
 @end
 
@@ -90,87 +84,32 @@
  *  初始化属性
  */
 - (void)commonInit{
-    _maxRadius = self.frame.size.width > self.frame.size.height ? self.frame.size.height : self.frame.size.width;
-    _radius = _maxRadius * ZFPieChartCirqueRatio;
+    _startAngle = ZFRadian(-90);
+    _originHeight = self.frame.size.height;
+    _pieCenter = self.center;
+    _opacity = 1.f;
+}
+
+- (void)setUp{
     _piePatternType = kPieChartPatternTypeForCirque;
     _isShadow = YES;
     _isShowPercent = YES;
-    _isShowDetail = NO;
     _isAnimated = YES;
-    _startAngle = ZFRadian(-90);
+    _extendLength = 20.f;
     _totalDuration = 0.75f;
     _percentOnChartFontSize = 10.f;
-    _extendLength = _radius * ZFPieChartCirqueRatio;
-    _originHeight = self.frame.size.height;
-    _pieCenter = CGPointMake(self.center.x, CGRectGetHeight(self.topicLabel.frame) + NAVIGATIONBAR_HEIGHT + _radius);
-    _opacity = 1.f;
+    _radiusSegments = 2.f;
     self.backgroundColor = ZFWhite;
-    self.bounces = NO;
-    self.showsHorizontalScrollIndicator = NO;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
-        //标题Label
-        self.topicLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, TOPIC_HEIGHT)];
-        self.topicLabel.font = [UIFont boldSystemFontOfSize:18.f];
-        self.topicLabel.textAlignment = NSTextAlignmentCenter;
-        [self addSubview:self.topicLabel];
-        
+        [self setUp];
         [self commonInit];
     }
     
     return self;
-}
-
-/**
- *  添加详情
- */
-- (void)addUI{
-    for (NSInteger i = 0; i < self.valueArray.count; i++) {
-        CGFloat height = 25;
-        CGFloat yPos = _piePatternType == kPieChartPatternTypeForCirque ? _pieCenter.y + _radius * 1.75 + height * i : _pieCenter.y + _radius * 2.4 + height * i;
-        
-        //装载容器
-        UIView * background = [[UIView alloc] initWithFrame:CGRectMake(0, yPos, self.frame.size.width, height)];
-        background.tag = PieChartDetailBackgroundTag + i;
-        [self addSubview:background];
-        
-        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showTranslucencePathAction:)];
-        [background addGestureRecognizer:tap];
-        
-        //颜色View
-        UIView * color = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width * 0.05, 5, 10, 10)];
-        [color setBorderCornerRadius:color.frame.size.width * 0.5 andBorderWidth:0 andBorderColor:nil];
-        color.backgroundColor = _colorArray[i];
-        [background addSubview:color];
-        
-        CGFloat width = (self.frame.size.width * (1 - 0.1) - 40) / 3.f;
-        CGFloat gap = (SCREEN_WIDTH - CGRectGetMaxX(color.frame) - 10 - self.frame.size.width * 0.05 - 3 * width) / 2;
-        
-        //名称
-        UILabel * name = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(color.frame) + 10, 0, width, 20)];
-        name.text = _nameArray[i];
-        name.font = [UIFont boldSystemFontOfSize:16.f];
-        [background addSubview:name];
-        
-        //数值
-        UILabel * value = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(name.frame) + gap, 0, width, 20)];
-        value.text = _valueArray[i];
-        value.font = [UIFont boldSystemFontOfSize:16.f];
-        [background addSubview:value];
-        
-        //百分比
-        UILabel * percent = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(value.frame) + gap, 0, width, 20)];
-        percent.text = [self getPercent:i];
-        percent.font = [UIFont boldSystemFontOfSize:16.f];
-        [background addSubview:percent];
-    }
-    
-    //重设self.frame的值
-    UILabel * lastLabel = (UILabel *)[self viewWithTag:PieChartDetailBackgroundTag + self.valueArray.count - 1];
-    self.contentSize = CGSizeMake(self.frame.size.width, CGRectGetMaxY(lastLabel.frame) + 20);
 }
 
 /**
@@ -190,7 +129,8 @@
     ZFPie * pie = [ZFPie pieWithCenter:center radius:_radius startAngle:startAngle endAngle:endAngle color:color duration:duration piePatternType:piePatternType isAnimated:_isAnimated];
     pie.isShadow = _isShadow;
     pie.opacity = _opacity;
-    _lineWidth = pie.lineWidth;
+    pie.lineWidth = _lineWidth;
+    
     return pie;
 }
 
@@ -225,17 +165,13 @@
     
     NSArray * subLayers = [NSArray arrayWithArray:self.layer.sublayers];
     for (CALayer * layer in subLayers) {
-        if (layer != self.topicLabel.layer) {
-            [layer removeAllAnimations];
-            [layer removeFromSuperlayer];
-        }
+        [layer removeAllAnimations];
+        [layer removeFromSuperlayer];
     }
     
     NSArray * subviews = [NSArray arrayWithArray:self.subviews];
     for (UIView * view in subviews) {
-        if (view != self.topicLabel) {
-            [view removeFromSuperview];
-        }
+        [view removeFromSuperview];
     }
 }
 
@@ -264,17 +200,26 @@
         self.valueArray = [NSMutableArray arrayWithArray:[self.dataSource valueArrayInPieChart:self]];
     }
     
-    if ([self.dataSource respondsToSelector:@selector(nameArrayInPieChart:)]) {
-        self.nameArray = [NSMutableArray arrayWithArray:[self.dataSource nameArrayInPieChart:self]];
-    }
-    
     if ([self.dataSource respondsToSelector:@selector(colorArrayInPieChart:)]) {
         self.colorArray = [NSMutableArray arrayWithArray:[self.dataSource colorArrayInPieChart:self]];
     }
     
-    //若为整圆样式，则改变半径大小
-    if (_piePatternType == kPieChartPatternTypeForCircle) {
-        _radius = _maxRadius * ZFPieChartCircleRatio;
+    if ([self.delegate respondsToSelector:@selector(radiusForPieChart:)]) {
+        _radius = [self.delegate radiusForPieChart:self];
+        if (_piePatternType == kPieChartPatternTypeForCircle) {
+            _lineWidth = _radius;
+            _radius = _radius / 2;
+        }
+    }
+    
+    if (_piePatternType == kPieChartPatternTypeForCirque) {
+        if ([self.delegate respondsToSelector:@selector(radiusAverageNumberOfSegments:)]) {
+            _radiusSegments = [self.delegate radiusAverageNumberOfSegments:self] > 1 ? [self.delegate radiusAverageNumberOfSegments:self] : 2.f;
+        }
+        
+        _lineWidth = _radius / _radiusSegments;
+        //圆环线宽是以自身中心扩散，故减去自身一半的宽度
+        _radius = _radius - _lineWidth / 2;
     }
     
     for (NSInteger i = 0; i < _valueArray.count; i++) {
@@ -286,10 +231,6 @@
         }else{//无动画
             [self showEachPieShapeLayer:i];
         }
-    }
-    
-    if (_nameArray) {
-        _isShowDetail ? [self addUI] : nil;
     }
 }
 
@@ -345,34 +286,20 @@
     for (NSInteger i = 0; i < _startAngleArray.count; i++) {
         CGFloat startAngle = [_startAngleArray[i] floatValue];
         CGFloat endAngle = [_endAngleArray[i] floatValue];
-
+        
         if (radian >= startAngle && radian < endAngle) {
             [self removeZFTranslucencePath];
             [self.layer addSublayer:[self translucencePathShapeLayerWithStartAngle:startAngle endAngle:endAngle index:i]];
-            UILabel * percentLabel = [self viewWithTag:PieChartPercentLabelTag + i];
+            UILabel * percentLabel = [self viewWithTag:ZFPieChartPercentLabelTag + i];
             [self bringSubviewToFront:percentLabel];
+            
+            if ([self.delegate respondsToSelector:@selector(pieChart:didSelectPathAtIndex:)]) {
+                [self.delegate pieChart:self didSelectPathAtIndex:i];
+            }
             
             return;
         }
     }
-}
-
-#pragma mark - 显示半透明Path Action
-
-/**
- *  显示半透明Path Action
- *
- *  @param sender UITapGestureRecognizer
- */
-- (void)showTranslucencePathAction:(UITapGestureRecognizer *)sender{
-    NSInteger index = sender.view.tag - PieChartDetailBackgroundTag;
-    CGFloat startAngle = [_startAngleArray[index] floatValue];
-    CGFloat endAngle = [_endAngleArray[index] floatValue];
-    
-    [self removeZFTranslucencePath];
-    [self.layer addSublayer:[self translucencePathShapeLayerWithStartAngle:startAngle endAngle:endAngle index:index]];
-    UILabel * percentLabel = [self viewWithTag:PieChartPercentLabelTag + index];
-    [self bringSubviewToFront:percentLabel];
 }
 
 #pragma mark - 计算每个item所占角度大小
@@ -447,7 +374,7 @@
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont boldSystemFontOfSize:_percentOnChartFontSize];
     label.center = _centerPoint;
-    label.tag = PieChartPercentLabelTag + i;
+    label.tag = ZFPieChartPercentLabelTag + i;
     [self addSubview:label];
     
     [UIView animateWithDuration:[self countDuration:i] animations:^{
@@ -481,6 +408,11 @@
 
 #pragma mark - 重写setter,getter方法
 
+- (void)setFrame:(CGRect)frame{
+    [super setFrame:frame];
+    [self commonInit];
+}
+
 - (void)setValueArray:(NSMutableArray *)valueArray{
     _valueArray = valueArray;
     _totalValue = 0;
@@ -498,11 +430,6 @@
         CFTimeInterval duration = [self countDuration:i];
         startTime += duration;
     }
-}
-
-- (void)setTopic:(NSString *)topic{
-    _topic = topic;
-    self.topicLabel.text = _topic;
 }
 
 @end

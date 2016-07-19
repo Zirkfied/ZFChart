@@ -101,7 +101,7 @@
         self.unitLabel = [[ZFLabel alloc] initWithFrame:CGRectMake(xPos, yPos, width, height)];
         self.unitLabel.text = [NSString stringWithFormat:@"(%@)",_unit];
         self.unitLabel.textColor = _unitColor;
-        self.unitLabel.font = [UIFont boldSystemFontOfSize:10];
+        self.unitLabel.font = [UIFont boldSystemFontOfSize:10.f];
         [self.yAxisLine addSubview:self.unitLabel];
     }
 }
@@ -330,6 +330,12 @@
 
 #pragma mark - 重写setter,getter方法
 
+- (void)setFrame:(CGRect)frame{
+    [super setFrame:frame];
+    self.xAxisLine.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);    
+    self.yAxisLine.frame = CGRectMake(self.contentOffset.x, 0, ZFAxisLineStartXPos, frame.size.height);
+}
+
 /** y轴背景颜色 */
 - (void)setAxisLineBackgroundColor:(UIColor *)axisLineBackgroundColor{
     _axisLineBackgroundColor = axisLineBackgroundColor;
@@ -340,8 +346,8 @@
 /** 设置坐标轴颜色 */
 - (void)setAxisColor:(UIColor *)axisColor{
     _axisColor = axisColor;
-    _xAxisLine.axisColor = _axisColor;
-    _yAxisLine.axisColor = _axisColor;
+    self.xAxisLine.axisColor = _axisColor;
+    self.yAxisLine.axisColor = _axisColor;
 }
 
 /**

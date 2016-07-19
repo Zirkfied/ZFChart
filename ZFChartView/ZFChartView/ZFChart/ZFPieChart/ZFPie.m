@@ -26,12 +26,6 @@
         self.strokeColor = color.CGColor;
         self.path = [self bezierWithCenter:center radius:radius startAngle:startAngle endAngle:endAngle color:color].CGPath;
         
-        if (piePatternType == kPieChartPatternTypeForCirque) {
-            self.lineWidth = radius;
-        }else if (piePatternType == kPieChartPatternTypeForCircle){
-            self.lineWidth = radius * 2;
-        }
-        
         if (isAnimated) {
             CABasicAnimation * animation = [self animationWithDuration:duration];
             [self addAnimation:animation forKey:nil];

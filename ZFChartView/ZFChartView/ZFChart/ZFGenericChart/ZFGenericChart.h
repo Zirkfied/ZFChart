@@ -33,6 +33,8 @@
  */
 - (NSArray *)nameArrayInGenericChart:(ZFGenericChart *)chart;
 
+
+
 @optional
 
 /**
@@ -69,12 +71,10 @@
 
 @property (nonatomic, weak) id<ZFGenericChartDataSource> dataSource;
 
-/** 主题 */
-@property (nonatomic, copy) NSString * topic;
+/** 主题Label */
+@property (nonatomic, strong) UILabel * topicLabel;
 /** y轴单位 */
 @property (nonatomic, copy) NSString * unit;
-/** 主题文字颜色(默认为黑色) */
-@property (nonatomic, strong) UIColor * topicColor;
 /** 单位颜色(默认为黑色) */
 @property (nonatomic, strong) UIColor * unitColor;
 /** 背景颜色(默认为白色) */
@@ -102,9 +102,9 @@
 @property (nonatomic, assign) CGFloat axisLineValueFontSize;
 /** x轴名称label与x轴之间的距离(默认为0.f)(横向图表无效) */
 @property (nonatomic, assign) CGFloat xLineNameLabelToXAxisLinePadding;
-/** x轴valueLabel样式(默认为kPopoverLabelPatternPopover)(横向图表无效) */
+/** x轴valueLabel样式(默认为kPopoverLabelPatternPopover) */
 @property (nonatomic, assign) kPopoverLabelPattern valueLabelPattern;
-/** 坐标轴数值的显示类型(保留有效小数或显示整数形式) */
+/** y轴(普通图表) 或 x轴(横向图表) 数值的显示类型(保留有效小数或显示整数形式，默认为保留有效小数) */
 @property (nonatomic, assign) kAxisLineValueType axisLineValueType;
 
 

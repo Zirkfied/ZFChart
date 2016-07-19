@@ -19,26 +19,56 @@
  *
  *  @return NSArray必须存储NSString类型
  */
-- (NSArray *)valueArrayInPieChart:(ZFPieChart *)chart;
+- (NSArray *)valueArrayInPieChart:(ZFPieChart *)pieChart;
 
 /**
  *  颜色数组
  *
  *  @return NSArray必须存储UIColor类型
  */
-- (NSArray *)colorArrayInPieChart:(ZFPieChart *)chart;
+- (NSArray *)colorArrayInPieChart:(ZFPieChart *)pieChart;
+
+@end
+
+
+
+/*********************  ZFPieChartDelegate(ZFPieChart代理方法)  *********************/
+@protocol ZFPieChartDelegate <NSObject>
+
+@required
+
+/**
+ *  设置饼图的半径
+ *
+ *  @return 半径
+ */
+- (CGFloat)radiusForPieChart:(ZFPieChart *)pieChart;
 
 
 
 @optional
 /**
- *  名称数据
+ *  用于点击path后需要执行后续代码
  *
- *  @return NSArray必须存储NSString类型
+ *  @param index 点击的path的位置下标
  */
-- (NSArray *)nameArrayInPieChart:(ZFPieChart *)chart;
+- (void)pieChart:(ZFPieChart *)pieChart didSelectPathAtIndex:(NSInteger)index;
+
+#warning message - 此代理方法只适用于圆环类型
+
+/**
+ *  当饼图类型为圆环类型时，可通过此方法把半径平均分成n段，圆环的线宽为n分之1，简单理解就是调整圆环线宽的粗细
+ *  (e.g. radius为100，把半径平均分成4段，则圆环的线宽为100 * (1 / 4), 即25)
+ *  (若不设置，默认平均分2段)
+ *
+ *  (PS:此方法对 整圆(kPieChartPatternTypeForCircle)类型 无效)
+ *
+ *  @return 设置半径平均段数(可以为小数, 返回的值必须大于1，当<=1时则自动返回默认值)
+ */
+- (CGFloat)radiusAverageNumberOfSegments:(ZFPieChart *)pieChart;
 
 @end
+
 
 
 /**
@@ -49,12 +79,11 @@ typedef enum{
     kPercentTypeInteger = 1//取整数形式(四舍五入)
 }kPercentType;
 
-@interface ZFPieChart : UIScrollView
+@interface ZFPieChart : UIView
 
 @property (nonatomic, weak) id<ZFPieChartDataSource> dataSource;
+@property (nonatomic, weak) id<ZFPieChartDelegate> delegate;
 
-/** 主题 */
-@property (nonatomic, copy) NSString * topic;
 /** 饼图样式(若不设置，默认为kPieChartPatternTypeForCirque(圆环样式)) */
 @property (nonatomic, assign) kPiePatternType piePatternType;
 /** kPercentType类型 */
@@ -65,8 +94,6 @@ typedef enum{
 @property (nonatomic, assign) CGFloat percentOnChartFontSize;
 /** 是否带阴影效果(默认为YES) */
 @property (nonatomic, assign) BOOL isShadow;
-/** 显示详细信息(默认为NO) */
-@property (nonatomic, assign) BOOL isShowDetail;
 /** 是否带动画显示(默认为YES，带动画) */
 @property (nonatomic, assign) BOOL isAnimated;
 /** 图表透明度(范围0 ~ 1, 默认为1.f) */

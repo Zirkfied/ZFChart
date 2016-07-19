@@ -23,6 +23,8 @@
 @property (nonatomic, assign) CGFloat lineWidthHalf;
 /** 分段线长度 */
 @property (nonatomic, assign) CGFloat sectionLength;
+/** 记录原来y轴终点y值 (用于横竖屏适配) */
+@property (nonatomic, assign) CGFloat originYLineEndYPos;
 /** 记录坐标轴方向 */
 @property (nonatomic, assign) kAxisDirection direction;
 
@@ -35,9 +37,9 @@
  */
 - (void)commonInit{
     _yLineStartXPos = ZFAxisLineStartXPos;
-    _yLineStartYPos = _direction == kAxisDirectionVertical ? self.frame.size.height * EndRatio : self.frame.size.height * HorizontalEndRatio;
+    _yLineStartYPos = _direction == kAxisDirectionVertical ? self.frame.size.height * ZFAxisLineVerticalEndRatio : self.frame.size.height * ZFAxisLineHorizontalEndRatio;
     _yLineEndXPos = ZFAxisLineStartXPos;
-    _yLineEndYPos = self.frame.size.height * StartRatio < TOPIC_HEIGHT + 20 ? TOPIC_HEIGHT + 20 : self.frame.size.height * StartRatio;
+    _yLineEndYPos = self.frame.size.height * ZFAxisLineStartRatio < TOPIC_HEIGHT + 20 ? TOPIC_HEIGHT + 20 : self.frame.size.height * ZFAxisLineStartRatio;
     
     _yLineWidth = 1.f;
     _yLineHeight = _yLineStartYPos - _yLineEndYPos;
@@ -47,6 +49,9 @@
     _arrowsWidthHalf = _arrowsWidth / 2.f;
     _lineWidthHalf = _yLineWidth / 2.f;
     _sectionLength = ZFAxisLineSectionLength;
+}
+
+- (void)setUp{
     _axisColor = ZFBlack;
 }
 
@@ -55,6 +60,7 @@
     if (self) {
         _direction = direction;
         [self commonInit];
+        [self setUp];
     }
     return self;
 }
@@ -68,7 +74,6 @@
  */
 - (UIBezierPath *)axisLineNoFill{
     UIBezierPath * bezier = [UIBezierPath bezierPathWithRect:CGRectMake(_yLineStartXPos, _yLineStartYPos, _yLineWidth, _yLineWidth)];
-    [bezier stroke];
     return bezier;
 }
 
@@ -79,7 +84,6 @@
  */
 - (UIBezierPath *)drawYAxisLine{
     UIBezierPath * bezier = [UIBezierPath bezierPathWithRect:CGRectMake(_yLineEndXPos, _yLineEndYPos, _yLineWidth, _yLineHeight)];
-    [bezier stroke];
     return bezier;
 }
 
@@ -112,7 +116,6 @@
     UIBezierPath * bezier = [UIBezierPath bezierPath];
     [bezier moveToPoint:CGPointMake(_yLineEndXPos + _arrowsWidthHalf + _lineWidthHalf, _yLineEndYPos)];
     [bezier addLineToPoint:CGPointMake(_yLineEndXPos - _arrowsWidthHalf + _lineWidthHalf, _yLineEndYPos)];
-    [bezier stroke];
     return bezier;
 }
 
@@ -126,9 +129,7 @@
     [bezier moveToPoint:CGPointMake(_yLineEndXPos + _lineWidthHalf - _arrowsWidthHalf, _yLineEndYPos)];
     [bezier addLineToPoint:CGPointMake(_yLineEndXPos + _lineWidthHalf, _yLineEndYPos - _arrowsWidthHalf * ZFTan(60))];
     [bezier addLineToPoint:CGPointMake(_yLineEndXPos + _arrowsWidthHalf + _lineWidthHalf, _yLineEndYPos)];
-
     [bezier closePath];
-    [bezier fill];
     
     return bezier;
 }
@@ -208,17 +209,24 @@
 
 #pragma mark - 重写setter,getter方法
 
+- (void)setFrame:(CGRect)frame{
+    [super setFrame:frame];
+    [self commonInit];
+}
+
 - (void)setYLineHeight:(CGFloat)yLineHeight{
     if (yLineHeight > _yLineStartYPos - _yLineEndYPos) {
-        _yLineHeight = yLineHeight;
+        _originYLineEndYPos = _yLineEndYPos;
         //底部高度(x轴到底部的高度)
         CGFloat bottomHeight = self.frame.size.height - _yLineStartYPos;
         //计算self的新高度
-        CGFloat height = (self.frame.size.height - _yLineStartYPos) + _yLineHeight + _yLineEndYPos;
+        CGFloat height = (self.frame.size.height - _yLineStartYPos) + yLineHeight + _yLineEndYPos;
         //重设self的frame
         self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, height);
         //计算y轴新的StartYPos
         _yLineStartYPos = self.frame.size.height - bottomHeight;
+        _yLineEndYPos = _originYLineEndYPos;
+        _yLineHeight = yLineHeight;
     }
 }
 

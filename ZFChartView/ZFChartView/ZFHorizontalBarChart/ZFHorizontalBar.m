@@ -49,7 +49,6 @@
  */
 - (UIBezierPath *)noFill{
     UIBezierPath * bezier = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, 0, self.frame.size.height)];
-    [bezier fill];
     return bezier;
 }
 
@@ -63,7 +62,6 @@
     _endXPos = currentWidth;
     
     UIBezierPath * bezier = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, currentWidth, self.frame.size.height)];
-    [bezier fill];
     return bezier;
 }
 

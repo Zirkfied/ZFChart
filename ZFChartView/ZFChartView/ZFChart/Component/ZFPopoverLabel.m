@@ -34,12 +34,12 @@
     if (self) {
         _direction = direction;
         [self commonInit];
-        [self addUI];
+        [self setUp];
     }
     return self;
 }
 
-- (void)addUI{
+- (void)setUp{
     self.label = [[UILabel alloc] init];
     self.label.numberOfLines = 0;
     self.label.textAlignment = NSTextAlignmentCenter;

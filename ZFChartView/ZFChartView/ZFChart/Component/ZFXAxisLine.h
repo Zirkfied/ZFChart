@@ -17,8 +17,6 @@
 
 /** x轴宽度 */
 @property (nonatomic, assign) CGFloat xLineWidth;
-/** x轴高度 */
-@property (nonatomic, assign) CGFloat xLineHeight;
 /** x轴数值显示的段数 */
 @property (nonatomic, assign) NSInteger xLineSectionCount;
 /** 是否带动画显示(默认为YES，带动画) */
@@ -28,6 +26,9 @@
 
 
 #warning message - readonly(只读)
+
+/** x轴高度 */
+@property (nonatomic, assign, readonly) CGFloat xLineHeight;
 
 /** x轴开始x位置(从数学坐标轴(0.0)(左下角)开始) */
 @property (nonatomic, assign, readonly) CGFloat xLineStartXPos;

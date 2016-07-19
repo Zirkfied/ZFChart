@@ -15,8 +15,6 @@
 
 @interface ZFYAxisLine : UIView
 
-/** y轴宽度 */
-@property (nonatomic, assign) CGFloat yLineWidth;
 /** y轴高度 */
 @property (nonatomic, assign) CGFloat yLineHeight;
 /** y轴数值显示的段数 */
@@ -27,6 +25,9 @@
 @property (nonatomic, strong) UIColor * axisColor;
 
 #warning message - readonly(只读)
+
+/** y轴宽度 */
+@property (nonatomic, assign, readonly) CGFloat yLineWidth;
 
 /** y轴开始x位置(从数学坐标轴(0.0)(左下角)开始) */
 @property (nonatomic, assign, readonly) CGFloat yLineStartXPos;
