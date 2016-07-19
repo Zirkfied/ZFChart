@@ -61,7 +61,7 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         ZFBarChart * barChart = [[ZFBarChart alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT)];
         barChart.dataSource = self;
         barChart.delegate = self;
-        barChart.topic = @"xx小学各年级人数";
+        barChart.topicLabel.text = @"xx小学各年级人数";
         barChart.unit = @"人";
         [barChart strokePath];
         [self.view addSubview:barChart];
@@ -137,7 +137,7 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         ZFLineChart * lineChart = [[ZFLineChart alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT)];
         lineChart.dataSource = self;
         lineChart.delegate = self;
-        lineChart.topic = @"xx小学各年级男女人数";
+        lineChart.topicLabel.text = @"xx小学各年级男女人数";
         lineChart.unit = @"人";
         [lineChart strokePath];
         [self.view addSubview:lineChart];
@@ -187,7 +187,7 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
 
         ZFPieChart * pieChart = [[ZFPieChart alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT)];
         pieChart.dataSource = self;
-        pieChart.topic = @"xx小学各年级男女人数占比";
+        pieChart.delegate = self;
         [pieChart strokePath];
         [self.view addSubview:pieChart];
         
@@ -202,11 +202,24 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         
         - (NSArray *)colorArrayInPieChart:(ZFPieChart *)chart;
         
+###     ZFPieChartDelegate代理方法
+####    @required 必须实现的方法
+        //设置饼图的半径
         
+        - (CGFloat)radiusForPieChart:(ZFPieChart *)pieChart;
+
 ####    @optional 可选实现的方法
-        //返回名称数据(NSArray必须存储NSString类型)
+        /**
+         *  当饼图类型为圆环类型时，可通过此方法把半径平均分成n段，圆环的线宽为n分之1，简单理解就是调整圆环线宽的粗细
+         *  (e.g. radius为100，把半径平均分成4段，则圆环的线宽为100 * (1 / 4), 即25)
+         *  (若不设置，默认平均分2段)
+         *
+         *  (PS:此方法对 整圆(kPieChartPatternTypeForCircle)类型 无效)
+         *
+         *  @return 设置半径平均段数(可以为小数, 返回的值必须大于1，当<=1时则自动返回默认值)
+         */
         
-        - (NSArray *)nameArrayInPieChart:(ZFPieChart *)chart
+        - (CGFloat)radiusAverageNumberOfSegments:(ZFPieChart *)pieChart;
         
         
 ####效果展示
@@ -214,26 +227,6 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
 ![](https://github.com/Zirkfied/Library/blob/master/pie2.png)
         
 ###饼图其余属性
-
-![](https://github.com/Zirkfied/Library/blob/master/pie1.png)
-
-        该属性默认为NO，设置YES时，饼图将显示详细信息，如上所示
-        pieChart.isShowDetail = YES;
-        
-![](https://github.com/Zirkfied/Library/blob/master/pie3.png)
-        
-        该属性默认为YES，设置NO时，饼图将不显示饼图上的百分比，如上所示
-        pieChart.isShowPercent = NO;
-        
-![](https://github.com/Zirkfied/Library/blob/master/pie4.png)
-        
-        该属性默认为kPercentTypeDecimal(显示2位小数)，当设置kPercentTypeInteger时，将显示四舍五入后的整数，如上所示
-        pieChart.percentType = kPercentTypeInteger;
-        
-![](https://github.com/Zirkfied/Library/blob/master/pie5.png)
-        
-        该属性默认为kPieChartPatternTypeForCirque(圆环)，当设置kPieChartPatternTypeForCircle时，则以整圆的形式显示，如上所示
-        pieChart.piePatternType = kPieChartPatternTypeForCircle;
         
         
         
@@ -243,7 +236,7 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         ZFWaveChart * waveChart = [[ZFWaveChart alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT)];
         waveChart.dataSource = self;
         waveChart.delegate = self;
-        waveChart.topic = @"xx小学各年级人数";
+        waveChart.topicLabel.text = @"xx小学各年级人数";
         waveChart.unit = @"人";
         [waveChart strokePath];
         [self.view addSubview:waveChart];
@@ -288,7 +281,7 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         ZFHorizontalBarChart * barChart = [[ZFHorizontalBarChart alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT)];
         barChart.dataSource = self;
         barChart.delegate = self;
-        barChart.topic = @"xx小学各年级人数";
+        barChart.topicLabel.text = @"xx小学各年级人数";
         barChart.unit = @"人";
         [barChart strokePath];
         [self.view addSubview:barChart];
@@ -322,24 +315,23 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         
         3.  ZFBarChartDelegate是柱状图(ZFBarChart)的部分常量设置的协议方法
             ZFLineChartDelegate是线状图(ZFLineChart)的部分常量设置的协议方法
+            ZFPieChartDelegate是饼图(ZFLineChart)的部分常量设置的协议方法
             ZFWaveChartDelegate是波浪图(ZFWaveChart)的部分常量设置的协议方法
             ZFHorizontalBarChartDelegate是柱状图(ZFHorizontalBarChart)的部分常量设置的协议方法
         
-        4.  饼图(ZFPieChart)只有DataSource数据源方法，没有Delegate的协议方法
-        
-        5.  因再一次进行封装，柱状图(ZFBarChart, ZFHorizontalBarChart)，线状图(ZFLineChart)，波浪图(ZFWaveChart)均继承ZFGenericChart，故ZFGenericChartDataSource数据源方法 和 通用属性请查看 ZFGenericChart.h
+        4.  因再一次进行封装，柱状图(ZFBarChart, ZFHorizontalBarChart)，线状图(ZFLineChart)，波浪图(ZFWaveChart)均继承ZFGenericChart，故ZFGenericChartDataSource数据源方法 和 通用属性请查看 ZFGenericChart.h
             ZFBarChartDelegate协议方法 和 柱状图(ZFBarChart)专有属性 请查看 ZFBarChart.h
             ZFLineChartDelegate协议方法 和 线状图(ZFLineChart)专有属性 请查看 ZFLineChart.h
             ZFPieChartDataSource数据源方法 和 饼图(ZFPieChart)其余属性 请查看 ZFPieChart.h
             ZFWaveChartDelegate协议方法 和 波浪图(ZFWaveChart)专有属性 请查看 ZFWaveChart.h
             ZFHorizontalBarChartDelegate协议方法 和 横向柱状图(ZFHorizontalBarChart)专有属性 请查看 ZFHorizontalBarChart.h
         
-        6.柱状图(ZFBarChart, ZFHorizontalBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)的valueLabel新增气泡样式，对应属性valueLabelPattern，现已默认为
+        5.柱状图(ZFBarChart, ZFHorizontalBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)的valueLabel新增气泡样式，对应属性valueLabelPattern，现已默认为
           kPopoverLabelPatternPopover(气泡样式)，若要改回原样式，则设置为kPopoverLabelPatternBlank；
           
           eg:  barChart.valueLabelPattern = kPopoverLabelPatternBlank;
           
-        7.关于自定义设置y轴最小值说明：
+        6.关于自定义设置y轴最小值说明：
           /** 该属性是否重设y轴最小值，默认为NO(不设置，从0开始)，当设置为YES时，则有以下2种情况
               ①若同时实现代理方法中的 - (CGFloat)yLineMinValueInGenericChart:(ZFGenericChart *)chart，则y轴最小值为该方法的返回值
               ②若不实现①中的方法，则y轴最小值为数据源最小值
@@ -353,7 +345,7 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
            */
            @property (nonatomic, assign) BOOL isResetAxisLineMinValue;
           
-        8.每当更新数据后或更改属性设置，则需重新调用一次 - (void)strokePath 方法。
+        7.每当更新数据后或更改属性设置，则需重新调用一次 - (void)strokePath 方法。
           网络获取数据后，才调用 - (void)strokePath 方法
 
 
