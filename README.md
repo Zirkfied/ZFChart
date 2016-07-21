@@ -210,25 +210,34 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
 
 ####    @optional 可选实现的方法
         /**
-         *  当饼图类型为圆环类型时，可通过此方法把半径平均分成n段，圆环的线宽为n分之1，简单理解就是调整圆环线宽的粗细
-         *  (e.g. radius为100，把半径平均分成4段，则圆环的线宽为100 * (1 / 4), 即25)
-         *  (若不设置，默认平均分2段)
-         *
-         *  (PS:此方法对 整圆(kPieChartPatternTypeForCircle)类型 无效)
-         *
-         *  @return 设置半径平均段数(可以为小数, 返回的值必须大于1，当<=1时则自动返回默认值)
-         */
+          *  当饼图类型为圆环类型时，可通过此方法把半径平均分成n段，圆环的线宽为n分之1，间接计算圆环线宽，简单理解就是调整圆环线宽的粗细
+          *  (若不设置，默认平均分2段)
+          *  (e.g. 当radius为150，把半径平均分成3段，则圆环的线宽为150 * (1 / 3), 即37.5)，如下图所示
+          *
+          *  (PS:此方法对 整圆(kPieChartPatternTypeForCircle)类型 无效)
+          *
+          *  @return 设置半径平均段数(可以为小数, 返回的值必须大于1，当<=1时则自动返回默认值)
+          */
         
         - (CGFloat)radiusAverageNumberOfSegments:(ZFPieChart *)pieChart;
         
+![](https://github.com/Zirkfied/Library/blob/master/pie4.png)
+        
         
 ####效果展示
+
+![](https://github.com/Zirkfied/Library/blob/master/pie1.png)
 
 ![](https://github.com/Zirkfied/Library/blob/master/pie2.png)
         
 ###饼图其余属性
         
-        
+![](https://github.com/Zirkfied/Library/blob/master/pie3.png)
+
+//当piePatternType设置为kPieChartPatternTypeForCircle时，则饼图为整圆，如上图所示
+pieChart.piePatternType = kPieChartPatternTypeForCircle;
+
+
         
 ## WaveChart(波浪图)
         须遵循ZFGenericChartDataSource数据源协议
@@ -381,6 +390,13 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
                     
         2016.06.02 ①新增横向柱状图(ZFHorizontalBarChart)
                    ②部分数据源方法名和属性名称进行了修改，替换时注意修改对应属性
+                   
+        2016.07.21 ①新增ZFPieChartDelegate协议方法，现可通过协议方法自定义饼图的半径和线宽
+                   ②新增饼图(ZFPieChart)事件点击协议方法，可用于点击某个path进行后续操作
+                   ③删除饼图(ZFPieChart)的ZFPieChartDataSource数据源方法的- (NSArray *)nameArrayInPieChart:(ZFPieChart *)pieChart
+                   ④删除饼图(ZFPieChart)的isShowDetail（显示详情）的属性和控件，方便自定义排版
+                   ⑤删除柱状图(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart),新增横向柱状图(ZFHorizontalBarChart)的topic和topicColor属性，现已直接给出topicLabel控件，方便进行标题其余属性的更改
+                   ⑥现已支持横竖屏适配
         
         
 ##本人其他开源框架
