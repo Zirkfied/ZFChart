@@ -397,6 +397,7 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
                    ④删除饼图(ZFPieChart)的isShowDetail（显示详情）的属性和控件，方便自定义排版
                    ⑤删除柱状图(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart),新增横向柱状图(ZFHorizontalBarChart)的topic和topicColor属性，现已直接给出topicLabel控件，方便进行标题其余属性的更改
                    ⑥现已支持横竖屏适配
+                   ⑦现已修复打印控制台的一堆警告
         
         
 ##本人其他开源框架
