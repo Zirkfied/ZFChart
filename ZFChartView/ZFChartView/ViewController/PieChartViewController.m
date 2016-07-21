@@ -67,7 +67,7 @@
 
 /** 此方法只对圆环类型(kPieChartPatternTypeForCirque)有效 */
 - (CGFloat)radiusAverageNumberOfSegments:(ZFPieChart *)pieChart{
-    return 0.5f;
+    return 2.f;
 }
 
 #pragma mark - 横竖屏适配(若需要同时横屏,竖屏适配，则添加以下代码，反之不需添加)
