@@ -212,7 +212,7 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         /**
           *  当饼图类型为圆环类型时，可通过此方法把半径平均分成n段，圆环的线宽为n分之1，间接计算圆环线宽，简单理解就是调整圆环线宽的粗细
           *  (若不设置，默认平均分2段)
-          *  (e.g. 当radius为150，把半径平均分成3段，则圆环的线宽为150 * (1 / 3), 即37.5)，如下图所示
+          *  (e.g. 当radius为150，把半径平均分成4段，则圆环的线宽为150 * (1 / 4), 即37.5)，如下图所示
           *
           *  (PS:此方法对 整圆(kPieChartPatternTypeForCircle)类型 无效)
           *
