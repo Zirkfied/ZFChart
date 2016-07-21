@@ -234,8 +234,8 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         
 ![](https://github.com/Zirkfied/Library/blob/master/pie3.png)
 
-//当piePatternType设置为kPieChartPatternTypeForCircle时，则饼图为整圆，如上图所示
-pieChart.piePatternType = kPieChartPatternTypeForCircle;
+        //当piePatternType设置为kPieChartPatternTypeForCircle时，则饼图为整圆，如上图所示
+        pieChart.piePatternType = kPieChartPatternTypeForCircle;
 
 
         
