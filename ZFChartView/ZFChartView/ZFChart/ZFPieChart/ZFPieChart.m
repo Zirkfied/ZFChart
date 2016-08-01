@@ -86,7 +86,7 @@
 - (void)commonInit{
     _startAngle = ZFRadian(-90);
     _originHeight = self.frame.size.height;
-    _pieCenter = self.center;
+    _pieCenter = CGPointMake(CGRectGetWidth(self.frame) / 2, CGRectGetHeight(self.frame) / 2);
     _opacity = 1.f;
 }
 
