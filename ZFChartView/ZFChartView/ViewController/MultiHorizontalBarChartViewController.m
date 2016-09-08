@@ -56,7 +56,9 @@
 #pragma mark - ZFGenericChartDataSource
 
 - (NSArray *)valueArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[@[@"123", @"500", @"490", @"380", @"167", @"235"], @[@"256", @"283", @"236", @"240", @"183", @"200"], @[@"256", @"256", @"256", @"256", @"256", @"256"]];
+    return @[@[@"123", @"500", @"490", @"380", @"167", @"235"],
+             @[@"256", @"283", @"236", @"240", @"183", @"200"],
+             @[@"256", @"256", @"256", @"256", @"256", @"256"]];
 }
 
 - (NSArray *)nameArrayInGenericChart:(ZFGenericChart *)chart{
@@ -94,8 +96,8 @@
 //}
 
 - (id)valueTextColorArrayInHorizontalBarChart:(ZFHorizontalBarChart *)barChart{
-    return ZFBlue;
-//    return @[ZFColor(71, 204, 255, 1), ZFColor(253, 203, 76, 1), ZFColor(16, 140, 39, 1)];
+//    return ZFBlue;
+    return @[ZFColor(71, 204, 255, 1), ZFColor(253, 203, 76, 1), ZFColor(16, 140, 39, 1)];
 }
 
 - (void)horizontalBarChart:(ZFHorizontalBarChart *)barChart didSelectBarAtGroupIndex:(NSInteger)groupIndex barIndex:(NSInteger)barIndex{

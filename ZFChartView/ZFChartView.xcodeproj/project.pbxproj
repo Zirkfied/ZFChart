@@ -291,10 +291,10 @@
 		18C0A8B41D1A66CF000FE955 /* ZFHorizontalBarChart */ = {
 			isa = PBXGroup;
 			children = (
-				18D33BF01D5B41FA00CE33AD /* ZFHorizontalBar.h */,
-				18D33BF11D5B41FA00CE33AD /* ZFHorizontalBar.m */,
 				18D33BF21D5B41FA00CE33AD /* ZFHorizontalBarChart.h */,
 				18D33BF31D5B41FA00CE33AD /* ZFHorizontalBarChart.m */,
+				18D33BF01D5B41FA00CE33AD /* ZFHorizontalBar.h */,
+				18D33BF11D5B41FA00CE33AD /* ZFHorizontalBar.m */,
 			);
 			name = ZFHorizontalBarChart;
 			path = ../ZFHorizontalBarChart;

@@ -337,9 +337,10 @@
             
         }else if ([subObject isKindOfClass:[NSArray class]]){
             if ([color isKindOfClass:[UIColor class]]) {
-                for (NSInteger i = 0; i < [subObject count]; i++) {
+                for (NSInteger i = 0; i < self.horizontalAxis.yLineValueArray.count; i++) {
                     [self.valueTextColorArray addObject:color];
                 }
+                
             }else if ([color isKindOfClass:[NSArray class]]){
                 self.valueTextColorArray = [NSMutableArray arrayWithArray:color];
             }
@@ -350,7 +351,7 @@
         if ([subObject isKindOfClass:[NSString class]]) {
             [self.valueTextColorArray addObject:_valueTextColor];
         }else if ([subObject isKindOfClass:[NSArray class]]){
-            for (NSInteger i = 0; i < [subObject count]; i++) {
+            for (NSInteger i = 0; i < self.horizontalAxis.yLineValueArray.count; i++) {
                 [self.valueTextColorArray addObject:_valueTextColor];
             }
         }
