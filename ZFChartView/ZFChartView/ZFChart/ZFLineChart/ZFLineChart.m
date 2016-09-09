@@ -78,7 +78,10 @@
     if ([subObject isKindOfClass:[NSString class]]) {
         for (NSInteger i = 0; i < self.genericAxis.xLineValueArray.count; i++) {
             BOOL isOverrun = NO;//记录是否超出上限
-            CGFloat percent = ([self.genericAxis.xLineValueArray[i] floatValue] - self.genericAxis.yLineMinValue) / (self.genericAxis.yLineMaxValue - self.genericAxis.yLineMinValue);
+            CGFloat percent = 0;
+            if(self.genericAxis.yLineMaxValue - self.genericAxis.yLineMinValue != 0){
+                percent = ([self.genericAxis.xLineValueArray[i] floatValue] - self.genericAxis.yLineMinValue) / (self.genericAxis.yLineMaxValue - self.genericAxis.yLineMinValue);
+            }
             if (percent > 1) {
                 percent = 1.f;
                 isOverrun = YES;
