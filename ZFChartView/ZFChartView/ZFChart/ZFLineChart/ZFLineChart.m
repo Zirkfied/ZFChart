@@ -115,7 +115,11 @@
                 //第几个圆
                 for (NSInteger circleIndex = 0; circleIndex < [subObject count]; circleIndex++) {
                     BOOL isOverrun = NO;//记录是否超出上限
-                    CGFloat percent = ([self.genericAxis.xLineValueArray[lineIndex][circleIndex] floatValue] - self.genericAxis.yLineMinValue) / (self.genericAxis.yLineMaxValue - self.genericAxis.yLineMinValue);
+                    CGFloat percent = 0;
+                    if(self.genericAxis.yLineMaxValue - self.genericAxis.yLineMinValue != 0){
+                        percent = ([self.genericAxis.xLineValueArray[lineIndex][circleIndex] floatValue] - self.genericAxis.yLineMinValue) / (self.genericAxis.yLineMaxValue - self.genericAxis.yLineMinValue);
+                    }
+                    
                     if (percent > 1) {
                         percent = 1.f;
                         isOverrun = YES;
