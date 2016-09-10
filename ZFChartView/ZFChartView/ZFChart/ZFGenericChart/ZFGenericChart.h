@@ -48,6 +48,8 @@
 
 /**
  *  y轴(普通图表) 或 x轴(横向图表) 数值显示的最大值(若不设置，默认返回数据源最大值)
+ *
+ *  (PS: 此方法与 isResetAxisLineMaxValue 关联，具体查看该属性注释)
  */
 - (CGFloat)axisLineMaxValueInGenericChart:(ZFGenericChart *)chart;
 
