@@ -289,10 +289,24 @@
         _colorArray = [NSMutableArray arrayWithArray:[[ZFMethod shareInstance] cachedColor:self.genericAxis.xLineValueArray]];
     }
     
-    if ([self.dataSource respondsToSelector:@selector(axisLineMaxValueInGenericChart:)]) {
-        self.genericAxis.yLineMaxValue = [self.dataSource axisLineMaxValueInGenericChart:self];
+    if (self.isResetAxisLineMaxValue) {
+        if ([self.dataSource respondsToSelector:@selector(axisLineMaxValueInGenericChart:)]) {
+            self.genericAxis.yLineMaxValue = [self.dataSource axisLineMaxValueInGenericChart:self];
+        }else{
+            NSLog(@"请返回一个最大值");
+            return;
+        }
     }else{
         self.genericAxis.yLineMaxValue = [[ZFMethod shareInstance] cachedYLineMaxValue:self.genericAxis.xLineValueArray];
+        
+        if (self.genericAxis.yLineMaxValue == 0.f) {
+            if ([self.dataSource respondsToSelector:@selector(axisLineMaxValueInGenericChart:)]) {
+                self.genericAxis.yLineMaxValue = [self.dataSource axisLineMaxValueInGenericChart:self];
+            }else{
+                NSLog(@"当前所有数据的最大值为0, 请返回一个固定最大值, 否则没法绘画图表");
+                return;
+            }
+        }
     }
     
     if (self.isResetAxisLineMinValue) {

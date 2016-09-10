@@ -109,7 +109,9 @@
 
 
 /** 该属性是否重设坐标轴最小值，默认为NO(不设置，从0开始)，当设置为YES时，则有以下2种情况
-    ①若同时实现代理方法中的 - (CGFloat)axisLineMinValueInGenericChart:(ZFGenericChart *)chart，则y轴最小值为该方法的返回值
+    ①若同时实现代理方法中的 
+        - (CGFloat)axisLineMinValueInGenericChart:(ZFGenericChart *)chart，
+        则y轴最小值为该方法的返回值
     ②若不实现①中的方法，则y轴最小值为数据源最小值
  
  
@@ -120,6 +122,19 @@
     ②If not implemented the method in ①, then axisLineMinValue is the minimum value of the dataSource.
  */
 @property (nonatomic, assign) BOOL isResetAxisLineMinValue;
+/** 是否一直显示固定的最大值，默认为NO，该属性有以下3种情况
+    ①当为NO时，且不实现
+        - (CGFloat)axisLineMaxValueInGenericChart:(ZFGenericChart *)chart
+        则自动计算返回的全部数据中的最大值
+    ②当为NO时，且实现
+        - (CGFloat)axisLineMaxValueInGenericChart:(ZFGenericChart *)chart
+        则当返回的全部数据的值都为"0"时，则最大值为该代理方法给予的值
+        若数据的值并不都是"0"时，则自动计算返回的全部数据中的最大值
+    ③当为YES时，则必须实现
+        - (CGFloat)axisLineMaxValueInGenericChart:(ZFGenericChart *)chart
+        否则无法绘画图表，且任何情况最大值都为该代理方法给予的值
+ */
+@property (nonatomic, assign) BOOL isResetAxisLineMaxValue;
 /** 是否带动画显示(默认为YES，带动画) */
 @property (nonatomic, assign) BOOL isAnimated;
 /** valueLabel当为气泡样式时，是否带阴影效果(默认为YES) */

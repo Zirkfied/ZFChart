@@ -42,6 +42,7 @@
     self.barChart.topicLabel.textColor = ZFWhite;
 //    self.barChart.isAnimated = NO;
 //    self.barChart.isResetAxisLineMinValue = YES;
+//    self.barChart.isResetAxisLineMaxValue = YES;
 //    self.barChart.isShadowForValueLabel = NO;
 //    self.barChart.valueLabelPattern = kPopoverLabelPatternBlank;
     self.barChart.isShowSeparate = YES;

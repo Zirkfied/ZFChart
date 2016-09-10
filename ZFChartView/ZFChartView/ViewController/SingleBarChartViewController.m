@@ -41,6 +41,7 @@
     self.barChart.unit = @"人";
     self.barChart.isAnimated = NO;
 //    self.barChart.isResetAxisLineMinValue = YES;
+//    self.barChart.isResetAxisLineMaxValue = YES;
 //    self.barChart.isShowAxisLineValue = NO;
 //    self.barChart.valueLabelPattern = kPopoverLabelPatternBlank;
     self.barChart.isShowSeparate = YES;
@@ -68,9 +69,9 @@
     return @[ZFMagenta];
 }
 
-- (CGFloat)axisLineMaxValueInGenericChart:(ZFGenericChart *)chart{
-    return 500;
-}
+//- (CGFloat)axisLineMaxValueInGenericChart:(ZFGenericChart *)chart{
+//    return 500;
+//}
 
 //- (CGFloat)axisLineMinValueInGenericChart:(ZFGenericChart *)chart{
 //    return 50;
