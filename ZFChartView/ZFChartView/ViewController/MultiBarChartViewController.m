@@ -88,11 +88,11 @@
 //- (CGFloat)barWidthInBarChart:(ZFBarChart *)barChart{
 //    return 25.f;
 //}
-//
+
 //- (CGFloat)paddingForGroupsInBarChart:(ZFBarChart *)barChart{
 //    return 20.f;
 //}
-//
+
 //- (CGFloat)paddingForBarInBarChart:(ZFBarChart *)barChart{
 //    return 5.f;
 //}

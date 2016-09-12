@@ -22,6 +22,15 @@
 - (NSMutableArray *)cachedColor:(NSArray *)array;
 
 /**
+ *  存储默认kChartValuePosition枚举类型(全部为kChartValuePositionDefalut)
+ *
+ *  @param array 传入valueArray
+ *
+ *  @return 返回存储kChartValuePosition枚举类型的数组
+ */
+- (NSMutableArray *)cachedValuePositionInLineChart:(NSArray *)array;
+
+/**
  *  获取数据源最大值，并赋值给y轴最大上限
  */
 - (CGFloat)cachedYLineMaxValue:(NSMutableArray *)array;

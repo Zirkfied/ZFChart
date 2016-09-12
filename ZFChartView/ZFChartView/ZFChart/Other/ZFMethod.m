@@ -65,6 +65,18 @@ static ZFMethod * instance = nil;
 }
 
 /**
+ *  存储默认kChartValuePosition枚举类型(全部为kChartValuePositionDefalut)
+ */
+- (NSMutableArray *)cachedValuePositionInLineChart:(NSArray *)array{
+    NSInteger count = [self countColorCount:array];
+    NSMutableArray * newArray = [NSMutableArray array];
+    for (NSInteger i = 0; i < count; i++) {
+        [newArray addObject:@(kChartValuePositionDefalut)];
+    }
+    return newArray;
+}
+
+/**
  *  获取数据源最大值，并赋值给y轴显示的最大值
  */
 - (CGFloat)cachedYLineMaxValue:(NSMutableArray *)array{

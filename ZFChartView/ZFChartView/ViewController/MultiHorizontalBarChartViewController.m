@@ -86,11 +86,11 @@
 //- (CGFloat)barHeightInHorizontalBarChart:(ZFHorizontalBarChart *)barChart{
 //    return 60.f;
 //}
-//
+
 //- (CGFloat)paddingForGroupsInHorizontalBarChart:(ZFHorizontalBarChart *)barChart{
 //    return 20.f;
 //}
-//
+
 //- (CGFloat)paddingForBarInHorizontalBarChart:(ZFHorizontalBarChart *)barChart{
 //    return 5.f;
 //}

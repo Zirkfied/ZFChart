@@ -86,11 +86,11 @@
 //- (CGFloat)barWidthInBarChart:(ZFBarChart *)barChart{
 //    return 40.f;
 //}
-//
+
 //- (CGFloat)paddingForGroupsInBarChart:(ZFBarChart *)barChart{
 //    return 40.f;
 //}
-//
+
 //- (id)valueTextColorArrayInBarChart:(ZFGenericChart *)barChart{
 //    return ZFBlue;
 //}

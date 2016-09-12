@@ -36,6 +36,16 @@
 - (CGFloat)lineWidthInLineChart:(ZFLineChart *)lineChart;
 
 /**
+ *  图表上value位置(若不设置，默认全部为kChartValuePositionDefalut)
+ *
+ *  @return NSArray必须存储kChartValuePosition枚举类型
+ *          eg: ①当只有1条线时，NSArray存储 @[@(kChartValuePositionOnTop)];
+ *              ②当有3条线时(有多少条线，则存储多少个kChartValuePosition枚举类型)，  
+ *                NSArray存储 @[@(kChartValuePositionOnTop), @(kChartValuePositionDefalut), @(kChartValuePositionOnBelow)];
+ */
+- (NSArray *)valuePositionInLineChart:(ZFLineChart *)lineChart;
+
+/**
  *  用于编写circle点击后需要执行后续代码
  *
  *  @param lineIndex   点击的circle在第几条线
@@ -55,16 +65,12 @@
 
 
 
-
-
 @interface ZFLineChart : ZFGenericChart
 
 @property (nonatomic, weak) id<ZFLineChartDelegate> delegate;
 
 /** 图表上valueLabel中心点到对应圆的中心点的距离(默认为25.f) */
 @property (nonatomic, assign) CGFloat valueCenterToCircleCenterPadding;
-/** 图表上value位置(默认为kChartValuePositionDefalut) */
-@property (nonatomic, assign) kChartValuePosition valuePosition;
 /** 是否带阴影效果(默认为YES) */
 @property (nonatomic, assign) BOOL isShadow;
 /** 超过y轴显示最大值时线状图上的圆颜色(默认为红色) */

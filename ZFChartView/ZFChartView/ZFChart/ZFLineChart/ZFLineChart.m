@@ -21,6 +21,8 @@
 @property (nonatomic, strong) NSMutableArray * circleArray;
 /** 颜色数组 */
 @property (nonatomic, strong) NSMutableArray * colorArray;
+/** 存储每条线value位置的数组 */
+@property (nonatomic, strong) NSMutableArray * valuePositionArray;
 /** 半径 */
 @property (nonatomic, assign) CGFloat radius;
 /** 线宽 */
@@ -41,7 +43,6 @@
     [super commonInit];
     
     _valueCenterToCircleCenterPadding = 25.f;
-    _valuePosition = kChartValuePositionDefalut;
     _isShadow = YES;
     _overMaxValueCircleColor = ZFRed;
     _lineWidth = 2.f;
@@ -150,14 +151,15 @@
     id subObject = self.circleArray.firstObject;
     if ([subObject isKindOfClass:[ZFCircle class]]) {
         for (NSInteger i = 0; i < self.circleArray.count; i++) {
-            [self addValueLabel:self.circleArray index:i colorIndex:0 valueArray:self.genericAxis.xLineValueArray];
+            [self addValueLabel:self.circleArray index:i colorIndex:0 valueArray:self.genericAxis.xLineValueArray valuePosition:(kChartValuePosition)[self.valuePositionArray.firstObject integerValue]];
+            
         }
         
     }else if ([subObject isKindOfClass:[NSArray class]]){
         for (NSInteger i = 0; i < self.circleArray.count; i++) {
             NSMutableArray * subArray = self.circleArray[i];
             for (NSInteger j = 0; j < subArray.count; j++) {
-                [self addValueLabel:subArray index:j colorIndex:i valueArray:self.genericAxis.xLineValueArray[i]];
+                [self addValueLabel:subArray index:j colorIndex:i valueArray:self.genericAxis.xLineValueArray[i] valuePosition:(kChartValuePosition)[self.valuePositionArray[i] integerValue]];
             }
         }
     }
@@ -171,7 +173,7 @@
  *  @param colorIndex  颜色下标
  *  @param valueArray  当前线段的value数组
  */
-- (void)addValueLabel:(NSMutableArray *)circleArray index:(NSInteger)index colorIndex:(NSInteger)colorIndex valueArray:(NSMutableArray *)valueArray{
+- (void)addValueLabel:(NSMutableArray *)circleArray index:(NSInteger)index colorIndex:(NSInteger)colorIndex valueArray:(NSMutableArray *)valueArray valuePosition:(kChartValuePosition)valuePosition{
     //当前的圆
     ZFCircle * circle = circleArray[index];
     
@@ -190,7 +192,7 @@
     [popoverLabel addTarget:self action:@selector(popoverAction:) forControlEvents:UIControlEventTouchUpInside];
     
     //_valueOnChartPosition为上下分布
-    if (_valuePosition == kChartValuePositionDefalut) {
+    if (valuePosition == kChartValuePositionDefalut) {
         //根据end_YPos判断label显示在圆环上面或下面
         CGFloat end_YPos;
         
@@ -212,12 +214,12 @@
         }
         
     //_valueOnChartPosition为圆环上方
-    }else if (_valuePosition == kChartValuePositionOnTop){
+    }else if (valuePosition == kChartValuePositionOnTop){
         popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnBelow;
         popoverLabel.center = CGPointMake(circle.center.x, circle.center.y - _valueCenterToCircleCenterPadding);
         
     //_valueOnChartPosition为圆环下方
-    }else if (_valuePosition == kChartValuePositionOnBelow){
+    }else if (valuePosition == kChartValuePositionOnBelow){
         popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnTop;
         popoverLabel.center = CGPointMake(circle.center.x, circle.center.y + _valueCenterToCircleCenterPadding);
     }
@@ -394,6 +396,12 @@
     
     if ([self.delegate respondsToSelector:@selector(lineWidthInLineChart:)]) {
         _lineWidth = [self.delegate lineWidthInLineChart:self];
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(valuePositionInLineChart:)]) {
+        self.valuePositionArray = [NSMutableArray arrayWithArray:[self.delegate valuePositionInLineChart:self]];
+    }else{
+        self.valuePositionArray = [NSMutableArray arrayWithArray:[[ZFMethod shareInstance] cachedValuePositionInLineChart:self.genericAxis.xLineValueArray]];
     }
     
     [self removeAllCircle];

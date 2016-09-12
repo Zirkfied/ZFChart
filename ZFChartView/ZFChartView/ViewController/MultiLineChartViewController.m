@@ -93,17 +93,21 @@
 //- (CGFloat)groupWidthInLineChart:(ZFLineChart *)lineChart{
 //    return 40.f;
 //}
-//
+
 //- (CGFloat)paddingForGroupsInLineChart:(ZFLineChart *)lineChart{
 //    return 30.f;
 //}
-//
+
 //- (CGFloat)circleRadiusInLineChart:(ZFLineChart *)lineChart{
 //    return 10.f;
 //}
-//
+
 //- (CGFloat)lineWidthInLineChart:(ZFLineChart *)lineChart{
 //    return 5.f;
+//}
+
+//- (NSArray *)valuePositionInLineChart:(ZFLineChart *)lineChart{
+//    return @[@(kChartValuePositionOnTop), @(kChartValuePositionDefalut), @(kChartValuePositionOnBelow)];
 //}
 
 - (void)lineChart:(ZFLineChart *)lineChart didSelectCircleAtLineIndex:(NSInteger)lineIndex circleIndex:(NSInteger)circleIndex{

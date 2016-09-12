@@ -80,11 +80,11 @@
 //- (CGFloat)groupWidthInWaveChart:(ZFWaveChart *)waveChart{
 //    return 50.f;
 //}
-//
+
 //- (CGFloat)paddingForGroupsInWaveChart:(ZFWaveChart *)waveChart{
 //    return 20.f;
 //}
-//
+
 - (UIColor *)pathColorInWaveChart:(ZFWaveChart *)waveChart{
     return ZFGrassGreen;
 }
