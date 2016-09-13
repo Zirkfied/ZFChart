@@ -15,7 +15,11 @@ typedef enum{
 
 @interface ZFWave : UIView
 
+/** path颜色 */
 @property (nonatomic, strong) UIColor * pathColor;
+/** path边线颜色 */
+@property (nonatomic, strong) UIColor * pathLineColor;
+/** 数值坐标的数组 */
 @property (nonatomic, strong) NSMutableArray * valuePointArray;
 /** 间距 */
 @property (nonatomic, assign) CGFloat padding;

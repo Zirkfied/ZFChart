@@ -34,6 +34,13 @@
 - (UIColor *)pathColorInWaveChart:(ZFWaveChart *)waveChart;
 
 /**
+ *  path边线颜色(若不设置，默认为ZFClear)
+ *
+ *  @return 返回UIColor
+ */
+- (UIColor *)pathLineColorInWaveChart:(ZFWaveChart *)waveChart;
+
+/**
  *  用于编写x轴valueLabel点击后需要执行后续代码
  *
  *  @param index     点击的x轴valueLabel的位置下标

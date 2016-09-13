@@ -19,6 +19,8 @@
 @property (nonatomic, strong) ZFWave * wave;
 /** 波浪path颜色 */
 @property (nonatomic, strong) UIColor * pathColor;
+/** 波浪path边线颜色 */
+@property (nonatomic, strong) UIColor * pathLineColor;
 /** 存储点的位置的数组 */
 @property (nonatomic, strong) NSMutableArray * valuePointArray;
 
@@ -30,6 +32,7 @@
     [super commonInit];
     
     _pathColor = ZFSkyBlue;
+    _pathLineColor = ZFClear;
     _valuePosition = kChartValuePositionDefalut;
     _valueTextColor = ZFBlack;
     _overMaxValueTextColor = ZFRed;
@@ -61,6 +64,7 @@
     self.wave = [[ZFWave alloc] initWithFrame:CGRectMake(self.genericAxis.axisStartXPos, self.genericAxis.yLineMaxValueYPos, self.genericAxis.xLineWidth, self.genericAxis.yLineMaxValueHeight)];
     self.wave.valuePointArray = _valuePointArray;
     self.wave.pathColor = _pathColor;
+    self.wave.pathLineColor = _pathLineColor;
     self.wave.padding = self.genericAxis.groupPadding;
     self.wave.wavePatternType = _wavePatternType;
     self.wave.isAnimated = self.isAnimated;
@@ -223,6 +227,10 @@
     
     if ([self.delegate respondsToSelector:@selector(pathColorInWaveChart:)]) {
         _pathColor = [self.delegate pathColorInWaveChart:self];
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(pathLineColorInWaveChart:)]) {
+        _pathLineColor = [self.delegate pathLineColorInWaveChart:self];
     }
     
     [self removeAllSubview];

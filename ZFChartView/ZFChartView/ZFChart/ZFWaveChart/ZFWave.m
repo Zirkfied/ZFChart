@@ -69,6 +69,7 @@
 - (CAShapeLayer *)shapeLayer{
     CAShapeLayer * shapeLayer = [CAShapeLayer layer];
     shapeLayer.anchorPoint = CGPointMake(1, 0.5);
+    shapeLayer.strokeColor = _pathLineColor.CGColor;
     shapeLayer.fillColor = _pathColor.CGColor;
     shapeLayer.path = [self fill].CGPath;
     shapeLayer.lineJoin = kCALineJoinRound;

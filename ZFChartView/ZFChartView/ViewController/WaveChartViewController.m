@@ -89,6 +89,10 @@
     return ZFGrassGreen;
 }
 
+//- (UIColor *)pathLineColorInWaveChart:(ZFWaveChart *)waveChart{
+//    return ZFBlack;
+//}
+
 - (void)waveChart:(ZFWaveChart *)waveChart popoverLabelAtIndex:(NSInteger)index{
     NSLog(@"第%ld个Label",(long)index);
 }
