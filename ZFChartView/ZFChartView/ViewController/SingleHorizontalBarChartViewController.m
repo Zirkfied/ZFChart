@@ -74,7 +74,7 @@
 //    return 50;
 //}
 
-//- (NSInteger)axisLineSectionCountInGenericChart:(ZFGenericChart *)chart{
+//- (NSUInteger)axisLineSectionCountInGenericChart:(ZFGenericChart *)chart{
 //    return 10;
 //}
 
@@ -96,15 +96,25 @@
     return ZFBlue;
 }
 
-- (void)horizontalBarChart:(ZFHorizontalBarChart *)barChart didSelectBarAtGroupIndex:(NSInteger)groupIndex barIndex:(NSInteger)barIndex{
+- (void)horizontalBarChart:(ZFHorizontalBarChart *)barChart didSelectBarAtGroupIndex:(NSInteger)groupIndex barIndex:(NSInteger)barIndex horizontalBar:(ZFHorizontalBar *)horizontalBar{
     //特殊说明，因传入数据是3个subArray(代表3个类型)，每个subArray存的是6个元素(代表每个类型存了1~6年级的数据),所以这里的groupIndex是第几个subArray(类型)
     //eg：三年级第0个元素为 groupIndex为0，barIndex为2
     NSLog(@"第%ld个颜色中的第%ld个",(long)groupIndex,(long)barIndex);
+    
+    //可在此处进行bar被点击后的自身部分属性设置
+//    horizontalBar.barColor = ZFYellow;
+//    horizontalBar.isAnimated = YES;
+//    horizontalBar.opacity = 0.5;
+//    [horizontalBar strokePath];
 }
 
-- (void)horizontalBarChart:(ZFHorizontalBarChart *)barChart didSelectPopoverLabelAtGroupIndex:(NSInteger)groupIndex labelIndex:(NSInteger)labelIndex{
+- (void)horizontalBarChart:(ZFHorizontalBarChart *)barChart didSelectPopoverLabelAtGroupIndex:(NSInteger)groupIndex labelIndex:(NSInteger)labelIndex popoverLabel:(ZFPopoverLabel *)popoverLabel{
     //理由同上
     NSLog(@"第%ld组========第%ld个",(long)groupIndex,(long)labelIndex);
+    
+    //可在此处进行popoverLabel被点击后的自身部分属性设置
+//    popoverLabel.textColor = ZFSkyBlue;
+//    [popoverLabel strokePath];
 }
 
 #pragma mark - 横竖屏适配(若需要同时横屏,竖屏适配，则添加以下代码，反之不需添加)

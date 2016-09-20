@@ -8,6 +8,7 @@
 
 #import "ZFGenericChart.h"
 #import "ZFConst.h"
+#import "ZFHorizontalBar.h"
 @class ZFHorizontalBarChart;
 
 /*********************  ZFHorizontalBarChartDelegate(ZFHorizontalBarChart协议方法)  *********************/
@@ -46,7 +47,7 @@
  *  @param groupIndex 点击的bar在第几组
  *  @param barIndex   点击的bar在该组的下标
  */
-- (void)horizontalBarChart:(ZFHorizontalBarChart *)barChart didSelectBarAtGroupIndex:(NSInteger)groupIndex barIndex:(NSInteger)barIndex;
+- (void)horizontalBarChart:(ZFHorizontalBarChart *)barChart didSelectBarAtGroupIndex:(NSInteger)groupIndex barIndex:(NSInteger)barIndex horizontalBar:(ZFHorizontalBar *)horizontalBar;
 
 /**
  *  用于编写点击y轴valueLabel后需要执行后续代码
@@ -54,7 +55,7 @@
  *  @param groupIndex 点击的label在第几组
  *  @param labelIndex 点击的label在该组的下标
  */
-- (void)horizontalBarChart:(ZFHorizontalBarChart *)barChart didSelectPopoverLabelAtGroupIndex:(NSInteger)groupIndex labelIndex:(NSInteger)labelIndex;
+- (void)horizontalBarChart:(ZFHorizontalBarChart *)barChart didSelectPopoverLabelAtGroupIndex:(NSInteger)groupIndex labelIndex:(NSInteger)labelIndex popoverLabel:(ZFPopoverLabel *)popoverLabel;
 
 @end
 

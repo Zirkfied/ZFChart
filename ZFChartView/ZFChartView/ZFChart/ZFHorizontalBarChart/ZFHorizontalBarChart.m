@@ -7,7 +7,6 @@
 //
 
 #import "ZFHorizontalBarChart.h"
-#import "ZFHorizontalBar.h"
 #import "ZFHorizontalAxis.h"
 #import "NSString+Zirkfied.h"
 #import "ZFMethod.h"
@@ -223,8 +222,8 @@
  *  @param sender bar
  */
 - (void)barAction:(ZFHorizontalBar *)sender{
-    if ([self.delegate respondsToSelector:@selector(horizontalBarChart:didSelectBarAtGroupIndex:barIndex:)]) {
-        [self.delegate horizontalBarChart:self didSelectBarAtGroupIndex:sender.groupAtIndex barIndex:sender.barIndex];
+    if ([self.delegate respondsToSelector:@selector(horizontalBarChart:didSelectBarAtGroupIndex:barIndex:horizontalBar:)]) {
+        [self.delegate horizontalBarChart:self didSelectBarAtGroupIndex:sender.groupAtIndex barIndex:sender.barIndex horizontalBar:sender];
     }
 }
 
@@ -234,8 +233,8 @@
  *  @param sender popoverLabel
  */
 - (void)popoverAction:(ZFPopoverLabel *)sender{
-    if ([self.delegate respondsToSelector:@selector(horizontalBarChart:didSelectPopoverLabelAtGroupIndex:labelIndex:)]) {
-        [self.delegate horizontalBarChart:self didSelectPopoverLabelAtGroupIndex:sender.groupIndex labelIndex:sender.labelIndex];
+    if ([self.delegate respondsToSelector:@selector(horizontalBarChart:didSelectPopoverLabelAtGroupIndex:labelIndex:popoverLabel:)]) {
+        [self.delegate horizontalBarChart:self didSelectPopoverLabelAtGroupIndex:sender.groupIndex labelIndex:sender.labelIndex popoverLabel:sender];
     }
 }
 

@@ -53,6 +53,8 @@
 //    self.barChart.backgroundColor = ZFPurple;
     [self.view addSubview:self.barChart];
     [self.barChart strokePath];
+    
+    self.barChart.tag = 100;
 }
 
 #pragma mark - ZFGenericChartDataSource
@@ -77,7 +79,7 @@
 //    return 50;
 //}
 
-- (NSInteger)axisLineSectionCountInGenericChart:(ZFGenericChart *)chart{
+- (NSUInteger)axisLineSectionCountInGenericChart:(ZFGenericChart *)chart{
     return 10;
 }
 
@@ -95,12 +97,22 @@
 //    return ZFBlue;
 //}
 
-- (void)barChart:(ZFBarChart *)barChart didSelectBarAtGroupIndex:(NSInteger)groupIndex barIndex:(NSInteger)barIndex{
+- (void)barChart:(ZFBarChart *)barChart didSelectBarAtGroupIndex:(NSInteger)groupIndex barIndex:(NSInteger)barIndex bar:(ZFBar *)bar{
     NSLog(@"第%ld组========第%ld个",(long)groupIndex,(long)barIndex);
+    
+    //可在此处进行bar被点击后的自身部分属性设置
+//    bar.barColor = ZFYellow;
+//    bar.isAnimated = YES;
+//    bar.opacity = 0.5;
+//    [bar strokePath];
 }
 
-- (void)barChart:(ZFBarChart *)barChart didSelectPopoverLabelAtGroupIndex:(NSInteger)groupIndex labelIndex:(NSInteger)labelIndex{
+- (void)barChart:(ZFBarChart *)barChart didSelectPopoverLabelAtGroupIndex:(NSInteger)groupIndex labelIndex:(NSInteger)labelIndex popoverLabel:(ZFPopoverLabel *)popoverLabel{
     NSLog(@"第%ld组========第%ld个",(long)groupIndex,(long)labelIndex);
+    
+    //可在此处进行popoverLabel被点击后的自身部分属性设置
+//    popoverLabel.textColor = ZFSkyBlue;
+//    [popoverLabel strokePath];
 }
 
 #pragma mark - 横竖屏适配(若需要同时横屏,竖屏适配，则添加以下代码，反之不需添加)

@@ -7,6 +7,7 @@
 //
 
 #import "ZFGenericChart.h"
+#import "ZFBar.h"
 #import "ZFPopoverLabel.h"
 #import "ZFConst.h"
 @class ZFBarChart;
@@ -47,7 +48,7 @@
  *  @param groupIndex 点击的bar在第几组
  *  @param barIndex   点击的bar在该组的下标
  */
-- (void)barChart:(ZFBarChart *)barChart didSelectBarAtGroupIndex:(NSInteger)groupIndex barIndex:(NSInteger)barIndex;
+- (void)barChart:(ZFBarChart *)barChart didSelectBarAtGroupIndex:(NSInteger)groupIndex barIndex:(NSInteger)barIndex bar:(ZFBar *)bar;
 
 /**
  *  用于编写点击x轴valueLabel后需要执行后续代码
@@ -55,7 +56,7 @@
  *  @param groupIndex 点击的label在第几组
  *  @param labelIndex 点击的label在该组的下标
  */
-- (void)barChart:(ZFBarChart *)barChart didSelectPopoverLabelAtGroupIndex:(NSInteger)groupIndex labelIndex:(NSInteger)labelIndex;
+- (void)barChart:(ZFBarChart *)barChart didSelectPopoverLabelAtGroupIndex:(NSInteger)groupIndex labelIndex:(NSInteger)labelIndex popoverLabel:(ZFPopoverLabel *)popoverLabel;
 
 @end
 
