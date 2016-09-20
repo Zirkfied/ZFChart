@@ -29,7 +29,7 @@
 /** 百分比小数 */
 @property (nonatomic, assign) CGFloat percent;
 /** self所在第几组数据 */
-@property (nonatomic, assign) NSInteger groupAtIndex;
+@property (nonatomic, assign) NSInteger groupIndex;
 /** self在该组数据的下标位置 */
 @property (nonatomic, assign) NSInteger barIndex;
 

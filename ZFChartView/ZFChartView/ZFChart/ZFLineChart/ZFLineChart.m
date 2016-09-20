@@ -90,7 +90,7 @@
             CGFloat center_yPos = self.genericAxis.axisStartYPos - height;
             
             ZFCircle * circle = [[ZFCircle alloc] initWithFrame:CGRectMake(0, 0, _radius * 2, _radius * 2)];
-            circle.lineAtIndex = 0;
+            circle.lineIndex = 0;
             circle.circleIndex = i;
             circle.center = CGPointMake(center_xPos, center_yPos);
             circle.circleColor = isOverrun ? _overMaxValueCircleColor : _colorArray.firstObject;
@@ -124,7 +124,7 @@
                     CGFloat center_yPos = self.genericAxis.axisStartYPos - height;
                     
                     ZFCircle * circle = [[ZFCircle alloc] initWithFrame:CGRectMake(0, 0, _radius * 2, _radius * 2)];
-                    circle.lineAtIndex = lineIndex;
+                    circle.lineIndex = lineIndex;
                     circle.circleIndex = circleIndex;
                     circle.center = CGPointMake(center_xPos, center_yPos);
                     circle.circleColor = isOverrun ? _overMaxValueCircleColor : _colorArray[lineIndex];
@@ -267,7 +267,7 @@
  */
 - (void)circleAction:(ZFCircle *)sender{
     if ([self.delegate respondsToSelector:@selector(lineChart:didSelectCircleAtLineIndex:circleIndex:)]) {
-        [self.delegate lineChart:self didSelectCircleAtLineIndex:sender.lineAtIndex circleIndex:sender.circleIndex];
+        [self.delegate lineChart:self didSelectCircleAtLineIndex:sender.lineIndex circleIndex:sender.circleIndex];
     }
 }
 

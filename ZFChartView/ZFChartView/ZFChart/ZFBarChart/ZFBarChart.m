@@ -19,6 +19,8 @@
 @property (nonatomic, strong) NSMutableArray * barArray;
 /** 颜色数组 */
 @property (nonatomic, strong) NSMutableArray * colorArray;
+/** 存储popoverLaber数组 */
+@property (nonatomic, strong) NSMutableArray * popoverLaberArray;
 /** 存储value文本颜色的数组 */
 @property (nonatomic, strong) NSMutableArray * valueTextColorArray;
 /** bar宽度 */
@@ -37,6 +39,13 @@
         _barArray = [NSMutableArray array];
     }
     return _barArray;
+}
+
+- (NSMutableArray *)popoverLaberArray{
+    if (!_popoverLaberArray) {
+        _popoverLaberArray = [NSMutableArray array];
+    }
+    return _popoverLaberArray;
 }
 
 - (NSMutableArray *)valueTextColorArray{
@@ -94,7 +103,7 @@
             CGFloat height = self.genericAxis.yLineMaxValueHeight;
             
             ZFBar * bar = [[ZFBar alloc] initWithFrame:CGRectMake(xPos, yPos, width, height)];
-            bar.groupAtIndex = 0;
+            bar.groupIndex = 0;
             bar.barIndex = i;
             //当前数值超过y轴显示上限时，柱状改为红色
             if ([self.genericAxis.xLineValueArray[i] floatValue] / self.genericAxis.yLineMaxValue <= 1) {
@@ -131,7 +140,7 @@
                 CGFloat height = self.genericAxis.yLineMaxValueHeight;
                 
                 ZFBar * bar = [[ZFBar alloc] initWithFrame:CGRectMake(xPos, yPos, width, height)];
-                bar.groupAtIndex = groupIndex;
+                bar.groupIndex = groupIndex;
                 bar.barIndex = barIndex;
                 //当前数值超过y轴显示上限时，柱状改为红色
                 if ([valueArray[groupIndex][barIndex] floatValue] / self.genericAxis.yLineMaxValue <= 1) {
@@ -180,6 +189,7 @@
             popoverLabel.isAnimated = self.isAnimated;
             popoverLabel.shadowColor = self.valueLabelShadowColor;
             [popoverLabel strokePath];
+            [self.popoverLaberArray addObject:popoverLabel];
             [self.genericAxis addSubview:popoverLabel];
             [popoverLabel addTarget:self action:@selector(popoverAction:) forControlEvents:UIControlEventTouchUpInside];
         }
@@ -207,6 +217,7 @@
                 popoverLabel.labelIndex = barIndex;
                 popoverLabel.shadowColor = self.valueLabelShadowColor;
                 [popoverLabel strokePath];
+                [self.popoverLaberArray addObject:popoverLabel];
                 [self.genericAxis addSubview:popoverLabel];
                 [popoverLabel addTarget:self action:@selector(popoverAction:) forControlEvents:UIControlEventTouchUpInside];
             }
@@ -223,7 +234,9 @@
  */
 - (void)barAction:(ZFBar *)sender{
     if ([self.delegate respondsToSelector:@selector(barChart:didSelectBarAtGroupIndex:barIndex:bar:)]) {
-        [self.delegate barChart:self didSelectBarAtGroupIndex:sender.groupAtIndex barIndex:sender.barIndex bar:sender];
+        [self.delegate barChart:self didSelectBarAtGroupIndex:sender.groupIndex barIndex:sender.barIndex bar:sender];
+        
+        [self resetBar:sender];
     }
 }
 
@@ -235,6 +248,38 @@
 - (void)popoverAction:(ZFPopoverLabel *)sender{
     if ([self.delegate respondsToSelector:@selector(barChart:didSelectPopoverLabelAtGroupIndex:labelIndex:popoverLabel:)]) {
         [self.delegate barChart:self didSelectPopoverLabelAtGroupIndex:sender.groupIndex labelIndex:sender.labelIndex popoverLabel:sender];
+        
+        [self resetPopoverLabel:sender];
+    }
+}
+
+#pragma mark - 重置Bar原始设置
+
+- (void)resetBar:(ZFBar *)sender{
+    for (ZFBar * bar in self.barArray) {
+        if (bar != sender) {
+            bar.barColor = _colorArray[bar.groupIndex];
+            bar.isShadow = _isShadow;
+            bar.isAnimated = self.isAnimated;
+            bar.shadowColor = self.shadowColor;
+            bar.opacity = self.opacity;
+            [bar strokePath];
+        }
+    }
+}
+
+#pragma mark - 重置PopoverLabel原始设置
+
+- (void)resetPopoverLabel:(ZFPopoverLabel *)sender{
+    for (ZFPopoverLabel * popoverLabel in self.popoverLaberArray) {
+        if (popoverLabel != sender) {
+            popoverLabel.font = [UIFont systemFontOfSize:self.valueOnChartFontSize];
+            popoverLabel.textColor = (UIColor *)self.valueTextColorArray[popoverLabel.groupIndex];
+            popoverLabel.shadowColor = self.valueLabelShadowColor;
+            popoverLabel.isShadow = self.isShadowForValueLabel;
+            popoverLabel.isAnimated = sender.isAnimated;
+            [popoverLabel strokePath];
+        }
     }
 }
 
@@ -257,6 +302,7 @@
  *  清除柱状条上的Label
  */
 - (void)removeLabelOnChart{
+    [self.popoverLaberArray removeAllObjects];
     NSArray * subviews = [NSArray arrayWithArray:self.genericAxis.subviews];
     for (UIView * view in subviews) {
         if ([view isKindOfClass:[ZFPopoverLabel class]]) {

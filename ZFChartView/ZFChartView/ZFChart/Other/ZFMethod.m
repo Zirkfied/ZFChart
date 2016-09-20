@@ -77,6 +77,17 @@ static ZFMethod * instance = nil;
 }
 
 /**
+ *  存储雷达图半径延伸长度，默认为25.f
+ */
+- (NSMutableArray *)cachedRadiusExtendLengthInRadarChart:(NSArray *)array{
+    NSMutableArray * newArray = [NSMutableArray array];
+    for (NSInteger i = 0; i < array.count; i++) {
+        [newArray addObject:@(ZFRadarChartRadiusExtendLength)];
+    }
+    return newArray;
+}
+
+/**
  *  获取数据源最大值，并赋值给y轴显示的最大值
  */
 - (CGFloat)cachedYLineMaxValue:(NSMutableArray *)array{

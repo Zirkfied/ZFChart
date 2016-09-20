@@ -15,7 +15,7 @@
 /** 是否带阴影效果(默认为YES) */
 @property (nonatomic, assign) BOOL isShadow;
 /** self所在第几条线 */
-@property (nonatomic, assign) NSInteger lineAtIndex;
+@property (nonatomic, assign) NSInteger lineIndex;
 /** self在该线的下标位置 */
 @property (nonatomic, assign) NSInteger circleIndex;
 /** 是否带动画显示(默认为YES，带动画) */

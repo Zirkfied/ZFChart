@@ -42,7 +42,7 @@
         NSDictionary * point = _valuePointArray[i];
         [bezier addLineToPoint:CGPointMake([point[@"xPos"] floatValue], self.frame.size.height)];
     }
-
+    
     [bezier addLineToPoint:CGPointMake(self.frame.size.width, self.frame.size.height)];
     [bezier addLineToPoint:CGPointMake(self.frame.size.width, self.frame.size.height)];
     [bezier closePath];

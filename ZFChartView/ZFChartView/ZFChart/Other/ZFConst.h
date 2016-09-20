@@ -105,6 +105,11 @@ extern CGFloat const ZFAxisLineHorizontalEndRatio;
 extern CGFloat const ZFLineChartCircleRadius;
 
 /**
+ *  雷达图半径延伸长度
+ */
+extern CGFloat const ZFRadarChartRadiusExtendLength;
+
+/**
  *  饼图百分比label Tag值
  */
 extern NSInteger const ZFPieChartPercentLabelTag;

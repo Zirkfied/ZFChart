@@ -37,7 +37,7 @@
 /** x轴开始Y位置(从数学坐标轴(0.0)(左下角)开始) */
 @property (nonatomic, assign, readonly) CGFloat xLineStartYPos;
 /** x轴结束Y位置(从数学坐标轴(0.0)(左下角)开始) */
-@property (nonatomic, assign) CGFloat xLineEndYPos;
+@property (nonatomic, assign, readonly) CGFloat xLineEndYPos;
 /** 计算x轴分段宽度的平均值 */
 @property (nonatomic, assign, readonly) CGFloat xLineSectionWidthAverage;
 

@@ -19,6 +19,7 @@ CGFloat const ZFAxisLineStartRatio = 0.1f;
 CGFloat const ZFAxisLineVerticalEndRatio = 0.85f;
 CGFloat const ZFAxisLineHorizontalEndRatio = 0.85f;
 CGFloat const ZFLineChartCircleRadius = 5.f;
+CGFloat const ZFRadarChartRadiusExtendLength = 25.f;
 NSInteger const ZFAxisLineValueLabelTag = 100;
 NSInteger const ZFPieChartPercentLabelTag = 100;
 

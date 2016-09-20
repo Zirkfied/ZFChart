@@ -17,10 +17,6 @@
 @property (nonatomic, strong) ZFGenericAxis * genericAxis;
 /** 波浪path */
 @property (nonatomic, strong) ZFWave * wave;
-/** 波浪path颜色 */
-@property (nonatomic, strong) UIColor * pathColor;
-/** 波浪path边线颜色 */
-@property (nonatomic, strong) UIColor * pathLineColor;
 /** 存储点的位置的数组 */
 @property (nonatomic, strong) NSMutableArray * valuePointArray;
 
@@ -123,12 +119,12 @@
                 popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue], [currentDict[@"yPos"] floatValue] - (rect.size.height + 10) * 0.5 - _valueLabelToWaveLinePadding);
             }
             
-        //_valueOnChartPosition为图表上方
+            //_valueOnChartPosition为图表上方
         }else if (_valuePosition == kChartValuePositionOnTop){
             popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnBelow;
             popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue], [currentDict[@"yPos"] floatValue] - (rect.size.height + 10) * 0.5 - _valueLabelToWaveLinePadding);
-        
-        //_valueOnChartPosition为图表下方
+            
+            //_valueOnChartPosition为图表下方
         }else if (_valuePosition == kChartValuePositionOnBelow){
             popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnTop;
             popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue], [currentDict[@"yPos"] floatValue] + (rect.size.height + 10) * 0.5 + _valueLabelToWaveLinePadding);
@@ -223,14 +219,6 @@
     
     if ([self.delegate respondsToSelector:@selector(paddingForGroupsInWaveChart:)]) {
         self.genericAxis.groupPadding = [self.delegate paddingForGroupsInWaveChart:self];
-    }
-    
-    if ([self.delegate respondsToSelector:@selector(pathColorInWaveChart:)]) {
-        _pathColor = [self.delegate pathColorInWaveChart:self];
-    }
-    
-    if ([self.delegate respondsToSelector:@selector(pathLineColorInWaveChart:)]) {
-        _pathLineColor = [self.delegate pathLineColorInWaveChart:self];
     }
     
     [self removeAllSubview];
