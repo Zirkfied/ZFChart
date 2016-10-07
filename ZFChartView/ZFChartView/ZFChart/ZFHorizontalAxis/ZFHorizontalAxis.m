@@ -29,22 +29,14 @@
 
 @implementation ZFHorizontalAxis
 
-- (NSMutableArray *)sectionArray{
-    if (!_sectionArray) {
-        _sectionArray = [NSMutableArray array];
-    }
-    
-    return _sectionArray;
-}
-
 /**
  *  初始化默认变量
  */
 - (void)commonInit{
     _xLineMinValue = 0;
     _xLineSectionCount = 5;
-    _yLineNameFontSize = 10.f;
-    _xLineValueFontSize = 10.f;
+    _yLineNameFont = [UIFont systemFontOfSize:10.f];
+    _xLineValueFont = [UIFont systemFontOfSize:10.f];
     _animationDuration = 1.f;
     _groupHeight = ZFAxisLineItemWidth;
     _groupPadding = ZFAxisLinePaddingForGroupsLength;
@@ -130,11 +122,11 @@
             
             //label的中心点
             CGPoint label_center = CGPointMake(center_xPos, center_yPos);
-            CGRect rect = [self.yLineNameArray[i] stringWidthRectWithSize:CGSizeMake(width, height + _groupPadding * 0.5) fontOfSize:_yLineNameFontSize isBold:NO];
+            CGRect rect = [self.yLineNameArray[i] stringWidthRectWithSize:CGSizeMake(width, height + _groupPadding * 0.5) font:_yLineNameFont];
             ZFLabel * label = [[ZFLabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
             label.text = self.yLineNameArray[i];
             label.textColor = _yLineNameColor;
-            label.font = [UIFont systemFontOfSize:_yLineNameFontSize];
+            label.font = _yLineNameFont;
             label.center = label_center;
             [self.yAxisLine addSubview:label];
         }
@@ -160,16 +152,16 @@
         //平均值
         float valueAverage = (_xLineMaxValue - _xLineMinValue) / _xLineSectionCount;
         
-        if (_axisLineValueType == kAxisLineValueTypeInteger) {
+        if (_valueType == kValueTypeInteger) {
             label.text = [NSString stringWithFormat:@"%.0f", valueAverage * i + _xLineMinValue];
             
-        }else if (_axisLineValueType == kAxisLineValueTypeDecimal){
+        }else if (_valueType == kValueTypeDecimal){
             label.text = [NSString stringWithFormat:@"%@", @(valueAverage * i + _xLineMinValue)];
             
         }
         
         label.textColor = _xLineValueColor;
-        label.font = [UIFont systemFontOfSize:_xLineValueFontSize];
+        label.font = _xLineValueFont;
         label.center = CGPointMake(center_xPos, center_yPos);
         label.tag = ZFAxisLineValueLabelTag + i;
         [self.xAxisLine addSubview:label];
@@ -405,6 +397,16 @@
  */
 - (CGFloat)yLineHeight{
     return self.yAxisLine.yLineHeight;
+}
+
+#pragma mark - 懒加载
+
+- (NSMutableArray *)sectionArray{
+    if (!_sectionArray) {
+        _sectionArray = [NSMutableArray array];
+    }
+    
+    return _sectionArray;
 }
 
 @end

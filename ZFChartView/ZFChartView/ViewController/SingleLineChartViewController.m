@@ -20,7 +20,7 @@
 @implementation SingleLineChartViewController
 
 - (void)setUp{
-    if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight){
+    if ([[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeLeft || [[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeRight){
         //首次进入控制器为横屏时
         _height = SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT * 0.5;
         
@@ -44,6 +44,7 @@
 //    self.lineChart.isAnimated = NO;
 //    self.lineChart.valueLabelPattern = kPopoverLabelPatternBlank;
     self.lineChart.isShowSeparate = YES;
+//    self.lineChart.isShowAxisLineValue = NO;
 //    lineChart.valueCenterToCircleCenterPadding = 0;
     [self.view addSubview:self.lineChart];
     [self.lineChart strokePath];
@@ -71,7 +72,7 @@
     return -200;
 }
 
-- (NSInteger)axisLineSectionCountInGenericChart:(ZFGenericChart *)chart{
+- (NSUInteger)axisLineSectionCountInGenericChart:(ZFGenericChart *)chart{
     return 10;
 }
 
@@ -97,12 +98,25 @@
 //    return @[@(kChartValuePositionOnTop)];
 //}
 
-- (void)lineChart:(ZFLineChart *)lineChart didSelectCircleAtLineIndex:(NSInteger)lineIndex circleIndex:(NSInteger)circleIndex{
+- (void)lineChart:(ZFLineChart *)lineChart didSelectCircleAtLineIndex:(NSInteger)lineIndex circleIndex:(NSInteger)circleIndex circle:(ZFCircle *)circle popoverLabel:(ZFPopoverLabel *)popoverLabel{
     NSLog(@"第%ld个", (long)circleIndex);
+    
+    //可在此处进行circle被点击后的自身部分属性设置,可修改的属性查看ZFCircle.h
+//    circle.circleColor = ZFRed;
+//    circle.isAnimated = YES;
+//    circle.opacity = 0.5;
+//    [circle strokePath];
+    
+    //可将isShowAxisLineValue设置为NO，然后执行下句代码进行点击才显示数值
+//    popoverLabel.hidden = NO;
 }
 
-- (void)lineChart:(ZFLineChart *)lineChart didSelectPopoverLabelAtLineIndex:(NSInteger)lineIndex circleIndex:(NSInteger)circleIndex{
+- (void)lineChart:(ZFLineChart *)lineChart didSelectPopoverLabelAtLineIndex:(NSInteger)lineIndex circleIndex:(NSInteger)circleIndex popoverLabel:(ZFPopoverLabel *)popoverLabel{
     NSLog(@"第%ld个" ,(long)circleIndex);
+    
+    //可在此处进行popoverLabel被点击后的自身部分属性设置
+//    popoverLabel.textColor = ZFGold;
+//    [popoverLabel strokePath];
 }
 
 #pragma mark - 横竖屏适配(若需要同时横屏,竖屏适配，则添加以下代码，反之不需添加)
@@ -112,7 +126,7 @@
  */
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator>)coordinator NS_AVAILABLE_IOS(8_0){
     
-    if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight){
+    if ([[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeLeft || [[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeRight){
         self.lineChart.frame = CGRectMake(0, 0, size.width, size.height - NAVIGATIONBAR_HEIGHT * 0.5);
     }else{
         self.lineChart.frame = CGRectMake(0, 0, size.width, size.height + NAVIGATIONBAR_HEIGHT * 0.5);

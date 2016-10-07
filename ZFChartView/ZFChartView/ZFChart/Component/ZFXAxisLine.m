@@ -169,6 +169,8 @@
     return fillAnimation;
 }
 
+#pragma mark - 清除控件
+
 /**
  *  清除之前所有subLayers
  */

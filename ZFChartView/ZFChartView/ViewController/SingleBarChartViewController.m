@@ -20,7 +20,7 @@
 @implementation SingleBarChartViewController
 
 - (void)setUp{
-    if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight){
+    if ([[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeLeft || [[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeRight){
         //首次进入控制器为横屏时
         _height = SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT * 0.5;
         
@@ -41,7 +41,7 @@
     self.barChart.unit = @"人";
     self.barChart.isAnimated = NO;
 //    self.barChart.isResetAxisLineMinValue = YES;
-//    self.barChart.isResetAxisLineMaxValue = YES;
+    self.barChart.isResetAxisLineMaxValue = YES;
 //    self.barChart.isShowAxisLineValue = NO;
 //    self.barChart.valueLabelPattern = kPopoverLabelPatternBlank;
     self.barChart.isShowSeparate = YES;
@@ -71,9 +71,9 @@
     return @[ZFMagenta];
 }
 
-//- (CGFloat)axisLineMaxValueInGenericChart:(ZFGenericChart *)chart{
-//    return 500;
-//}
+- (CGFloat)axisLineMaxValueInGenericChart:(ZFGenericChart *)chart{
+    return 500;
+}
 
 //- (CGFloat)axisLineMinValueInGenericChart:(ZFGenericChart *)chart{
 //    return 50;
@@ -97,14 +97,17 @@
 //    return ZFBlue;
 //}
 
-- (void)barChart:(ZFBarChart *)barChart didSelectBarAtGroupIndex:(NSInteger)groupIndex barIndex:(NSInteger)barIndex bar:(ZFBar *)bar{
+- (void)barChart:(ZFBarChart *)barChart didSelectBarAtGroupIndex:(NSInteger)groupIndex barIndex:(NSInteger)barIndex bar:(ZFBar *)bar popoverLabel:(ZFPopoverLabel *)popoverLabel{
     NSLog(@"第%ld组========第%ld个",(long)groupIndex,(long)barIndex);
     
-    //可在此处进行bar被点击后的自身部分属性设置
-//    bar.barColor = ZFYellow;
-//    bar.isAnimated = YES;
+    //可在此处进行bar被点击后的自身部分属性设置,可修改的属性查看ZFBar.h
+    bar.barColor = ZFGold;
+    bar.isAnimated = YES;
 //    bar.opacity = 0.5;
-//    [bar strokePath];
+    [bar strokePath];
+    
+    //可将isShowAxisLineValue设置为NO，然后执行下句代码进行点击才显示数值
+//    popoverLabel.hidden = NO;
 }
 
 - (void)barChart:(ZFBarChart *)barChart didSelectPopoverLabelAtGroupIndex:(NSInteger)groupIndex labelIndex:(NSInteger)labelIndex popoverLabel:(ZFPopoverLabel *)popoverLabel{
@@ -122,7 +125,7 @@
  */
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator>)coordinator{
     
-    if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight){
+    if ([[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeLeft || [[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeRight){
         self.barChart.frame = CGRectMake(0, 0, size.width, size.height - NAVIGATIONBAR_HEIGHT * 0.5);
     }else{
         self.barChart.frame = CGRectMake(0, 0, size.width, size.height + NAVIGATIONBAR_HEIGHT * 0.5);

@@ -20,7 +20,7 @@
 @implementation WaveChartViewController
 
 - (void)setUp{
-    if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight){
+    if ([[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeLeft || [[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeRight){
         //首次进入控制器为横屏时
         _height = SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT * 0.5;
         
@@ -39,16 +39,18 @@
     self.waveChart.delegate = self;
     self.waveChart.topicLabel.text = @"xx小学各年级人数";
     self.waveChart.unit = @"人";
-//    self.waveChart.isShowSeparate = YES;
+    //    self.waveChart.isShowSeparate = YES;
+    self.waveChart.pathColor = ZFGrassGreen;
+//    self.waveChart.pathLineColor = ZFBlack;
     self.waveChart.topicLabel.textColor = ZFPurple;
-//    self.waveChart.isAnimated = NO;
-//    self.waveChart.isResetAxisLineMinValue = YES;
-//    self.waveChart.isShowAxisLineValue = NO;
-//    self.waveChart.isShadowForValueLabel = NO;
-//    self.waveChart.valuePosition = kChartValuePositionOnBelow;
-//    self.waveChart.valueLabelPattern = kPopoverLabelPatternBlank;
-//    self.waveChart.wavePatternType = kWavePatternTypeForSharp;
-//    self.waveChart.valueLabelToWaveLinePadding = 20.f;
+    //    self.waveChart.isAnimated = NO;
+    //    self.waveChart.isResetAxisLineMinValue = YES;
+    //    self.waveChart.isShowAxisLineValue = NO;
+    //    self.waveChart.isShadowForValueLabel = NO;
+    //    self.waveChart.valuePosition = kChartValuePositionOnBelow;
+    //    self.waveChart.valueLabelPattern = kPopoverLabelPatternBlank;
+    //    self.waveChart.wavePatternType = kWavePatternTypeForSharp;
+    //    self.waveChart.valueLabelToWaveLinePadding = 20.f;
     [self.waveChart strokePath];
     [self.view addSubview:self.waveChart];
 }
@@ -71,7 +73,7 @@
 //    return 100;
 //}
 
-- (NSInteger)axisLineSectionCountInGenericChart:(ZFGenericChart *)chart{
+- (NSUInteger)axisLineSectionCountInGenericChart:(ZFGenericChart *)chart{
     return 10;
 }
 
@@ -85,16 +87,12 @@
 //    return 20.f;
 //}
 
-- (UIColor *)pathColorInWaveChart:(ZFWaveChart *)waveChart{
-    return ZFGrassGreen;
-}
-
-//- (UIColor *)pathLineColorInWaveChart:(ZFWaveChart *)waveChart{
-//    return ZFBlack;
-//}
-
-- (void)waveChart:(ZFWaveChart *)waveChart popoverLabelAtIndex:(NSInteger)index{
+- (void)waveChart:(ZFWaveChart *)waveChart popoverLabelAtIndex:(NSInteger)index popoverLabel:(ZFPopoverLabel *)popoverLabel{
     NSLog(@"第%ld个Label",(long)index);
+    
+    //可在此处进行popoverLabel被点击后的自身部分属性设置
+//    popoverLabel.textColor = ZFGold;
+//    [popoverLabel strokePath];
 }
 
 #pragma mark - 横竖屏适配(若需要同时横屏,竖屏适配，则添加以下代码，反之不需添加)
@@ -104,7 +102,7 @@
  */
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator>)coordinator NS_AVAILABLE_IOS(8_0){
     
-    if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight){
+    if ([[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeLeft || [[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeRight){
         self.waveChart.frame = CGRectMake(0, 0, size.width, size.height - NAVIGATIONBAR_HEIGHT * 0.5);
     }else{
         self.waveChart.frame = CGRectMake(0, 0, size.width, size.height + NAVIGATIONBAR_HEIGHT * 0.5);

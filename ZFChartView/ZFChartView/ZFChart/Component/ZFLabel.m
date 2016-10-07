@@ -17,6 +17,17 @@
 
 @implementation ZFLabel
 
+/**
+ *  初始化默认变量
+ */
+- (void)commonInit{
+    self.numberOfLines = 0;
+    self.textAlignment = NSTextAlignmentCenter;
+    self.font = [UIFont systemFontOfSize:10.f];
+    _animationDuration = 1.f;
+    _isFadeInAnimation = NO;
+}
+
 - (instancetype)init{
     self = [super init];
     if (self) {
@@ -33,17 +44,6 @@
     }
     
     return self;
-}
-
-/**
- *  初始化默认变量
- */
-- (void)commonInit{
-    self.numberOfLines = 0;
-    self.textAlignment = NSTextAlignmentCenter;
-    self.font = [UIFont systemFontOfSize:10.f];
-    _animationDuration = 1.f;
-    _isFadeInAnimation = NO;
 }
 
 /**

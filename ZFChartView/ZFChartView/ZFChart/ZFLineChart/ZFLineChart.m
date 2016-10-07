@@ -19,6 +19,8 @@
 @property (nonatomic, strong) ZFGenericAxis * genericAxis;
 /** 存储圆的数组 */
 @property (nonatomic, strong) NSMutableArray * circleArray;
+/** 存储popoverLaber数组 */
+@property (nonatomic, strong) NSMutableArray * popoverLaberArray;
 /** 颜色数组 */
 @property (nonatomic, strong) NSMutableArray * colorArray;
 /** 存储每条线value位置的数组 */
@@ -32,13 +34,9 @@
 
 @implementation ZFLineChart
 
-- (NSMutableArray *)circleArray{
-    if (!_circleArray) {
-        _circleArray = [NSMutableArray array];
-    }
-    return _circleArray;
-}
-
+/**
+ *  初始化变量
+ */
 - (void)commonInit{
     [super commonInit];
     
@@ -93,6 +91,7 @@
             circle.lineIndex = 0;
             circle.circleIndex = i;
             circle.center = CGPointMake(center_xPos, center_yPos);
+            circle.isOverrun = isOverrun;
             circle.circleColor = isOverrun ? _overMaxValueCircleColor : _colorArray.firstObject;
             circle.isShadow = _isShadow;
             circle.isAnimated = self.isAnimated;
@@ -127,6 +126,7 @@
                     circle.lineIndex = lineIndex;
                     circle.circleIndex = circleIndex;
                     circle.center = CGPointMake(center_xPos, center_yPos);
+                    circle.isOverrun = isOverrun;
                     circle.circleColor = isOverrun ? _overMaxValueCircleColor : _colorArray[lineIndex];
                     circle.isShadow = _isShadow;
                     circle.isAnimated = self.isAnimated;
@@ -177,10 +177,10 @@
     //当前的圆
     ZFCircle * circle = circleArray[index];
     
-    CGRect rect = [valueArray[index] stringWidthRectWithSize:CGSizeMake(45, 30) fontOfSize:self.valueOnChartFontSize isBold:NO];
+    CGRect rect = [valueArray[index] stringWidthRectWithSize:CGSizeMake(45, 30) font:self.valueOnChartFont];
     ZFPopoverLabel * popoverLabel = [[ZFPopoverLabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width + 10, rect.size.height + 10) direction:kAxisDirectionVertical];
     popoverLabel.text = valueArray[index];
-    popoverLabel.font = [UIFont systemFontOfSize:self.valueOnChartFontSize];
+    popoverLabel.font = self.valueOnChartFont;
     popoverLabel.textColor = _colorArray[colorIndex];
     popoverLabel.pattern = self.valueLabelPattern;
     popoverLabel.isShadow = self.isShadowForValueLabel;
@@ -188,7 +188,9 @@
     popoverLabel.groupIndex = colorIndex;
     popoverLabel.labelIndex = index;
     popoverLabel.shadowColor = self.valueLabelShadowColor;
+    popoverLabel.hidden = self.isShowAxisLineValue ? NO : YES;
     [self.genericAxis addSubview:popoverLabel];
+    [self.popoverLaberArray addObject:popoverLabel];
     [popoverLabel addTarget:self action:@selector(popoverAction:) forControlEvents:UIControlEventTouchUpInside];
     
     //_valueOnChartPosition为上下分布
@@ -266,8 +268,19 @@
  *  @param sender bar
  */
 - (void)circleAction:(ZFCircle *)sender{
-    if ([self.delegate respondsToSelector:@selector(lineChart:didSelectCircleAtLineIndex:circleIndex:)]) {
-        [self.delegate lineChart:self didSelectCircleAtLineIndex:sender.lineIndex circleIndex:sender.circleIndex];
+    if ([self.delegate respondsToSelector:@selector(lineChart:didSelectCircleAtLineIndex:circleIndex:circle:popoverLabel:)]) {
+        
+        ZFPopoverLabel * popoverLabel = nil;
+        id subObject = self.genericAxis.xLineValueArray.firstObject;
+        if ([subObject isKindOfClass:[NSString class]]) {
+            popoverLabel = self.popoverLaberArray[sender.circleIndex];
+        }else if ([subObject isKindOfClass:[NSArray class]]){
+            popoverLabel = self.popoverLaberArray[sender.lineIndex * [subObject count] + sender.circleIndex];
+        }
+        
+        [self.delegate lineChart:self didSelectCircleAtLineIndex:sender.lineIndex circleIndex:sender.circleIndex circle:sender popoverLabel:popoverLabel];
+        
+        [self resetCircle:sender popoverLabel:popoverLabel];
     }
 }
 
@@ -277,8 +290,57 @@
  *  @param sender popoverLabel
  */
 - (void)popoverAction:(ZFPopoverLabel *)sender{
-    if ([self.delegate respondsToSelector:@selector(lineChart:didSelectPopoverLabelAtLineIndex:circleIndex:)]) {
-        [self.delegate lineChart:self didSelectPopoverLabelAtLineIndex:sender.groupIndex circleIndex:sender.labelIndex];
+    if ([self.delegate respondsToSelector:@selector(lineChart:didSelectPopoverLabelAtLineIndex:circleIndex:popoverLabel:)]) {
+        [self.delegate lineChart:self didSelectPopoverLabelAtLineIndex:sender.groupIndex circleIndex:sender.labelIndex popoverLabel:sender];
+        
+        [self resetPopoverLabel:sender];
+    }
+}
+
+#pragma mark - 重置Bar原始设置
+
+- (void)resetCircle:(ZFCircle *)sender popoverLabel:(ZFPopoverLabel *)label{
+    //判断数组
+    NSArray * tempArray = nil;
+    id subObject = self.circleArray.firstObject;
+    if ([subObject isKindOfClass:[ZFCircle class]]) {
+        tempArray = [NSMutableArray arrayWithArray:self.circleArray];
+    }else if ([subObject isKindOfClass:[NSArray class]]){
+        tempArray = [NSMutableArray arrayWithArray:(NSArray *)subObject];
+    }
+    
+    for (ZFCircle * circle in tempArray) {
+        if (circle != sender) {
+            circle.circleColor = circle.isOverrun ? _overMaxValueCircleColor : _colorArray[circle.lineIndex];
+            circle.isShadow = _isShadow;
+            circle.isAnimated = self.isAnimated;
+            circle.shadowColor = self.shadowColor;
+            circle.opacity = self.opacity;
+            [circle strokePath];
+        }
+    }
+    
+    if (!self.isShowAxisLineValue) {
+        for (ZFPopoverLabel * popoverLabel in self.popoverLaberArray) {
+            if (popoverLabel != label) {
+                popoverLabel.hidden = YES;
+            }
+        }
+    }
+}
+
+#pragma mark - 重置PopoverLabel原始设置
+
+- (void)resetPopoverLabel:(ZFPopoverLabel *)sender{
+    for (ZFPopoverLabel * popoverLabel in self.popoverLaberArray) {
+        if (popoverLabel != sender) {
+            popoverLabel.font = self.valueOnChartFont;
+            popoverLabel.textColor = (UIColor *)self.colorArray[popoverLabel.groupIndex];
+            popoverLabel.shadowColor = self.valueLabelShadowColor;
+            popoverLabel.isShadow = self.isShadowForValueLabel;
+            popoverLabel.isAnimated = sender.isAnimated;
+            [popoverLabel strokePath];
+        }
     }
 }
 
@@ -301,6 +363,7 @@
  *  清除柱状条上的Label
  */
 - (void)removeLabelOnChart{
+    [self.popoverLaberArray removeAllObjects];
     NSArray * subviews = [NSArray arrayWithArray:self.genericAxis.subviews];
     for (UIView * view in subviews) {
         if ([view isKindOfClass:[ZFPopoverLabel class]]) {
@@ -350,7 +413,7 @@
             return;
         }
     }else{
-        self.genericAxis.yLineMaxValue = [[ZFMethod shareInstance] cachedYLineMaxValue:self.genericAxis.xLineValueArray];
+        self.genericAxis.yLineMaxValue = [[ZFMethod shareInstance] cachedMaxValue:self.genericAxis.xLineValueArray];
         
         if (self.genericAxis.yLineMaxValue == 0.f) {
             if ([self.dataSource respondsToSelector:@selector(axisLineMaxValueInGenericChart:)]) {
@@ -364,15 +427,15 @@
     
     if (self.isResetAxisLineMinValue) {
         if ([self.dataSource respondsToSelector:@selector(axisLineMinValueInGenericChart:)]) {
-            if ([self.dataSource axisLineMinValueInGenericChart:self] > [[ZFMethod shareInstance] cachedYLineMinValue:self.genericAxis.xLineValueArray]) {
-                self.genericAxis.yLineMinValue = [[ZFMethod shareInstance] cachedYLineMinValue:self.genericAxis.xLineValueArray];
+            if ([self.dataSource axisLineMinValueInGenericChart:self] > [[ZFMethod shareInstance] cachedMinValue:self.genericAxis.xLineValueArray]) {
+                self.genericAxis.yLineMinValue = [[ZFMethod shareInstance] cachedMinValue:self.genericAxis.xLineValueArray];
                 
             }else{
                 self.genericAxis.yLineMinValue = [self.dataSource axisLineMinValueInGenericChart:self];
             }
             
         }else{
-            self.genericAxis.yLineMinValue = [[ZFMethod shareInstance] cachedYLineMinValue:self.genericAxis.xLineValueArray];
+            self.genericAxis.yLineMinValue = [[ZFMethod shareInstance] cachedMinValue:self.genericAxis.xLineValueArray];
         }
     }
     
@@ -409,14 +472,26 @@
     [self removeAllSubLayer];
     self.genericAxis.xLineNameLabelToXAxisLinePadding = self.xLineNameLabelToXAxisLinePadding;
     self.genericAxis.isAnimated = self.isAnimated;
-    self.genericAxis.axisLineValueType = self.axisLineValueType;
+    self.genericAxis.valueType = self.valueType;
     [self.genericAxis strokePath];
     [self drawCircle];
     [self drawLine];
-    self.isShowAxisLineValue ? [self setValueLabelOnChart] : nil;
+    [self setValueLabelOnChart];
+    
+    [self bringCircleToFront];
     [self.genericAxis bringSubviewToFront:self.genericAxis.yAxisLine];
     [self.genericAxis bringSectionToFront];
     [self bringSubviewToFront:self.topicLabel];
+}
+
+#pragma mark - 把圆放到最前面
+
+- (void)bringCircleToFront{
+    for (UIView * view in self.genericAxis.subviews) {
+        if ([view isKindOfClass:[ZFCircle class]]) {
+            [self.genericAxis bringSubviewToFront:(ZFCircle *)view];
+        }
+    }
 }
 
 #pragma mark - 重写setter,getter方法
@@ -434,12 +509,12 @@
     self.genericAxis.unitColor = unitColor;
 }
 
-- (void)setAxisLineNameFontSize:(CGFloat)axisLineNameFontSize{
-    self.genericAxis.xLineNameFontSize = axisLineNameFontSize;
+- (void)setAxisLineNameFont:(UIFont *)axisLineNameFont{
+    self.genericAxis.xLineNameFont = axisLineNameFont;
 }
 
-- (void)setAxisLineValueFontSize:(CGFloat)axisLineValueFontSize{
-    self.genericAxis.yLineValueFontSize = axisLineValueFontSize;
+- (void)setAxisLineValueFont:(UIFont *)axisLineValueFont{
+    self.genericAxis.yLineValueFont = axisLineValueFont;
 }
 
 - (void)setAxisLineNameColor:(UIColor *)axisLineNameColor{
@@ -464,6 +539,22 @@
 
 - (void)setIsShowSeparate:(BOOL)isShowSeparate{
     self.genericAxis.isShowSeparate = isShowSeparate;
+}
+
+#pragma mark - 懒加载
+
+- (NSMutableArray *)circleArray{
+    if (!_circleArray) {
+        _circleArray = [NSMutableArray array];
+    }
+    return _circleArray;
+}
+
+- (NSMutableArray *)popoverLaberArray{
+    if (!_popoverLaberArray) {
+        _popoverLaberArray = [NSMutableArray array];
+    }
+    return _popoverLaberArray;
 }
 
 @end

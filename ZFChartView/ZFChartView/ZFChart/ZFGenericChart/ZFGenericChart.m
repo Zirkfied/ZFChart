@@ -19,10 +19,10 @@
     _isAnimated = YES;
     _isShadowForValueLabel = YES;
     _opacity = 1.f;
-    _valueOnChartFontSize = 10.f;
+    _valueOnChartFont = [UIFont systemFontOfSize:10.f];
     _xLineNameLabelToXAxisLinePadding = 0.f;
     _valueLabelPattern = kPopoverLabelPatternPopover;
-    _axisLineValueType = kAxisLineValueTypeInteger;
+    _valueType = kValueTypeInteger;
     _isShowAxisLineValue = YES;
 }
 

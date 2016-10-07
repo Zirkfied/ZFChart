@@ -16,11 +16,10 @@
  *  计算字符串宽度(指当该字符串放在view时的自适应宽度)
  *
  *  @param size 填入预留的大小
- *  @param font 字体大小
- *  @param isBold 字体是否加粗
+ *  @param font 字形
  *
  *  @return 返回CGRect
  */
-- (CGRect)stringWidthRectWithSize:(CGSize)size fontOfSize:(CGFloat)font isBold:(BOOL)isBold;
+- (CGRect)stringWidthRectWithSize:(CGSize)size font:(UIFont *)font;
 
 @end

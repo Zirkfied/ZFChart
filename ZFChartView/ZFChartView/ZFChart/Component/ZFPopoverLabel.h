@@ -55,6 +55,8 @@ typedef enum{
 @property (nonatomic, assign) NSInteger groupIndex;
 /** self所在的位置下标 */
 @property (nonatomic, assign) NSInteger labelIndex;
+/** 记录数据是否超出上限 */
+@property (nonatomic, assign) BOOL isOverrun;
 
 
 #pragma mark - public method

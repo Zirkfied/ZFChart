@@ -42,11 +42,11 @@
 /**
  *  获取数据源最大值，并赋值给y轴最大上限
  */
-- (CGFloat)cachedYLineMaxValue:(NSMutableArray *)array;
+- (CGFloat)cachedMaxValue:(NSMutableArray *)array;
 
 /**
  *  获取数据源最小值，并赋值给y轴显示的最小值
  */
-- (CGFloat)cachedYLineMinValue:(NSMutableArray *)array;
+- (CGFloat)cachedMinValue:(NSMutableArray *)array;
 
 @end

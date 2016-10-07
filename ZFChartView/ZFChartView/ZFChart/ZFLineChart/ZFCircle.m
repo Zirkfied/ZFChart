@@ -27,7 +27,7 @@
 - (void)commonInit{
     _animationDuration = 0.5f;
     _isShadow = YES;
-    _circleColor = ZFRandomColor;
+    _circleColor = ZFRandom;
     _radius = self.frame.size.width * 0.5;
 }
 

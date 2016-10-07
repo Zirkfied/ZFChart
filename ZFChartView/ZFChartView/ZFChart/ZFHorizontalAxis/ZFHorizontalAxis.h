@@ -21,21 +21,19 @@
 /** y轴名字数组 */
 @property (nonatomic, strong) NSMutableArray * yLineNameArray;
 /** x轴数值显示的最大值 */
-@property (nonatomic, assign) float xLineMaxValue;
+@property (nonatomic, assign) CGFloat xLineMaxValue;
 /** x轴数值显示的最小值 */
-@property (nonatomic, assign) float xLineMinValue;
+@property (nonatomic, assign) CGFloat xLineMinValue;
 /** x轴数值显示的段数 */
 @property (nonatomic, assign) NSInteger xLineSectionCount;
-/** y轴上名称字体大小(默认为10.f) */
-@property (nonatomic, assign) CGFloat yLineNameFontSize;
-/** x轴上数值字体大小(默认为10.f) */
-@property (nonatomic, assign) CGFloat xLineValueFontSize;
+
 /** 每组宽度(变相求y轴标题label高度) */
 @property (nonatomic, assign) CGFloat groupHeight;
 /** 组与组之间的间距 */
 @property (nonatomic, assign) CGFloat groupPadding;
 /** x轴单位 */
 @property (nonatomic, copy) NSString * unit;
+
 /** x轴单位颜色(默认为黑色) */
 @property (nonatomic, strong) UIColor * unitColor;
 /** y轴标题颜色(默认为黑色) */
@@ -46,14 +44,20 @@
 @property (nonatomic, strong) UIColor * axisLineBackgroundColor;
 /** 坐标轴颜色(默认为黑色) */
 @property (nonatomic, strong) UIColor * axisColor;
+/** 分割线颜色(默认为浅灰色) */
+@property (nonatomic, strong) UIColor * separateColor;
+
+/** y轴上名称字体大小(默认为10.f) */
+@property (nonatomic, strong) UIFont * yLineNameFont;
+/** x轴上数值字体大小(默认为10.f) */
+@property (nonatomic, strong) UIFont * xLineValueFont;
+
 /** 是否显示分割线 */
 @property (nonatomic, assign) BOOL isShowSeparate;
 /** 是否带动画显示(默认为YES，带动画) */
 @property (nonatomic, assign) BOOL isAnimated;
-/** 分割线颜色(默认为浅灰色) */
-@property (nonatomic, strong) UIColor * separateColor;
 /** 坐标轴数值的显示类型(保留有效小数或显示整数形式) */
-@property (nonatomic, assign) kAxisLineValueType axisLineValueType;
+@property (nonatomic, assign) kValueType valueType;
 
 
 #warning message - readonly(只读)

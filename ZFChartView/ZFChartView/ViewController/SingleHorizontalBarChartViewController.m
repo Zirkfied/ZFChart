@@ -20,7 +20,7 @@
 @implementation SingleHorizontalBarChartViewController
 
 - (void)setUp{
-    if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight){
+    if ([[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeLeft || [[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeRight){
         //首次进入控制器为横屏时
         _height = SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT * 0.5;
         
@@ -48,6 +48,8 @@
 //    self.barChart.axisColor = ZFWhite;
 //    self.barChart.axisLineNameColor = ZFWhite;
 //    self.barChart.axisLineValueColor = ZFWhite;
+//    self.barChart.isShowAxisLineValue = NO;
+//    self.barChart.isAnimated = NO;
     [self.view addSubview:self.barChart];
     [self.barChart strokePath];
 }
@@ -96,7 +98,7 @@
     return ZFBlue;
 }
 
-- (void)horizontalBarChart:(ZFHorizontalBarChart *)barChart didSelectBarAtGroupIndex:(NSInteger)groupIndex barIndex:(NSInteger)barIndex horizontalBar:(ZFHorizontalBar *)horizontalBar{
+- (void)horizontalBarChart:(ZFHorizontalBarChart *)barChart didSelectBarAtGroupIndex:(NSInteger)groupIndex barIndex:(NSInteger)barIndex horizontalBar:(ZFHorizontalBar *)horizontalBar popoverLabel:(ZFPopoverLabel *)popoverLabel{
     //特殊说明，因传入数据是3个subArray(代表3个类型)，每个subArray存的是6个元素(代表每个类型存了1~6年级的数据),所以这里的groupIndex是第几个subArray(类型)
     //eg：三年级第0个元素为 groupIndex为0，barIndex为2
     NSLog(@"第%ld个颜色中的第%ld个",(long)groupIndex,(long)barIndex);
@@ -106,6 +108,9 @@
 //    horizontalBar.isAnimated = YES;
 //    horizontalBar.opacity = 0.5;
 //    [horizontalBar strokePath];
+    
+    //可将isShowAxisLineValue设置为NO，然后执行下句代码进行点击才显示数值
+//    popoverLabel.hidden = NO;
 }
 
 - (void)horizontalBarChart:(ZFHorizontalBarChart *)barChart didSelectPopoverLabelAtGroupIndex:(NSInteger)groupIndex labelIndex:(NSInteger)labelIndex popoverLabel:(ZFPopoverLabel *)popoverLabel{
@@ -124,7 +129,7 @@
  */
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator>)coordinator NS_AVAILABLE_IOS(8_0){
     
-    if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight){
+    if ([[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeLeft || [[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeRight){
         self.barChart.frame = CGRectMake(0, 0, size.width, size.height - NAVIGATIONBAR_HEIGHT * 0.5);
     }else{
         self.barChart.frame = CGRectMake(0, 0, size.width, size.height + NAVIGATIONBAR_HEIGHT * 0.5);

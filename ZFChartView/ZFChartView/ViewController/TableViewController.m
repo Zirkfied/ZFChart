@@ -15,6 +15,8 @@
 #import "WaveChartViewController.h"
 #import "SingleHorizontalBarChartViewController.h"
 #import "MultiHorizontalBarChartViewController.h"
+#import "SingleRadarChartViewController.h"
+#import "MultiRadarChartViewController.h"
 
 @interface TableViewController ()
 
@@ -27,14 +29,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.nameArray = @[@"柱状图:一组数据(SingleBarChartViewController)",
-                       @"柱状图:多组数据(MultiBarChartViewController)",
-                       @"线状图:一组数据(SingleLineChartViewController)",
-                       @"线状图:多组数据(MultiLineChartViewController)",
-                       @"饼图(PieChartViewController)",
-                       @"波浪图(WaveChartViewController)",
-                       @"柱状图(横向):一组数据(SingleHorizontalBarChartViewController)",
-                       @"柱状图(横向):多组数据(MultiHorizontalBarChartViewController)"];
+    self.nameArray = @[@"柱状图:一组数据\n(SingleBarChartViewController)",
+                       @"柱状图:多组数据\n(MultiBarChartViewController)",
+                       @"线状图:一组数据\n(SingleLineChartViewController)",
+                       @"线状图:多组数据\n(MultiLineChartViewController)",
+                       @"饼图\n(PieChartViewController)",
+                       @"波浪图\n(WaveChartViewController)",
+                       @"柱状图(横向):一组数据\n(SingleHorizontalBarChartViewController)",
+                       @"柱状图(横向):多组数据\n(MultiHorizontalBarChartViewController)",
+                       @"雷达图:一组数据\n(SingleRadarChartViewController)",
+                       @"雷达图:多组数据\n(MultiRadarChartViewController)"];
 }
 
 #pragma mark - Table view data source
@@ -82,8 +86,13 @@
     }else if (indexPath.row == 7){
         MultiHorizontalBarChartViewController * vc = [[MultiHorizontalBarChartViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.row == 8){
+        SingleRadarChartViewController * vc = [[SingleRadarChartViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.row == 9){
+        MultiRadarChartViewController * vc = [[MultiRadarChartViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     }
-    
 }
 
 @end

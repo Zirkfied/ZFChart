@@ -47,7 +47,7 @@
  *  @param groupIndex 点击的bar在第几组
  *  @param barIndex   点击的bar在该组的下标
  */
-- (void)horizontalBarChart:(ZFHorizontalBarChart *)barChart didSelectBarAtGroupIndex:(NSInteger)groupIndex barIndex:(NSInteger)barIndex horizontalBar:(ZFHorizontalBar *)horizontalBar;
+- (void)horizontalBarChart:(ZFHorizontalBarChart *)barChart didSelectBarAtGroupIndex:(NSInteger)groupIndex barIndex:(NSInteger)barIndex horizontalBar:(ZFHorizontalBar *)horizontalBar popoverLabel:(ZFPopoverLabel *)popoverLabel;
 
 /**
  *  用于编写点击y轴valueLabel后需要执行后续代码

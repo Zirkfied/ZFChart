@@ -24,7 +24,7 @@
 @property (nonatomic, assign) CGFloat opacity;
 
 
-#warning message - 下列参数勿修改(Do not modify)
+#warning message - 下列参数请勿修改(Do not modify)
 
 /** 百分比小数 */
 @property (nonatomic, assign) CGFloat percent;
@@ -32,6 +32,8 @@
 @property (nonatomic, assign) NSInteger groupIndex;
 /** self在该组数据的下标位置 */
 @property (nonatomic, assign) NSInteger barIndex;
+/** 记录数据是否超出上限 */
+@property (nonatomic, assign) BOOL isOverrun;
 
 
 #warning message - readonly(只读)

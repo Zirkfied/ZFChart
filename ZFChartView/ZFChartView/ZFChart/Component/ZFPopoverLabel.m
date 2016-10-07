@@ -23,6 +23,9 @@
 
 @implementation ZFPopoverLabel
 
+/**
+ *  初始化变量
+ */
 - (void)commonInit{
     self.alpha = 0.f;
     _animationDuration = 1.f;

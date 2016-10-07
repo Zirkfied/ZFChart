@@ -45,16 +45,19 @@
 /**
  *  用于编写点击bar后需要执行后续代码
  *
- *  @param groupIndex 点击的bar在第几组
- *  @param barIndex   点击的bar在该组的下标
+ *  @param groupIndex   点击的bar在第几组
+ *  @param barIndex     点击的bar在该组的下标
+ *  @param bar          当前点击的bar对象
+ *  @param popoverLabel 当前点击的bar对应的popoverLabel对象
  */
-- (void)barChart:(ZFBarChart *)barChart didSelectBarAtGroupIndex:(NSInteger)groupIndex barIndex:(NSInteger)barIndex bar:(ZFBar *)bar;
+- (void)barChart:(ZFBarChart *)barChart didSelectBarAtGroupIndex:(NSInteger)groupIndex barIndex:(NSInteger)barIndex bar:(ZFBar *)bar popoverLabel:(ZFPopoverLabel *)popoverLabel;
 
 /**
  *  用于编写点击x轴valueLabel后需要执行后续代码
  *
- *  @param groupIndex 点击的label在第几组
- *  @param labelIndex 点击的label在该组的下标
+ *  @param groupIndex   点击的label在第几组
+ *  @param labelIndex   点击的label在该组的下标
+ *  @param popoverLabel 当前点击的popoverLabel对象
  */
 - (void)barChart:(ZFBarChart *)barChart didSelectPopoverLabelAtGroupIndex:(NSInteger)groupIndex labelIndex:(NSInteger)labelIndex popoverLabel:(ZFPopoverLabel *)popoverLabel;
 

@@ -9,6 +9,7 @@
 #import "ZFGenericChart.h"
 #import "ZFConst.h"
 #import "ZFPopoverLabel.h"
+#import "ZFCircle.h"
 @class ZFLineChart;
 
 /*********************  ZFLineChartDelegate(ZFLineChart协议方法)  *********************/
@@ -51,7 +52,7 @@
  *  @param lineIndex   点击的circle在第几条线
  *  @param circleIndex 点击的circle在该线的下标
  */
-- (void)lineChart:(ZFLineChart *)lineChart didSelectCircleAtLineIndex:(NSInteger)lineIndex circleIndex:(NSInteger)circleIndex;
+- (void)lineChart:(ZFLineChart *)lineChart didSelectCircleAtLineIndex:(NSInteger)lineIndex circleIndex:(NSInteger)circleIndex circle:(ZFCircle *)circle popoverLabel:(ZFPopoverLabel *)popoverLabel;
 
 /**
  *  用于编写点击x轴valueLabel后需要执行后续代码
@@ -59,7 +60,7 @@
  *  @param groupIndex 点击的label在第几组
  *  @param labelIndex 点击的label在该组的下标
  */
-- (void)lineChart:(ZFLineChart *)lineChart didSelectPopoverLabelAtLineIndex:(NSInteger)lineIndex circleIndex:(NSInteger)circleIndex;
+- (void)lineChart:(ZFLineChart *)lineChart didSelectPopoverLabelAtLineIndex:(NSInteger)lineIndex circleIndex:(NSInteger)circleIndex popoverLabel:(ZFPopoverLabel *)popoverLabel;
 
 @end
 

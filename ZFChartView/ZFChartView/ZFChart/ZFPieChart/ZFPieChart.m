@@ -52,34 +52,6 @@
 
 @implementation ZFPieChart
 
-- (NSMutableArray *)colorArray{
-    if (!_colorArray) {
-        _colorArray = [NSMutableArray array];
-    }
-    return _colorArray;
-}
-
-- (NSMutableArray *)startAngleArray{
-    if (!_startAngleArray) {
-        _startAngleArray = [NSMutableArray array];
-    }
-    return _startAngleArray;
-}
-
-- (NSMutableArray *)endAngleArray{
-    if (!_endAngleArray) {
-        _endAngleArray = [NSMutableArray array];
-    }
-    return _endAngleArray;
-}
-
-- (NSMutableArray *)startTimeArray{
-    if (!_startTimeArray) {
-        _startTimeArray = [NSMutableArray array];
-    }
-    return _startTimeArray;
-}
-
 /**
  *  初始化属性
  */
@@ -97,7 +69,7 @@
     _isAnimated = YES;
     _extendLength = 20.f;
     _totalDuration = 0.75f;
-    _percentOnChartFontSize = 10.f;
+    _percentOnChartFont = [UIFont boldSystemFontOfSize:10.f];
     _radiusSegments = 2.f;
     self.backgroundColor = ZFWhite;
 }
@@ -367,12 +339,12 @@
  */
 - (void)creatPercentLabel:(NSInteger)i{
     NSString * string = [self getPercent:i];
-    CGRect rect = [string stringWidthRectWithSize:CGSizeMake(0, 0) fontOfSize:_percentOnChartFontSize isBold:YES];
+    CGRect rect = [string stringWidthRectWithSize:CGSizeMake(0, 0) font:_percentOnChartFont];
     UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
     label.text = string;
     label.alpha = 0.f;
     label.textAlignment = NSTextAlignmentCenter;
-    label.font = [UIFont boldSystemFontOfSize:_percentOnChartFontSize];
+    label.font = _percentOnChartFont;
     label.center = _centerPoint;
     label.tag = ZFPieChartPercentLabelTag + i;
     [self addSubview:label];
@@ -430,6 +402,36 @@
         CFTimeInterval duration = [self countDuration:i];
         startTime += duration;
     }
+}
+
+#pragma mark - 懒加载
+
+- (NSMutableArray *)colorArray{
+    if (!_colorArray) {
+        _colorArray = [NSMutableArray array];
+    }
+    return _colorArray;
+}
+
+- (NSMutableArray *)startAngleArray{
+    if (!_startAngleArray) {
+        _startAngleArray = [NSMutableArray array];
+    }
+    return _startAngleArray;
+}
+
+- (NSMutableArray *)endAngleArray{
+    if (!_endAngleArray) {
+        _endAngleArray = [NSMutableArray array];
+    }
+    return _endAngleArray;
+}
+
+- (NSMutableArray *)startTimeArray{
+    if (!_startTimeArray) {
+        _startTimeArray = [NSMutableArray array];
+    }
+    return _startTimeArray;
 }
 
 @end

@@ -51,6 +51,7 @@
  *  y轴(普通图表) 或 x轴(横向图表) 数值显示的最大值(若不设置，默认返回数据源最大值)
  *
  *  (PS: 此方法与 isResetAxisLineMaxValue 关联，具体查看该属性注释)
+ *  (PS: The method is related to isResetAxisLineMaxValue, read the property notes to learn more details)
  */
 - (CGFloat)axisLineMaxValueInGenericChart:(ZFGenericChart *)chart;
 
@@ -78,6 +79,7 @@
 @property (nonatomic, strong) UILabel * topicLabel;
 /** y轴单位 */
 @property (nonatomic, copy) NSString * unit;
+
 /** 单位颜色(默认为黑色) */
 @property (nonatomic, strong) UIColor * unitColor;
 /** 背景颜色(默认为白色) */
@@ -95,49 +97,49 @@
 /** 图形bezierPath阴影颜色(默认为浅灰色) */
 @property (nonatomic, strong) UIColor * shadowColor;
 
+/** 图表上label字体大小(默认为10.f) */
+@property (nonatomic, strong) UIFont * valueOnChartFont;
+/** y轴(普通图表) 或 x轴(横向图表) 上名称字体大小(默认为10.f) */
+@property (nonatomic, strong) UIFont * axisLineNameFont;
+/** y轴(普通图表) 或 x轴(横向图表) 上数值字体大小(默认为10.f) */
+@property (nonatomic, strong) UIFont * axisLineValueFont;
+
 /** 图表透明度(范围0 ~ 1, 默认为1.f) */
 @property (nonatomic, assign) CGFloat opacity;
-/** 图表上label字体大小(默认为10.f) */
-@property (nonatomic, assign) CGFloat valueOnChartFontSize;
-/** y轴(普通图表) 或 x轴(横向图表) 上名称字体大小(默认为10.f) */
-@property (nonatomic, assign) CGFloat axisLineNameFontSize;
-/** y轴(普通图表) 或 x轴(横向图表) 上数值字体大小(默认为10.f) */
-@property (nonatomic, assign) CGFloat axisLineValueFontSize;
 /** x轴名称label与x轴之间的距离(默认为0.f)(横向图表无效) */
 @property (nonatomic, assign) CGFloat xLineNameLabelToXAxisLinePadding;
 /** x轴valueLabel样式(默认为kPopoverLabelPatternPopover) */
 @property (nonatomic, assign) kPopoverLabelPattern valueLabelPattern;
 /** y轴(普通图表) 或 x轴(横向图表) 数值的显示类型(保留有效小数或显示整数形式，默认为保留有效小数) */
-@property (nonatomic, assign) kAxisLineValueType axisLineValueType;
+@property (nonatomic, assign) kValueType valueType;
 
-
+/** 是否一直显示固定的最大值，默认为NO，该属性有以下3种情况
+    ①当为NO时，且不实现
+    - (CGFloat)axisLineMaxValueInGenericChart:(ZFGenericChart *)chart
+    则自动计算返回的全部数据中的最大值
+    ②当为NO时，且实现
+    - (CGFloat)axisLineMaxValueInGenericChart:(ZFGenericChart *)chart
+    则当返回的全部数据的值都为"0"时，则最大值为该代理方法给予的值
+    若数据的值并不都是"0"时，则自动计算返回的全部数据中的最大值
+    ③当为YES时，则必须实现
+    - (CGFloat)axisLineMaxValueInGenericChart:(ZFGenericChart *)chart
+    否则无法绘画图表，且任何情况最大值都为该代理方法给予的值
+ */
+@property (nonatomic, assign) BOOL isResetAxisLineMaxValue;
 /** 该属性是否重设坐标轴最小值，默认为NO(不设置，从0开始)，当设置为YES时，则有以下2种情况
-    ①若同时实现代理方法中的 
-        - (CGFloat)axisLineMinValueInGenericChart:(ZFGenericChart *)chart，
+    ①若同时实现代理方法中的
+        - (CGFloat)axisLineMinValueInGenericChart:(ZFGenericChart *)chart
         则y轴最小值为该方法的返回值
     ②若不实现①中的方法，则y轴最小值为数据源最小值
  
  
-    Default is No (Start to O). When set to YES, then there are 2 kinds of situations:
+    Default is NO (Start to O). When set to YES, then there are 2 cases:
     ①If at the same time to implement the method in ZFGenericChartDataSource:
-        ||- (CGFloat)axisLineMinValueInGenericChart:(ZFGenericChart *)chart||,
+        ||- (CGFloat)axisLineMinValueInGenericChart:(ZFGenericChart *)chart||
         then axisLineMinValue is the return value of the method.
-    ②If not implemented the method in ①, then axisLineMinValue is the minimum value of the dataSource.
+    ②If not to implement the method in ①, then axisLineMinValue is the minimum value of the dataSource.
  */
 @property (nonatomic, assign) BOOL isResetAxisLineMinValue;
-/** 是否一直显示固定的最大值，默认为NO，该属性有以下3种情况
-    ①当为NO时，且不实现
-        - (CGFloat)axisLineMaxValueInGenericChart:(ZFGenericChart *)chart
-        则自动计算返回的全部数据中的最大值
-    ②当为NO时，且实现
-        - (CGFloat)axisLineMaxValueInGenericChart:(ZFGenericChart *)chart
-        则当返回的全部数据的值都为"0"时，则最大值为该代理方法给予的值
-        若数据的值并不都是"0"时，则自动计算返回的全部数据中的最大值
-    ③当为YES时，则必须实现
-        - (CGFloat)axisLineMaxValueInGenericChart:(ZFGenericChart *)chart
-        否则无法绘画图表，且任何情况最大值都为该代理方法给予的值
- */
-@property (nonatomic, assign) BOOL isResetAxisLineMaxValue;
 /** 是否带动画显示(默认为YES，带动画) */
 @property (nonatomic, assign) BOOL isAnimated;
 /** valueLabel当为气泡样式时，是否带阴影效果(默认为YES) */

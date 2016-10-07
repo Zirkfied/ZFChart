@@ -13,3 +13,4 @@
 #import "ZFPieChart.h"
 #import "ZFWaveChart.h"
 #import "ZFHorizontalBarChart.h"
+#import "ZFRadarChart.h"

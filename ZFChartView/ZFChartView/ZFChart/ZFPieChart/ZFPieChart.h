@@ -84,14 +84,15 @@ typedef enum{
 @property (nonatomic, weak) id<ZFPieChartDataSource> dataSource;
 @property (nonatomic, weak) id<ZFPieChartDelegate> delegate;
 
+/** 图表上百分比字体大小 */
+@property (nonatomic, strong) UIFont * percentOnChartFont;
+
 /** 饼图样式(若不设置，默认为kPieChartPatternTypeForCirque(圆环样式)) */
 @property (nonatomic, assign) kPiePatternType piePatternType;
 /** kPercentType类型 */
 @property (nonatomic, assign) kPercentType percentType;
 /** 显示百分比(默认为YES) */
 @property (nonatomic, assign) BOOL isShowPercent;
-/** 图表上百分比字体大小 */
-@property (nonatomic, assign) CGFloat percentOnChartFontSize;
 /** 是否带阴影效果(默认为YES) */
 @property (nonatomic, assign) BOOL isShadow;
 /** 是否带动画显示(默认为YES，带动画) */

@@ -34,27 +34,6 @@
 
 @implementation ZFBarChart
 
-- (NSMutableArray *)barArray{
-    if (!_barArray) {
-        _barArray = [NSMutableArray array];
-    }
-    return _barArray;
-}
-
-- (NSMutableArray *)popoverLaberArray{
-    if (!_popoverLaberArray) {
-        _popoverLaberArray = [NSMutableArray array];
-    }
-    return _popoverLaberArray;
-}
-
-- (NSMutableArray *)valueTextColorArray{
-    if (!_valueTextColorArray) {
-        _valueTextColorArray = [NSMutableArray array];
-    }
-    return _valueTextColorArray;
-}
-
 /**
  *  初始化变量
  */
@@ -109,9 +88,11 @@
             if ([self.genericAxis.xLineValueArray[i] floatValue] / self.genericAxis.yLineMaxValue <= 1) {
                 bar.percent = ([self.genericAxis.xLineValueArray[i] floatValue] - self.genericAxis.yLineMinValue) / (self.genericAxis.yLineMaxValue - self.genericAxis.yLineMinValue);
                 bar.barColor = _colorArray.firstObject;
+                bar.isOverrun = NO;
             }else{
                 bar.percent = 1.f;
                 bar.barColor = _overMaxValueBarColor;
+                bar.isOverrun = YES;
             }
             bar.isShadow = _isShadow;
             bar.isAnimated = self.isAnimated;
@@ -146,9 +127,11 @@
                 if ([valueArray[groupIndex][barIndex] floatValue] / self.genericAxis.yLineMaxValue <= 1) {
                     bar.percent = ([valueArray[groupIndex][barIndex] floatValue] - self.genericAxis.yLineMinValue) / (self.genericAxis.yLineMaxValue - self.genericAxis.yLineMinValue);
                     bar.barColor = _colorArray[groupIndex];
+                    bar.isOverrun = NO;
                 }else{
                     bar.percent = 1.f;
                     bar.barColor = _overMaxValueBarColor;
+                    bar.isOverrun = YES;
                 }
                 bar.isShadow = _isShadow;
                 bar.isAnimated = self.isAnimated;
@@ -174,13 +157,13 @@
             ZFBar * bar = self.barArray[i];
             //label的中心点
             CGPoint label_center = CGPointMake(bar.center.x, bar.endYPos + self.genericAxis.yAxisLine.yLineEndYPos);
-            CGRect rect = [self.genericAxis.xLineValueArray[i] stringWidthRectWithSize:CGSizeMake(_barWidth + _barPadding * 0.5, 30) fontOfSize:self.valueOnChartFontSize isBold:NO];
+            CGRect rect = [self.genericAxis.xLineValueArray[i] stringWidthRectWithSize:CGSizeMake(_barWidth + _barPadding * 0.5, 30) font:self.valueOnChartFont];
             
             ZFPopoverLabel * popoverLabel = [[ZFPopoverLabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width + 10, rect.size.height + 10) direction:kAxisDirectionVertical];
             popoverLabel.groupIndex = 0;
             popoverLabel.labelIndex = i;
             popoverLabel.text = self.genericAxis.xLineValueArray[i];
-            popoverLabel.font = [UIFont systemFontOfSize:self.valueOnChartFontSize];
+            popoverLabel.font = self.valueOnChartFont;
             popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnBelow;
             popoverLabel.center = label_center;
             popoverLabel.pattern = self.valueLabelPattern;
@@ -188,6 +171,7 @@
             popoverLabel.isShadow = self.isShadowForValueLabel;
             popoverLabel.isAnimated = self.isAnimated;
             popoverLabel.shadowColor = self.valueLabelShadowColor;
+            popoverLabel.hidden = self.isShowAxisLineValue ? NO : YES;
             [popoverLabel strokePath];
             [self.popoverLaberArray addObject:popoverLabel];
             [self.genericAxis addSubview:popoverLabel];
@@ -202,11 +186,11 @@
                 NSInteger groupIndex = i / [subObject count];
                 //label的中心点
                 CGPoint label_center = CGPointMake(bar.center.x, bar.endYPos + self.genericAxis.yAxisLine.yLineEndYPos);
-                CGRect rect = [valueArray[groupIndex][barIndex] stringWidthRectWithSize:CGSizeMake(_barWidth + _barPadding * 0.5, 30) fontOfSize:self.valueOnChartFontSize isBold:NO];
+                CGRect rect = [valueArray[groupIndex][barIndex] stringWidthRectWithSize:CGSizeMake(_barWidth + _barPadding * 0.5, 30) font:self.valueOnChartFont];
                 
                 ZFPopoverLabel * popoverLabel = [[ZFPopoverLabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width + 10, rect.size.height + 10) direction:kAxisDirectionVertical];
                 popoverLabel.text = valueArray[groupIndex][barIndex];
-                popoverLabel.font = [UIFont systemFontOfSize:self.valueOnChartFontSize];
+                popoverLabel.font = self.valueOnChartFont;
                 popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnBelow;
                 popoverLabel.center = label_center;
                 popoverLabel.pattern = self.valueLabelPattern;
@@ -216,6 +200,7 @@
                 popoverLabel.groupIndex = groupIndex;
                 popoverLabel.labelIndex = barIndex;
                 popoverLabel.shadowColor = self.valueLabelShadowColor;
+                popoverLabel.hidden = self.isShowAxisLineValue ? NO : YES;
                 [popoverLabel strokePath];
                 [self.popoverLaberArray addObject:popoverLabel];
                 [self.genericAxis addSubview:popoverLabel];
@@ -233,10 +218,19 @@
  *  @param sender bar
  */
 - (void)barAction:(ZFBar *)sender{
-    if ([self.delegate respondsToSelector:@selector(barChart:didSelectBarAtGroupIndex:barIndex:bar:)]) {
-        [self.delegate barChart:self didSelectBarAtGroupIndex:sender.groupIndex barIndex:sender.barIndex bar:sender];
+    if ([self.delegate respondsToSelector:@selector(barChart:didSelectBarAtGroupIndex:barIndex:bar:popoverLabel:)]) {
         
-        [self resetBar:sender];
+        ZFPopoverLabel * popoverLabel = nil;
+        id subObject = self.genericAxis.xLineValueArray.firstObject;
+        if ([subObject isKindOfClass:[NSString class]]) {
+            popoverLabel = self.popoverLaberArray[sender.barIndex];
+        }else if ([subObject isKindOfClass:[NSArray class]]){
+            popoverLabel = self.popoverLaberArray[[self.barArray indexOfObject:sender]];
+        }
+        
+        [self.delegate barChart:self didSelectBarAtGroupIndex:sender.groupIndex barIndex:sender.barIndex bar:sender popoverLabel:popoverLabel];
+        
+        [self resetBar:sender popoverLabel:popoverLabel];
     }
 }
 
@@ -255,15 +249,23 @@
 
 #pragma mark - 重置Bar原始设置
 
-- (void)resetBar:(ZFBar *)sender{
+- (void)resetBar:(ZFBar *)sender popoverLabel:(ZFPopoverLabel *)label{
     for (ZFBar * bar in self.barArray) {
         if (bar != sender) {
-            bar.barColor = _colorArray[bar.groupIndex];
+            bar.barColor = bar.isOverrun ? _overMaxValueBarColor : _colorArray[bar.groupIndex];
             bar.isShadow = _isShadow;
             bar.isAnimated = self.isAnimated;
             bar.shadowColor = self.shadowColor;
             bar.opacity = self.opacity;
             [bar strokePath];
+        }
+    }
+    
+    if (!self.isShowAxisLineValue) {
+        for (ZFPopoverLabel * popoverLabel in self.popoverLaberArray) {
+            if (popoverLabel != label) {
+                popoverLabel.hidden = YES;
+            }
         }
     }
 }
@@ -273,7 +275,7 @@
 - (void)resetPopoverLabel:(ZFPopoverLabel *)sender{
     for (ZFPopoverLabel * popoverLabel in self.popoverLaberArray) {
         if (popoverLabel != sender) {
-            popoverLabel.font = [UIFont systemFontOfSize:self.valueOnChartFontSize];
+            popoverLabel.font = self.valueOnChartFont;
             popoverLabel.textColor = (UIColor *)self.valueTextColorArray[popoverLabel.groupIndex];
             popoverLabel.shadowColor = self.valueLabelShadowColor;
             popoverLabel.isShadow = self.isShadowForValueLabel;
@@ -342,7 +344,7 @@
             return;
         }
     }else{
-        self.genericAxis.yLineMaxValue = [[ZFMethod shareInstance] cachedYLineMaxValue:self.genericAxis.xLineValueArray];
+        self.genericAxis.yLineMaxValue = [[ZFMethod shareInstance] cachedMaxValue:self.genericAxis.xLineValueArray];
         
         if (self.genericAxis.yLineMaxValue == 0.f) {
             if ([self.dataSource respondsToSelector:@selector(axisLineMaxValueInGenericChart:)]) {
@@ -356,15 +358,15 @@
     
     if (self.isResetAxisLineMinValue) {
         if ([self.dataSource respondsToSelector:@selector(axisLineMinValueInGenericChart:)]) {
-            if ([self.dataSource axisLineMinValueInGenericChart:self] > [[ZFMethod shareInstance] cachedYLineMinValue:self.genericAxis.xLineValueArray]) {
-                self.genericAxis.yLineMinValue = [[ZFMethod shareInstance] cachedYLineMinValue:self.genericAxis.xLineValueArray];
+            if ([self.dataSource axisLineMinValueInGenericChart:self] > [[ZFMethod shareInstance] cachedMinValue:self.genericAxis.xLineValueArray]) {
+                self.genericAxis.yLineMinValue = [[ZFMethod shareInstance] cachedMinValue:self.genericAxis.xLineValueArray];
                 
             }else{
                 self.genericAxis.yLineMinValue = [self.dataSource axisLineMinValueInGenericChart:self];
             }
 
         }else{
-            self.genericAxis.yLineMinValue = [[ZFMethod shareInstance] cachedYLineMinValue:self.genericAxis.xLineValueArray];
+            self.genericAxis.yLineMinValue = [[ZFMethod shareInstance] cachedMinValue:self.genericAxis.xLineValueArray];
         }
     }
     
@@ -422,10 +424,11 @@
     [self removeLabelOnChart];
     self.genericAxis.xLineNameLabelToXAxisLinePadding = self.xLineNameLabelToXAxisLinePadding;
     self.genericAxis.isAnimated = self.isAnimated;
-    self.genericAxis.axisLineValueType = self.axisLineValueType;
+    self.genericAxis.valueType = self.valueType;
     [self.genericAxis strokePath];
     [self drawBar:self.genericAxis.xLineValueArray];
-    self.isShowAxisLineValue ? [self setValueLabelOnChart:self.genericAxis.xLineValueArray] : nil;
+    [self setValueLabelOnChart:self.genericAxis.xLineValueArray];
+    
     [self.genericAxis bringSubviewToFront:self.genericAxis.yAxisLine];
     [self.genericAxis bringSectionToFront];
     [self bringSubviewToFront:self.topicLabel];
@@ -458,12 +461,12 @@
     self.genericAxis.unitColor = unitColor;
 }
 
-- (void)setAxisLineNameFontSize:(CGFloat)axisLineNameFontSize{
-    self.genericAxis.xLineNameFontSize = axisLineNameFontSize;
+- (void)setAxisLineNameFont:(UIFont *)axisLineNameFont{
+    self.genericAxis.xLineNameFont = axisLineNameFont;
 }
 
-- (void)setAxisLineValueFontSize:(CGFloat)axisLineValueFontSize{
-    self.genericAxis.yLineValueFontSize = axisLineValueFontSize;
+- (void)setAxisLineValueFont:(UIFont *)axisLineValueFont{
+    self.genericAxis.yLineValueFont = axisLineValueFont;
 }
 
 - (void)setAxisLineNameColor:(UIColor *)axisLineNameColor{
@@ -488,6 +491,29 @@
 
 - (void)setIsShowSeparate:(BOOL)isShowSeparate{
     self.genericAxis.isShowSeparate = isShowSeparate;
+}
+
+#pragma mark - 懒加载
+
+- (NSMutableArray *)barArray{
+    if (!_barArray) {
+        _barArray = [NSMutableArray array];
+    }
+    return _barArray;
+}
+
+- (NSMutableArray *)popoverLaberArray{
+    if (!_popoverLaberArray) {
+        _popoverLaberArray = [NSMutableArray array];
+    }
+    return _popoverLaberArray;
+}
+
+- (NSMutableArray *)valueTextColorArray{
+    if (!_valueTextColorArray) {
+        _valueTextColorArray = [NSMutableArray array];
+    }
+    return _valueTextColorArray;
 }
 
 @end

@@ -20,7 +20,7 @@
 @implementation PieChartViewController
 
 - (void)setUp{
-    if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight){
+    if ([[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeLeft || [[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeRight){
         //首次进入控制器为横屏时
         _height = SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT * 0.5;
         
@@ -48,7 +48,7 @@
 #pragma mark - ZFPieChartDataSource
 
 - (NSArray *)valueArrayInPieChart:(ZFPieChart *)chart{
-    return @[@"200", @"256", @"300", @"283", @"490", @"236"];
+    return @[@"50", @"256", @"300", @"283", @"490", @"236"];
 }
 
 - (NSArray *)colorArrayInPieChart:(ZFPieChart *)chart{
@@ -62,7 +62,7 @@
 }
 
 - (CGFloat)radiusForPieChart:(ZFPieChart *)pieChart{
-    return 150.f;
+    return 120.f;
 }
 
 /** 此方法只对圆环类型(kPieChartPatternTypeForCirque)有效 */
@@ -77,7 +77,7 @@
  */
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator>)coordinator{
     
-    if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight){
+    if ([[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeLeft || [[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeRight){
         self.pieChart.frame = CGRectMake(0, 0, size.width, size.height - NAVIGATIONBAR_HEIGHT * 0.5);
     }else{
         self.pieChart.frame = CGRectMake(0, 0, size.width, size.height + NAVIGATIONBAR_HEIGHT * 0.5);

@@ -21,10 +21,14 @@
 		1808700D1CB4DF0B00C64C74 /* UIBezierPath+Zirkfied.m in Sources */ = {isa = PBXBuildFile; fileRef = 1808700C1CB4DF0B00C64C74 /* UIBezierPath+Zirkfied.m */; };
 		180E96DE1C97959E0056C716 /* ZFBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E96DD1C97959E0056C716 /* ZFBarChart.m */; };
 		180E96E11C9795EC0056C716 /* ZFBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 180E96E01C9795EC0056C716 /* ZFBar.m */; };
+		182800F61D7E6C5600467BA3 /* ZFRadar.m in Sources */ = {isa = PBXBuildFile; fileRef = 182800F51D7E6C5600467BA3 /* ZFRadar.m */; };
 		18308C291CFBC63C00E2F7D9 /* ZFHorizontalAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = 18308C281CFBC63C00E2F7D9 /* ZFHorizontalAxis.m */; };
 		18308C2A1CFBC63C00E2F7D9 /* ZFHorizontalAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = 18308C281CFBC63C00E2F7D9 /* ZFHorizontalAxis.m */; };
 		18308C2D1CFBD9E900E2F7D9 /* SingleHorizontalBarChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18308C2C1CFBD9E900E2F7D9 /* SingleHorizontalBarChartViewController.m */; };
 		18308C2E1CFBD9E900E2F7D9 /* SingleHorizontalBarChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18308C2C1CFBD9E900E2F7D9 /* SingleHorizontalBarChartViewController.m */; };
+		184961571D7E503F00171FE4 /* SingleRadarChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184961561D7E503F00171FE4 /* SingleRadarChartViewController.m */; };
+		1849615A1D7E506900171FE4 /* MultiRadarChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184961591D7E506900171FE4 /* MultiRadarChartViewController.m */; };
+		1849615E1D7E51F200171FE4 /* ZFRadarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 1849615D1D7E51F200171FE4 /* ZFRadarChart.m */; };
 		1856ABE21D0008CC001CABE7 /* ZFLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1856ABDB1D0008CC001CABE7 /* ZFLabel.m */; };
 		1856ABE31D0008CC001CABE7 /* ZFLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1856ABDB1D0008CC001CABE7 /* ZFLabel.m */; };
 		1856ABE41D0008CC001CABE7 /* ZFPopoverLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1856ABDD1D0008CC001CABE7 /* ZFPopoverLabel.m */; };
@@ -40,6 +44,8 @@
 		187D92301C9FFD6E00AD7370 /* ZFTranslucencePath.m in Sources */ = {isa = PBXBuildFile; fileRef = 187D922D1C9FFD6E00AD7370 /* ZFTranslucencePath.m */; };
 		18850E0F1CFEBF5C002DB7FA /* MultiHorizontalBarChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18850E0E1CFEBF5C002DB7FA /* MultiHorizontalBarChartViewController.m */; };
 		18850E101CFEBF5C002DB7FA /* MultiHorizontalBarChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18850E0E1CFEBF5C002DB7FA /* MultiHorizontalBarChartViewController.m */; };
+		18869E461D925E0000B58E75 /* ZFPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 18869E451D925E0000B58E75 /* ZFPolygon.m */; };
+		18869E471D925E0000B58E75 /* ZFPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = 18869E451D925E0000B58E75 /* ZFPolygon.m */; };
 		18B6A4801C9D3D7C00FEC918 /* ZFLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B6A47F1C9D3D7C00FEC918 /* ZFLine.m */; };
 		18D33BF41D5B41FA00CE33AD /* ZFHorizontalBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D33BF11D5B41FA00CE33AD /* ZFHorizontalBar.m */; };
 		18D33BF51D5B41FA00CE33AD /* ZFHorizontalBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D33BF31D5B41FA00CE33AD /* ZFHorizontalBarChart.m */; };
@@ -103,10 +109,18 @@
 		180E96DD1C97959E0056C716 /* ZFBarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFBarChart.m; sourceTree = "<group>"; };
 		180E96DF1C9795EC0056C716 /* ZFBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFBar.h; sourceTree = "<group>"; };
 		180E96E01C9795EC0056C716 /* ZFBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFBar.m; sourceTree = "<group>"; };
+		182800F41D7E6C5600467BA3 /* ZFRadar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFRadar.h; sourceTree = "<group>"; };
+		182800F51D7E6C5600467BA3 /* ZFRadar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFRadar.m; sourceTree = "<group>"; };
 		18308C271CFBC63C00E2F7D9 /* ZFHorizontalAxis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFHorizontalAxis.h; sourceTree = "<group>"; };
 		18308C281CFBC63C00E2F7D9 /* ZFHorizontalAxis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFHorizontalAxis.m; sourceTree = "<group>"; };
 		18308C2B1CFBD9E900E2F7D9 /* SingleHorizontalBarChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleHorizontalBarChartViewController.h; sourceTree = "<group>"; };
 		18308C2C1CFBD9E900E2F7D9 /* SingleHorizontalBarChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleHorizontalBarChartViewController.m; sourceTree = "<group>"; };
+		184961551D7E503F00171FE4 /* SingleRadarChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleRadarChartViewController.h; sourceTree = "<group>"; };
+		184961561D7E503F00171FE4 /* SingleRadarChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleRadarChartViewController.m; sourceTree = "<group>"; };
+		184961581D7E506900171FE4 /* MultiRadarChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiRadarChartViewController.h; sourceTree = "<group>"; };
+		184961591D7E506900171FE4 /* MultiRadarChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiRadarChartViewController.m; sourceTree = "<group>"; };
+		1849615C1D7E51F200171FE4 /* ZFRadarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFRadarChart.h; sourceTree = "<group>"; };
+		1849615D1D7E51F200171FE4 /* ZFRadarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFRadarChart.m; sourceTree = "<group>"; };
 		1856ABDA1D0008CC001CABE7 /* ZFLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFLabel.h; sourceTree = "<group>"; };
 		1856ABDB1D0008CC001CABE7 /* ZFLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFLabel.m; sourceTree = "<group>"; };
 		1856ABDC1D0008CC001CABE7 /* ZFPopoverLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFPopoverLabel.h; sourceTree = "<group>"; };
@@ -127,6 +141,8 @@
 		187D922D1C9FFD6E00AD7370 /* ZFTranslucencePath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFTranslucencePath.m; sourceTree = "<group>"; };
 		18850E0D1CFEBF5C002DB7FA /* MultiHorizontalBarChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiHorizontalBarChartViewController.h; sourceTree = "<group>"; };
 		18850E0E1CFEBF5C002DB7FA /* MultiHorizontalBarChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiHorizontalBarChartViewController.m; sourceTree = "<group>"; };
+		18869E441D925E0000B58E75 /* ZFPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFPolygon.h; sourceTree = "<group>"; };
+		18869E451D925E0000B58E75 /* ZFPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFPolygon.m; sourceTree = "<group>"; };
 		18B6A47E1C9D3D7C00FEC918 /* ZFLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFLine.h; sourceTree = "<group>"; };
 		18B6A47F1C9D3D7C00FEC918 /* ZFLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFLine.m; sourceTree = "<group>"; };
 		18D33BF01D5B41FA00CE33AD /* ZFHorizontalBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZFHorizontalBar.h; path = ZFChartView/ZFChart/ZFHorizontalBarChart/ZFHorizontalBar.h; sourceTree = SOURCE_ROOT; };
@@ -236,6 +252,10 @@
 				18308C2C1CFBD9E900E2F7D9 /* SingleHorizontalBarChartViewController.m */,
 				18850E0D1CFEBF5C002DB7FA /* MultiHorizontalBarChartViewController.h */,
 				18850E0E1CFEBF5C002DB7FA /* MultiHorizontalBarChartViewController.m */,
+				184961551D7E503F00171FE4 /* SingleRadarChartViewController.h */,
+				184961561D7E503F00171FE4 /* SingleRadarChartViewController.m */,
+				184961581D7E506900171FE4 /* MultiRadarChartViewController.h */,
+				184961591D7E506900171FE4 /* MultiRadarChartViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -258,6 +278,19 @@
 				18308C281CFBC63C00E2F7D9 /* ZFHorizontalAxis.m */,
 			);
 			path = ZFHorizontalAxis;
+			sourceTree = "<group>";
+		};
+		1849615B1D7E50C700171FE4 /* ZFRadarChart */ = {
+			isa = PBXGroup;
+			children = (
+				1849615C1D7E51F200171FE4 /* ZFRadarChart.h */,
+				1849615D1D7E51F200171FE4 /* ZFRadarChart.m */,
+				182800F41D7E6C5600467BA3 /* ZFRadar.h */,
+				182800F51D7E6C5600467BA3 /* ZFRadar.m */,
+				18869E441D925E0000B58E75 /* ZFPolygon.h */,
+				18869E451D925E0000B58E75 /* ZFPolygon.m */,
+			);
+			path = ZFRadarChart;
 			sourceTree = "<group>";
 		};
 		1856ABD91D0008CC001CABE7 /* Component */ = {
@@ -391,6 +424,7 @@
 				187D92271C9FFD6E00AD7370 /* ZFPieChart */,
 				1801F8181CA6679600DA2D53 /* ZFWaveChart */,
 				18C0A8B41D1A66CF000FE955 /* ZFHorizontalBarChart */,
+				1849615B1D7E50C700171FE4 /* ZFRadarChart */,
 			);
 			path = ZFChart;
 			sourceTree = "<group>";
@@ -483,18 +517,22 @@
 		18E4D5B51C93C890002A047B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = apple;
 				TargetAttributes = {
 					18E4D5BC1C93C890002A047B = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = W6629ZPGR7;
+						ProvisioningStyle = Manual;
 					};
 					18E4D5D51C93C891002A047B = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = CXCDY7CVCC;
 						TestTargetID = 18E4D5BC1C93C890002A047B;
 					};
 					18E4D5E01C93C891002A047B = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = CXCDY7CVCC;
 						TestTargetID = 18E4D5BC1C93C890002A047B;
 					};
 				};
@@ -555,6 +593,7 @@
 				18D33BF41D5B41FA00CE33AD /* ZFHorizontalBar.m in Sources */,
 				1808700D1CB4DF0B00C64C74 /* UIBezierPath+Zirkfied.m in Sources */,
 				1801F81B1CA6689000DA2D53 /* ZFWaveChart.m in Sources */,
+				1849615A1D7E506900171FE4 /* MultiRadarChartViewController.m in Sources */,
 				18E41DBC1C96ACC700402ACF /* UIView+Zirkfied.m in Sources */,
 				1856ABE61D0008CC001CABE7 /* ZFXAxisLine.m in Sources */,
 				18E41DBB1C96ACC700402ACF /* UIColor+Zirkfied.m in Sources */,
@@ -572,13 +611,17 @@
 				1856ABE41D0008CC001CABE7 /* ZFPopoverLabel.m in Sources */,
 				18E4D6001C93EAA5002A047B /* ZFConst.m in Sources */,
 				18E4D5C21C93C890002A047B /* main.m in Sources */,
+				182800F61D7E6C5600467BA3 /* ZFRadar.m in Sources */,
 				180260CF1CA236D80084DFFA /* MultiBarChartViewController.m in Sources */,
 				180260BA1CA2367A0084DFFA /* ZFGenericAxis.m in Sources */,
 				1801F81E1CA6698500DA2D53 /* ZFWave.m in Sources */,
 				180260D31CA236D80084DFFA /* SingleLineChartViewController.m in Sources */,
+				18869E461D925E0000B58E75 /* ZFPolygon.m in Sources */,
 				187D92301C9FFD6E00AD7370 /* ZFTranslucencePath.m in Sources */,
 				180260D21CA236D80084DFFA /* SingleBarChartViewController.m in Sources */,
+				1849615E1D7E51F200171FE4 /* ZFRadarChart.m in Sources */,
 				180260D11CA236D80084DFFA /* PieChartViewController.m in Sources */,
+				184961571D7E503F00171FE4 /* SingleRadarChartViewController.m in Sources */,
 				18850E0F1CFEBF5C002DB7FA /* MultiHorizontalBarChartViewController.m in Sources */,
 				1801F8211CA67CFC00DA2D53 /* WaveChartViewController.m in Sources */,
 				1856ABE81D0008CC001CABE7 /* ZFYAxisLine.m in Sources */,
@@ -599,6 +642,7 @@
 				18308C2E1CFBD9E900E2F7D9 /* SingleHorizontalBarChartViewController.m in Sources */,
 				18E4D5DB1C93C891002A047B /* ZFChartViewTests.m in Sources */,
 				1856ABE71D0008CC001CABE7 /* ZFXAxisLine.m in Sources */,
+				18869E471D925E0000B58E75 /* ZFPolygon.m in Sources */,
 				1856ABE51D0008CC001CABE7 /* ZFPopoverLabel.m in Sources */,
 				1856ABE91D0008CC001CABE7 /* ZFYAxisLine.m in Sources */,
 				18850E101CFEBF5C002DB7FA /* MultiHorizontalBarChartViewController.m in Sources */,
@@ -661,13 +705,17 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: xuefeng deng (QZ7Y6658V7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: xuefeng deng (QZ7Y6658V7)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = CXCDY7CVCC;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -684,9 +732,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "9999bd0c-0bcb-44a2-831d-2c2f65d1304c";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -705,13 +754,17 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: xuefeng deng (QZ7Y6658V7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: xuefeng deng (QZ7Y6658V7)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = CXCDY7CVCC;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -722,8 +775,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "9999bd0c-0bcb-44a2-831d-2c2f65d1304c";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -734,10 +788,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: xuefeng deng (QZ7Y6658V7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: xuefeng deng (QZ7Y6658V7)";
+				DEVELOPMENT_TEAM = W6629ZPGR7;
 				INFOPLIST_FILE = ZFChartView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Zirkfied.ZFChartView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9493096f-3f06-46d6-9492-87c4c7644296";
+				PROVISIONING_PROFILE_SPECIFIER = iOS_Wildcard_Provisioning_Profile_Development;
 			};
 			name = Debug;
 		};
@@ -745,10 +805,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: xuefeng deng (QZ7Y6658V7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: xuefeng deng (QZ7Y6658V7)";
+				DEVELOPMENT_TEAM = W6629ZPGR7;
 				INFOPLIST_FILE = ZFChartView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Zirkfied.ZFChartView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "e0ebc952-152f-4935-8e2c-3ccf8382e591";
+				PROVISIONING_PROFILE_SPECIFIER = iOS_Wildcard_Provisioning_Profile_Distribution;
 			};
 			name = Release;
 		};

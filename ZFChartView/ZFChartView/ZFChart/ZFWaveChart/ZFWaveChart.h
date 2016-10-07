@@ -31,7 +31,7 @@
  *
  *  @param index     点击的x轴valueLabel的位置下标
  */
-- (void)waveChart:(ZFWaveChart *)waveChart popoverLabelAtIndex:(NSInteger)index;
+- (void)waveChart:(ZFWaveChart *)waveChart popoverLabelAtIndex:(NSInteger)index popoverLabel:(ZFPopoverLabel *)popoverLabel;
 
 @end
 

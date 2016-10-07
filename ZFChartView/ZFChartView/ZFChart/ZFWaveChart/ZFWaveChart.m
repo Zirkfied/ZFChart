@@ -19,6 +19,8 @@
 @property (nonatomic, strong) ZFWave * wave;
 /** 存储点的位置的数组 */
 @property (nonatomic, strong) NSMutableArray * valuePointArray;
+/** 存储popoverLaber数组 */
+@property (nonatomic, strong) NSMutableArray * popoverLaberArray;
 
 @end
 
@@ -75,27 +77,30 @@
  *  设置x轴valueLabel
  */
 - (void)setValueLabelOnChart{
-    
     for (NSInteger i = 0; i < _valuePointArray.count; i++) {
         //当前点的位置
         NSDictionary * currentDict = _valuePointArray[i];
         
-        CGRect rect = [self.genericAxis.xLineValueArray[i] stringWidthRectWithSize:CGSizeMake(45, 30) fontOfSize:self.valueOnChartFontSize isBold:NO];
+        CGRect rect = [self.genericAxis.xLineValueArray[i] stringWidthRectWithSize:CGSizeMake(45, 30) font:self.valueOnChartFont];
         ZFPopoverLabel * popoverLabel = [[ZFPopoverLabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width + 10, rect.size.height + 10) direction:kAxisDirectionVertical];
         popoverLabel.text = self.genericAxis.xLineValueArray[i];
-        popoverLabel.font = [UIFont systemFontOfSize:self.valueOnChartFontSize];
+        popoverLabel.font = self.valueOnChartFont;
         popoverLabel.pattern = self.valueLabelPattern;
         popoverLabel.textColor = _valueTextColor;
         popoverLabel.isShadow = self.isShadowForValueLabel;
         popoverLabel.isAnimated = self.isAnimated;
         popoverLabel.labelIndex = i;
         popoverLabel.shadowColor = self.valueLabelShadowColor;
+        popoverLabel.isOverrun = NO;
+        popoverLabel.hidden = self.isShowAxisLineValue ? NO : YES;
         CGFloat percent = ([self.genericAxis.xLineValueArray[i] floatValue] - self.genericAxis.yLineMinValue) / (self.genericAxis.yLineMaxValue - self.genericAxis.yLineMinValue);
         if (percent > 1) {
             popoverLabel.textColor = _overMaxValueTextColor;
+            popoverLabel.isOverrun = YES;
         }
         
-        [self.wave addSubview:popoverLabel];
+        [self.genericAxis addSubview:popoverLabel];
+        [self.popoverLaberArray addObject:popoverLabel];
         [popoverLabel addTarget:self action:@selector(popoverAction:) forControlEvents:UIControlEventTouchUpInside];
         
         //_valueOnChartPosition为上下分布
@@ -113,21 +118,21 @@
             
             if (end_YPos < 0) {
                 popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnTop;
-                popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue], [currentDict[@"yPos"] floatValue] + (rect.size.height + 10) * 0.5 + _valueLabelToWaveLinePadding);
+                popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue] + CGRectGetMinX(self.wave.frame), [currentDict[@"yPos"] floatValue] + (rect.size.height + 10) * 0.5 + _valueLabelToWaveLinePadding + CGRectGetMinY(self.wave.frame));
             }else{
                 popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnBelow;
-                popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue], [currentDict[@"yPos"] floatValue] - (rect.size.height + 10) * 0.5 - _valueLabelToWaveLinePadding);
+                popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue] + CGRectGetMinX(self.wave.frame), [currentDict[@"yPos"] floatValue] - (rect.size.height + 10) * 0.5 - _valueLabelToWaveLinePadding + CGRectGetMinY(self.wave.frame));
             }
             
             //_valueOnChartPosition为图表上方
         }else if (_valuePosition == kChartValuePositionOnTop){
             popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnBelow;
-            popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue], [currentDict[@"yPos"] floatValue] - (rect.size.height + 10) * 0.5 - _valueLabelToWaveLinePadding);
+            popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue] + CGRectGetMinX(self.wave.frame), [currentDict[@"yPos"] floatValue] - (rect.size.height + 10) * 0.5 - _valueLabelToWaveLinePadding + CGRectGetMinY(self.wave.frame));
             
             //_valueOnChartPosition为图表下方
         }else if (_valuePosition == kChartValuePositionOnBelow){
             popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnTop;
-            popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue], [currentDict[@"yPos"] floatValue] + (rect.size.height + 10) * 0.5 + _valueLabelToWaveLinePadding);
+            popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue] + CGRectGetMinX(self.wave.frame), [currentDict[@"yPos"] floatValue] + (rect.size.height + 10) * 0.5 + _valueLabelToWaveLinePadding + CGRectGetMinY(self.wave.frame));
         }
         
         [popoverLabel strokePath];
@@ -137,8 +142,25 @@
 #pragma mark - popover点击事件
 
 - (void)popoverAction:(ZFPopoverLabel *)sender{
-    if ([self.delegate respondsToSelector:@selector(waveChart:popoverLabelAtIndex:)]) {
-        [self.delegate waveChart:self popoverLabelAtIndex:sender.labelIndex];
+    if ([self.delegate respondsToSelector:@selector(waveChart:popoverLabelAtIndex:popoverLabel:)]) {
+        [self.delegate waveChart:self popoverLabelAtIndex:sender.labelIndex popoverLabel:sender];
+        
+        [self resetPopoverLabel:sender];
+    }
+}
+
+#pragma mark - 重置PopoverLabel原始设置
+
+- (void)resetPopoverLabel:(ZFPopoverLabel *)sender{
+    for (ZFPopoverLabel * popoverLabel in self.popoverLaberArray) {
+        if (popoverLabel != sender) {
+            popoverLabel.font = self.valueOnChartFont;
+            popoverLabel.textColor = popoverLabel.isOverrun ? _overMaxValueTextColor : _valueTextColor;
+            popoverLabel.shadowColor = self.valueLabelShadowColor;
+            popoverLabel.isShadow = self.isShadowForValueLabel;
+            popoverLabel.isAnimated = sender.isAnimated;
+            [popoverLabel strokePath];
+        }
     }
 }
 
@@ -148,6 +170,7 @@
  *  清除所有子控件
  */
 - (void)removeAllSubview{
+    [self.popoverLaberArray removeAllObjects];
     NSArray * subviews = [NSArray arrayWithArray:self.genericAxis.subviews];
     for (UIView * view in subviews) {
         if ([view isKindOfClass:[ZFWave class]] || [view isKindOfClass:[ZFPopoverLabel class]]) {
@@ -183,7 +206,7 @@
             return;
         }
     }else{
-        self.genericAxis.yLineMaxValue = [[ZFMethod shareInstance] cachedYLineMaxValue:self.genericAxis.xLineValueArray];
+        self.genericAxis.yLineMaxValue = [[ZFMethod shareInstance] cachedMaxValue:self.genericAxis.xLineValueArray];
         
         if (self.genericAxis.yLineMaxValue == 0.f) {
             if ([self.dataSource respondsToSelector:@selector(axisLineMaxValueInGenericChart:)]) {
@@ -197,15 +220,15 @@
     
     if (self.isResetAxisLineMinValue) {
         if ([self.dataSource respondsToSelector:@selector(axisLineMinValueInGenericChart:)]) {
-            if ([self.dataSource axisLineMinValueInGenericChart:self] > [[ZFMethod shareInstance] cachedYLineMinValue:self.genericAxis.xLineValueArray]) {
-                self.genericAxis.yLineMinValue = [[ZFMethod shareInstance] cachedYLineMinValue:self.genericAxis.xLineValueArray];
+            if ([self.dataSource axisLineMinValueInGenericChart:self] > [[ZFMethod shareInstance] cachedMinValue:self.genericAxis.xLineValueArray]) {
+                self.genericAxis.yLineMinValue = [[ZFMethod shareInstance] cachedMinValue:self.genericAxis.xLineValueArray];
                 
             }else{
                 self.genericAxis.yLineMinValue = [self.dataSource axisLineMinValueInGenericChart:self];
             }
             
         }else{
-            self.genericAxis.yLineMinValue = [[ZFMethod shareInstance] cachedYLineMinValue:self.genericAxis.xLineValueArray];
+            self.genericAxis.yLineMinValue = [[ZFMethod shareInstance] cachedMinValue:self.genericAxis.xLineValueArray];
         }
     }
     
@@ -224,11 +247,11 @@
     [self removeAllSubview];
     self.genericAxis.xLineNameLabelToXAxisLinePadding = self.xLineNameLabelToXAxisLinePadding;
     self.genericAxis.isAnimated = self.isAnimated;
-    self.genericAxis.axisLineValueType = self.axisLineValueType;
+    self.genericAxis.valueType = self.valueType;
     [self.genericAxis strokePath];
     _valuePointArray = [NSMutableArray arrayWithArray:[self cachedValuePointArray:self.genericAxis.xLineValueArray]];
     [self drawWavePath];
-    self.isShowAxisLineValue ? [self setValueLabelOnChart] : nil;
+    [self setValueLabelOnChart];
     [self.genericAxis bringSubviewToFront:self.genericAxis.yAxisLine];
     [self.genericAxis bringSectionToFront];
     [self bringSubviewToFront:self.topicLabel];
@@ -271,12 +294,12 @@
     self.genericAxis.unitColor = unitColor;
 }
 
-- (void)setAxisLineNameFontSize:(CGFloat)axisLineNameFontSize{
-    self.genericAxis.xLineNameFontSize = axisLineNameFontSize;
+- (void)setAxisLineNameFont:(UIFont *)axisLineNameFont{
+    self.genericAxis.xLineNameFont = axisLineNameFont;
 }
 
-- (void)setAxisLineValueFontSize:(CGFloat)axisLineValueFontSize{
-    self.genericAxis.yLineValueFontSize = axisLineValueFontSize;
+- (void)setAxisLineValueFont:(UIFont *)axisLineValueFont{
+    self.genericAxis.yLineValueFont = axisLineValueFont;
 }
 
 - (void)setAxisLineNameColor:(UIColor *)axisLineNameColor{
@@ -301,6 +324,15 @@
 
 - (void)setIsShowSeparate:(BOOL)isShowSeparate{
     self.genericAxis.isShowSeparate = isShowSeparate;
+}
+
+#pragma mark - 懒加载
+
+- (NSMutableArray *)popoverLaberArray{
+    if (!_popoverLaberArray) {
+        _popoverLaberArray = [NSMutableArray array];
+    }
+    return _popoverLaberArray;
 }
 
 @end

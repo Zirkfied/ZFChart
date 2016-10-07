@@ -12,11 +12,11 @@
 static ZFMethod * instance = nil;
 
 @interface ZFMethod()
-/** 记录当前遍历中yLine显示最大值 */
-@property (nonatomic, assign) CGFloat tempYLineMaxValue;
-/** 记录当前遍历中yLine显示最小值 */
-@property (nonatomic, assign) CGFloat tempYLineMinValue;
-/** 记录是否第一次调用方法，用于初始化tempYLineMinValue */
+/** 记录当前遍历中显示的最大值 */
+@property (nonatomic, assign) CGFloat tempMaxValue;
+/** 记录当前遍历中显示的最小值 */
+@property (nonatomic, assign) CGFloat tempMinValue;
+/** 记录是否第一次调用方法，用于初始化tempMinValue */
 @property (nonatomic, assign) BOOL isFirstTransfer;
 
 @end
@@ -28,7 +28,7 @@ static ZFMethod * instance = nil;
     dispatch_once(&onceToken, ^{
         instance = [[super allocWithZone:NULL] init];
     });
-    instance.tempYLineMaxValue = 0;
+    instance.tempMaxValue = 0;
     instance.isFirstTransfer = YES;
     return instance;
 }
@@ -59,7 +59,7 @@ static ZFMethod * instance = nil;
     NSInteger count = [self countColorCount:array];
     NSMutableArray * newArray = [NSMutableArray array];
     for (NSInteger i = 0; i < count; i++) {
-        [newArray addObject:ZFRandomColor];
+        [newArray addObject:ZFRandom];
     }
     return newArray;
 }
@@ -90,20 +90,20 @@ static ZFMethod * instance = nil;
 /**
  *  获取数据源最大值，并赋值给y轴显示的最大值
  */
-- (CGFloat)cachedYLineMaxValue:(NSMutableArray *)array{
+- (CGFloat)cachedMaxValue:(NSMutableArray *)array{
     if (array.count > 0) {
         for (id subObject in array) {
             if ([subObject isKindOfClass:[NSString class]]) {
                 CGFloat value = [subObject floatValue];
-                if (value > _tempYLineMaxValue) {
-                    _tempYLineMaxValue = value;
+                if (value > _tempMaxValue) {
+                    _tempMaxValue = value;
                 }
                 
             }else if([subObject isKindOfClass:[NSArray class]]){
-                [self cachedYLineMaxValue:subObject];
+                [self cachedMaxValue:subObject];
             }
         }
-        return _tempYLineMaxValue;
+        return _tempMaxValue;
     }
     return 0;
 }
@@ -111,9 +111,9 @@ static ZFMethod * instance = nil;
 /**
  *  获取数据源最小值，并赋值给y轴显示的最小值
  */
-- (CGFloat)cachedYLineMinValue:(NSMutableArray *)array{
+- (CGFloat)cachedMinValue:(NSMutableArray *)array{
     if (_isFirstTransfer) {
-        _tempYLineMinValue = [self cachedYLineMaxValue:array];
+        _tempMinValue = [self cachedMaxValue:array];
         _isFirstTransfer = NO;
     }
     
@@ -121,18 +121,18 @@ static ZFMethod * instance = nil;
         for (id subObject in array) {
             if ([subObject isKindOfClass:[NSString class]]) {
                 CGFloat value = [subObject floatValue];
-                if (value < _tempYLineMinValue) {
-                    _tempYLineMinValue = value;
+                if (value < _tempMinValue) {
+                    _tempMinValue = value;
                 }
                 
             }else if([subObject isKindOfClass:[NSArray class]]){
-                [self cachedYLineMinValue:subObject];
+                [self cachedMinValue:subObject];
             }
         }
         
-        return _tempYLineMinValue;
+        return _tempMinValue;
     }
-    return 0;
+    return 0.f;
 }
 
 @end
