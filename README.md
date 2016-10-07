@@ -448,12 +448,10 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
                    
         2016.10.07 ①新增雷达图(ZFRadarChart)
                    ②柱状图(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart),横向柱状图(ZFHorizontalBarChart),雷达图(ZFRadarChart)新增isResetMaxValue属性
-                   ③新增ZFLineChartDelegate协议方法: - (NSArray *)valuePositionInLineChart:(ZFLineChart *)lineChart,
-                     现可根据该方法独立设置每条线的value位置
-                   ④柱状图(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart),横向柱状图(ZFHorizontalBarChart),雷达图(ZFRadarChart)代理点击方法进行扩展，
-                   现可根据自身需求进行点击控件才显示value或对被点击的控件进行属性修改，具体代码查看Demo
+                   ③新增ZFLineChartDelegate协议方法: - (NSArray *)valuePositionInLineChart:(ZFLineChart *)lineChart,现可根据该方法独立设置每条线的value位置
+                   ④柱状图(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart),横向柱状图(ZFHorizontalBarChart),雷达图(ZFRadarChart)代理点击方法进行扩展，现可根据自身需求进行点击控件才显示value或对被点击的控件进行属性修改，具体代码查看Demo
                    ⑤现将所有字体大小属性从CGFloat类型转换成UIFont类型，比以往更方便对字体进行修改，减少源码的变动
-                   ⑥新增部分属性设置，具体请自行探索（因为我自己都忘了-_-! ）
+                   ⑥新增部分属性设置，具体请自行探索（因为我自己都忘了-_-! ）
                    ⑦修复特殊情况下crash问题
                    ⑧部分属性名或方法名进行修改并优化部分bug
                    
