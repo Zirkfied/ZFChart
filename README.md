@@ -1,7 +1,7 @@
 # ZFChart
 A simple chart library for iOS , contains barChart, lineChart, pieChart, waveChart. Thanks for your star if you like.
 
-模仿PNChart写的一个图表库，用法简单，暂时有柱状图，线状图，饼图，波浪图四种类型，带动画效果，后续可能会更新新的类型，喜欢的欢迎star一个，有任何建议或问题可以加QQ群交流：451169423
+模仿PNChart，Charts写的一个图表库，用法简单，暂时有柱状图，线状图，饼图，波浪图四种类型，带动画效果，后续可能会更新新的类型，喜欢的欢迎star一个，有任何建议或问题可以加QQ群交流：451169423
 
 ###用法:
         第一步(step 1)
