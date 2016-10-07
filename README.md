@@ -63,8 +63,8 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         barChart.delegate = self;
         barChart.topicLabel.text = @"xx小学各年级人数";
         barChart.unit = @"人";
-        [barChart strokePath];
         [self.view addSubview:barChart];
+        [barChart strokePath];
         
         
 ###     ZFBarChartDelegate协议方法
@@ -139,8 +139,8 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         lineChart.delegate = self;
         lineChart.topicLabel.text = @"xx小学各年级男女人数";
         lineChart.unit = @"人";
-        [lineChart strokePath];
         [self.view addSubview:lineChart];
+        [lineChart strokePath];
         
 ###     ZFLineChartDelegate协议方法
 ####    @optional 可选实现的方法
@@ -183,13 +183,13 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         }
         
 ## PieChart(饼图)
-        须遵循ZFPieChartDataSource数据源方法
+        须遵循ZFPieChartDataSource，ZFPieChartDelegate协议
 
         ZFPieChart * pieChart = [[ZFPieChart alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT)];
         pieChart.dataSource = self;
         pieChart.delegate = self;
-        [pieChart strokePath];
         [self.view addSubview:pieChart];
+        [pieChart strokePath];
         
 ###     ZFPieChartDataSource数据源方法
 ####    @required 必须实现的方法
@@ -247,8 +247,8 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         waveChart.delegate = self;
         waveChart.topicLabel.text = @"xx小学各年级人数";
         waveChart.unit = @"人";
-        [waveChart strokePath];
         [self.view addSubview:waveChart];
+        [waveChart strokePath];
         
 ###     ZFWaveChartDelegate协议方法
 ####    @optional 可选实现的方法
@@ -292,55 +292,102 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         barChart.delegate = self;
         barChart.topicLabel.text = @"xx小学各年级人数";
         barChart.unit = @"人";
-        [barChart strokePath];
         [self.view addSubview:barChart];
+        [barChart strokePath];
 
 
 ####效果展示
 
 ![image](https://github.com/Zirkfied/Library/blob/master/HorizontalBarChart.gif)
 
+
+
+## RadarChart(雷达图)
+        须遵循ZFRadarChartDataSource，ZFRadarChartDelegate协议
+        
+        ZFRadarChart * radarChart = [[ZFRadarChart alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT)];
+        radarChart.dataSource = self;
+        radarChart.delegate = self;
+        [self.view addSubview:self.radarChart];
+        [self.radarChart strokePath];
+
+###     ZFRadarChartDataSource数据源方法
+####    @required 必须实现的方法
+        /**
+         *  item数组(eg: 力量，智力，物防，法防，敏捷...)
+         *
+         *  PS:根据item数组的个数自动生成N边形
+         *
+         *  @return NSArray必须存储NSString类型
+         */
+        - (NSArray *)itemArrayInRadarChart:(ZFRadarChart *)radarChart;
+
+        /**
+         *  value数组
+         *
+         *  @return NSArray必须存储NSString类型
+         */
+        - (NSArray *)valueArrayInRadarChart:(ZFRadarChart *)radarChart;
+
+
+###     ZFRadarChartDelegate协议方法
+####    @required 必须实现的方法
+        /**
+         *  设置雷达图半径
+         *
+         *  @return 半径
+         */
+        - (CGFloat)radiusForRadarChart:(ZFRadarChart *)radarChart;
+        
+####    @optional 可选实现的方法
+        /**
+         *  设置雷达图半径延伸长度，用于计算item label的中心点位置(默认25.f)
+         *
+         *  @param itemIndex item下标(可根据item的字符长度自行调节item label的中心点位置)
+         *
+         *  @return 半径延伸长度
+         */
+        - (CGFloat)radiusExtendLengthForRadarChart:(ZFRadarChart *)radarChart itemIndex:(NSInteger)itemIndex;
+
+        /**
+         *  雷达图分段数值的角度位置(若不设置,默认为-90度(正上方))
+         *
+         *  @return 角度( 可调节范围 [-90, 270) )
+         */
+        - (CGFloat)valueRotationAngleForRadarChart:(ZFRadarChart *)radarChart;
+
+
+####效果展示
+
+![image](https://github.com/Zirkfied/Library/blob/master/RadarChart.gif)
+
+
+
 ###其余说明
 ####    
-        1.可根据自身图表需求进行框架瘦身
-        柱状图(ZFBarChart)
-![](https://github.com/Zirkfied/Library/blob/master/BarChart.png)
-
-        线状图(ZFLineChart)
-![](https://github.com/Zirkfied/Library/blob/master/LineChart.png)
-
-        饼图(ZFPieChart)
-![](https://github.com/Zirkfied/Library/blob/master/PieChart.png)
-
-        波浪图(ZFWaveChart)
-![](https://github.com/Zirkfied/Library/blob/master/WaveChart.png)
-
-        横向柱状图(ZFHorizontalBarChart)
-![](https://github.com/Zirkfied/Library/blob/master/HorizontalBarChart.png)
-          
-        2.  ZFGenericChartDataSource是柱状图(ZFBarChart, ZFHorizontalBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)的数据源方法
+        1.  ZFGenericChartDataSource是柱状图(ZFBarChart, ZFHorizontalBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)的数据源方法
             ZFPieChartDataSource是饼图(ZFPieChart)的数据源方法
             根据自身使用的图表遵循对应的数据源
         
-        3.  ZFBarChartDelegate是柱状图(ZFBarChart)的部分常量设置的协议方法
+        2.  ZFBarChartDelegate是柱状图(ZFBarChart)的部分常量设置的协议方法
             ZFLineChartDelegate是线状图(ZFLineChart)的部分常量设置的协议方法
             ZFPieChartDelegate是饼图(ZFLineChart)的部分常量设置的协议方法
             ZFWaveChartDelegate是波浪图(ZFWaveChart)的部分常量设置的协议方法
             ZFHorizontalBarChartDelegate是柱状图(ZFHorizontalBarChart)的部分常量设置的协议方法
         
-        4.  因再一次进行封装，柱状图(ZFBarChart, ZFHorizontalBarChart)，线状图(ZFLineChart)，波浪图(ZFWaveChart)均继承ZFGenericChart，故ZFGenericChartDataSource数据源方法 和 通用属性请查看 ZFGenericChart.h
+        3.  因再一次进行封装，柱状图(ZFBarChart, ZFHorizontalBarChart)，线状图(ZFLineChart)，波浪图(ZFWaveChart)均继承ZFGenericChart，故ZFGenericChartDataSource数据源方法 和 通用属性请查看 ZFGenericChart.h
             ZFBarChartDelegate协议方法 和 柱状图(ZFBarChart)专有属性 请查看 ZFBarChart.h
             ZFLineChartDelegate协议方法 和 线状图(ZFLineChart)专有属性 请查看 ZFLineChart.h
             ZFPieChartDataSource数据源方法 和 饼图(ZFPieChart)其余属性 请查看 ZFPieChart.h
             ZFWaveChartDelegate协议方法 和 波浪图(ZFWaveChart)专有属性 请查看 ZFWaveChart.h
             ZFHorizontalBarChartDelegate协议方法 和 横向柱状图(ZFHorizontalBarChart)专有属性 请查看 ZFHorizontalBarChart.h
         
-        5.柱状图(ZFBarChart, ZFHorizontalBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)的valueLabel新增气泡样式，对应属性valueLabelPattern，现已默认为
+        4.柱状图(ZFBarChart, ZFHorizontalBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)的valueLabel新增气泡样式，对应属性valueLabelPattern，现已默认为
           kPopoverLabelPatternPopover(气泡样式)，若要改回原样式，则设置为kPopoverLabelPatternBlank；
           
           eg:  barChart.valueLabelPattern = kPopoverLabelPatternBlank;
           
-        6.关于自定义设置y轴最小值说明：
+        5.关于自定义设置y轴最小值说明：
           /** 该属性是否重设y轴最小值，默认为NO(不设置，从0开始)，当设置为YES时，则有以下2种情况
               ①若同时实现代理方法中的 - (CGFloat)yLineMinValueInGenericChart:(ZFGenericChart *)chart，则y轴最小值为该方法的返回值
               ②若不实现①中的方法，则y轴最小值为数据源最小值
@@ -354,7 +401,7 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
            */
            @property (nonatomic, assign) BOOL isResetAxisLineMinValue;
           
-        7.每当更新数据后或更改属性设置，则需重新调用一次 - (void)strokePath 方法。
+        6.每当更新数据后或更改属性设置，则需重新调用一次 - (void)strokePath 方法。
           网络获取数据后，才调用 - (void)strokePath 方法
 
 
@@ -374,7 +421,7 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         2016.03.30 ①新增波浪图表(ZFWaveChart)
                    ②柱状图(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)的valueLabel新增气泡样式，
                     请查看ZFPopoverLabel.h的kPopoverLabelPattern枚举类型
-                   ③(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)新增坐标轴的分割线显示
+                   ③柱状图(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)新增坐标轴的分割线显示
                    ④优化线状图(LineChart)重绘时在真机上卡帧问题
                    ⑤修复其余Bug
                    
@@ -398,7 +445,18 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
                    ⑤删除柱状图(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart),新增横向柱状图(ZFHorizontalBarChart)的topic和topicColor属性，现已直接给出topicLabel控件，方便进行标题其余属性的更改
                    ⑥现已支持横竖屏适配
                    ⑦现已修复打印控制台的一堆警告
-        
+                   
+        2016.10.07 ①新增雷达图(ZFRadarChart)
+                   ②柱状图(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart),横向柱状图(ZFHorizontalBarChart),雷达图(ZFRadarChart)新增isResetMaxValue属性
+                   ③新增ZFLineChartDelegate协议方法: - (NSArray *)valuePositionInLineChart:(ZFLineChart *)lineChart,
+                     现可根据该方法独立设置每条线的value位置
+                   ④柱状图(ZFBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart),横向柱状图(ZFHorizontalBarChart),雷达图(ZFRadarChart)代理点击方法进行扩展，
+                   现可根据自身需求进行点击控件才显示value或对被点击的控件进行属性修改，具体代码查看Demo
+                   ⑤现将所有字体大小属性从CGFloat类型转换成UIFont类型，比以往更方便对字体进行修改，减少源码的变动
+                   ⑥新增部分属性设置，具体请自行探索（因为我自己都忘了-_-! ）
+                   ⑦修复特殊情况下crash问题
+                   ⑧部分属性名或方法名进行修改并优化部分bug
+                   
         
 ##本人其他开源框架
 ####[ZFChart - 一款简单好用的图表库，目前有柱状，线状，饼图，波浪图类型](https://github.com/Zirkfied/ZFChart)
