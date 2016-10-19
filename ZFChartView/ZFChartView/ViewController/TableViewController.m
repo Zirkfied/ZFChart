@@ -21,6 +21,7 @@
 @interface TableViewController ()
 
 @property (nonatomic, strong) NSArray * nameArray;
+@property (nonatomic, strong) NSArray * viewControllerArray;
 
 @end
 
@@ -39,6 +40,17 @@
                        @"柱状图(横向):多组数据\n(MultiHorizontalBarChartViewController)",
                        @"雷达图:一组数据\n(SingleRadarChartViewController)",
                        @"雷达图:多组数据\n(MultiRadarChartViewController)"];
+    
+    self.viewControllerArray = @[@"SingleBarChartViewController",
+                                 @"MultiBarChartViewController",
+                                 @"SingleLineChartViewController",
+                                 @"MultiLineChartViewController",
+                                 @"PieChartViewController",
+                                 @"WaveChartViewController",
+                                 @"SingleHorizontalBarChartViewController",
+                                 @"MultiHorizontalBarChartViewController",
+                                 @"SingleRadarChartViewController",
+                                 @"MultiRadarChartViewController"];
 }
 
 #pragma mark - Table view data source
@@ -62,37 +74,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0) {
-        SingleBarChartViewController * vc = [[SingleBarChartViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 1){
-        MultiBarChartViewController * vc = [[MultiBarChartViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 2){
-        SingleLineChartViewController * vc = [[SingleLineChartViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 3){
-        MultiLineChartViewController * vc = [[MultiLineChartViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 4){
-        PieChartViewController * vc = [[PieChartViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 5){
-        WaveChartViewController * vc = [[WaveChartViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 6){
-        SingleHorizontalBarChartViewController * vc = [[SingleHorizontalBarChartViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 7){
-        MultiHorizontalBarChartViewController * vc = [[MultiHorizontalBarChartViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 8){
-        SingleRadarChartViewController * vc = [[SingleRadarChartViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 9){
-        MultiRadarChartViewController * vc = [[MultiRadarChartViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+    [self.navigationController pushViewController:[[NSClassFromString(self.viewControllerArray[indexPath.row]) alloc] init] animated:YES];
 }
 
 @end

@@ -28,6 +28,8 @@
  *  value数组
  *
  *  @return NSArray必须存储NSString类型
+ *          eg: ①当只有1组数据时，NSArray存储 @[@"1", @"2", @"3", @"4"]
+ *              ②当有多组数据时，NSArray存储 @[@[@"1", @"2", @"3", @"4"], @[@"1", @"2", @"3", @"4"]]
  */
 - (NSArray *)valueArrayInRadarChart:(ZFRadarChart *)radarChart;
 
