@@ -129,30 +129,35 @@ extern CGFloat const TABBAR_HEIGHT;
  */
 extern CGFloat const TOPIC_HEIGHT;
 
+/**
+ *  圆周角
+ */
+extern CGFloat const ZFPerigon;
+
 
 /**
  *  线状图, 波浪图上的value的位置
  */
 typedef enum{
-    kChartValuePositionDefalut = 0,//上下分布
-    kChartValuePositionOnTop = 1,//上方
-    kChartValuePositionOnBelow = 2//下方
+    kChartValuePositionDefalut = 0,   //上下分布
+    kChartValuePositionOnTop = 1,     //上方
+    kChartValuePositionOnBelow = 2    //下方
 }kChartValuePosition;
 
 /**
  *  横向或竖向坐标轴
  */
 typedef enum{
-    kAxisDirectionVertical = 0,//垂直方向
-    kAxisDirectionHorizontal = 1//水平方向
+    kAxisDirectionVertical = 0,    //垂直方向
+    kAxisDirectionHorizontal = 1   //水平方向
 }kAxisDirection;
 
 /**
  *  坐标轴y轴数值 或 雷达图分段数值 的显示类型
  */
 typedef enum{
-    kValueTypeDecimal = 0,//保留有效小数
-    kValueTypeInteger = 1,//取整数形式(四舍五入)(默认)
+    kValueTypeDecimal = 0,   //保留有效小数
+    kValueTypeInteger = 1,   //取整数形式(四舍五入)(默认)
 }kValueType;
 
 @interface ZFConst : NSObject

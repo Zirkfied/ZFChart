@@ -148,6 +148,8 @@
 @property (nonatomic, assign) BOOL isShowAxisLineValue;
 /** 是否显示分割线(默认为NO) */
 @property (nonatomic, assign) BOOL isShowSeparate;
+/** 是否显示坐标轴箭头(默认为YES) */
+@property (nonatomic, assign) BOOL isShowAxisArrows;
 
 
 

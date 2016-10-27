@@ -17,6 +17,8 @@
 #import "MultiHorizontalBarChartViewController.h"
 #import "SingleRadarChartViewController.h"
 #import "MultiRadarChartViewController.h"
+#import "SingleCirqueChartViewController.h"
+#import "MultiCirqueChartViewController.h"
 
 @interface TableViewController ()
 
@@ -39,7 +41,9 @@
                        @"柱状图(横向):一组数据\n(SingleHorizontalBarChartViewController)",
                        @"柱状图(横向):多组数据\n(MultiHorizontalBarChartViewController)",
                        @"雷达图:一组数据\n(SingleRadarChartViewController)",
-                       @"雷达图:多组数据\n(MultiRadarChartViewController)"];
+                       @"雷达图:多组数据\n(MultiRadarChartViewController)",
+                       @"圆环图:一组数据\n(SingleCirqueChartViewController)",
+                       @"圆环图:多组数据\n(MultiCirqueChartViewController)"];
     
     self.viewControllerArray = @[@"SingleBarChartViewController",
                                  @"MultiBarChartViewController",
@@ -50,7 +54,9 @@
                                  @"SingleHorizontalBarChartViewController",
                                  @"MultiHorizontalBarChartViewController",
                                  @"SingleRadarChartViewController",
-                                 @"MultiRadarChartViewController"];
+                                 @"MultiRadarChartViewController",
+                                 @"SingleCirqueChartViewController",
+                                 @"MultiCirqueChartViewController"];
 }
 
 #pragma mark - Table view data source

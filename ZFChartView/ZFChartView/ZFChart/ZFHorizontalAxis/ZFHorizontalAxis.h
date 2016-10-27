@@ -56,6 +56,8 @@
 @property (nonatomic, assign) BOOL isShowSeparate;
 /** 是否带动画显示(默认为YES，带动画) */
 @property (nonatomic, assign) BOOL isAnimated;
+/** 是否显示坐标轴箭头(默认为YES) */
+@property (nonatomic, assign) BOOL isShowAxisArrows;
 /** 坐标轴数值的显示类型(保留有效小数或显示整数形式) */
 @property (nonatomic, assign) kValueType valueType;
 

@@ -55,6 +55,8 @@
 @property (nonatomic, assign) BOOL isShowSeparate;
 /** 是否带动画显示(默认为YES，带动画) */
 @property (nonatomic, assign) BOOL isAnimated;
+/** 是否显示坐标轴箭头(默认为YES) */
+@property (nonatomic, assign) BOOL isShowAxisArrows;
 /** 分割线颜色(默认为浅灰色) */
 @property (nonatomic, strong) UIColor * separateColor;
 /** 坐标轴y轴数值的显示类型(保留有效小数或显示整数形式，默认为整数形式) */

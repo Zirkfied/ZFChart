@@ -9,9 +9,12 @@
 #import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
 
+/**
+ *   饼图样式
+ */
 typedef enum{
-    kPieChartPatternTypeForCirque = 0,//圆环
-    kPieChartPatternTypeForCircle = 1//整圆
+    kPieChartPatternTypeForCirque = 0,   //圆环
+    kPieChartPatternTypeForCircle = 1    //整圆
 }kPiePatternType;
 
 

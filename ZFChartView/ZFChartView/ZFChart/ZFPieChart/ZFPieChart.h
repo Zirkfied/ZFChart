@@ -75,9 +75,10 @@
  *   百分比类型
  */
 typedef enum{
-    kPercentTypeDecimal = 0,//保留2位小数形式(默认)
-    kPercentTypeInteger = 1//取整数形式(四舍五入)
+    kPercentTypeDecimal = 0,   //保留2位小数形式(默认)
+    kPercentTypeInteger = 1    //取整数形式(四舍五入)
 }kPercentType;
+
 
 @interface ZFPieChart : UIView
 

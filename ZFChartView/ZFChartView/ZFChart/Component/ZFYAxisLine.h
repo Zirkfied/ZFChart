@@ -21,6 +21,8 @@
 @property (nonatomic, assign) NSInteger yLineSectionCount;
 /** 是否带动画显示(默认为YES，带动画) */
 @property (nonatomic, assign) BOOL isAnimated;
+/** 是否显示坐标轴箭头(默认为YES) */
+@property (nonatomic, assign) BOOL isShowAxisArrows;
 /** 坐标轴颜色(默认为黑色) */
 @property (nonatomic, strong) UIColor * axisColor;
 

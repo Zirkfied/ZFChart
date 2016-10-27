@@ -84,6 +84,7 @@
     self.radar = [[ZFRadar alloc] initWithFrame:self.bounds];
     [self addSubview:self.radar];
     
+    //旋转手势
     self.rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotationAction:)];
     [self addGestureRecognizer:self.rotationGesture];
 }
@@ -94,23 +95,23 @@
  *  设置多边形
  */
 - (void)setPolygon{
-    id subObject = self.valueArray.firstObject;
+    id subObject = _valueArray.firstObject;
     //一组数据
     if ([subObject isKindOfClass:[NSString class]]) {
         CGFloat width = self.radar.radius * 2;
         CGFloat height = width;
         
         ZFPolygon * polygon = [[ZFPolygon alloc] initWithFrame:CGRectMake(0, 0, width, height)];
-        polygon.polygonColor = self.colorArray.firstObject;
+        polygon.polygonColor = _colorArray.firstObject;
         polygon.center = self.radar.center;
         polygon.averageRadarAngle = self.radar.averageRadarAngle;
         polygon.maxValue = self.maxValue;
         polygon.minValue = self.minValue;
         polygon.maxRadius = self.radar.radius;
         polygon.isAnimated = _isAnimated;
-        polygon.valueArray = self.valueArray;
+        polygon.valueArray = _valueArray;
         polygon.opacity = _opacity;
-        polygon.polygonLineColor = self.colorArray.firstObject;
+        polygon.polygonLineColor = _colorArray.firstObject;
         polygon.polygonLineWidth = _polygonLineWidth;
         polygon.isShowPolygonLine = _isShowPolygonLine;
         [self.radar addSubview:polygon];
@@ -118,21 +119,21 @@
     
     //多组数据
     }else if ([subObject isKindOfClass:[NSArray class]]){
-        for (NSInteger i = 0; i < self.valueArray.count; i++) {
+        for (NSInteger i = 0; i < _valueArray.count; i++) {
             CGFloat width = self.radar.radius * 2;
             CGFloat height = width;
             
             ZFPolygon * polygon = [[ZFPolygon alloc] initWithFrame:CGRectMake(0, 0, width, height)];
-            polygon.polygonColor = self.colorArray[i];
+            polygon.polygonColor = _colorArray[i];
             polygon.center = self.radar.center;
             polygon.averageRadarAngle = self.radar.averageRadarAngle;
             polygon.maxValue = self.maxValue;
             polygon.minValue = self.minValue;
             polygon.maxRadius = self.radar.radius;
             polygon.isAnimated = _isAnimated;
-            polygon.valueArray = self.valueArray[i];
+            polygon.valueArray = _valueArray[i];
             polygon.opacity = _opacity;
-            polygon.polygonLineColor = self.colorArray[i];
+            polygon.polygonLineColor = _colorArray[i];
             polygon.polygonLineWidth = _polygonLineWidth;
             polygon.isShowPolygonLine = _isShowPolygonLine;
             [self.radar addSubview:polygon];
@@ -263,13 +264,13 @@
     }
     
     if ([self.dataSource respondsToSelector:@selector(valueArrayInRadarChart:)]) {
-        self.valueArray = [NSMutableArray arrayWithArray:[self.dataSource valueArrayInRadarChart:self]];
+        _valueArray = [NSMutableArray arrayWithArray:[self.dataSource valueArrayInRadarChart:self]];
     }
     
     if ([self.dataSource respondsToSelector:@selector(colorArrayInRadarChart:)]) {
-        self.colorArray = [NSMutableArray arrayWithArray:[self.dataSource colorArrayInRadarChart:self]];
+        _colorArray = [NSMutableArray arrayWithArray:[self.dataSource colorArrayInRadarChart:self]];
     }else{
-        self.colorArray = [NSMutableArray arrayWithArray:[[ZFMethod shareInstance] cachedColor:self.valueArray]];
+        _colorArray = [NSMutableArray arrayWithArray:[[ZFMethod shareInstance] cachedRandomColor:_valueArray]];
     }
     
     if (_isResetMaxValue) {
@@ -280,7 +281,7 @@
             return;
         }
     }else{
-        _maxValue = [[ZFMethod shareInstance] cachedMaxValue:self.valueArray];
+        _maxValue = [[ZFMethod shareInstance] cachedMaxValue:_valueArray];
         
         if (_maxValue == 0.f) {
             if ([self.dataSource respondsToSelector:@selector(maxValueInRadarChart:)]) {
@@ -294,15 +295,15 @@
     
     if (_isResetMinValue) {
         if ([self.dataSource respondsToSelector:@selector(minValueInRadarChart:)]) {
-            if ([self.dataSource minValueInRadarChart:self] > [[ZFMethod shareInstance] cachedMinValue:self.valueArray]) {
-                _minValue = [[ZFMethod shareInstance] cachedMinValue:self.valueArray];
+            if ([self.dataSource minValueInRadarChart:self] > [[ZFMethod shareInstance] cachedMinValue:_valueArray]) {
+                _minValue = [[ZFMethod shareInstance] cachedMinValue:_valueArray];
                 
             }else{
                 _minValue = [self.dataSource minValueInRadarChart:self];
             }
             
         }else{
-            _minValue = [[ZFMethod shareInstance] cachedMinValue:self.valueArray];
+            _minValue = [[ZFMethod shareInstance] cachedMinValue:_valueArray];
         }
     }
     
@@ -375,20 +376,6 @@
 }
 
 #pragma mark - 懒加载
-
-- (NSMutableArray *)valueArray{
-    if (!_valueArray) {
-        _valueArray = [NSMutableArray array];
-    }
-    return _valueArray;
-}
-
-- (NSMutableArray *)colorArray{
-    if (!_colorArray) {
-        _colorArray = [NSMutableArray array];
-    }
-    return _colorArray;
-}
 
 - (NSMutableArray *)itemLabelArray{
     if (!_itemLabelArray) {

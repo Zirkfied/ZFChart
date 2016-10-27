@@ -24,6 +24,7 @@
     _valueLabelPattern = kPopoverLabelPatternPopover;
     _valueType = kValueTypeInteger;
     _isShowAxisLineValue = YES;
+    _isShowAxisArrows = YES;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{

@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ *  波浪图样式
+ */
 typedef enum{
-    kWavePatternTypeForCurve = 0,//曲线样式(默认样式)
-    kWavePatternTypeForSharp = 1//直线样式
+    kWavePatternTypeForCurve = 0,   //曲线样式(默认样式)
+    kWavePatternTypeForSharp = 1    //直线样式
 }kWavePatternType;
 
 @interface ZFWave : UIView

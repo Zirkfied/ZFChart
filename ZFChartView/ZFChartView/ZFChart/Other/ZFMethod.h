@@ -19,7 +19,17 @@
 *
 *  @return 返回存储UIColor的数组
 */
-- (NSMutableArray *)cachedColor:(NSArray *)array;
+- (NSMutableArray *)cachedRandomColor:(NSArray *)array;
+
+/**
+ *  存储固定颜色
+ *
+ *  @param color 指定颜色
+ *  @param array 传入valueArray
+ *
+ *  @return 返回存储UIColor的数组
+ */
+- (NSMutableArray *)cachedColor:(UIColor *)color array:(NSArray *)array;
 
 /**
  *  存储默认kChartValuePosition枚举类型(全部为kChartValuePositionDefalut)

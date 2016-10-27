@@ -36,6 +36,7 @@
 @end
 
 
+
 @interface ZFWaveChart : ZFGenericChart
 
 @property (nonatomic, weak) id<ZFWaveChartDelegate> delegate;

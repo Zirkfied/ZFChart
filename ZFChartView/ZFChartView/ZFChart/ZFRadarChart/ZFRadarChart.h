@@ -174,6 +174,7 @@
 /** 雷达图分段数值的显示类型(保留有效小数或显示整数形式，默认为整数形式) */
 @property (nonatomic, assign) kValueType valueType;
 
+
 #pragma mark - public method
 
 /**

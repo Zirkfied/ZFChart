@@ -196,7 +196,7 @@
 #pragma mark - 重写setter, getter方法
 
 - (CGFloat)averageRadarAngle{
-    return 360.f / self.itemArray.count;
+    return ZFPerigon / self.itemArray.count;
 }
 
 - (NSArray *)itemLabelCenterArray{

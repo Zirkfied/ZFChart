@@ -402,7 +402,7 @@
     if ([self.dataSource respondsToSelector:@selector(colorArrayInGenericChart:)]) {
         _colorArray = [NSMutableArray arrayWithArray:[self.dataSource colorArrayInGenericChart:self]];
     }else{
-        _colorArray = [NSMutableArray arrayWithArray:[[ZFMethod shareInstance] cachedColor:self.genericAxis.xLineValueArray]];
+        _colorArray = [NSMutableArray arrayWithArray:[[ZFMethod shareInstance] cachedRandomColor:self.genericAxis.xLineValueArray]];
     }
     
     if (self.isResetAxisLineMaxValue) {
@@ -472,6 +472,7 @@
     [self removeAllSubLayer];
     self.genericAxis.xLineNameLabelToXAxisLinePadding = self.xLineNameLabelToXAxisLinePadding;
     self.genericAxis.isAnimated = self.isAnimated;
+    self.genericAxis.isShowAxisArrows = self.isShowAxisArrows;
     self.genericAxis.valueType = self.valueType;
     [self.genericAxis strokePath];
     [self drawCircle];

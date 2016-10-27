@@ -55,11 +55,22 @@ static ZFMethod * instance = nil;
 /**
  *  存储随机颜色
  */
-- (NSMutableArray *)cachedColor:(NSArray *)array{
+- (NSMutableArray *)cachedRandomColor:(NSArray *)array{
     NSInteger count = [self countColorCount:array];
     NSMutableArray * newArray = [NSMutableArray array];
     for (NSInteger i = 0; i < count; i++) {
         [newArray addObject:ZFRandom];
+    }
+    return newArray;
+}
+
+/**
+ *  存储固定颜色
+ */
+- (NSMutableArray *)cachedColor:(UIColor *)color array:(NSArray *)array{
+    NSMutableArray * newArray = [NSMutableArray array];
+    for (NSInteger i = 0; i < array.count; i++) {
+        [newArray addObject:color];
     }
     return newArray;
 }

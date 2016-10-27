@@ -291,6 +291,8 @@
     
     self.xAxisLine.isAnimated = _isAnimated;
     self.yAxisLine.isAnimated = _isAnimated;
+    self.yAxisLine.isShowAxisArrows = _isShowAxisArrows;
+    self.xAxisLine.isShowAxisArrows = _isShowAxisArrows;
     [self.yAxisLine strokePath];
     [self.xAxisLine strokePath];
     [self setYLineNameLabel];

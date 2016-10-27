@@ -194,14 +194,14 @@
         self.timer = [NSTimer timerWithTimeInterval:_animationDuration target:self selector:@selector(timerAction:) userInfo:nil repeats:NO];
         [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
     }else{//无动画
-        [self.layer addSublayer:[self arrowsShapeLayer]];
+        _isShowAxisArrows ? [self.layer addSublayer:[self arrowsShapeLayer]] : nil;
     }
 }
 
 #pragma mark - 定时器
 
 - (void)timerAction:(NSTimer *)sender{
-    [self.layer addSublayer:[self arrowsShapeLayer]];
+    _isShowAxisArrows ? [self.layer addSublayer:[self arrowsShapeLayer]] : nil;
     
     [sender invalidate];
     sender = nil;

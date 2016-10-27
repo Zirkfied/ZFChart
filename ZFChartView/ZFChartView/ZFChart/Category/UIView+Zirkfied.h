@@ -17,7 +17,7 @@
  *  @param borderWidth  边框宽度
  *  @param color        边框颜色
  */
--(void)setBorderCornerRadius:(CGFloat)cornerRadius andBorderWidth:(CGFloat)borderWidth andBorderColor:(UIColor *)color;
+- (void)setBorderCornerRadius:(CGFloat)cornerRadius andBorderWidth:(CGFloat)borderWidth andBorderColor:(UIColor *)color;
 
 /**
  *  设置阴影

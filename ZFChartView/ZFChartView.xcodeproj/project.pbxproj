@@ -26,6 +26,14 @@
 		18308C2A1CFBC63C00E2F7D9 /* ZFHorizontalAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = 18308C281CFBC63C00E2F7D9 /* ZFHorizontalAxis.m */; };
 		18308C2D1CFBD9E900E2F7D9 /* SingleHorizontalBarChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18308C2C1CFBD9E900E2F7D9 /* SingleHorizontalBarChartViewController.m */; };
 		18308C2E1CFBD9E900E2F7D9 /* SingleHorizontalBarChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18308C2C1CFBD9E900E2F7D9 /* SingleHorizontalBarChartViewController.m */; };
+		183D57921DB770D0006B5001 /* SingleCirqueChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183D57911DB770D0006B5001 /* SingleCirqueChartViewController.m */; };
+		183D57931DB770D0006B5001 /* SingleCirqueChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183D57911DB770D0006B5001 /* SingleCirqueChartViewController.m */; };
+		183D57961DB770E2006B5001 /* MultiCirqueChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183D57951DB770E2006B5001 /* MultiCirqueChartViewController.m */; };
+		183D57971DB770E2006B5001 /* MultiCirqueChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 183D57951DB770E2006B5001 /* MultiCirqueChartViewController.m */; };
+		183D579B1DB77A69006B5001 /* ZFCirqueChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 183D579A1DB77A69006B5001 /* ZFCirqueChart.m */; };
+		183D579C1DB77A69006B5001 /* ZFCirqueChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 183D579A1DB77A69006B5001 /* ZFCirqueChart.m */; };
+		1848F47B1DB84F5D00432D01 /* ZFCirque.m in Sources */ = {isa = PBXBuildFile; fileRef = 1848F47A1DB84F5D00432D01 /* ZFCirque.m */; };
+		1848F47C1DB84F5D00432D01 /* ZFCirque.m in Sources */ = {isa = PBXBuildFile; fileRef = 1848F47A1DB84F5D00432D01 /* ZFCirque.m */; };
 		184961571D7E503F00171FE4 /* SingleRadarChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184961561D7E503F00171FE4 /* SingleRadarChartViewController.m */; };
 		1849615A1D7E506900171FE4 /* MultiRadarChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184961591D7E506900171FE4 /* MultiRadarChartViewController.m */; };
 		1849615E1D7E51F200171FE4 /* ZFRadarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 1849615D1D7E51F200171FE4 /* ZFRadarChart.m */; };
@@ -115,6 +123,14 @@
 		18308C281CFBC63C00E2F7D9 /* ZFHorizontalAxis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFHorizontalAxis.m; sourceTree = "<group>"; };
 		18308C2B1CFBD9E900E2F7D9 /* SingleHorizontalBarChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleHorizontalBarChartViewController.h; sourceTree = "<group>"; };
 		18308C2C1CFBD9E900E2F7D9 /* SingleHorizontalBarChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleHorizontalBarChartViewController.m; sourceTree = "<group>"; };
+		183D57901DB770D0006B5001 /* SingleCirqueChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleCirqueChartViewController.h; sourceTree = "<group>"; };
+		183D57911DB770D0006B5001 /* SingleCirqueChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleCirqueChartViewController.m; sourceTree = "<group>"; };
+		183D57941DB770E2006B5001 /* MultiCirqueChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiCirqueChartViewController.h; sourceTree = "<group>"; };
+		183D57951DB770E2006B5001 /* MultiCirqueChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiCirqueChartViewController.m; sourceTree = "<group>"; };
+		183D57991DB77A69006B5001 /* ZFCirqueChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFCirqueChart.h; sourceTree = "<group>"; };
+		183D579A1DB77A69006B5001 /* ZFCirqueChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFCirqueChart.m; sourceTree = "<group>"; };
+		1848F4791DB84F5D00432D01 /* ZFCirque.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFCirque.h; sourceTree = "<group>"; };
+		1848F47A1DB84F5D00432D01 /* ZFCirque.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFCirque.m; sourceTree = "<group>"; };
 		184961551D7E503F00171FE4 /* SingleRadarChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleRadarChartViewController.h; sourceTree = "<group>"; };
 		184961561D7E503F00171FE4 /* SingleRadarChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleRadarChartViewController.m; sourceTree = "<group>"; };
 		184961581D7E506900171FE4 /* MultiRadarChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiRadarChartViewController.h; sourceTree = "<group>"; };
@@ -256,6 +272,10 @@
 				184961561D7E503F00171FE4 /* SingleRadarChartViewController.m */,
 				184961581D7E506900171FE4 /* MultiRadarChartViewController.h */,
 				184961591D7E506900171FE4 /* MultiRadarChartViewController.m */,
+				183D57901DB770D0006B5001 /* SingleCirqueChartViewController.h */,
+				183D57911DB770D0006B5001 /* SingleCirqueChartViewController.m */,
+				183D57941DB770E2006B5001 /* MultiCirqueChartViewController.h */,
+				183D57951DB770E2006B5001 /* MultiCirqueChartViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -278,6 +298,17 @@
 				18308C281CFBC63C00E2F7D9 /* ZFHorizontalAxis.m */,
 			);
 			path = ZFHorizontalAxis;
+			sourceTree = "<group>";
+		};
+		183D57981DB77A4F006B5001 /* ZFCirqueChart */ = {
+			isa = PBXGroup;
+			children = (
+				183D57991DB77A69006B5001 /* ZFCirqueChart.h */,
+				183D579A1DB77A69006B5001 /* ZFCirqueChart.m */,
+				1848F4791DB84F5D00432D01 /* ZFCirque.h */,
+				1848F47A1DB84F5D00432D01 /* ZFCirque.m */,
+			);
+			path = ZFCirqueChart;
 			sourceTree = "<group>";
 		};
 		1849615B1D7E50C700171FE4 /* ZFRadarChart */ = {
@@ -425,6 +456,7 @@
 				1801F8181CA6679600DA2D53 /* ZFWaveChart */,
 				18C0A8B41D1A66CF000FE955 /* ZFHorizontalBarChart */,
 				1849615B1D7E50C700171FE4 /* ZFRadarChart */,
+				183D57981DB77A4F006B5001 /* ZFCirqueChart */,
 			);
 			path = ZFChart;
 			sourceTree = "<group>";
@@ -594,6 +626,7 @@
 				1808700D1CB4DF0B00C64C74 /* UIBezierPath+Zirkfied.m in Sources */,
 				1801F81B1CA6689000DA2D53 /* ZFWaveChart.m in Sources */,
 				1849615A1D7E506900171FE4 /* MultiRadarChartViewController.m in Sources */,
+				1848F47B1DB84F5D00432D01 /* ZFCirque.m in Sources */,
 				18E41DBC1C96ACC700402ACF /* UIView+Zirkfied.m in Sources */,
 				1856ABE61D0008CC001CABE7 /* ZFXAxisLine.m in Sources */,
 				18E41DBB1C96ACC700402ACF /* UIColor+Zirkfied.m in Sources */,
@@ -606,8 +639,10 @@
 				180260D41CA236D80084DFFA /* TableViewController.m in Sources */,
 				18D33BF51D5B41FA00CE33AD /* ZFHorizontalBarChart.m in Sources */,
 				18308C291CFBC63C00E2F7D9 /* ZFHorizontalAxis.m in Sources */,
+				183D579B1DB77A69006B5001 /* ZFCirqueChart.m in Sources */,
 				18E41DBA1C96ACC700402ACF /* NSString+Zirkfied.m in Sources */,
 				18E4D5C51C93C890002A047B /* AppDelegate.m in Sources */,
+				183D57961DB770E2006B5001 /* MultiCirqueChartViewController.m in Sources */,
 				1856ABE41D0008CC001CABE7 /* ZFPopoverLabel.m in Sources */,
 				18E4D6001C93EAA5002A047B /* ZFConst.m in Sources */,
 				18E4D5C21C93C890002A047B /* main.m in Sources */,
@@ -627,6 +662,7 @@
 				1856ABE81D0008CC001CABE7 /* ZFYAxisLine.m in Sources */,
 				180E96DE1C97959E0056C716 /* ZFBarChart.m in Sources */,
 				180260C11CA236980084DFFA /* ZFGenericChart.m in Sources */,
+				183D57921DB770D0006B5001 /* SingleCirqueChartViewController.m in Sources */,
 				180260D01CA236D80084DFFA /* MultiLineChartViewController.m in Sources */,
 				180E96E11C9795EC0056C716 /* ZFBar.m in Sources */,
 				18B6A4801C9D3D7C00FEC918 /* ZFLine.m in Sources */,
@@ -638,13 +674,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				18308C2A1CFBC63C00E2F7D9 /* ZFHorizontalAxis.m in Sources */,
+				183D579C1DB77A69006B5001 /* ZFCirqueChart.m in Sources */,
+				1848F47C1DB84F5D00432D01 /* ZFCirque.m in Sources */,
 				1856ABE31D0008CC001CABE7 /* ZFLabel.m in Sources */,
 				18308C2E1CFBD9E900E2F7D9 /* SingleHorizontalBarChartViewController.m in Sources */,
 				18E4D5DB1C93C891002A047B /* ZFChartViewTests.m in Sources */,
 				1856ABE71D0008CC001CABE7 /* ZFXAxisLine.m in Sources */,
+				183D57971DB770E2006B5001 /* MultiCirqueChartViewController.m in Sources */,
 				18869E471D925E0000B58E75 /* ZFPolygon.m in Sources */,
 				1856ABE51D0008CC001CABE7 /* ZFPopoverLabel.m in Sources */,
 				1856ABE91D0008CC001CABE7 /* ZFYAxisLine.m in Sources */,
+				183D57931DB770D0006B5001 /* SingleCirqueChartViewController.m in Sources */,
 				18850E101CFEBF5C002DB7FA /* MultiHorizontalBarChartViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

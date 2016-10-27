@@ -36,8 +36,9 @@
  *
  *  @return 返回UIColor或者NSArray
  *          eg: ①return ZFRed;  若返回UIColor,则全部value文本颜色为红色,当只有一组数据时,只允许返回UIColor
- *              ②return @[ZFRed, ZFOrange, ZFBlue];  若返回数组,则不同类别的bar上的value文本颜色     
- *                                                    为数组对应下标的颜色，样式看Github文档
+ *              ②return @[ZFRed, ZFOrange, ZFBlue];  若返回数组,则不同类别的bar上的value文本颜色为数组对应下标的颜色
+ *
+ *          样式看Github文档
  *
  */
 - (id)valueTextColorArrayInBarChart:(ZFBarChart *)barChart;

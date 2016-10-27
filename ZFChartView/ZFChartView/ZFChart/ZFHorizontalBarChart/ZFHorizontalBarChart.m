@@ -332,7 +332,7 @@
     if ([self.delegate respondsToSelector:@selector(colorArrayInGenericChart:)]) {
         _colorArray = [NSMutableArray arrayWithArray:[self.dataSource colorArrayInGenericChart:self]];
     }else{
-        _colorArray = [NSMutableArray arrayWithArray:[[ZFMethod shareInstance] cachedColor:self.horizontalAxis.yLineValueArray]];
+        _colorArray = [NSMutableArray arrayWithArray:[[ZFMethod shareInstance] cachedRandomColor:self.horizontalAxis.yLineValueArray]];
     }
     
     if (self.isResetAxisLineMaxValue) {
@@ -422,6 +422,7 @@
     [self removeAllBar];
     [self removeLabelOnChart];
     self.horizontalAxis.isAnimated = self.isAnimated;
+    self.horizontalAxis.isShowAxisArrows = self.isShowAxisArrows;
     self.horizontalAxis.valueType = self.valueType;
     [self.horizontalAxis strokePath];
     [self drawBar:self.horizontalAxis.yLineValueArray];

@@ -27,6 +27,8 @@ CGFloat const NAVIGATIONBAR_HEIGHT = 64.f;
 CGFloat const TABBAR_HEIGHT = 49.f;
 CGFloat const TOPIC_HEIGHT = 30.f;
 
+CGFloat const ZFPerigon = 360.f;
+
 @implementation ZFConst
 
 @end
