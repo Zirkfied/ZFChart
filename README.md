@@ -476,7 +476,7 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
                    ⑧部分属性名或方法名进行修改并优化部分bug
                    
         2016.10.27 ①新增圆环图(ZFCirqueChart)
-                   ②ZFGenericChart.h新增isShowAxisArrows属性，先可隐藏坐标轴箭头
+                   ②ZFGenericChart.h新增isShowAxisArrows属性，现可隐藏坐标轴箭头
                    
         
 ##本人其他开源框架
