@@ -308,8 +308,8 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         ZFRadarChart * radarChart = [[ZFRadarChart alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT)];
         radarChart.dataSource = self;
         radarChart.delegate = self;
-        [self.view addSubview:self.radarChart];
-        [self.radarChart strokePath];
+        [self.view addSubview:radarChart];
+        [radarChart strokePath];
 
 ###     ZFRadarChartDataSource数据源方法
 ####    @required 必须实现的方法
@@ -360,6 +360,26 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
 ####效果展示
 
 ![image](https://github.com/Zirkfied/Library/blob/master/RadarChart.gif)
+
+
+
+## CirqueChart(圆环图)
+        须遵循ZFCirqueChartDataSource，ZFCirqueChartDelegate协议
+        
+        ZFCirqueChart * cirqueChart = [[ZFCirqueChart alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT)];
+        cirqueChart.dataSource = self;
+        cirqueChart.delegate = self;
+        [self.view addSubview:cirqueChart];
+        [cirqueChart strokePath];
+        
+       
+####效果展示
+
+![image](https://github.com/Zirkfied/Library/blob/master/ZFCirqueChart.gif)
+
+####其余样式
+
+![image](https://github.com/Zirkfied/Library/blob/master/kCirquePatternType.png)
 
 
 
@@ -454,6 +474,9 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
                    ⑥新增部分属性设置，具体请自行探索（因为我自己都忘了-_-! ）
                    ⑦修复特殊情况下crash问题
                    ⑧部分属性名或方法名进行修改并优化部分bug
+                   
+        2016.10.27 ①新增圆环图(ZFCirqueChart)
+                   ②ZFGenericChart.h新增isShowAxisArrows属性，先可隐藏坐标轴箭头
                    
         
 ##本人其他开源框架
