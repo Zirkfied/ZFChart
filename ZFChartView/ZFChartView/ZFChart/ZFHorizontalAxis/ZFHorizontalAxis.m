@@ -351,7 +351,9 @@
     self.maskView.frame = CGRectMake(0, 0, self.frame.size.width, self.yAxisLine.yLineArrowTopYPos);
 }
 
-/** y轴背景颜色 */
+/** 
+ *  y轴背景颜色 
+ */
 - (void)setAxisLineBackgroundColor:(UIColor *)axisLineBackgroundColor{
     _axisLineBackgroundColor = axisLineBackgroundColor;
     self.yAxisLine.backgroundColor = _axisLineBackgroundColor;
@@ -359,7 +361,9 @@
     self.maskView.backgroundColor = _axisLineBackgroundColor;
 }
 
-/** 设置坐标轴颜色 */
+/** 
+ *  设置坐标轴颜色 
+ */
 - (void)setAxisColor:(UIColor *)axisColor{
     _axisColor = axisColor;
     _xAxisLine.axisColor = _axisColor;

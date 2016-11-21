@@ -156,8 +156,8 @@ typedef enum{
  *  坐标轴y轴数值 或 雷达图分段数值 的显示类型
  */
 typedef enum{
-    kValueTypeDecimal = 0,   //保留有效小数
-    kValueTypeInteger = 1,   //取整数形式(四舍五入)(默认)
+    kValueTypeInteger = 0,   //取整数形式(四舍五入)(默认)
+    kValueTypeDecimal = 1,   //保留有效小数
 }kValueType;
 
 @interface ZFConst : NSObject

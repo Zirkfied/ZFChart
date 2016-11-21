@@ -83,14 +83,13 @@
  */
 - (void)addUnitLabel{
     if (_unit) {
-        ZFLabel * lastLabel = (ZFLabel *)[self.yAxisLine viewWithTag:ZFAxisLineValueLabelTag + _yLineSectionCount];
-    
         CGFloat width = self.yAxisLine.yLineStartXPos;
         CGFloat height = self.yAxisLine.yLineSectionHeightAverage;
-        CGFloat xPos = 0;
-        CGFloat yPos = CGRectGetMinY(lastLabel.frame) - height;
-    
-        self.unitLabel = [[ZFLabel alloc] initWithFrame:CGRectMake(xPos, yPos, width, height)];
+        CGFloat center_xPos = self.yAxisLine.yLineStartXPos / 2;
+        CGFloat center_yPos = self.yAxisLine.yLineEndYPos;
+        
+        self.unitLabel = [[ZFLabel alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+        self.unitLabel.center = CGPointMake(center_xPos, center_yPos);
         self.unitLabel.text = [NSString stringWithFormat:@"(%@)",_unit];
         self.unitLabel.textColor = _unitColor;
         self.unitLabel.font = [UIFont boldSystemFontOfSize:10.f];
@@ -331,14 +330,18 @@
     self.yAxisLine.frame = CGRectMake(self.contentOffset.x, 0, ZFAxisLineStartXPos, frame.size.height);
 }
 
-/** y轴背景颜色 */
+/** 
+ *  y轴背景颜色 
+ */
 - (void)setAxisLineBackgroundColor:(UIColor *)axisLineBackgroundColor{
     _axisLineBackgroundColor = axisLineBackgroundColor;
     self.yAxisLine.backgroundColor = _axisLineBackgroundColor;
     self.xAxisLine.backgroundColor = _axisLineBackgroundColor;
 }
 
-/** 设置坐标轴颜色 */
+/** 
+ *  设置坐标轴颜色 
+ */
 - (void)setAxisColor:(UIColor *)axisColor{
     _axisColor = axisColor;
     self.xAxisLine.axisColor = _axisColor;

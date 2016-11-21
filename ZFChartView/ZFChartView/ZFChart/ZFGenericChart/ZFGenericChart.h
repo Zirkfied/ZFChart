@@ -110,7 +110,7 @@
 @property (nonatomic, assign) CGFloat xLineNameLabelToXAxisLinePadding;
 /** x轴valueLabel样式(默认为kPopoverLabelPatternPopover) */
 @property (nonatomic, assign) kPopoverLabelPattern valueLabelPattern;
-/** y轴(普通图表) 或 x轴(横向图表) 数值的显示类型(保留有效小数或显示整数形式，默认为保留有效小数) */
+/** y轴(普通图表) 或 x轴(横向图表) 数值的显示类型(保留有效小数或显示整数形式，默认为整数形式) */
 @property (nonatomic, assign) kValueType valueType;
 
 /** 是否一直显示固定的最大值，默认为NO，该属性有以下3种情况
