@@ -478,6 +478,10 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         2016.10.27 ①新增圆环图(ZFCirqueChart)
                    ②ZFGenericChart.h新增isShowAxisArrows属性，现可隐藏坐标轴箭头
                    
+        2016.11.22 ①线状图(ZFLineChart)新增曲线样式，具体属性查看相关头文件
+                   ②完善坐标轴分隔线
+                   ③完善坐标轴颜色设置，可根据自身需求将x,y轴颜色设置ZFClear从而达到隐藏效果
+                   
         
 ##本人其他开源框架
 ####[ZFChart - 一款简单好用的图表库，目前有柱状，线状，饼图，波浪图类型](https://github.com/Zirkfied/ZFChart)
