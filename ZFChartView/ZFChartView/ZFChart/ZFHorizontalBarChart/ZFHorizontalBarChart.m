@@ -480,16 +480,24 @@
     self.horizontalAxis.axisLineBackgroundColor = backgroundColor;
 }
 
-- (void)setAxisColor:(UIColor *)axisColor{
-    self.horizontalAxis.axisColor = axisColor;
+- (void)setXAxisColor:(UIColor *)xAxisColor{
+    self.horizontalAxis.xAxisColor = xAxisColor;
+}
+
+- (void)setYAxisColor:(UIColor *)yAxisColor{
+    self.horizontalAxis.yAxisColor = yAxisColor;
 }
 
 - (void)setSeparateColor:(UIColor *)separateColor{
     self.horizontalAxis.separateColor = separateColor;
 }
 
-- (void)setIsShowSeparate:(BOOL)isShowSeparate{
-    self.horizontalAxis.isShowSeparate = isShowSeparate;
+- (void)setIsShowXLineSeparate:(BOOL)isShowXLineSeparate{
+    self.horizontalAxis.isShowXLineSeparate = isShowXLineSeparate;
+}
+
+- (void)setIsShowYLineSeparate:(BOOL)isShowYLineSeparate{
+    self.horizontalAxis.isShowYLineSeparate = isShowYLineSeparate;
 }
 
 #pragma mark - 懒加载

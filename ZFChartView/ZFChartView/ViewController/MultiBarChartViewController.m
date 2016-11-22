@@ -46,10 +46,12 @@
 //    self.barChart.isShadowForValueLabel = NO;
 //    self.barChart.valueLabelPattern = kPopoverLabelPatternBlank;
 //    self.barChart.isShowAxisLineValue = NO;
-    self.barChart.isShowSeparate = YES;
+    self.barChart.isShowYLineSeparate = YES;
+    self.barChart.isShowXLineSeparate = YES;
     self.barChart.unitColor = ZFWhite;
     self.barChart.backgroundColor = ZFPurple;
-    self.barChart.axisColor = ZFWhite;
+    self.barChart.xAxisColor = ZFWhite;
+    self.barChart.yAxisColor = ZFWhite;
     self.barChart.axisLineNameColor = ZFWhite;
     self.barChart.axisLineValueColor = ZFWhite;
     [self.barChart strokePath];

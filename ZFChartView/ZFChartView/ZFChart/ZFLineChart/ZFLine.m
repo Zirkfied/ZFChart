@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "ZFCircle.h"
 #import "ZFConst.h"
+#import "UIBezierPath+Zirkfied.h"
 
 @interface ZFLine()
 
@@ -28,11 +29,11 @@
     _isShadow = YES;
 }
 
-+ (instancetype)lineWithCircleArray:(NSMutableArray *)circleArray isAnimated:(BOOL)isAnimated shadowColor:(UIColor *)shadowColor{
-    return [[ZFLine alloc] initWithCircleArray:circleArray isAnimated:isAnimated shadowColor:shadowColor];
++ (instancetype)lineWithCircleArray:(NSMutableArray *)circleArray isAnimated:(BOOL)isAnimated shadowColor:(UIColor *)shadowColor linePatternType:(kLinePatternType)linePatternType padding:(CGFloat)padding{
+    return [[ZFLine alloc] initWithCircleArray:circleArray isAnimated:isAnimated shadowColor:shadowColor linePatternType:linePatternType  padding:padding];
 }
 
-- (instancetype)initWithCircleArray:(NSMutableArray *)circleArray isAnimated:(BOOL)isAnimated shadowColor:(UIColor *)shadowColor{
+- (instancetype)initWithCircleArray:(NSMutableArray *)circleArray isAnimated:(BOOL)isAnimated shadowColor:(UIColor *)shadowColor linePatternType:(kLinePatternType)linePatternType padding:(CGFloat)padding{
     self = [super init];
     if (self) {
         [self commonInit];
@@ -40,7 +41,7 @@
         self.fillColor = nil;
         self.lineCap = kCALineCapRound;
         self.lineJoin = kCALineJoinRound;
-        self.path = [self bezierWithCircleArray:circleArray].CGPath;
+        self.path = [self bezierWithCircleArray:circleArray linePatternType:linePatternType padding:padding].CGPath;
         
         if (_isShadow) {
             self.shadowOpacity = 1.f;
@@ -63,7 +64,7 @@
  *
  *  @return UIBezierPath
  */
-- (UIBezierPath *)bezierWithCircleArray:(NSMutableArray *)circleArray{
+- (UIBezierPath *)bezierWithCircleArray:(NSMutableArray *)circleArray  linePatternType:(kLinePatternType)linePatternType padding:(CGFloat)padding{
     UIBezierPath * bezier = [UIBezierPath bezierPath];
     for (NSInteger i = 0; i < circleArray.count; i++) {
         ZFCircle * circle = circleArray[i];
@@ -73,7 +74,8 @@
             [bezier addLineToPoint:CGPointMake(circle.center.x, circle.center.y)];
         }
     }
-    return bezier;
+    
+    return linePatternType == kLinePatternTypeForCurve ? [bezier smoothedPathWithGranularity:padding] : bezier;
 }
 
 #pragma mark - 动画

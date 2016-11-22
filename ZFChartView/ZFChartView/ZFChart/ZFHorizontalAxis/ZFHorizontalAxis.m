@@ -44,8 +44,6 @@
     _yLineNameColor = ZFBlack;
     _xLineValueColor = ZFBlack;
     _axisLineBackgroundColor = ZFWhite;
-    _axisColor = ZFBlack;
-    _isShowSeparate = NO;
     _separateColor = ZFLightGray;
     
     self.delegate = self;
@@ -168,16 +166,16 @@
     }
 }
 
-#pragma mark - 灰色分割线
+#pragma mark - x轴灰色分割线
 
 /**
- *  灰色分割线起始位置 (未填充)
+ *  x轴灰色分割线起始位置 (未填充)
  *
  *  @param i 下标
  *
  *  @return UIBezierPath
  */
-- (UIBezierPath *)xAxisLineSectionNoFill:(NSInteger)i {
+- (UIBezierPath *)xAxisLineSectionNoFill:(NSInteger)i{
     UIBezierPath * bezier = [UIBezierPath bezierPath];
     CGFloat xStartPos = self.xAxisLine.xLineStartXPos + (self.xAxisLine.xLineWidth - ZFAxisLineGapFromAxisLineMaxValueToArrow) / _xLineSectionCount * (i + 1);
     [bezier moveToPoint:CGPointMake(self.xAxisLine.xLineStartXPos, xStartPos)];
@@ -187,7 +185,7 @@
 }
 
 /**
- *  画灰色分割线
+ *  画x轴灰色分割线
  *
  *  @param i 下标
  *
@@ -203,7 +201,7 @@
 }
 
 /**
- *  灰色分割线CAShapeLayer
+ *  x轴灰色分割线CAShapeLayer
  *
  *  @param i 下标
  *
@@ -211,8 +209,57 @@
  */
 - (CAShapeLayer *)xAxisLineSectionShapeLayer:(NSInteger)i sectionLength:(CGFloat)sectionLength sectionColor:(UIColor *)sectionColor{
     CAShapeLayer * layer = [CAShapeLayer layer];
-    layer.strokeColor = _separateColor.CGColor;
+    layer.strokeColor = sectionColor.CGColor;
     layer.path = [self drawXAxisLineSection:i sectionLength:sectionLength].CGPath;
+    
+    return layer;
+}
+
+#pragma mark - y轴灰色分割线
+
+/**
+ *  y轴灰色分割线起始位置 (未填充)
+ *
+ *  @param i 下标
+ *
+ *  @return UIBezierPath
+ */
+- (UIBezierPath *)yAxisLineSectionNoFill:(NSInteger)i{
+    UIBezierPath * bezier = [UIBezierPath bezierPath];
+    CGFloat yStartPos = self.yAxisLine.yLineStartYPos - _groupPadding - (_groupHeight + _groupPadding) * i - _groupHeight * 0.5;
+    [bezier moveToPoint:CGPointMake(self.xAxisLine.xLineStartXPos, yStartPos)];
+    [bezier addLineToPoint:CGPointMake(self.xAxisLine.xLineStartXPos, yStartPos)];
+    
+    return bezier;
+}
+
+/**
+ *  画y轴灰色分割线
+ *
+ *  @param i 下标
+ *
+ *  @return UIBezierPath
+ */
+- (UIBezierPath *)drawYAxisLineSection:(NSInteger)i{
+    UIBezierPath * bezier = [UIBezierPath bezierPath];
+    CGFloat yStartPos = self.yAxisLine.yLineStartYPos - _groupPadding - (_groupHeight + _groupPadding) * i - _groupHeight * 0.5;
+    [bezier moveToPoint:CGPointMake(self.xAxisLine.xLineStartXPos, yStartPos)];
+    [bezier addLineToPoint:CGPointMake(self.xAxisLine.xLineEndXPos, yStartPos)];
+    
+    return bezier;
+}
+
+/**
+ *  y轴灰色分割线CAShapeLayer
+ *
+ *  @param i 下标
+ *
+ *  @return CAShapeLayer
+ */
+- (CAShapeLayer *)yAxisLineSectionShapeLayer:(NSInteger)i sectionColor:(UIColor *)sectionColor{
+    CAShapeLayer * layer = [CAShapeLayer layer];
+    layer.strokeColor = sectionColor.CGColor;
+    layer.path = [self drawYAxisLineSection:i].CGPath;
     
     return layer;
 }
@@ -225,7 +272,7 @@
 - (UIView *)sectionView:(NSInteger)i{
     CGFloat xStartPos = self.xAxisLine.xLineStartXPos + (self.xAxisLine.xLineWidth - ZFAxisLineGapFromAxisLineMaxValueToArrow) / _xLineSectionCount * (i + 1);
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(xStartPos, self.yAxisLine.yLineStartYPos - ZFAxisLineSectionLength, ZFAxisLineSectionHeight, ZFAxisLineSectionLength)];
-    view.backgroundColor = _axisColor;
+    view.backgroundColor = _xAxisColor;
     view.alpha = 0.f;
     
     if (_isAnimated) {
@@ -300,12 +347,18 @@
     [self addUnitLabel];
     
     for (NSInteger i = 0; i < _xLineSectionCount; i++) {
-        if (_isShowSeparate) {
-            [self.layer addSublayer:[self xAxisLineSectionShapeLayer:i sectionLength:self.yLineHeight sectionColor:ZFLightGray]];
+        if (_isShowXLineSeparate) {
+            [self.layer addSublayer:[self xAxisLineSectionShapeLayer:i sectionLength:self.yLineHeight sectionColor:_separateColor]];
         }else{
             UIView * sectionView = [self sectionView:i];
             [self addSubview:sectionView];
             [self.sectionArray addObject:sectionView];
+        }
+    }
+    
+    for (NSInteger i = 0; i < self.yLineNameArray.count; i++) {
+        if (_isShowYLineSeparate) {
+            [self.layer addSublayer:[self yAxisLineSectionShapeLayer:i sectionColor:_separateColor]];
         }
     }
 }
@@ -314,7 +367,7 @@
  *  把分段线放的父控件最上面
  */
 - (void)bringSectionToFront{
-    if (!_isShowSeparate) {
+    if (!_isShowXLineSeparate) {
         for (NSInteger i = 0; i < self.sectionArray.count; i++) {
             UIView * sectionView = self.sectionArray[i];
             [self bringSubviewToFront:sectionView];
@@ -331,7 +384,7 @@
     self.xAxisLine.frame = CGRectMake(self.xAxisLine.frame.origin.x, yPos, self.xAxisLine.frame.size.width, self.xAxisLine.frame.size.height);
     
     //滚动时重设分段线的frame
-    if (!_isShowSeparate) {
+    if (!_isShowXLineSeparate) {
         for (NSInteger i = 0; i < self.sectionArray.count; i++) {
             UIView * sectionView = self.sectionArray[i];
             sectionView.frame = CGRectMake(sectionView.frame.origin.x, yPos - ZFAxisLineSectionLength, sectionView.frame.size.width, sectionView.frame.size.height);
@@ -361,13 +414,20 @@
     self.maskView.backgroundColor = _axisLineBackgroundColor;
 }
 
-/** 
- *  设置坐标轴颜色 
+/**
+ *  设置x轴颜色
  */
-- (void)setAxisColor:(UIColor *)axisColor{
-    _axisColor = axisColor;
-    _xAxisLine.axisColor = _axisColor;
-    _yAxisLine.axisColor = _axisColor;
+- (void)setXAxisColor:(UIColor *)xAxisColor{
+    _xAxisColor = xAxisColor;
+    self.xAxisLine.axisColor = _xAxisColor;
+}
+
+/**
+ *  设置y轴颜色
+ */
+- (void)setYAxisColor:(UIColor *)yAxisColor{
+    _yAxisColor = yAxisColor;
+    self.yAxisLine.axisColor = _yAxisColor;
 }
 
 /**

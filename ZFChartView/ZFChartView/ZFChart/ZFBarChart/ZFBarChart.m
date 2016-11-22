@@ -482,16 +482,24 @@
     self.genericAxis.axisLineBackgroundColor = backgroundColor;
 }
 
-- (void)setAxisColor:(UIColor *)axisColor{
-    self.genericAxis.axisColor = axisColor;
+- (void)setXAxisColor:(UIColor *)xAxisColor{
+    self.genericAxis.xAxisColor = xAxisColor;
+}
+
+- (void)setYAxisColor:(UIColor *)yAxisColor{
+    self.genericAxis.yAxisColor = yAxisColor;
 }
 
 - (void)setSeparateColor:(UIColor *)separateColor{
     self.genericAxis.separateColor = separateColor;
 }
 
-- (void)setIsShowSeparate:(BOOL)isShowSeparate{
-    self.genericAxis.isShowSeparate = isShowSeparate;
+- (void)setIsShowXLineSeparate:(BOOL)isShowXLineSeparate{
+    self.genericAxis.isShowXLineSeparate = isShowXLineSeparate;
+}
+
+- (void)setIsShowYLineSeparate:(BOOL)isShowYLineSeparate{
+    self.genericAxis.isShowYLineSeparate = isShowYLineSeparate;
 }
 
 #pragma mark - 懒加载

@@ -10,6 +10,7 @@
 #import "ZFConst.h"
 #import "ZFPopoverLabel.h"
 #import "ZFCircle.h"
+#import "ZFLine.h"
 @class ZFLineChart;
 
 /*********************  ZFLineChartDelegate(ZFLineChart协议方法)  *********************/
@@ -76,6 +77,8 @@
 @property (nonatomic, assign) BOOL isShadow;
 /** 超过y轴显示最大值时线状图上的圆颜色(默认为红色) */
 @property (nonatomic, strong) UIColor * overMaxValueCircleColor;
+/** 线样式(默认为kLinePatternTypeForSharp) */
+@property (nonatomic, assign) kLinePatternType linePatternType;
 
 
 #pragma mark - public method

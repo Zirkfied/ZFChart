@@ -44,14 +44,18 @@
     self.barChart.isResetAxisLineMaxValue = YES;
 //    self.barChart.isShowAxisLineValue = NO;
 //    self.barChart.valueLabelPattern = kPopoverLabelPatternBlank;
-    self.barChart.isShowSeparate = YES;
+//    self.barChart.isShowXLineSeparate = YES;
+//    self.barChart.isShowYLineSeparate = YES;
 //    self.barChart.topicLabel.textColor = ZFWhite;
 //    self.barChart.unitColor = ZFWhite;
-//    self.barChart.axisColor = ZFWhite;
+//    self.barChart.xAxisColor = ZFWhite;
+//    self.barChart.yAxisColor = ZFWhite;
+//    self.barChart.xAxisColor = ZFClear;
+    self.barChart.yAxisColor = ZFClear;
 //    self.barChart.axisLineNameColor = ZFWhite;
 //    self.barChart.axisLineValueColor = ZFWhite;
 //    self.barChart.backgroundColor = ZFPurple;
-    self.barChart.isShowAxisArrows = NO;
+//    self.barChart.isShowAxisArrows = NO;
     [self.view addSubview:self.barChart];
     [self.barChart strokePath];
     

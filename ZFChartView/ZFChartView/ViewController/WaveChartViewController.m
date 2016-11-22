@@ -39,7 +39,7 @@
     self.waveChart.delegate = self;
     self.waveChart.topicLabel.text = @"xx小学各年级人数";
     self.waveChart.unit = @"人";
-    //    self.waveChart.isShowSeparate = YES;
+    //    self.waveChart.isShowYLineSeparate = YES;
     self.waveChart.pathColor = ZFGrassGreen;
 //    self.waveChart.pathLineColor = ZFBlack;
     self.waveChart.topicLabel.textColor = ZFPurple;

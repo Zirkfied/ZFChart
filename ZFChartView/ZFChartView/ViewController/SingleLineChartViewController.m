@@ -43,7 +43,9 @@
     self.lineChart.isResetAxisLineMinValue = YES;
 //    self.lineChart.isAnimated = NO;
 //    self.lineChart.valueLabelPattern = kPopoverLabelPatternBlank;
-    self.lineChart.isShowSeparate = YES;
+    self.lineChart.isShowXLineSeparate = YES;
+    self.lineChart.isShowYLineSeparate = YES;
+    self.lineChart.linePatternType = kLinePatternTypeForCurve;
 //    self.lineChart.isShowAxisLineValue = NO;
 //    lineChart.valueCenterToCircleCenterPadding = 0;
     [self.view addSubview:self.lineChart];
@@ -61,7 +63,7 @@
 }
 
 - (NSArray *)colorArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[ZFMagenta];
+    return @[ZFSkyBlue];
 }
 
 - (CGFloat)axisLineMaxValueInGenericChart:(ZFGenericChart *)chart{

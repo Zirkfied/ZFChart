@@ -84,8 +84,10 @@
 @property (nonatomic, strong) UIColor * unitColor;
 /** 背景颜色(默认为白色) */
 @property (nonatomic, strong) UIColor * backgroundColor;
-/** 坐标轴颜色(默认为黑色) */
-@property (nonatomic, strong) UIColor * axisColor;
+/** x轴颜色(默认为黑色) */
+@property (nonatomic, strong) UIColor * xAxisColor;
+/** y轴颜色(默认为黑色) */
+@property (nonatomic, strong) UIColor * yAxisColor;
 /** y轴(普通图表) 或 x轴(横向图表) 标题颜色(默认为黑色) */
 @property (nonatomic, strong) UIColor * axisLineNameColor;
 /** y轴(普通图表) 或 x轴(横向图表) value颜色(默认为黑色) */
@@ -146,8 +148,10 @@
 @property (nonatomic, assign) BOOL isShadowForValueLabel;
 /** 是否显示 y轴(普通图表) 或 x轴(横向图表) 的value(默认为YES，当需要自定义value显示样式时，可设置为NO) */
 @property (nonatomic, assign) BOOL isShowAxisLineValue;
-/** 是否显示分割线(默认为NO) */
-@property (nonatomic, assign) BOOL isShowSeparate;
+/** 是否显示x轴分割线(默认为NO) */
+@property (nonatomic, assign) BOOL isShowXLineSeparate;
+/** 是否显示y轴分割线(默认为NO) */
+@property (nonatomic, assign) BOOL isShowYLineSeparate;
 /** 是否显示坐标轴箭头(默认为YES) */
 @property (nonatomic, assign) BOOL isShowAxisArrows;
 

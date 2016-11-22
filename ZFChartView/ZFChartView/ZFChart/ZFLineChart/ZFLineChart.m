@@ -9,7 +9,6 @@
 #import "ZFLineChart.h"
 #import "ZFCircle.h"
 #import "ZFGenericAxis.h"
-#import "ZFLine.h"
 #import "NSString+Zirkfied.h"
 #import "ZFMethod.h"
 
@@ -44,6 +43,7 @@
     _isShadow = YES;
     _overMaxValueCircleColor = ZFRed;
     _lineWidth = 2.f;
+    _linePatternType = kLinePatternTypeForSharp;
     self.shadowColor = ZFLightGray;
 }
 
@@ -251,7 +251,7 @@
  *  @return CAShapeLayer
  */
 - (CAShapeLayer *)lineShapeLayer:(NSMutableArray *)array index:(NSInteger)index{
-    ZFLine * layer = [ZFLine lineWithCircleArray:array isAnimated:self.isAnimated shadowColor:self.shadowColor];
+    ZFLine * layer = [ZFLine lineWithCircleArray:array isAnimated:self.isAnimated shadowColor:self.shadowColor linePatternType:_linePatternType padding:self.genericAxis.groupPadding];
     layer.strokeColor = [_colorArray[index] CGColor];
     layer.lineWidth = _lineWidth;
     layer.isShadow = _isShadow;
@@ -530,16 +530,24 @@
     self.genericAxis.axisLineBackgroundColor = backgroundColor;;
 }
 
-- (void)setAxisColor:(UIColor *)axisColor{
-    self.genericAxis.axisColor = axisColor;
+- (void)setXAxisColor:(UIColor *)xAxisColor{
+    self.genericAxis.xAxisColor = xAxisColor;
+}
+
+- (void)setYAxisColor:(UIColor *)yAxisColor{
+    self.genericAxis.yAxisColor = yAxisColor;
 }
 
 - (void)setSeparateColor:(UIColor *)separateColor{
     self.genericAxis.separateColor = separateColor;
 }
 
-- (void)setIsShowSeparate:(BOOL)isShowSeparate{
-    self.genericAxis.isShowSeparate = isShowSeparate;
+- (void)setIsShowXLineSeparate:(BOOL)isShowXLineSeparate{
+    self.genericAxis.isShowXLineSeparate = isShowXLineSeparate;
+}
+
+- (void)setIsShowYLineSeparate:(BOOL)isShowYLineSeparate{
+    self.genericAxis.isShowYLineSeparate = isShowYLineSeparate;
 }
 
 #pragma mark - 懒加载

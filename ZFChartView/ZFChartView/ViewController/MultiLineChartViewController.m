@@ -40,7 +40,8 @@
     self.lineChart.topicLabel.text = @"xx小学各年级男女人数";
     self.lineChart.unit = @"人";
     self.lineChart.topicLabel.textColor = ZFWhite;
-    self.lineChart.isShowSeparate = YES;
+//    self.lineChart.isShowXLineSeparate = YES;
+    self.lineChart.isShowYLineSeparate = YES;
 //    self.lineChart.isAnimated = NO;
     self.lineChart.isResetAxisLineMinValue = YES;
 //    self.lineChart.isShowAxisLineValue = NO;
@@ -49,9 +50,11 @@
 //    self.lineChart.valueLabelPattern = kPopoverLabelPatternBlank;
 //    self.lineChart.valueCenterToCircleCenterPadding = 0;
 //    self.lineChart.separateColor = ZFYellow;
+//    self.lineChart.linePatternType = kLinePatternTypeForCurve;
     self.lineChart.unitColor = ZFWhite;
     self.lineChart.backgroundColor = ZFPurple;
-    self.lineChart.axisColor = ZFWhite;
+    self.lineChart.xAxisColor = ZFWhite;
+    self.lineChart.yAxisColor = ZFWhite;
     self.lineChart.axisLineNameColor = ZFWhite;
     self.lineChart.axisLineValueColor = ZFWhite;
     self.lineChart.xLineNameLabelToXAxisLinePadding = 40;

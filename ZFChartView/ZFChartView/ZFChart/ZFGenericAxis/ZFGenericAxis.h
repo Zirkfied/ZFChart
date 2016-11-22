@@ -43,16 +43,21 @@
 @property (nonatomic, strong) UIColor * yLineValueColor;
 /** 坐标轴背景颜色 */
 @property (nonatomic, strong) UIColor * axisLineBackgroundColor;
-/** 坐标轴颜色(默认为黑色) */
-@property (nonatomic, strong) UIColor * axisColor;
+/** x轴颜色(默认为黑色) */
+@property (nonatomic, strong) UIColor * xAxisColor;
+/** y轴颜色(默认为黑色) */
+@property (nonatomic, strong) UIColor * yAxisColor;
+
 
 /** x轴上名称字体大小(默认为10.f) */
 @property (nonatomic, strong) UIFont * xLineNameFont;
 /** y轴上数值字体大小(默认为10.f) */
 @property (nonatomic, strong) UIFont * yLineValueFont;
 
-/** 是否显示分割线 */
-@property (nonatomic, assign) BOOL isShowSeparate;
+/** 是否显示x轴分割线(默认为NO) */
+@property (nonatomic, assign) BOOL isShowXLineSeparate;
+/** 是否显示y轴分割线(默认为NO) */
+@property (nonatomic, assign) BOOL isShowYLineSeparate;
 /** 是否带动画显示(默认为YES，带动画) */
 @property (nonatomic, assign) BOOL isAnimated;
 /** 是否显示坐标轴箭头(默认为YES) */
