@@ -22,6 +22,9 @@ CGFloat const ZFLineChartCircleRadius = 5.f;
 CGFloat const ZFRadarChartRadiusExtendLength = 25.f;
 NSInteger const ZFAxisLineValueLabelTag = 100;
 NSInteger const ZFPieChartPercentLabelTag = 100;
+NSString * const ZFWaveChartXPos = @"ZFWaveChartXPos";
+NSString * const ZFWaveChartYPos = @"ZFWaveChartYPos";
+NSString * const ZFWaveChartIsHeightEqualZero = @"ZFWaveChartIsHeightEqualZero";
 
 CGFloat const NAVIGATIONBAR_HEIGHT = 64.f;
 CGFloat const TABBAR_HEIGHT = 49.f;

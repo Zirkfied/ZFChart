@@ -35,7 +35,7 @@ void getPointsFromBezier(void * info, const CGPathElement * element){
 - (UIBezierPath *)smoothedPathWithGranularity:(NSInteger)granularity{
     NSMutableArray * points = [NSMutableArray arrayWithArray:[self pointsFromBezierPath:self]];
 
-    if (points.count < 4) {
+    if (points.count < 3) {
         return [self copy];
     }
     

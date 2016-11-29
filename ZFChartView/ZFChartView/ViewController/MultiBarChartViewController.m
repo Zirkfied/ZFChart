@@ -40,7 +40,7 @@
     self.barChart.topicLabel.text = @"xx小学各年级男女人数";
     self.barChart.unit = @"人";
     self.barChart.topicLabel.textColor = ZFWhite;
-    self.barChart.isAnimated = NO;
+//    self.barChart.isAnimated = NO;
 //    self.barChart.isResetAxisLineMinValue = YES;
 //    self.barChart.isResetAxisLineMaxValue = YES;
 //    self.barChart.isShadowForValueLabel = NO;
@@ -111,10 +111,10 @@
     NSLog(@"第%ld个颜色中的第%ld个",(long)groupIndex,(long)barIndex);
     
     //可在此处进行bar被点击后的自身部分属性设置
-    bar.barColor = ZFDeepPink;
-    bar.isAnimated = YES;
+//    bar.barColor = ZFDeepPink;
+//    bar.isAnimated = YES;
 //    bar.opacity = 0.5;
-    [bar strokePath];
+//    [bar strokePath];
     
     //可将isShowAxisLineValue设置为NO，然后执行下句代码进行点击才显示数值
 //    popoverLabel.hidden = NO;

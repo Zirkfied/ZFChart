@@ -14,12 +14,8 @@
 
 /** bar颜色 */
 @property (nonatomic, strong) UIColor * barColor;
-/** 是否带阴影效果(默认为YES) */
-@property (nonatomic, assign) BOOL isShadow;
 /** 是否带动画显示(默认为YES，带动画) */
 @property (nonatomic, assign) BOOL isAnimated;
-/** 图形bezierPath阴影颜色(默认为浅灰色) */
-@property (nonatomic, strong) UIColor * shadowColor;
 /** 图表透明度(范围0 ~ 1, 默认为1.f) */
 @property (nonatomic, assign) CGFloat opacity;
 
@@ -34,6 +30,10 @@
 @property (nonatomic, assign) NSInteger barIndex;
 /** 记录数据是否超出上限 */
 @property (nonatomic, assign) BOOL isOverrun;
+/** 是否带阴影效果(默认为YES) */
+@property (nonatomic, assign) BOOL isShadow;
+/** 图形bezierPath阴影颜色(默认为浅灰色) */
+@property (nonatomic, strong) UIColor * shadowColor;
 
 
 #warning message - readonly(只读)

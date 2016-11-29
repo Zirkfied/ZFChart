@@ -297,7 +297,7 @@
     }
 }
 
-#pragma mark - 重置Bar原始设置
+#pragma mark - 重置Circle原始设置
 
 - (void)resetCircle:(ZFCircle *)sender popoverLabel:(ZFPopoverLabel *)label{
     //判断数组
@@ -306,17 +306,17 @@
     if ([subObject isKindOfClass:[ZFCircle class]]) {
         tempArray = [NSMutableArray arrayWithArray:self.circleArray];
     }else if ([subObject isKindOfClass:[NSArray class]]){
-        tempArray = [NSMutableArray arrayWithArray:(NSArray *)subObject];
+        tempArray = [NSMutableArray arrayWithArray:(NSArray *)self.circleArray[sender.lineIndex]];
     }
     
     for (ZFCircle * circle in tempArray) {
         if (circle != sender) {
             circle.circleColor = circle.isOverrun ? _overMaxValueCircleColor : _colorArray[circle.lineIndex];
-            circle.isShadow = _isShadow;
-            circle.isAnimated = self.isAnimated;
-            circle.shadowColor = self.shadowColor;
+            circle.isAnimated = NO;
             circle.opacity = self.opacity;
             [circle strokePath];
+            //复原
+            circle.isAnimated = self.isAnimated;
         }
     }
     
@@ -336,8 +336,6 @@
         if (popoverLabel != sender) {
             popoverLabel.font = self.valueOnChartFont;
             popoverLabel.textColor = (UIColor *)self.colorArray[popoverLabel.groupIndex];
-            popoverLabel.shadowColor = self.valueLabelShadowColor;
-            popoverLabel.isShadow = self.isShadowForValueLabel;
             popoverLabel.isAnimated = sender.isAnimated;
             [popoverLabel strokePath];
         }

@@ -39,18 +39,18 @@
     self.waveChart.delegate = self;
     self.waveChart.topicLabel.text = @"xx小学各年级人数";
     self.waveChart.unit = @"人";
-    //    self.waveChart.isShowYLineSeparate = YES;
+//    self.waveChart.isShowYLineSeparate = YES;
     self.waveChart.pathColor = ZFGrassGreen;
 //    self.waveChart.pathLineColor = ZFBlack;
     self.waveChart.topicLabel.textColor = ZFPurple;
-    //    self.waveChart.isAnimated = NO;
-    //    self.waveChart.isResetAxisLineMinValue = YES;
-    //    self.waveChart.isShowAxisLineValue = NO;
-    //    self.waveChart.isShadowForValueLabel = NO;
-    //    self.waveChart.valuePosition = kChartValuePositionOnBelow;
-    //    self.waveChart.valueLabelPattern = kPopoverLabelPatternBlank;
-    //    self.waveChart.wavePatternType = kWavePatternTypeForSharp;
-    //    self.waveChart.valueLabelToWaveLinePadding = 20.f;
+//    self.waveChart.isAnimated = NO;
+//    self.waveChart.isResetAxisLineMinValue = YES;
+//    self.waveChart.isShowAxisLineValue = NO;
+//    self.waveChart.isShadowForValueLabel = NO;
+//    self.waveChart.valuePosition = kChartValuePositionOnBelow;
+//    self.waveChart.valueLabelPattern = kPopoverLabelPatternBlank;
+//    self.waveChart.wavePatternType = kWavePatternTypeForSharp;
+//    self.waveChart.valueLabelToWaveLinePadding = 20.f;
     [self.waveChart strokePath];
     [self.view addSubview:self.waveChart];
 }

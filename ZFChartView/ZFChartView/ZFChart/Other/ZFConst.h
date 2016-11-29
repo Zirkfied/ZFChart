@@ -134,6 +134,21 @@ extern CGFloat const TOPIC_HEIGHT;
  */
 extern CGFloat const ZFPerigon;
 
+/**
+ *  波浪图路径x点标识
+ */
+extern NSString * const ZFWaveChartXPos;
+
+/**
+ *  波浪图路径y点标识
+ */
+extern NSString * const ZFWaveChartYPos;
+
+/**
+ *  波浪图点是否等于0标识
+ */
+extern NSString * const ZFWaveChartIsHeightEqualZero;
+
 
 /**
  *  线状图, 波浪图上的value的位置

@@ -9,11 +9,19 @@
 #import "ZFWave.h"
 #import "ZFColor.h"
 #import "UIBezierPath+Zirkfied.h"
+#import "ZFConst.h"
+#import "ZFWaveAttribute.h"
 
 @interface ZFWave()
 
 /** 动画时间 */
 @property (nonatomic, assign) CGFloat animationDuration;
+/** 临时新数值坐标的数组 */
+@property (nonatomic, strong) NSMutableArray * tempValuePointArray;
+/** 存储kWavePatternTypeForCurve样式下各段线段模型数组(存储的是ZFWaveAttribute模型) */
+@property (nonatomic, strong) NSMutableArray * curveArray;
+/** 存储细分曲线的子数组 */
+@property (nonatomic, strong) NSMutableArray * subArray;
 
 @end
 
@@ -36,34 +44,88 @@
 }
 
 - (UIBezierPath *)noFill{
-    UIBezierPath * bezier = [UIBezierPath bezierPath];
-    [bezier moveToPoint:CGPointMake(0, self.frame.size.height)];
-    for (NSInteger i = 0; i < _valuePointArray.count; i++) {
-        NSDictionary * point = _valuePointArray[i];
-        [bezier addLineToPoint:CGPointMake([point[@"xPos"] floatValue], self.frame.size.height)];
+    if (_wavePatternType == kWavePatternTypeForCurve) {
+        UIBezierPath * bezier = [UIBezierPath bezierPath];
+        for (NSInteger i = 0; i < self.curveArray.count; i++) {
+            UIBezierPath * subBezier = [UIBezierPath bezierPath];
+            ZFWaveAttribute * attribute = self.curveArray[i];
+            for (NSInteger j = 0; j < attribute.pointArray.count; j++) {
+                NSDictionary * currentPoint = attribute.pointArray[j];
+                if (j == 0) {
+                    [subBezier moveToPoint:CGPointMake([currentPoint[ZFWaveChartXPos] floatValue], self.frame.size.height)];
+                }else{
+                    [subBezier addLineToPoint:CGPointMake([currentPoint[ZFWaveChartXPos] floatValue], self.frame.size.height)];
+                }
+            }
+            //判断绘画直线还是曲线
+            subBezier = attribute.isCurve ? [subBezier smoothedPathWithGranularity:_padding] : subBezier;
+            [bezier appendPath:subBezier];
+            
+            UIBezierPath * closeBezier = [UIBezierPath bezierPath];
+            [closeBezier moveToPoint:CGPointMake(self.frame.size.width, self.frame.size.height)];
+            [closeBezier addLineToPoint:CGPointMake(0, self.frame.size.height)];
+            [bezier appendPath:closeBezier];
+        }
+        
+        return bezier;
+        
+    }else if (_wavePatternType == kWavePatternTypeForSharp){
+        UIBezierPath * bezier = [UIBezierPath bezierPath];
+        [bezier moveToPoint:CGPointMake(0, self.frame.size.height)];
+        for (NSInteger i = 0; i < _valuePointArray.count; i++) {
+            NSDictionary * point = _valuePointArray[i];
+            
+            [bezier addLineToPoint:CGPointMake([point[ZFWaveChartXPos] floatValue], self.frame.size.height)];
+        }
+
+        [bezier addLineToPoint:CGPointMake(self.frame.size.width, self.frame.size.height)];
+        [bezier closePath];
+        return bezier;
     }
     
-    [bezier addLineToPoint:CGPointMake(self.frame.size.width, self.frame.size.height)];
-    [bezier addLineToPoint:CGPointMake(self.frame.size.width, self.frame.size.height)];
-    [bezier closePath];
-    
-    return bezier = _wavePatternType == kWavePatternTypeForCurve ? [bezier smoothedPathWithGranularity:_padding] : bezier;;
+    return nil;
 }
 
 - (UIBezierPath *)fill{
-    UIBezierPath * bezier = [UIBezierPath bezierPath];
-    [bezier moveToPoint:CGPointMake(0, self.frame.size.height)];
-    for (NSInteger i = 0; i < _valuePointArray.count; i++) {
-        NSDictionary * point = _valuePointArray[i];
-        [bezier addLineToPoint:CGPointMake([point[@"xPos"] floatValue], [point[@"yPos"] floatValue])];
+    if (_wavePatternType == kWavePatternTypeForCurve) {
+        UIBezierPath * bezier = [UIBezierPath bezierPath];
+        for (NSInteger i = 0; i < self.curveArray.count; i++) {
+            UIBezierPath * subBezier = [UIBezierPath bezierPath];
+            ZFWaveAttribute * attribute = self.curveArray[i];
+            for (NSInteger j = 0; j < attribute.pointArray.count; j++) {
+                NSDictionary * currentPoint = attribute.pointArray[j];
+                if (j == 0) {
+                    [subBezier moveToPoint:CGPointMake([currentPoint[ZFWaveChartXPos] floatValue], [currentPoint[ZFWaveChartYPos] floatValue])];
+                }else{
+                    [subBezier addLineToPoint:CGPointMake([currentPoint[ZFWaveChartXPos] floatValue], [currentPoint[ZFWaveChartYPos] floatValue])];
+                }
+            }
+            //判断绘画直线还是曲线
+            subBezier = attribute.isCurve ? [subBezier smoothedPathWithGranularity:_padding] : subBezier;
+            [bezier appendPath:subBezier];
+            
+            UIBezierPath * closeBezier = [UIBezierPath bezierPath];
+            [closeBezier moveToPoint:CGPointMake(self.frame.size.width, self.frame.size.height)];
+            [closeBezier addLineToPoint:CGPointMake(0, self.frame.size.height)];
+            [bezier appendPath:closeBezier];
+        }
+        
+        return bezier;
+        
+    }else if (_wavePatternType == kWavePatternTypeForSharp){
+        UIBezierPath * bezier = [UIBezierPath bezierPath];
+        [bezier moveToPoint:CGPointMake(0, self.frame.size.height)];
+        for (NSInteger i = 0; i < _valuePointArray.count; i++) {
+            NSDictionary * point = _valuePointArray[i];
+            [bezier addLineToPoint:CGPointMake([point[ZFWaveChartXPos] floatValue], [point[ZFWaveChartYPos] floatValue])];
+        }
+    
+        [bezier addLineToPoint:CGPointMake(self.frame.size.width, self.frame.size.height)];
+        [bezier closePath];
+        return bezier;
     }
     
-    NSDictionary * lastPoint = _valuePointArray.lastObject;
-    [bezier addLineToPoint:CGPointMake(self.frame.size.width, [lastPoint[@"yPos"] floatValue])];
-    [bezier addLineToPoint:CGPointMake(self.frame.size.width, self.frame.size.height)];
-    [bezier closePath];
-    
-    return bezier = _wavePatternType == kWavePatternTypeForCurve ? [bezier smoothedPathWithGranularity:_padding] : bezier;
+    return nil;
 }
 
 - (CAShapeLayer *)shapeLayer{
@@ -96,13 +158,144 @@
     return fillAnimation;
 }
 
+#pragma mark - 重绘
+
 - (void)strokePath{
     for (CALayer * layer in self.layer.sublayers) {
         [layer removeAllAnimations];
         [layer removeFromSuperlayer];
     }
     
+    if (_wavePatternType == kWavePatternTypeForCurve) {
+        [self subsectionCruve];
+    }
+    
     [self.layer addSublayer:[self shapeLayer]];
+
+}
+
+#pragma mark - kWavePatternTypeForCurve样式下模型处理
+
+/**
+ *  细分曲线
+ */
+- (void)subsectionCruve{
+    [self.subArray removeAllObjects];
+    
+    for (NSInteger i = 2; i < self.tempValuePointArray.count; i++) {
+        NSDictionary * previousPoint2 = self.tempValuePointArray[i - 2];
+        NSDictionary * previousPoint1 = self.tempValuePointArray[i - 1];
+        NSDictionary * currentPoint = self.tempValuePointArray[i];
+        
+        if (i == 2) {
+            [self.subArray addObject:previousPoint1];
+            [self.subArray addObject:currentPoint];
+        }
+        
+        if (i > 2) {
+            //a.a.a
+            if ([previousPoint2[ZFWaveChartIsHeightEqualZero] boolValue] == [currentPoint[ZFWaveChartIsHeightEqualZero] boolValue] &&[previousPoint1[ZFWaveChartIsHeightEqualZero] boolValue] == [currentPoint[ZFWaveChartIsHeightEqualZero] boolValue]) {
+                [self.subArray addObject:currentPoint];
+                
+            //a.a.b
+            }else if (![previousPoint2[ZFWaveChartIsHeightEqualZero] boolValue] == [currentPoint[ZFWaveChartIsHeightEqualZero] boolValue] && ![previousPoint1[ZFWaveChartIsHeightEqualZero] boolValue] == [currentPoint[ZFWaveChartIsHeightEqualZero] boolValue]){
+                //当高度为0
+                if ([currentPoint[ZFWaveChartIsHeightEqualZero] boolValue]) {
+                    [self.subArray addObject:currentPoint];
+                //当高度不为0
+                }else{
+                    ZFWaveAttribute * attribute = [[ZFWaveAttribute alloc] init];
+                    attribute.pointArray = [NSMutableArray arrayWithArray:self.subArray];
+                    attribute.isCurve = NO;
+                    [self.curveArray addObject:attribute];
+                    
+                    [self.subArray removeAllObjects];
+                    [self.subArray addObject:previousPoint1];
+                    [self.subArray addObject:currentPoint];
+                }
+                
+            //a.b.a
+            }else if ([previousPoint2[ZFWaveChartIsHeightEqualZero] boolValue] == [currentPoint[ZFWaveChartIsHeightEqualZero] boolValue] && ![previousPoint1[ZFWaveChartIsHeightEqualZero] boolValue] == [currentPoint[ZFWaveChartIsHeightEqualZero] boolValue]){
+                [self.subArray addObject:currentPoint];
+                
+            //a.b.b
+            }else if (![previousPoint2[ZFWaveChartIsHeightEqualZero] boolValue] == [currentPoint[ZFWaveChartIsHeightEqualZero] boolValue] && [previousPoint1[ZFWaveChartIsHeightEqualZero] boolValue] == [currentPoint[ZFWaveChartIsHeightEqualZero] boolValue]){
+                //当高度为0
+                if ([currentPoint[ZFWaveChartIsHeightEqualZero] boolValue]) {
+                    ZFWaveAttribute * attribute = [[ZFWaveAttribute alloc] init];
+                    attribute.pointArray = [NSMutableArray arrayWithArray:self.subArray];
+                    attribute.isCurve = YES;
+                    [self.curveArray addObject:attribute];
+                    
+                    [self.subArray removeAllObjects];
+                    [self.subArray addObject:previousPoint1];
+                    [self.subArray addObject:currentPoint];
+                    //当高度不为0
+                }else{
+                    [self.subArray addObject:currentPoint];
+                }
+            }
+        }
+        
+        //最后一个点
+        if (i == self.tempValuePointArray.count - 1) {
+            ZFWaveAttribute * attribute = [[ZFWaveAttribute alloc] init];
+            attribute.pointArray = [NSMutableArray arrayWithArray:self.subArray];
+            //a.a.a
+            if ([previousPoint1[ZFWaveChartIsHeightEqualZero] boolValue] == [currentPoint[ZFWaveChartIsHeightEqualZero] boolValue] && [previousPoint2[ZFWaveChartIsHeightEqualZero] boolValue] == [currentPoint[ZFWaveChartIsHeightEqualZero] boolValue]) {
+                //当高度为0
+                if ([currentPoint[ZFWaveChartIsHeightEqualZero] boolValue]) {
+                    attribute.isCurve = NO;
+                }else{
+                    attribute.isCurve = YES;
+                }
+                
+            //a.b.b
+            }else if (![previousPoint1[ZFWaveChartIsHeightEqualZero] boolValue] == [currentPoint[ZFWaveChartIsHeightEqualZero] boolValue] && [previousPoint2[ZFWaveChartIsHeightEqualZero] boolValue] == [currentPoint[ZFWaveChartIsHeightEqualZero] boolValue]){
+                //当高度为0
+                if ([currentPoint[ZFWaveChartIsHeightEqualZero] boolValue]) {
+                    attribute.isCurve = NO;
+                }else{
+                    attribute.isCurve = YES;
+                }
+            }else{
+                attribute.isCurve = YES;
+            }
+
+            [self.curveArray addObject:attribute];
+
+            [self.subArray removeAllObjects];
+        }
+    }
+}
+
+#pragma mark - 懒加载
+
+- (NSMutableArray *)curveArray{
+    if (!_curveArray) {
+        _curveArray = [NSMutableArray array];
+    }
+    return _curveArray;
+}
+
+- (NSMutableArray *)subArray{
+    if (!_subArray) {
+        _subArray = [NSMutableArray array];
+    }
+    return _subArray;
+}
+
+- (NSMutableArray *)tempValuePointArray{
+    if (!_tempValuePointArray) {
+        _tempValuePointArray = [NSMutableArray arrayWithArray:_valuePointArray];
+        //(在最前面多插入了2个原点, 在最后面多插入了1个终点, 用于判断切断位置)
+        NSDictionary * startPoint = @{ZFWaveChartXPos:@(0), ZFWaveChartYPos:@(self.frame.size.height), ZFWaveChartIsHeightEqualZero:@(YES)};
+        NSDictionary * endPoint = @{ZFWaveChartXPos:@(self.frame.size.width), ZFWaveChartYPos:@(self.frame.size.height), ZFWaveChartIsHeightEqualZero:@(YES)};
+        [_tempValuePointArray insertObject:startPoint atIndex:0];
+        [_tempValuePointArray insertObject:startPoint atIndex:0];
+        [_tempValuePointArray addObject:endPoint];
+    }
+    return _tempValuePointArray;
 }
 
 @end

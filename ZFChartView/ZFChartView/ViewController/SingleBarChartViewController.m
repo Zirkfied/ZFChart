@@ -39,7 +39,7 @@
     self.barChart.delegate = self;
     self.barChart.topicLabel.text = @"xx小学各年级人数";
     self.barChart.unit = @"人";
-    self.barChart.isAnimated = NO;
+//    self.barChart.isAnimated = NO;
 //    self.barChart.isResetAxisLineMinValue = YES;
     self.barChart.isResetAxisLineMaxValue = YES;
 //    self.barChart.isShowAxisLineValue = NO;

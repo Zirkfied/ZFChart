@@ -109,30 +109,30 @@
             CGFloat end_YPos;
             
             if (i == 0) {//当前点是第一个时
-                end_YPos = [currentDict[@"yPos"] floatValue];
+                end_YPos = [currentDict[ZFWaveChartYPos] floatValue];
                 
             }else{//当前点不是第一个时
                 NSDictionary * preDict = _valuePointArray[i - 1];
-                end_YPos = [preDict[@"yPos"] floatValue] - [currentDict[@"yPos"] floatValue];
+                end_YPos = [preDict[ZFWaveChartYPos] floatValue] - [currentDict[ZFWaveChartYPos] floatValue];
             }
             
             if (end_YPos < 0) {
                 popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnTop;
-                popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue] + CGRectGetMinX(self.wave.frame), [currentDict[@"yPos"] floatValue] + (rect.size.height + 10) * 0.5 + _valueLabelToWaveLinePadding + CGRectGetMinY(self.wave.frame));
+                popoverLabel.center = CGPointMake([currentDict[ZFWaveChartXPos] floatValue] + CGRectGetMinX(self.wave.frame), [currentDict[ZFWaveChartYPos] floatValue] + (rect.size.height + 10) * 0.5 + _valueLabelToWaveLinePadding + CGRectGetMinY(self.wave.frame));
             }else{
                 popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnBelow;
-                popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue] + CGRectGetMinX(self.wave.frame), [currentDict[@"yPos"] floatValue] - (rect.size.height + 10) * 0.5 - _valueLabelToWaveLinePadding + CGRectGetMinY(self.wave.frame));
+                popoverLabel.center = CGPointMake([currentDict[ZFWaveChartXPos] floatValue] + CGRectGetMinX(self.wave.frame), [currentDict[ZFWaveChartYPos] floatValue] - (rect.size.height + 10) * 0.5 - _valueLabelToWaveLinePadding + CGRectGetMinY(self.wave.frame));
             }
             
             //_valueOnChartPosition为图表上方
         }else if (_valuePosition == kChartValuePositionOnTop){
             popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnBelow;
-            popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue] + CGRectGetMinX(self.wave.frame), [currentDict[@"yPos"] floatValue] - (rect.size.height + 10) * 0.5 - _valueLabelToWaveLinePadding + CGRectGetMinY(self.wave.frame));
+            popoverLabel.center = CGPointMake([currentDict[ZFWaveChartXPos] floatValue] + CGRectGetMinX(self.wave.frame), [currentDict[ZFWaveChartYPos] floatValue] - (rect.size.height + 10) * 0.5 - _valueLabelToWaveLinePadding + CGRectGetMinY(self.wave.frame));
             
             //_valueOnChartPosition为图表下方
         }else if (_valuePosition == kChartValuePositionOnBelow){
             popoverLabel.arrowsOrientation = kPopoverLaberArrowsOrientationOnTop;
-            popoverLabel.center = CGPointMake([currentDict[@"xPos"] floatValue] + CGRectGetMinX(self.wave.frame), [currentDict[@"yPos"] floatValue] + (rect.size.height + 10) * 0.5 + _valueLabelToWaveLinePadding + CGRectGetMinY(self.wave.frame));
+            popoverLabel.center = CGPointMake([currentDict[ZFWaveChartXPos] floatValue] + CGRectGetMinX(self.wave.frame), [currentDict[ZFWaveChartYPos] floatValue] + (rect.size.height + 10) * 0.5 + _valueLabelToWaveLinePadding + CGRectGetMinY(self.wave.frame));
         }
         
         [popoverLabel strokePath];
@@ -273,7 +273,9 @@
         CGFloat xPos = self.genericAxis.groupPadding + self.genericAxis.groupWidth * 0.5 + (self.genericAxis.groupPadding + self.genericAxis.groupWidth) * i;
         CGFloat yPos = self.genericAxis.axisStartYPos - self.genericAxis.yLineMaxValueYPos - height;
         
-        NSDictionary * dict = @{@"xPos":@(xPos), @"yPos":@(yPos)};
+        //判断高度是否为0
+        BOOL isHeightEqualZero = height == 0 ? YES : NO;
+        NSDictionary * dict = @{ZFWaveChartXPos:@(xPos), ZFWaveChartYPos:@(yPos), ZFWaveChartIsHeightEqualZero:@(isHeightEqualZero)};
         [valuePointArray addObject:dict];
     }
     

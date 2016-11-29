@@ -253,11 +253,11 @@
     for (ZFBar * bar in self.barArray) {
         if (bar != sender) {
             bar.barColor = bar.isOverrun ? _overMaxValueBarColor : _colorArray[bar.groupIndex];
-            bar.isShadow = _isShadow;
-            bar.isAnimated = self.isAnimated;
-            bar.shadowColor = self.shadowColor;
+            bar.isAnimated = NO;
             bar.opacity = self.opacity;
             [bar strokePath];
+            //复原
+            bar.isAnimated = self.isAnimated;
         }
     }
     
@@ -277,8 +277,6 @@
         if (popoverLabel != sender) {
             popoverLabel.font = self.valueOnChartFont;
             popoverLabel.textColor = (UIColor *)self.valueTextColorArray[popoverLabel.groupIndex];
-            popoverLabel.shadowColor = self.valueLabelShadowColor;
-            popoverLabel.isShadow = self.isShadowForValueLabel;
             popoverLabel.isAnimated = sender.isAnimated;
             [popoverLabel strokePath];
         }

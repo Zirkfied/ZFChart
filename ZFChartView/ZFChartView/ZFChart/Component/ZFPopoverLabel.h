@@ -35,10 +35,6 @@ typedef enum{
 @property (nonatomic, strong) UIFont * font;
 /** 文本颜色 */
 @property (nonatomic, strong) UIColor * textColor;
-/** label阴影颜色(默认为浅灰色) */
-@property (nonatomic, strong) UIColor * shadowColor;
-/** 是否带阴影效果(默认为YES) */
-@property (nonatomic, assign) BOOL isShadow;
 /** 是否带动画显示(默认为YES，带动画) */
 @property (nonatomic, assign) BOOL isAnimated;
 
@@ -57,6 +53,10 @@ typedef enum{
 @property (nonatomic, assign) NSInteger labelIndex;
 /** 记录数据是否超出上限 */
 @property (nonatomic, assign) BOOL isOverrun;
+/** 是否带阴影效果(默认为YES) */
+@property (nonatomic, assign) BOOL isShadow;
+/** label阴影颜色(默认为浅灰色) */
+@property (nonatomic, strong) UIColor * shadowColor;
 
 
 #pragma mark - public method

@@ -118,11 +118,12 @@
     
     //可在此处进行circle被点击后的自身部分属性设置,可修改的属性查看ZFCircle.h
 //    circle.circleColor = ZFYellow;
-//    circle.isAnimated = YES;
+    circle.isAnimated = YES;
 //    circle.opacity = 0.5;
-//    [circle strokePath];
     
-    //可将isShowAxisLineValue设置为NO，然后执行下句代码进行点击才显示数值
+    [circle strokePath];
+    
+//    可将isShowAxisLineValue设置为NO，然后执行下句代码进行点击才显示数值
 //    popoverLabel.hidden = NO;
 }
 
