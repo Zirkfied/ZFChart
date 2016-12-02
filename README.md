@@ -481,6 +481,7 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         2016.11.22 ①线状图(ZFLineChart)新增曲线样式，具体属性查看相关头文件
                    ②完善坐标轴分隔线
                    ③完善坐标轴颜色设置，可根据自身需求将x,y轴颜色设置ZFClear从而达到隐藏效果
+                   
         2016.11.29 ①优化波浪图(ZFWaveChart)曲线模型下数值为0时path路径突出问题
                    ②修正部分注释说明错误问题
                    
