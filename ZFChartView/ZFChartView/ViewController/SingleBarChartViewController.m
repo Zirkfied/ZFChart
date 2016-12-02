@@ -51,11 +51,11 @@
 //    self.barChart.xAxisColor = ZFWhite;
 //    self.barChart.yAxisColor = ZFWhite;
 //    self.barChart.xAxisColor = ZFClear;
-    self.barChart.yAxisColor = ZFClear;
+//    self.barChart.yAxisColor = ZFClear;
 //    self.barChart.axisLineNameColor = ZFWhite;
 //    self.barChart.axisLineValueColor = ZFWhite;
 //    self.barChart.backgroundColor = ZFPurple;
-//    self.barChart.isShowAxisArrows = NO;
+    self.barChart.isShowAxisArrows = NO;
     [self.view addSubview:self.barChart];
     [self.barChart strokePath];
     
@@ -101,6 +101,14 @@
 //- (id)valueTextColorArrayInBarChart:(ZFGenericChart *)barChart{
 //    return ZFBlue;
 //}
+
+- (NSArray *)gradientColorArrayInBarChart:(ZFBarChart *)barChart{
+    ZFGradientAttribute * gradientAttribute = [[ZFGradientAttribute alloc] init];
+    gradientAttribute.colors = @[(id)ZFRed.CGColor, (id)ZFWhite.CGColor];
+    gradientAttribute.locations = @[@(0.5), @(0.99)];
+    
+    return [NSArray arrayWithObjects:gradientAttribute, nil];
+}
 
 - (void)barChart:(ZFBarChart *)barChart didSelectBarAtGroupIndex:(NSInteger)groupIndex barIndex:(NSInteger)barIndex bar:(ZFBar *)bar popoverLabel:(ZFPopoverLabel *)popoverLabel{
     NSLog(@"第%ld组========第%ld个",(long)groupIndex,(long)barIndex);

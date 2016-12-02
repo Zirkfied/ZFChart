@@ -104,6 +104,31 @@
     return @[ZFBlue, ZFGold, ZFOrange];
 }
 
+//- (NSArray<ZFGradientAttribute *> *)gradientColorArrayInHorizontalBarChart:(ZFHorizontalBarChart *)barChart{
+//    //该组第1个bar渐变色
+//    ZFGradientAttribute * gradientAttribute1 = [[ZFGradientAttribute alloc] init];
+//    gradientAttribute1.colors = @[(id)ZFBlue.CGColor, (id)ZFWhite.CGColor];
+//    gradientAttribute1.locations = @[@(0.5), @(0.99)];
+//    gradientAttribute1.startPoint = CGPointMake(0, 0);
+//    gradientAttribute1.endPoint = CGPointMake(0.5, 0.5);
+//    
+//    //该组第2个bar渐变色
+//    ZFGradientAttribute * gradientAttribute2 = [[ZFGradientAttribute alloc] init];
+//    gradientAttribute2.colors = @[(id)ZFGold.CGColor, (id)ZFWhite.CGColor];
+//    gradientAttribute2.locations = @[@(0.5), @(0.99)];
+//    gradientAttribute2.startPoint = CGPointMake(0, 0);
+//    gradientAttribute2.endPoint = CGPointMake(0.5, 0.5);
+//    
+//    //该组第3个bar渐变色
+//    ZFGradientAttribute * gradientAttribute3 = [[ZFGradientAttribute alloc] init];
+//    gradientAttribute3.colors = @[(id)ZFOrange.CGColor, (id)ZFWhite.CGColor];
+//    gradientAttribute3.locations = @[@(0.5), @(0.99)];
+//    gradientAttribute3.startPoint = CGPointMake(0, 0);
+//    gradientAttribute3.endPoint = CGPointMake(0.5, 0.5);
+//    
+//    return [NSArray arrayWithObjects:gradientAttribute1, gradientAttribute2, gradientAttribute3, nil];
+//}
+
 - (void)horizontalBarChart:(ZFHorizontalBarChart *)barChart didSelectBarAtGroupIndex:(NSInteger)groupIndex barIndex:(NSInteger)barIndex horizontalBar:(ZFHorizontalBar *)horizontalBar popoverLabel:(ZFPopoverLabel *)popoverLabel{
     //特殊说明，因传入数据是3个subArray(代表3个类型)，每个subArray存的是6个元素(代表每个类型存了1~6年级的数据),所以这里的groupIndex是第几个subArray(类型)
     //eg：三年级第0个元素为 groupIndex为0，barIndex为2

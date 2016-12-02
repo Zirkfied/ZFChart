@@ -66,9 +66,9 @@
     return @[@"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级"];
 }
 
-- (NSArray *)colorArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[ZFMagenta];
-}
+//- (NSArray *)colorArrayInGenericChart:(ZFGenericChart *)chart{
+//    return @[ZFMagenta];
+//}
 
 - (CGFloat)axisLineMaxValueInGenericChart:(ZFGenericChart *)chart{
     return 500;
@@ -98,6 +98,14 @@
 
 - (id)valueTextColorArrayInHorizontalBarChart:(ZFHorizontalBarChart *)barChart{
     return ZFBlue;
+}
+
+- (NSArray<ZFGradientAttribute *> *)gradientColorArrayInHorizontalBarChart:(ZFHorizontalBarChart *)barChart{
+    ZFGradientAttribute * gradientAttribute = [[ZFGradientAttribute alloc] init];
+    gradientAttribute.colors = @[(id)ZFMagenta.CGColor, (id)ZFWhite.CGColor];
+    gradientAttribute.locations = @[@(0.0), @(0.9)];
+    
+    return [NSArray arrayWithObjects:gradientAttribute, nil];
 }
 
 - (void)horizontalBarChart:(ZFHorizontalBarChart *)barChart didSelectBarAtGroupIndex:(NSInteger)groupIndex barIndex:(NSInteger)barIndex horizontalBar:(ZFHorizontalBar *)horizontalBar popoverLabel:(ZFPopoverLabel *)popoverLabel{

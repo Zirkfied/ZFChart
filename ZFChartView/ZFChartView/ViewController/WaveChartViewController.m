@@ -40,8 +40,8 @@
     self.waveChart.topicLabel.text = @"xx小学各年级人数";
     self.waveChart.unit = @"人";
 //    self.waveChart.isShowYLineSeparate = YES;
-    self.waveChart.pathColor = ZFGrassGreen;
-//    self.waveChart.pathLineColor = ZFBlack;
+//    self.waveChart.pathColor = ZFGrassGreen;
+    self.waveChart.pathLineColor = ZFLightGray;
     self.waveChart.topicLabel.textColor = ZFPurple;
 //    self.waveChart.isAnimated = NO;
 //    self.waveChart.isResetAxisLineMinValue = YES;
@@ -86,6 +86,14 @@
 //- (CGFloat)paddingForGroupsInWaveChart:(ZFWaveChart *)waveChart{
 //    return 20.f;
 //}
+
+- (ZFGradientAttribute *)gradientColorInWaveChart:(ZFWaveChart *)waveChart{
+    ZFGradientAttribute * gradientAttribute = [[ZFGradientAttribute alloc] init];
+    gradientAttribute.colors = @[(id)ZFGold.CGColor, (id)ZFWhite.CGColor];
+    gradientAttribute.locations = @[@(0.0), @(0.9)];
+    
+    return gradientAttribute;
+}
 
 - (void)waveChart:(ZFWaveChart *)waveChart popoverLabelAtIndex:(NSInteger)index popoverLabel:(ZFPopoverLabel *)popoverLabel{
     NSLog(@"第%ld个Label",(long)index);

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZFConst.h"
 
 @interface ZFBar : UIControl
 
@@ -14,6 +15,8 @@
 
 /** bar颜色 */
 @property (nonatomic, strong) UIColor * barColor;
+/** bar渐变色模型 */
+@property (nonatomic, strong) ZFGradientAttribute * gradientAttribute;
 /** 是否带动画显示(默认为YES，带动画) */
 @property (nonatomic, assign) BOOL isAnimated;
 /** 图表透明度(范围0 ~ 1, 默认为1.f) */

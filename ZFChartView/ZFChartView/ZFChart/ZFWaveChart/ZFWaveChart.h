@@ -27,6 +27,13 @@
 - (CGFloat)paddingForGroupsInWaveChart:(ZFWaveChart *)waveChart;
 
 /**
+ *  path渐变色
+ *
+ *  (PS: 当实现此方法时，属性pathColor将无效，若不需渐变色，则直接设置pathColor)
+ */
+- (ZFGradientAttribute *)gradientColorInWaveChart:(ZFWaveChart *)waveChart;
+
+/**
  *  用于编写x轴valueLabel点击后需要执行后续代码
  *
  *  @param index     点击的x轴valueLabel的位置下标
@@ -41,7 +48,7 @@
 
 @property (nonatomic, weak) id<ZFWaveChartDelegate> delegate;
 
-/** path颜色(若不设置，默认为ZFSkyBlue) */
+/** path颜色(若不设置，默认为ZFSkyBlue)(若需实现CAGradientLayer渐变色请看ZFWaveChartDelegate代理方法) */
 @property (nonatomic, strong) UIColor * pathColor;
 /** path边线颜色(若不设置，默认为ZFClear) */
 @property (nonatomic, strong) UIColor * pathLineColor;

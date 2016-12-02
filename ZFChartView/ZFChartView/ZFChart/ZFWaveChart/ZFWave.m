@@ -9,7 +9,6 @@
 #import "ZFWave.h"
 #import "ZFColor.h"
 #import "UIBezierPath+Zirkfied.h"
-#import "ZFConst.h"
 #import "ZFWaveAttribute.h"
 
 @interface ZFWave()
@@ -146,6 +145,43 @@
     return shapeLayer;
 }
 
+/**
+ *  渐变色
+ */
+- (CALayer *)pathGradientColor{
+    CALayer * layer = [CALayer layer];
+    CAGradientLayer * gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
+    gradientLayer.colors = _gradientAttribute.colors;
+    gradientLayer.locations = _gradientAttribute.locations;
+    gradientLayer.startPoint = _gradientAttribute.startPoint;
+    gradientLayer.endPoint = _gradientAttribute.endPoint;
+    [layer addSublayer:gradientLayer];
+    
+    CAShapeLayer * lineLayer = [CAShapeLayer layer];
+    lineLayer.strokeColor = _pathLineColor.CGColor;
+    lineLayer.fillColor = nil;
+    lineLayer.path = [self fill].CGPath;
+    lineLayer.lineJoin = kCALineJoinRound;
+    lineLayer.lineCap = kCALineCapRound;
+    [layer addSublayer:lineLayer];
+    
+    if (_isAnimated) {
+        CABasicAnimation * animation = [self animation];
+        [lineLayer addAnimation:animation forKey:nil];
+    }
+    
+    layer.mask = [self shapeLayer];
+    return layer;
+}
+
+#pragma mark - 动画
+
+/**
+ *  填充动画过程
+ *
+ *  @return CABasicAnimation
+ */
 - (CABasicAnimation *)animation{
     CABasicAnimation * fillAnimation = [CABasicAnimation animationWithKeyPath:@"path"];
     fillAnimation.duration = _animationDuration;
@@ -170,8 +206,7 @@
         [self subsectionCruve];
     }
     
-    [self.layer addSublayer:[self shapeLayer]];
-
+    _gradientAttribute ? [self.layer addSublayer:[self pathGradientColor]] : [self.layer addSublayer:[self shapeLayer]];
 }
 
 #pragma mark - kWavePatternTypeForCurve样式下模型处理

@@ -45,6 +45,8 @@
 		1856ABE71D0008CC001CABE7 /* ZFXAxisLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 1856ABDF1D0008CC001CABE7 /* ZFXAxisLine.m */; };
 		1856ABE81D0008CC001CABE7 /* ZFYAxisLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 1856ABE11D0008CC001CABE7 /* ZFYAxisLine.m */; };
 		1856ABE91D0008CC001CABE7 /* ZFYAxisLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 1856ABE11D0008CC001CABE7 /* ZFYAxisLine.m */; };
+		18645A3C1DF003A400501BF9 /* ZFGradientAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 18645A3B1DF003A400501BF9 /* ZFGradientAttribute.m */; };
+		18645A3D1DF003A400501BF9 /* ZFGradientAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 18645A3B1DF003A400501BF9 /* ZFGradientAttribute.m */; };
 		187006A51C9AAED300BEF5FB /* ZFMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 187006A41C9AAED300BEF5FB /* ZFMethod.m */; };
 		187006A81C9AB54D00BEF5FB /* ZFCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 187006A71C9AB54D00BEF5FB /* ZFCircle.m */; };
 		187D922E1C9FFD6E00AD7370 /* ZFPie.m in Sources */ = {isa = PBXBuildFile; fileRef = 187D92291C9FFD6E00AD7370 /* ZFPie.m */; };
@@ -147,6 +149,8 @@
 		1856ABDF1D0008CC001CABE7 /* ZFXAxisLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFXAxisLine.m; sourceTree = "<group>"; };
 		1856ABE01D0008CC001CABE7 /* ZFYAxisLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFYAxisLine.h; sourceTree = "<group>"; };
 		1856ABE11D0008CC001CABE7 /* ZFYAxisLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFYAxisLine.m; sourceTree = "<group>"; };
+		18645A3A1DF003A400501BF9 /* ZFGradientAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFGradientAttribute.h; sourceTree = "<group>"; };
+		18645A3B1DF003A400501BF9 /* ZFGradientAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFGradientAttribute.m; sourceTree = "<group>"; };
 		187006A31C9AAED300BEF5FB /* ZFMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFMethod.h; sourceTree = "<group>"; };
 		187006A41C9AAED300BEF5FB /* ZFMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFMethod.m; sourceTree = "<group>"; };
 		187006A61C9AB54D00BEF5FB /* ZFCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFCircle.h; sourceTree = "<group>"; };
@@ -373,6 +377,8 @@
 			children = (
 				18D5C33F1DE6D8D60073A7AA /* ZFWaveAttribute.h */,
 				18D5C3401DE6D8D60073A7AA /* ZFWaveAttribute.m */,
+				18645A3A1DF003A400501BF9 /* ZFGradientAttribute.h */,
+				18645A3B1DF003A400501BF9 /* ZFGradientAttribute.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -636,6 +642,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1856ABE21D0008CC001CABE7 /* ZFLabel.m in Sources */,
+				18645A3C1DF003A400501BF9 /* ZFGradientAttribute.m in Sources */,
 				18D33BF41D5B41FA00CE33AD /* ZFHorizontalBar.m in Sources */,
 				1808700D1CB4DF0B00C64C74 /* UIBezierPath+Zirkfied.m in Sources */,
 				1801F81B1CA6689000DA2D53 /* ZFWaveChart.m in Sources */,
@@ -698,6 +705,7 @@
 				1856ABE71D0008CC001CABE7 /* ZFXAxisLine.m in Sources */,
 				183D57971DB770E2006B5001 /* MultiCirqueChartViewController.m in Sources */,
 				18869E471D925E0000B58E75 /* ZFPolygon.m in Sources */,
+				18645A3D1DF003A400501BF9 /* ZFGradientAttribute.m in Sources */,
 				1856ABE51D0008CC001CABE7 /* ZFPopoverLabel.m in Sources */,
 				1856ABE91D0008CC001CABE7 /* ZFYAxisLine.m in Sources */,
 				183D57931DB770D0006B5001 /* SingleCirqueChartViewController.m in Sources */,

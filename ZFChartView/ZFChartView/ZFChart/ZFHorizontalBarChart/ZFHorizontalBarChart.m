@@ -23,6 +23,8 @@
 @property (nonatomic, strong) NSMutableArray * popoverLaberArray;
 /** 存储value文本颜色的数组 */
 @property (nonatomic, strong) NSMutableArray * valueTextColorArray;
+/** 存储bar渐变色的数组 */
+@property (nonatomic, strong) NSMutableArray * gradientColorArray;
 /** bar高度 */
 @property (nonatomic, assign) CGFloat barHeight;
 /** bar与bar之间的间距 */
@@ -98,6 +100,7 @@
             bar.isAnimated = self.isAnimated;
             bar.opacity = self.opacity;
             bar.shadowColor = self.shadowColor;
+            bar.gradientAttribute = _gradientColorArray ? _gradientColorArray.firstObject : nil;
             [bar strokePath];
             [self.barArray addObject:bar];
             [self.horizontalAxis addSubview:bar];
@@ -135,6 +138,7 @@
                 bar.isAnimated = self.isAnimated;
                 bar.opacity = self.opacity;
                 bar.shadowColor = self.shadowColor;
+                bar.gradientAttribute = _gradientColorArray ? _gradientColorArray[groupIndex] : nil;
                 [bar strokePath];
                 [self.barArray addObject:bar];
                 [self.horizontalAxis addSubview:bar];
@@ -415,6 +419,10 @@
                 [self.valueTextColorArray addObject:_valueTextColor];
             }
         }
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(gradientColorArrayInHorizontalBarChart:)]) {
+        _gradientColorArray = [NSMutableArray arrayWithArray:[self.delegate gradientColorArrayInHorizontalBarChart:self]];
     }
     
     self.horizontalAxis.groupHeight = [self cachedGroupHeight:self.horizontalAxis.yLineValueArray];

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZFConst.h"
 
 /**
  *  波浪图样式
@@ -24,6 +25,8 @@ typedef enum{
 @property (nonatomic, strong) UIColor * pathLineColor;
 /** 数值坐标的数组 */
 @property (nonatomic, strong) NSMutableArray * valuePointArray;
+/** path渐变色模型 */
+@property (nonatomic, strong) ZFGradientAttribute * gradientAttribute;
 /** 间距 */
 @property (nonatomic, assign) CGFloat padding;
 /** 图表透明度(范围0 ~ 1, 默认为1.f) */

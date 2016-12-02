@@ -17,6 +17,8 @@
 @property (nonatomic, strong) ZFGenericAxis * genericAxis;
 /** 波浪path */
 @property (nonatomic, strong) ZFWave * wave;
+/** 存储path渐变色 */
+@property (nonatomic, strong) ZFGradientAttribute * gradientAttribute;
 /** 存储点的位置的数组 */
 @property (nonatomic, strong) NSMutableArray * valuePointArray;
 /** 存储popoverLaber数组 */
@@ -67,6 +69,7 @@
     self.wave.wavePatternType = _wavePatternType;
     self.wave.isAnimated = self.isAnimated;
     self.wave.opacity = self.opacity;
+    self.wave.gradientAttribute = _gradientAttribute;
     [self.genericAxis addSubview:self.wave];
     [self.wave strokePath];
 }
@@ -242,6 +245,10 @@
     
     if ([self.delegate respondsToSelector:@selector(paddingForGroupsInWaveChart:)]) {
         self.genericAxis.groupPadding = [self.delegate paddingForGroupsInWaveChart:self];
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(gradientColorInWaveChart:)]) {
+        _gradientAttribute = [self.delegate gradientColorInWaveChart:self];
     }
     
     [self removeAllSubview];

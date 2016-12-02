@@ -42,6 +42,15 @@
 - (id)valueTextColorArrayInHorizontalBarChart:(ZFHorizontalBarChart *)barChart;
 
 /**
+ *  bar渐变色
+ *
+ *  (PS: 此方法 与 父类代理方法 - (NSArray *)colorArrayInGenericChart:(ZFGenericChart *)chart 二选一。若同时实现了这两个方法，则会优先执行渐变色)
+ *
+ *  @return NSArray必须存储ZFGradientAttribute类型
+ */
+- (NSArray<ZFGradientAttribute *> *)gradientColorArrayInHorizontalBarChart:(ZFHorizontalBarChart *)barChart;
+
+/**
  *  用于编写点击bar后需要执行后续代码
  *
  *  @param groupIndex 点击的bar在第几组

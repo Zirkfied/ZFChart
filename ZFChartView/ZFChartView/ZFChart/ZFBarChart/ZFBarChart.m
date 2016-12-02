@@ -23,6 +23,8 @@
 @property (nonatomic, strong) NSMutableArray * popoverLaberArray;
 /** 存储value文本颜色的数组 */
 @property (nonatomic, strong) NSMutableArray * valueTextColorArray;
+/** 存储bar渐变色的数组 */
+@property (nonatomic, strong) NSMutableArray * gradientColorArray;
 /** bar宽度 */
 @property (nonatomic, assign) CGFloat barWidth;
 /** bar与bar之间的间距 */
@@ -88,6 +90,7 @@
             if ([self.genericAxis.xLineValueArray[i] floatValue] / self.genericAxis.yLineMaxValue <= 1) {
                 bar.percent = ([self.genericAxis.xLineValueArray[i] floatValue] - self.genericAxis.yLineMinValue) / (self.genericAxis.yLineMaxValue - self.genericAxis.yLineMinValue);
                 bar.barColor = _colorArray.firstObject;
+                
                 bar.isOverrun = NO;
             }else{
                 bar.percent = 1.f;
@@ -98,6 +101,7 @@
             bar.isAnimated = self.isAnimated;
             bar.opacity = self.opacity;
             bar.shadowColor = self.shadowColor;
+            bar.gradientAttribute = _gradientColorArray ? _gradientColorArray.firstObject : nil;
             [bar strokePath];
             [self.barArray addObject:bar];
             [self.genericAxis addSubview:bar];
@@ -137,6 +141,7 @@
                 bar.isAnimated = self.isAnimated;
                 bar.opacity = self.opacity;
                 bar.shadowColor = self.shadowColor;
+                bar.gradientAttribute = _gradientColorArray ? _gradientColorArray[groupIndex] : nil;
                 [bar strokePath];
                 [self.barArray addObject:bar];
                 [self.genericAxis addSubview:bar];
@@ -414,6 +419,10 @@
                 [self.valueTextColorArray addObject:_valueTextColor];
             }
         }
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(gradientColorArrayInBarChart:)]) {
+        _gradientColorArray = [NSMutableArray arrayWithArray:[self.delegate gradientColorArrayInBarChart:self]];
     }
     
     self.genericAxis.groupWidth = [self cachedGroupWidth:self.genericAxis.xLineValueArray];

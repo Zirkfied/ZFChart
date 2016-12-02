@@ -39,7 +39,7 @@
     self.barChart.delegate = self;
     self.barChart.topicLabel.text = @"xx小学各年级男女人数";
     self.barChart.unit = @"人";
-    self.barChart.topicLabel.textColor = ZFWhite;
+//    self.barChart.topicLabel.textColor = ZFWhite;
 //    self.barChart.isAnimated = NO;
 //    self.barChart.isResetAxisLineMinValue = YES;
 //    self.barChart.isResetAxisLineMaxValue = YES;
@@ -48,12 +48,12 @@
 //    self.barChart.isShowAxisLineValue = NO;
     self.barChart.isShowYLineSeparate = YES;
     self.barChart.isShowXLineSeparate = YES;
-    self.barChart.unitColor = ZFWhite;
-    self.barChart.backgroundColor = ZFPurple;
-    self.barChart.xAxisColor = ZFWhite;
-    self.barChart.yAxisColor = ZFWhite;
-    self.barChart.axisLineNameColor = ZFWhite;
-    self.barChart.axisLineValueColor = ZFWhite;
+//    self.barChart.unitColor = ZFWhite;
+//    self.barChart.backgroundColor = ZFPurple;
+//    self.barChart.xAxisColor = ZFWhite;
+//    self.barChart.yAxisColor = ZFWhite;
+//    self.barChart.axisLineNameColor = ZFWhite;
+//    self.barChart.axisLineValueColor = ZFWhite;
     [self.barChart strokePath];
     [self.view addSubview:self.barChart];
 }
@@ -103,6 +103,31 @@
 - (id)valueTextColorArrayInBarChart:(ZFBarChart *)barChart{
     return ZFBlue;
 //    return @[ZFColor(71, 204, 255, 1), ZFColor(253, 203, 76, 1), ZFColor(16, 140, 39, 1)];
+}
+
+- (NSArray<ZFGradientAttribute *> *)gradientColorArrayInBarChart:(ZFBarChart *)barChart{
+    //该组第1个bar渐变色
+    ZFGradientAttribute * gradientAttribute1 = [[ZFGradientAttribute alloc] init];
+    gradientAttribute1.colors = @[(id)ZFColor(71, 204, 255, 1).CGColor, (id)ZFWhite.CGColor];
+    gradientAttribute1.locations = @[@(0.5), @(0.99)];
+    gradientAttribute1.startPoint = CGPointMake(0, 0.5);
+    gradientAttribute1.endPoint = CGPointMake(1, 0.5);
+    
+    //该组第2个bar渐变色
+    ZFGradientAttribute * gradientAttribute2 = [[ZFGradientAttribute alloc] init];
+    gradientAttribute2.colors = @[(id)ZFGold.CGColor, (id)ZFWhite.CGColor];
+    gradientAttribute2.locations = @[@(0.5), @(0.99)];
+    gradientAttribute2.startPoint = CGPointMake(0, 0.5);
+    gradientAttribute2.endPoint = CGPointMake(1, 0.5);
+    
+    //该组第3个bar渐变色
+    ZFGradientAttribute * gradientAttribute3 = [[ZFGradientAttribute alloc] init];
+    gradientAttribute3.colors = @[(id)ZFColor(16, 140, 39, 1).CGColor, (id)ZFWhite.CGColor];
+    gradientAttribute3.locations = @[@(0.5), @(0.99)];
+    gradientAttribute3.startPoint = CGPointMake(0, 0.5);
+    gradientAttribute3.endPoint = CGPointMake(1, 0.5);
+    
+    return [NSArray arrayWithObjects:gradientAttribute1, gradientAttribute2, gradientAttribute3, nil];
 }
 
 - (void)barChart:(ZFBarChart *)barChart didSelectBarAtGroupIndex:(NSInteger)groupIndex barIndex:(NSInteger)barIndex bar:(ZFBar *)bar popoverLabel:(ZFPopoverLabel *)popoverLabel{
