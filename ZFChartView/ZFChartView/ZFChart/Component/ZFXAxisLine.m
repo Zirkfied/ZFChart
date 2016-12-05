@@ -212,11 +212,9 @@
 #pragma mark - 重写setter,getter方法
 
 - (void)setXLineWidth:(CGFloat)xLineWidth{
-    if (xLineWidth > _xLineWidth) {
-        _xLineWidth = xLineWidth;
-        _xLineEndXPos = _xLineStartXPos + _xLineWidth;
-        self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, _xLineEndXPos + 20.f, self.frame.size.height);
-    }
+    _xLineWidth = xLineWidth;
+    _xLineEndXPos = _xLineStartXPos + _xLineWidth;
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, _xLineEndXPos + 20.f, self.frame.size.height);
 }
 
 /**
