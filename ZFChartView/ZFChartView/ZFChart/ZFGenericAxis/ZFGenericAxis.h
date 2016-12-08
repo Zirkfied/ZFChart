@@ -92,4 +92,13 @@
  */
 - (void)bringSectionToFront;
 
+
+#warning message - 自定义添加 by zhb
+/**
+ 生成无坐标轴图表
+ 
+ @return instancetype
+ */
+- (instancetype)initWithNoGenericAxis;
+
 @end

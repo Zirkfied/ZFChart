@@ -11,6 +11,11 @@
 
 @interface ZFBar : UIControl
 
+#warning message - 自定义添加 by zhb
+/** 是否全圆角 */
+@property (nonatomic, assign, getter = isAllCircle)BOOL allCircle;
+
+
 #warning message - 以下属性可在点击后根据自身需求改动
 
 /** bar颜色 */

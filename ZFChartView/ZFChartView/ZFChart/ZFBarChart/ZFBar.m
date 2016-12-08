@@ -47,7 +47,19 @@
  *  @return UIBezierPath
  */
 - (UIBezierPath *)noFill{
-    UIBezierPath * bezier = [UIBezierPath bezierPathWithRect:CGRectMake(0, _barHeightLimit, self.frame.size.width, 0)];
+    //2016.12自定义圆角 by zhb
+    UIBezierPath *bezier;
+    if (self.isAllCircle) {
+        //define path parameters
+        CGRect rect = CGRectMake(0, _barHeightLimit, self.frame.size.width, 0);
+        CGSize radii = CGSizeMake(10, 10);
+        UIRectCorner corners = UIRectCornerAllCorners;
+        //create path
+        bezier = [UIBezierPath bezierPathWithRoundedRect:rect byRoundingCorners:corners cornerRadii:radii];
+    } else {
+        bezier = [UIBezierPath bezierPathWithRect:CGRectMake(0, _barHeightLimit, self.frame.size.width, 0)];
+    }
+
     return bezier;
 }
 
@@ -60,7 +72,21 @@
     CGFloat currentHeight = _barHeightLimit * self.percent;
     _endYPos = _barHeightLimit - currentHeight;
     
-    UIBezierPath * bezier = [UIBezierPath bezierPathWithRect:CGRectMake(0, _endYPos, self.frame.size.width, currentHeight)];
+    #warning message - 自定义添加 by zhb
+    //圆角
+    UIBezierPath *bezier;
+    if (self.isAllCircle) {
+        //define path parameters
+        CGRect rect = CGRectMake(0, _endYPos, self.frame.size.width, currentHeight);
+        CGSize radii = CGSizeMake(10, 10);
+        UIRectCorner corners = UIRectCornerAllCorners;
+        //create path
+        bezier = [UIBezierPath bezierPathWithRoundedRect:rect byRoundingCorners:corners cornerRadii:radii];
+    } else {
+        bezier = [UIBezierPath bezierPathWithRect:CGRectMake(0, _endYPos, self.frame.size.width, currentHeight)];
+    }
+
+    
     return bezier;
 }
 

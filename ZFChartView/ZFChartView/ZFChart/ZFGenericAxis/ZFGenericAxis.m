@@ -21,6 +21,11 @@
 /** 存储分段线的数组 */
 @property (nonatomic, strong) NSMutableArray * sectionArray;
 
+
+#warning message - 自定义添加 by zhb
+/** 是否无坐标轴 */
+@property (nonatomic, assign, getter = isNoGenericAxis)BOOL noGenericAxis;
+
 @end
 
 @implementation ZFGenericAxis
@@ -57,21 +62,46 @@
     return self;
 }
 
+#warning message - 自定义添加 by zhb
+- (instancetype)initWithNoGenericAxis {
+    self = [super init];
+    if (self) {
+        self.noGenericAxis = YES;
+        [self commonInit];
+        [self drawAxisLine];
+    }
+    
+    return self;
+}
+
 #pragma mark - 坐标轴
 
 /**
  *  画坐标轴
  */
 - (void)drawAxisLine{
-    //x轴
-    self.xAxisLine = [[ZFXAxisLine alloc] initWithFrame:self.bounds direction:kAxisDirectionVertical];
-    self.xAxisLine.backgroundColor = _axisLineBackgroundColor;
-    [self addSubview:self.xAxisLine];
     
-    //y轴
-    self.yAxisLine = [[ZFYAxisLine alloc] initWithFrame:CGRectMake(0, 0, ZFAxisLineStartXPos, self.bounds.size.height) direction:kAxisDirectionVertical];
-    self.yAxisLine.backgroundColor = _axisLineBackgroundColor;
-    [self addSubview:self.yAxisLine];
+    if (self.isNoGenericAxis) {
+        #warning message - 自定义添加 by zhb
+        //x轴
+//        self.xAxisLine = [[ZFXAxisLine alloc] initWithFrame:self.bounds direction:kAxisDirectionVertical];
+        self.xAxisLine = [[ZFXAxisLine alloc] initNoGenericAxisWithDirection:kAxisDirectionVertical];
+        self.xAxisLine.backgroundColor = _axisLineBackgroundColor;
+        [self addSubview:self.xAxisLine];
+        
+        self.yAxisLine.hidden = YES;
+    } else {
+        //x轴
+        self.xAxisLine = [[ZFXAxisLine alloc] initWithFrame:self.bounds direction:kAxisDirectionVertical];
+        self.xAxisLine.backgroundColor = _axisLineBackgroundColor;
+        [self addSubview:self.xAxisLine];
+        
+        //y轴
+        self.yAxisLine = [[ZFYAxisLine alloc] initWithFrame:CGRectMake(0, 0, ZFAxisLineStartXPos, self.bounds.size.height) direction:kAxisDirectionVertical];
+        self.yAxisLine.backgroundColor = _axisLineBackgroundColor;
+        [self addSubview:self.yAxisLine];
+    }
+    
 }
 
 #pragma mark - y轴单位Label
@@ -441,6 +471,12 @@
  */
 - (CGFloat)xLineWidth{
     return self.xAxisLine.xLineWidth;
+}
+
+#warning message - 自定义添加 by zhb
+-(void)setNoGenericAxis:(BOOL)noGenericAxis {
+    _noGenericAxis = noGenericAxis;
+    
 }
 
 #pragma mark - 懒加载
