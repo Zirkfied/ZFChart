@@ -32,6 +32,10 @@
 /** value文本颜色 */
 @property (nonatomic, strong) UIColor * valueTextColor;
 
+#warning message - 自定义添加 by zhb
+/** 是否无坐标轴 */
+@property (nonatomic, assign, getter = isNoGenericAxis)BOOL noGenericAxis;
+
 @end
 
 @implementation ZFBarChart
@@ -59,13 +63,31 @@
     return self;
 }
 
+#warning message - 自定义添加 by zhb
+- (instancetype)initWithNoGenericAxis {
+    self = [super init];
+    if (self) {
+        self.noGenericAxis = YES;
+        [self commonInit];
+        [self drawGenericChart];
+    }
+    
+    return self;
+}
+
 #pragma mark - 坐标轴
 
 /**
  *  画坐标轴
  */
+
 - (void)drawGenericChart{
-    self.genericAxis = [[ZFGenericAxis alloc] initWithFrame:self.bounds];
+#warning message - 自定义修改 by zhb
+    if (self.isNoGenericAxis) {
+        self.genericAxis = [[ZFGenericAxis alloc] initWithNoGenericAxis];
+    } else {
+        self.genericAxis = [[ZFGenericAxis alloc] initWithFrame:self.bounds];
+    }
     [self addSubview:self.genericAxis];
 }
 
@@ -84,6 +106,8 @@
             CGFloat height = self.genericAxis.yLineMaxValueHeight;
             
             ZFBar * bar = [[ZFBar alloc] initWithFrame:CGRectMake(xPos, yPos, width, height)];
+            #warning message - 自定义添加 by zhb
+            bar.allCircle = self.isAllCircle;
             bar.groupIndex = 0;
             bar.barIndex = i;
             //当前数值超过y轴显示上限时，柱状改为红色
@@ -125,6 +149,8 @@
                 CGFloat height = self.genericAxis.yLineMaxValueHeight;
                 
                 ZFBar * bar = [[ZFBar alloc] initWithFrame:CGRectMake(xPos, yPos, width, height)];
+                #warning message - 自定义添加 by zhb
+                bar.allCircle = self.isAllCircle;
                 bar.groupIndex = groupIndex;
                 bar.barIndex = barIndex;
                 //当前数值超过y轴显示上限时，柱状改为红色

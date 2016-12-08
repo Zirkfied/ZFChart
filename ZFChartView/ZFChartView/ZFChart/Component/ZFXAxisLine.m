@@ -26,6 +26,11 @@
 /** x轴箭头的顶点与self的间距 */
 @property (nonatomic, assign) CGFloat xLineRightGap;
 
+
+#warning message - 自定义添加 by zhb
+/** 是否无坐标轴 */
+@property (nonatomic, assign, getter = isNoGenericAxis)BOOL noGenericAxis;
+
 @end
 
 @implementation ZFXAxisLine
@@ -34,11 +39,18 @@
  *  初始化默认变量
  */
 - (void)commonInit{
+    
+    #warning message - 自定义修改 by zhb
+    _xLineStartXPos = self.isNoGenericAxis ? 0 : ZFAxisLineStartXPos;
+    
     _xLineRightGap = _direction == kAxisDirectionVertical ? 20.f : 40.f;
-    _xLineWidth = self.frame.size.width - ZFAxisLineStartXPos - _xLineRightGap;
+    #warning message - 自定义修改 by zhb
+//    _xLineWidth = self.frame.size.width - _xLineStartXPos - _xLineRightGap;
+    _xLineWidth = 0;
     _xLineHeight = 1.f;
     
-    _xLineStartXPos = ZFAxisLineStartXPos;
+    #warning message - 自定义修改 by zhb
+//    _xLineStartXPos = ZFAxisLineStartXPos;
     _xLineStartYPos = _direction == kAxisDirectionVertical ? self.frame.size.height * ZFAxisLineVerticalEndRatio : 0;
     _xLineEndXPos = self.frame.size.width - _xLineRightGap;
     _xLineEndYPos = _xLineStartYPos;
@@ -60,6 +72,19 @@
         [self commonInit];
         [self setUp];
     }
+    return self;
+}
+
+#warning message - 自定义添加 by zhb
+- (instancetype)initNoGenericAxisWithDirection:(kAxisDirection)direction {
+    self = [super init];
+    if (self) {
+        self.noGenericAxis = YES;
+        _direction = direction;
+        [self commonInit];
+        [self setUp];
+    }
+    
     return self;
 }
 

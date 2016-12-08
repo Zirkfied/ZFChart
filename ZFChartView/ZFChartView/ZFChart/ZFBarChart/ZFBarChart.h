@@ -79,6 +79,11 @@
 
 @interface ZFBarChart : ZFGenericChart
 
+#warning message - 自定义添加 by zhb
+/** 是否全圆角 */
+@property (nonatomic, assign, getter = isAllCircle)BOOL allCircle;
+
+
 @property (nonatomic, weak) id<ZFBarChartDelegate> delegate;
 /** 是否带阴影效果(默认为YES) */
 @property (nonatomic, assign) BOOL isShadow;
@@ -92,5 +97,15 @@
  *  重绘(每次更新数据后都需要再调一次此方法)
  */
 - (void)strokePath;
+
+
+#warning message - 自定义添加 by zhb
+/**
+ 生成无坐标轴图表
+ 
+ @return instancetype
+ */
+- (instancetype)initWithNoGenericAxis;
+
 
 @end

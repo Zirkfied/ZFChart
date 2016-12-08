@@ -61,4 +61,14 @@
  */
 - (void)strokePath;
 
+
+#warning message - 自定义添加 by zhb
+/**
+   无坐标轴图表
+
+ @param direction kAxisDirection
+ @return self
+ */
+- (instancetype)initNoGenericAxisWithDirection:(kAxisDirection)direction;
+
 @end
