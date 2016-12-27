@@ -61,6 +61,10 @@
     NSLog(@"第%ld个",(long)index);
 }
 
+- (CGFloat)allowToShowMinLimitPercent:(ZFPieChart *)pieChart{
+    return 5.f;
+}
+
 - (CGFloat)radiusForPieChart:(ZFPieChart *)pieChart{
     return 120.f;
 }

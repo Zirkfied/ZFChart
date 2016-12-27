@@ -47,6 +47,8 @@
 @property (nonatomic, assign) CGFloat originHeight;
 /** 记录半径平均分段数 */
 @property (nonatomic, assign) CGFloat radiusSegments;
+/** 记录百分比Label显示的最小值限制 */
+@property (nonatomic, assign) CGFloat minLimitPercent;
 
 @end
 
@@ -71,6 +73,7 @@
     _totalDuration = 0.75f;
     _percentOnChartFont = [UIFont boldSystemFontOfSize:10.f];
     _radiusSegments = 2.f;
+    _minLimitPercent = 0.f;
     self.backgroundColor = ZFWhite;
 }
 
@@ -182,6 +185,10 @@
             _lineWidth = _radius;
             _radius = _radius / 2;
         }
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(allowToShowMinLimitPercent:)]) {
+        _minLimitPercent = [self.delegate allowToShowMinLimitPercent:self];
     }
     
     if (_piePatternType == kPieChartPatternTypeForCirque) {
@@ -371,10 +378,17 @@
     CGFloat percent = [_valueArray[index] floatValue] / _totalValue * 100;
     NSString * string;
     if (self.percentType == kPercentTypeDecimal) {
-        string = [NSString stringWithFormat:@"%.2f%%",percent];
+        string = [NSString stringWithFormat:@"%.2f",percent];
     }else if (self.percentType == kPercentTypeInteger){
-        string = [NSString stringWithFormat:@"%d%%",(int)roundf(percent)];
+        string = [NSString stringWithFormat:@"%d",(int)roundf(percent)];
     }
+
+    if ([string floatValue] < _minLimitPercent) {
+        string = @"";
+    }else{
+        string = [NSString stringWithFormat:@"%@%%",string];
+    }
+    
     return string;
 }
 

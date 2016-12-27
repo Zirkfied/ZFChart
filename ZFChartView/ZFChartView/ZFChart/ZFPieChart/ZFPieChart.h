@@ -54,6 +54,11 @@
  */
 - (void)pieChart:(ZFPieChart *)pieChart didSelectPathAtIndex:(NSInteger)index;
 
+/**
+ *  百分比Label显示的最小值限制 (譬如设置5，则当前百分比小于5%则不显示，默认为0)
+ */
+- (CGFloat)allowToShowMinLimitPercent:(ZFPieChart *)pieChart;
+
 #warning message - 此代理方法只适用于圆环类型
 
 /**
