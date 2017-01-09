@@ -33,6 +33,7 @@
 #define ZFFicelle       ZFColor(247, 247, 247, 1)
 #define ZFTaupe         ZFColor(238, 239, 241, 1)
 #define ZFTaupe2        ZFColor(237, 236, 236, 1)
+#define ZFTaupe3        ZFColor(236, 236, 236, 1)
 #define ZFGrassGreen    ZFColor(254, 200, 122, 1)
 #define ZFGold          ZFColor(255, 215, 0, 1)
 #define ZFDeepPink      ZFColor(238, 18, 137, 1)

@@ -92,9 +92,7 @@
  */
 - (void)removeAllSubviews{
     for (UIView * subview in self.subviews) {
-//        if (![subview isKindOfClass:[ZFCirque class]]) {
-            [subview removeFromSuperview];
-//        }
+        [subview removeFromSuperview];
     }
 }
 
