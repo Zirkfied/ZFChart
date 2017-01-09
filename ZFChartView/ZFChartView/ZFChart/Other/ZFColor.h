@@ -30,6 +30,7 @@
 #define ZFClear         [UIColor clearColor]
 #define ZFSkyBlue       ZFDecimalColor(0, 0.68, 1, 1)
 #define ZFLightBlue     ZFColor(125, 231, 255, 1)
+#define ZFSystemBlue    ZFColor(10, 96, 254, 1)
 #define ZFFicelle       ZFColor(247, 247, 247, 1)
 #define ZFTaupe         ZFColor(238, 239, 241, 1)
 #define ZFTaupe2        ZFColor(237, 236, 236, 1)
