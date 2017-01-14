@@ -68,6 +68,7 @@
     _valueStartAngle = -90.f;
     _valueRotationAngle = _valueStartAngle;
     _isShowSeparate = YES;
+    _canRotation = YES;
     self.backgroundColor = ZFWhite;
 }
 
@@ -373,6 +374,11 @@
     self.radar.transform = CGAffineTransformIdentity;
     self.radar.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
     self.radar.transform = CGAffineTransformMakeRotation(_finalRotationAngle + self.rotationGesture.rotation);
+}
+
+- (void)setCanRotation:(BOOL)canRotation{
+    _canRotation = canRotation;
+    self.rotationGesture.enabled = _canRotation ? YES : NO;
 }
 
 #pragma mark - 懒加载
