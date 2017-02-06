@@ -432,6 +432,7 @@
     self.horizontalAxis.isAnimated = self.isAnimated;
     self.horizontalAxis.isShowAxisArrows = self.isShowAxisArrows;
     self.horizontalAxis.valueType = self.valueType;
+    self.horizontalAxis.numberOfDecimal = self.numberOfDecimal;
     [self.horizontalAxis strokePath];
     [self drawBar:self.horizontalAxis.yLineValueArray];
     [self setValueLabelOnChart:self.horizontalAxis.yLineValueArray];

@@ -52,6 +52,7 @@
 //    self.barChart.axisLineNameColor = ZFWhite;
 //    self.barChart.axisLineValueColor = ZFWhite;
 //    self.barChart.isShowAxisLineValue = NO;
+    
     self.barChart.isAnimated = NO;
     [self.view addSubview:self.barChart];
     [self.barChart strokePath];

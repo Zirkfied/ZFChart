@@ -10,6 +10,7 @@
 #import "ZFConst.h"
 #import "ZFLabel.h"
 #import "NSString+Zirkfied.h"
+#import "NSNumber+Zirkfied.h"
 #import "ZFColor.h"
 
 @interface ZFHorizontalAxis()<UIScrollViewDelegate>
@@ -154,7 +155,7 @@
             label.text = [NSString stringWithFormat:@"%.0f", valueAverage * i + _xLineMinValue];
             
         }else if (_valueType == kValueTypeDecimal){
-            label.text = [NSString stringWithFormat:@"%@", @(valueAverage * i + _xLineMinValue)];
+            label.text = [NSNumber roundOffValue:@(valueAverage * i + _xLineMinValue) numberOfdecimal:_numberOfDecimal];
             
         }
         

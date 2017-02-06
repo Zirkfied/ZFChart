@@ -173,7 +173,7 @@ typedef enum{
  */
 typedef enum{
     kValueTypeInteger = 0,   //取整数形式(四舍五入)(默认)
-    kValueTypeDecimal = 1,   //保留有效小数
+    kValueTypeDecimal = 1,   //取小数形式(默认显示1位小数, 如需显示其余位数则设置ZFGenericChart.h文件中 numberOfDecimal属性)
 }kValueType;
 
 @interface ZFConst : NSObject

@@ -56,6 +56,7 @@
 //    self.barChart.axisLineValueColor = ZFWhite;
 //    self.barChart.backgroundColor = ZFPurple;
 //    self.barChart.isShowAxisArrows = NO;
+    
     [self.view addSubview:self.barChart];
     [self.barChart strokePath];
 }

@@ -25,6 +25,7 @@
     _valueType = kValueTypeInteger;
     _isShowAxisLineValue = YES;
     _isShowAxisArrows = YES;
+    _numberOfDecimal = 1;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{

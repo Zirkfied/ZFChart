@@ -64,6 +64,8 @@
 @property (nonatomic, assign) BOOL isShowAxisArrows;
 /** 坐标轴数值的显示类型(保留有效小数或显示整数形式) */
 @property (nonatomic, assign) kValueType valueType;
+/** 小数位数(默认为显示1位小数，当 kValueType = kValueTypeDecimal，该属性才有效) */
+@property (nonatomic, assign) NSInteger numberOfDecimal;
 
 
 #warning message - readonly(只读)

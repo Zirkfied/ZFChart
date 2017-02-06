@@ -433,6 +433,7 @@
     self.genericAxis.isAnimated = self.isAnimated;
     self.genericAxis.isShowAxisArrows = self.isShowAxisArrows;
     self.genericAxis.valueType = self.valueType;
+    self.genericAxis.numberOfDecimal = self.numberOfDecimal;
     [self.genericAxis strokePath];
     [self drawBar:self.genericAxis.xLineValueArray];
     [self setValueLabelOnChart:self.genericAxis.xLineValueArray];

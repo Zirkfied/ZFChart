@@ -256,6 +256,7 @@
     self.genericAxis.isAnimated = self.isAnimated;
     self.genericAxis.isShowAxisArrows = self.isShowAxisArrows;
     self.genericAxis.valueType = self.valueType;
+    self.genericAxis.numberOfDecimal = self.numberOfDecimal;
     [self.genericAxis strokePath];
     _valuePointArray = [NSMutableArray arrayWithArray:[self cachedValuePointArray:self.genericAxis.xLineValueArray]];
     [self drawWavePath];

@@ -54,6 +54,10 @@
 //    self.barChart.yAxisColor = ZFWhite;
 //    self.barChart.axisLineNameColor = ZFWhite;
 //    self.barChart.axisLineValueColor = ZFWhite;
+    
+    self.barChart.valueType = kValueTypeDecimal;
+    self.barChart.numberOfDecimal = 2;
+    
     [self.barChart strokePath];
     [self.view addSubview:self.barChart];
 }
