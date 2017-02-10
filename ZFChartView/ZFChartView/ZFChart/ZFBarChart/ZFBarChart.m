@@ -86,6 +86,7 @@
             ZFBar * bar = [[ZFBar alloc] initWithFrame:CGRectMake(xPos, yPos, width, height)];
             bar.groupIndex = 0;
             bar.barIndex = i;
+            
             //当前数值超过y轴显示上限时，柱状改为红色
             if ([self.genericAxis.xLineValueArray[i] floatValue] / self.genericAxis.yLineMaxValue <= 1) {
                 bar.percent = ([self.genericAxis.xLineValueArray[i] floatValue] - self.genericAxis.yLineMinValue) / (self.genericAxis.yLineMaxValue - self.genericAxis.yLineMinValue);
@@ -423,6 +424,11 @@
     
     if ([self.delegate respondsToSelector:@selector(gradientColorArrayInBarChart:)]) {
         _gradientColorArray = [NSMutableArray arrayWithArray:[self.delegate gradientColorArrayInBarChart:self]];
+    }
+    
+    if (self.genericAxis.yLineMaxValue - self.genericAxis.yLineMinValue == 0) {
+        NSLog(@"y轴数值显示的最大值与最小值相等，导致公式分母为0，无法绘画图表，请设置数值不一样的最大值与最小值");
+        return;
     }
     
     self.genericAxis.groupWidth = [self cachedGroupWidth:self.genericAxis.xLineValueArray];

@@ -333,6 +333,10 @@
         _valueRotationAngle = [self.delegate valueRotationAngleForRadarChart:self];
     }
     
+    if (_maxValue - _minValue == 0) {
+        NSLog(@"显示的最大值与最小值相等，导致公式分母为0，无法绘画图表，请设置数值不一样的最大值与最小值");
+    }
+    
     self.radar.radarLineColor = _radarLineColor;
     self.radar.radarLineWidth = _radarLineWidth;
     self.radar.separateLineWidth = _separateLineWidth;

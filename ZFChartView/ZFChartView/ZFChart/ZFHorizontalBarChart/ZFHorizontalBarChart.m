@@ -425,6 +425,11 @@
         _gradientColorArray = [NSMutableArray arrayWithArray:[self.delegate gradientColorArrayInHorizontalBarChart:self]];
     }
     
+    if (self.horizontalAxis.xLineMaxValue - self.horizontalAxis.xLineMinValue == 0) {
+        NSLog(@"y轴数值显示的最大值与最小值相等，导致公式分母为0，无法绘画图表，请设置数值不一样的最大值与最小值");
+        return;
+    }
+    
     self.horizontalAxis.groupHeight = [self cachedGroupHeight:self.horizontalAxis.yLineValueArray];
     
     [self removeAllBar];

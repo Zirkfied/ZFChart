@@ -465,6 +465,11 @@
         self.valuePositionArray = [NSMutableArray arrayWithArray:[[ZFMethod shareInstance] cachedValuePositionInLineChart:self.genericAxis.xLineValueArray]];
     }
     
+    if (self.genericAxis.yLineMaxValue - self.genericAxis.yLineMinValue == 0) {
+        NSLog(@"y轴数值显示的最大值与最小值相等，导致公式分母为0，无法绘画图表，请设置数值不一样的最大值与最小值");
+        return;
+    }
+    
     [self removeAllCircle];
     [self removeLabelOnChart];
     [self removeAllSubLayer];
