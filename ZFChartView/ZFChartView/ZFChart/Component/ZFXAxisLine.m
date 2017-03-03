@@ -25,6 +25,8 @@
 @property (nonatomic, assign) kAxisDirection direction;
 /** x轴箭头的顶点与self的间距 */
 @property (nonatomic, assign) CGFloat xLineRightGap;
+/** 记录初始化的width */
+@property (nonatomic, assign) CGFloat originWidth;
 
 @end
 
@@ -51,6 +53,7 @@
 
 - (void)setUp{
     _axisColor = ZFBlack;
+    _originWidth = _xLineWidth;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame direction:(kAxisDirection)direction{
@@ -213,6 +216,11 @@
 
 - (void)setXLineWidth:(CGFloat)xLineWidth{
     _xLineWidth = xLineWidth;
+    
+    if (_xLineWidth < _originWidth) {
+        _xLineWidth = _originWidth;
+    }
+    
     _xLineEndXPos = _xLineStartXPos + _xLineWidth;
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, _xLineEndXPos + 20.f, self.frame.size.height);
 }
