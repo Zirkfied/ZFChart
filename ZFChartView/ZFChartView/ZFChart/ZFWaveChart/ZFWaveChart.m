@@ -282,7 +282,7 @@
             percent = 1;
         }
         
-        CGFloat height = percent * self.genericAxis.yLineMaxValueHeight;
+        CGFloat height = self.genericAxis.yLineMaxValueHeight * percent;
         CGFloat xPos = self.genericAxis.groupPadding + self.genericAxis.groupWidth * 0.5 + (self.genericAxis.groupPadding + self.genericAxis.groupWidth) * i;
         CGFloat yPos = self.genericAxis.axisStartYPos - self.genericAxis.yLineMaxValueYPos - height;
         

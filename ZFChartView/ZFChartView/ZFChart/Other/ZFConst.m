@@ -22,6 +22,11 @@ CGFloat const ZFLineChartCircleRadius = 5.f;
 CGFloat const ZFRadarChartRadiusExtendLength = 25.f;
 NSInteger const ZFAxisLineValueLabelTag = 100;
 NSInteger const ZFPieChartPercentLabelTag = 100;
+
+NSString * const ZFLineChartXPos = @"ZFLineChartXPos";
+NSString * const ZFLineChartYPos = @"ZFLineChartYPos";
+NSString * const ZFLineChartIsHeightEqualZero = @"ZFLineChartIsHeightEqualZero";
+
 NSString * const ZFWaveChartXPos = @"ZFWaveChartXPos";
 NSString * const ZFWaveChartYPos = @"ZFWaveChartYPos";
 NSString * const ZFWaveChartIsHeightEqualZero = @"ZFWaveChartIsHeightEqualZero";

@@ -70,9 +70,9 @@
     return 500;
 }
 
-- (CGFloat)axisLineMinValueInGenericChart:(ZFGenericChart *)chart{
-    return -200;
-}
+//- (CGFloat)axisLineMinValueInGenericChart:(ZFGenericChart *)chart{
+//    return -200;
+//}
 
 - (NSUInteger)axisLineSectionCountInGenericChart:(ZFGenericChart *)chart{
     return 10;

@@ -136,6 +136,21 @@ extern CGFloat const TOPIC_HEIGHT;
 extern CGFloat const ZFPerigon;
 
 /**
+ *  线状图路径x点标识
+ */
+extern NSString * const ZFLineChartXPos;
+
+/**
+ *  线状图路径y点标识
+ */
+extern NSString * const ZFLineChartYPos;
+
+/**
+ *  线状图点是否等于0标识
+ */
+extern NSString * const ZFLineChartIsHeightEqualZero;
+
+/**
  *  波浪图路径x点标识
  */
 extern NSString * const ZFWaveChartXPos;

@@ -9,7 +9,7 @@
 #import "ZFWave.h"
 #import "ZFColor.h"
 #import "UIBezierPath+Zirkfied.h"
-#import "ZFWaveAttribute.h"
+#import "ZFCurveAttribute.h"
 
 @interface ZFWave()
 
@@ -17,7 +17,7 @@
 @property (nonatomic, assign) CGFloat animationDuration;
 /** 临时新数值坐标的数组 */
 @property (nonatomic, strong) NSMutableArray * tempValuePointArray;
-/** 存储kWavePatternTypeForCurve样式下各段线段模型数组(存储的是ZFWaveAttribute模型) */
+/** 存储kWavePatternTypeForCurve样式下各段线段模型数组(存储的是ZFCurveAttribute模型) */
 @property (nonatomic, strong) NSMutableArray * curveArray;
 /** 存储细分曲线的子数组 */
 @property (nonatomic, strong) NSMutableArray * subArray;
@@ -47,7 +47,7 @@
         UIBezierPath * bezier = [UIBezierPath bezierPath];
         for (NSInteger i = 0; i < self.curveArray.count; i++) {
             UIBezierPath * subBezier = [UIBezierPath bezierPath];
-            ZFWaveAttribute * attribute = self.curveArray[i];
+            ZFCurveAttribute * attribute = self.curveArray[i];
             for (NSInteger j = 0; j < attribute.pointArray.count; j++) {
                 NSDictionary * currentPoint = attribute.pointArray[j];
                 if (j == 0) {
@@ -90,7 +90,7 @@
         UIBezierPath * bezier = [UIBezierPath bezierPath];
         for (NSInteger i = 0; i < self.curveArray.count; i++) {
             UIBezierPath * subBezier = [UIBezierPath bezierPath];
-            ZFWaveAttribute * attribute = self.curveArray[i];
+            ZFCurveAttribute * attribute = self.curveArray[i];
             for (NSInteger j = 0; j < attribute.pointArray.count; j++) {
                 NSDictionary * currentPoint = attribute.pointArray[j];
                 if (j == 0) {
@@ -229,7 +229,7 @@
         
         if (i > 2) {
             //a.a.a
-            if ([previousPoint2[ZFWaveChartIsHeightEqualZero] boolValue] == [currentPoint[ZFWaveChartIsHeightEqualZero] boolValue] &&[previousPoint1[ZFWaveChartIsHeightEqualZero] boolValue] == [currentPoint[ZFWaveChartIsHeightEqualZero] boolValue]) {
+            if ([previousPoint2[ZFWaveChartIsHeightEqualZero] boolValue] == [currentPoint[ZFWaveChartIsHeightEqualZero] boolValue] && [previousPoint1[ZFWaveChartIsHeightEqualZero] boolValue] == [currentPoint[ZFWaveChartIsHeightEqualZero] boolValue]) {
                 [self.subArray addObject:currentPoint];
                 
             //a.a.b
@@ -239,7 +239,7 @@
                     [self.subArray addObject:currentPoint];
                 //当高度不为0
                 }else{
-                    ZFWaveAttribute * attribute = [[ZFWaveAttribute alloc] init];
+                    ZFCurveAttribute * attribute = [[ZFCurveAttribute alloc] init];
                     attribute.pointArray = [NSMutableArray arrayWithArray:self.subArray];
                     attribute.isCurve = NO;
                     [self.curveArray addObject:attribute];
@@ -257,7 +257,7 @@
             }else if (![previousPoint2[ZFWaveChartIsHeightEqualZero] boolValue] == [currentPoint[ZFWaveChartIsHeightEqualZero] boolValue] && [previousPoint1[ZFWaveChartIsHeightEqualZero] boolValue] == [currentPoint[ZFWaveChartIsHeightEqualZero] boolValue]){
                 //当高度为0
                 if ([currentPoint[ZFWaveChartIsHeightEqualZero] boolValue]) {
-                    ZFWaveAttribute * attribute = [[ZFWaveAttribute alloc] init];
+                    ZFCurveAttribute * attribute = [[ZFCurveAttribute alloc] init];
                     attribute.pointArray = [NSMutableArray arrayWithArray:self.subArray];
                     attribute.isCurve = YES;
                     [self.curveArray addObject:attribute];
@@ -274,7 +274,7 @@
         
         //最后一个点
         if (i == self.tempValuePointArray.count - 1) {
-            ZFWaveAttribute * attribute = [[ZFWaveAttribute alloc] init];
+            ZFCurveAttribute * attribute = [[ZFCurveAttribute alloc] init];
             attribute.pointArray = [NSMutableArray arrayWithArray:self.subArray];
             //a.a.a
             if ([previousPoint1[ZFWaveChartIsHeightEqualZero] boolValue] == [currentPoint[ZFWaveChartIsHeightEqualZero] boolValue] && [previousPoint2[ZFWaveChartIsHeightEqualZero] boolValue] == [currentPoint[ZFWaveChartIsHeightEqualZero] boolValue]) {

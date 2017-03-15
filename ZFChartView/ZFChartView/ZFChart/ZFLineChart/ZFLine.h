@@ -27,10 +27,10 @@ typedef enum{
 /**
  *  线
  *
- *  @param circleArray 当前线段圆环数组
+ *  @param valuePointArray 当前线段圆环的中心点数组
  *
  *  @return self
  */
-+ (instancetype)lineWithCircleArray:(NSMutableArray *)circleArray isAnimated:(BOOL)isAnimated shadowColor:(UIColor *)shadowColor linePatternType:(kLinePatternType)linePatternType padding:(CGFloat)padding;
++ (instancetype)lineWithValuePointArray:(NSMutableArray *)valuePointArray isAnimated:(BOOL)isAnimated shadowColor:(UIColor *)shadowColor linePatternType:(kLinePatternType)linePatternType padding:(CGFloat)padding;
 
 @end

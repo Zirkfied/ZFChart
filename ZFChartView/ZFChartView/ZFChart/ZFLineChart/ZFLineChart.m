@@ -251,7 +251,9 @@
  *  @return CAShapeLayer
  */
 - (CAShapeLayer *)lineShapeLayer:(NSMutableArray *)array index:(NSInteger)index{
-    ZFLine * layer = [ZFLine lineWithCircleArray:array isAnimated:self.isAnimated shadowColor:self.shadowColor linePatternType:_linePatternType padding:self.genericAxis.groupPadding];
+    NSMutableArray * valuePointArray = [self cachedValuePointArray:array];
+    
+    ZFLine * layer = [ZFLine lineWithValuePointArray:valuePointArray isAnimated:self.isAnimated shadowColor:self.shadowColor linePatternType:_linePatternType padding:self.genericAxis.groupPadding];
     layer.strokeColor = [_colorArray[index] CGColor];
     layer.lineWidth = _lineWidth;
     layer.isShadow = _isShadow;
@@ -497,6 +499,32 @@
             [self.genericAxis bringSubviewToFront:(ZFCircle *)view];
         }
     }
+}
+
+#pragma mark - 计算点的位置
+
+/**
+ *  计算点的位置
+ */
+- (NSMutableArray *)cachedValuePointArray:(NSMutableArray *)circleArray{
+    NSMutableArray * valuePointArray = [NSMutableArray array];
+    for (NSInteger i = 0; i < circleArray.count; i++) {
+        ZFCircle * circle = circleArray[i];
+        CGFloat height = self.genericAxis.axisStartYPos - circle.center.y;
+        //判断高度是否为0
+        BOOL isHeightEqualZero = height == 0 ? YES : NO;
+        NSDictionary * dict = @{ZFLineChartXPos:@(circle.center.x), ZFLineChartYPos:@(circle.center.y), ZFLineChartIsHeightEqualZero:@(isHeightEqualZero)};
+        [valuePointArray addObject:dict];
+    }
+    
+    //(在最前面多插入了2个原点, 在最后面多插入了1个终点, 用于判断切断位置)
+    NSDictionary * startPoint = @{ZFLineChartXPos:@(self.genericAxis.axisStartXPos), ZFLineChartYPos:@(self.genericAxis.axisStartYPos), ZFLineChartIsHeightEqualZero:@(YES)};
+    NSDictionary * endPoint = @{ZFLineChartXPos:@(self.genericAxis.axisEndXPos), ZFLineChartYPos:@(self.genericAxis.axisStartYPos), ZFLineChartIsHeightEqualZero:@(YES)};
+    [valuePointArray insertObject:startPoint atIndex:0];
+    [valuePointArray insertObject:startPoint atIndex:0];
+    [valuePointArray addObject:endPoint];
+    
+    return valuePointArray;
 }
 
 #pragma mark - 重写setter,getter方法

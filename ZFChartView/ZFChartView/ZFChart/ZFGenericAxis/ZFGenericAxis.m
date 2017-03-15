@@ -423,6 +423,13 @@
 }
 
 /**
+ *  获取坐标轴终点Y值
+ */
+- (CGFloat)axisEndXPos{
+    return self.xAxisLine.xLineStartXPos + self.xAxisLine.xLineWidth;
+}
+
+/**
  *  获取y轴最大上限值y值
  */
 - (CGFloat)yLineMaxValueYPos{

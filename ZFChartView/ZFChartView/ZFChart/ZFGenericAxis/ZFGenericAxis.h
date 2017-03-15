@@ -75,6 +75,8 @@
 @property (nonatomic, assign, readonly) CGFloat axisStartXPos;
 /** 获取坐标轴起点Y值 */
 @property (nonatomic, assign, readonly) CGFloat axisStartYPos;
+/** 获取坐标轴终点X值 */
+@property (nonatomic, assign, readonly) CGFloat axisEndXPos;
 /** 获取y轴最大上限值y值 */
 @property (nonatomic, assign, readonly) CGFloat yLineMaxValueYPos;
 /** 获取y轴最大上限值与0值的高度 */
