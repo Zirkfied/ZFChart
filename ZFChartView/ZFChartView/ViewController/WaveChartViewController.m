@@ -57,9 +57,7 @@
 
 #pragma mark - ZFGenericChartDataSource
 
-- (NSArray *)valueArrayInGenericChart:(ZFGenericChart *)chart{
-//    return @[@"123", @"256", @"0", @"0", @"490", @"0", @"401", @"356", @"0", @"0", @"463", @"399"];
-    
+- (NSArray *)valueArrayInGenericChart:(ZFGenericChart *)chart{    
     return @[@"123", @"256", @"300", @"283", @"490", @"236", @"401", @"356", @"270", @"369", @"463", @"399"];
 }
 

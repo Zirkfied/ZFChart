@@ -284,15 +284,14 @@
                 }else{
                     attribute.isCurve = YES;
                 }
-                
-            //a.b.b
+
+            //a.b.a(特殊情况，a只会为0)
             }else if (![previousPoint1[ZFWaveChartIsHeightEqualZero] boolValue] == [currentPoint[ZFWaveChartIsHeightEqualZero] boolValue] && [previousPoint2[ZFWaveChartIsHeightEqualZero] boolValue] == [currentPoint[ZFWaveChartIsHeightEqualZero] boolValue]){
                 //当高度为0
                 if ([currentPoint[ZFWaveChartIsHeightEqualZero] boolValue]) {
-                    attribute.isCurve = NO;
-                }else{
                     attribute.isCurve = YES;
                 }
+
             }else{
                 attribute.isCurve = YES;
             }

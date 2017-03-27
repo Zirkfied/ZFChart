@@ -885,8 +885,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Zirkfied.ZFChartView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e0ebc952-152f-4935-8e2c-3ccf8382e591";
-				PROVISIONING_PROFILE_SPECIFIER = iOS_Wildcard_Provisioning_Profile_Distribution;
+				PROVISIONING_PROFILE = "253f64d3-d574-4600-8040-e876d9c5abb7";
+				PROVISIONING_PROFILE_SPECIFIER = iOS_Wildcard_Provisioning_Profile_Development;
 			};
 			name = Release;
 		};
