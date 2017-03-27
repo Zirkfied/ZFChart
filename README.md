@@ -3,7 +3,7 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
 
 模仿PNChart，Charts写的一个图表库，用法简单，暂时有柱状图，线状图，饼图，波浪图，雷达图，圆环图等类型，带动画效果，后续可能会更新新的类型，喜欢的欢迎star一个，有任何建议或问题可以加QQ群交流：451169423
 
-###用法:
+### 用法:
         第一步(step 1)
         将项目里ZFChart整个文件夹拖进新项目
         
@@ -90,7 +90,7 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         - (CGFloat)paddingForBarInBarChart:(ZFBarChart *)barChart;
         
         
-####效果展示
+#### 效果展示
 
 ![](https://github.com/Zirkfied/Library/blob/master/bar1.png)
         
@@ -164,7 +164,7 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         - (CGFloat)lineWidthInLineChart:(ZFLineChart *)lineChart;
 
 
-####效果展示
+#### 效果展示
 
 ![](https://github.com/Zirkfied/Library/blob/master/line1.png)
 
@@ -224,13 +224,13 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
 ![](https://github.com/Zirkfied/Library/blob/master/pie4.png)
         
         
-####效果展示
+#### 效果展示
 
 ![](https://github.com/Zirkfied/Library/blob/master/pie1.png)
 
 ![](https://github.com/Zirkfied/Library/blob/master/pie2.png)
         
-###饼图其余属性
+### 饼图其余属性
         
 ![](https://github.com/Zirkfied/Library/blob/master/pie3.png)
 
@@ -267,7 +267,7 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         - (UIColor *)pathColorInWaveChart:(ZFWaveChart *)waveChart;
         
         
-####效果展示
+#### 效果展示
 
 ![](https://github.com/Zirkfied/Library/blob/master/wave2.png)
         
@@ -296,7 +296,7 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         [barChart strokePath];
 
 
-####效果展示
+#### 效果展示
 
 ![image](https://github.com/Zirkfied/Library/blob/master/HorizontalBarChart.gif)
 
@@ -357,7 +357,7 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         - (CGFloat)valueRotationAngleForRadarChart:(ZFRadarChart *)radarChart;
 
 
-####效果展示
+#### 效果展示
 
 ![image](https://github.com/Zirkfied/Library/blob/master/RadarChart.gif)
 
@@ -373,17 +373,17 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         [cirqueChart strokePath];
         
        
-####效果展示
+#### 效果展示
 
 ![image](https://github.com/Zirkfied/Library/blob/master/ZFCirqueChart.gif)
 
-####其余样式
+#### 其余样式
 
 ![image](https://github.com/Zirkfied/Library/blob/master/kCirquePatternType.png)
 
 
 
-###其余说明
+### 其余说明
 ####    
         1.  ZFGenericChartDataSource是柱状图(ZFBarChart, ZFHorizontalBarChart),线状图(ZFLineChart),波浪图(ZFWaveChart)的数据源方法
             ZFPieChartDataSource是饼图(ZFPieChart)的数据源方法
@@ -425,7 +425,7 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
           网络获取数据后，才调用 - (void)strokePath 方法
 
 
-###更新日志
+### 更新日志
         2016.02.25 初版发布
         
         2016.02.26 新增柱状图和线状图表上的数值显示
@@ -488,7 +488,7 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         2016.12.02 ①柱状图(ZFBarChart), 波浪图(ZFWaveChart)新增渐变色样式, 具体代码查看Demo
                    ②修复部分Bug
                    
-##本人其他开源框架
-####[ZFChart - 一款简单好用的图表库，目前有柱状，线状，饼图，波浪，雷达，圆环图类型](https://github.com/Zirkfied/ZFChart)
-####[ZFScan - 仿微信 二维码/条形码 扫描](https://github.com/Zirkfied/ZFScan)
-####[ZFDropDown - 简单大气的下拉列表框](https://github.com/Zirkfied/ZFDropDown)
+## 本人其他开源框架
+#### [ZFChart - 一款简单好用的图表库，目前有柱状，线状，饼图，波浪，雷达，圆环图类型](https://github.com/Zirkfied/ZFChart)
+#### [ZFScan - 仿微信 二维码/条形码 扫描](https://github.com/Zirkfied/ZFScan)
+#### [ZFDropDown - 简单大气的下拉列表框](https://github.com/Zirkfied/ZFDropDown)
