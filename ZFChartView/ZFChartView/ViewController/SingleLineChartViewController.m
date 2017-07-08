@@ -45,7 +45,7 @@
 //    self.lineChart.valueLabelPattern = kPopoverLabelPatternBlank;
     self.lineChart.isShowXLineSeparate = YES;
     self.lineChart.isShowYLineSeparate = YES;
-    self.lineChart.linePatternType = kLinePatternTypeForCurve;
+    self.lineChart.linePatternType = kLinePatternTypeCurve;
 //    self.lineChart.isShowAxisLineValue = NO;
 //    lineChart.valueCenterToCircleCenterPadding = 0;
     [self.view addSubview:self.lineChart];

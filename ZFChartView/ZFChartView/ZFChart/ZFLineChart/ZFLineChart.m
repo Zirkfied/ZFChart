@@ -43,7 +43,7 @@
     _isShadow = YES;
     _overMaxValueCircleColor = ZFRed;
     _lineWidth = 2.f;
-    _linePatternType = kLinePatternTypeForSharp;
+    _linePatternType = kLinePatternTypeSharp;
     self.shadowColor = ZFLightGray;
 }
 

@@ -7,7 +7,6 @@
 //
 
 #import "ZFRadarChart.h"
-#import "ZFRadar.h"
 #import "ZFPolygon.h"
 #import "ZFLabel.h"
 #import "ZFMethod.h"
@@ -52,11 +51,14 @@
 - (void)commonInit{
     _unit = nil;
     _itemTextColor = ZFBlack;
-    _radarLineColor = ZFLightGray;
     _valueTextColor = ZFBlack;
+    _radarLineColor = ZFLightGray;
+    _radarBackgroundColor = ZFClear;
+    _radarPeakColor = ZFWhite;
     _radarLineWidth = 1.f;
     _separateLineWidth = 1.f;
     _polygonLineWidth = 1.f;
+    _radarPeakRadius = 5.f;
     _itemFont = [UIFont systemFontOfSize:15.f];
     _valueFont = [UIFont systemFontOfSize:10.f];
     _opacity = 0.3f;
@@ -337,10 +339,15 @@
         NSLog(@"显示的最大值与最小值相等，导致公式分母为0，无法绘画图表，请设置数值不一样的最大值与最小值");
     }
     
+    self.radar.radarPatternType = _radarPatternType;
     self.radar.radarLineColor = _radarLineColor;
+    self.radar.radarBackgroundColor = _radarBackgroundColor;
     self.radar.radarLineWidth = _radarLineWidth;
     self.radar.separateLineWidth = _separateLineWidth;
+    self.radar.raderPeakRadius = _radarPeakRadius;
     self.radar.isShowSeparate = _isShowSeparate;
+    self.radar.isShowRadarPeak = _isShowRadarPeak;
+    self.radar.radarPeakColor = _radarPeakColor;
     [self.radar strokePath];
     [self setItemLabelOnChart];
     [self setPolygon];

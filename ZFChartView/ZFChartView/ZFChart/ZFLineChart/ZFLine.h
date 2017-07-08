@@ -13,8 +13,8 @@
  *  波浪图样式
  */
 typedef enum{
-    kLinePatternTypeForSharp = 0,   //直线样式(默认样式)
-    kLinePatternTypeForCurve = 1    //曲线样式
+    kLinePatternTypeSharp = 0,   //直线样式(默认样式)
+    kLinePatternTypeCurve = 1    //曲线样式
 }kLinePatternType;
 
 @interface ZFLine : CAShapeLayer

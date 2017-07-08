@@ -65,7 +65,7 @@
 }
 
 - (void)setUp{
-    _piePatternType = kPieChartPatternTypeForCirque;
+    _piePatternType = kPieChartPatternTypeCirque;
     _isShadow = YES;
     _isShowPercent = YES;
     _isAnimated = YES;
@@ -181,7 +181,7 @@
     
     if ([self.delegate respondsToSelector:@selector(radiusForPieChart:)]) {
         _radius = [self.delegate radiusForPieChart:self];
-        if (_piePatternType == kPieChartPatternTypeForCircle) {
+        if (_piePatternType == kPieChartPatternTypeCircle) {
             _lineWidth = _radius;
             _radius = _radius / 2;
         }
@@ -191,7 +191,7 @@
         _minLimitPercent = [self.delegate allowToShowMinLimitPercent:self];
     }
     
-    if (_piePatternType == kPieChartPatternTypeForCirque) {
+    if (_piePatternType == kPieChartPatternTypeCirque) {
         if ([self.delegate respondsToSelector:@selector(radiusAverageNumberOfSegments:)]) {
             _radiusSegments = [self.delegate radiusAverageNumberOfSegments:self] > 1 ? [self.delegate radiusAverageNumberOfSegments:self] : 2.f;
         }

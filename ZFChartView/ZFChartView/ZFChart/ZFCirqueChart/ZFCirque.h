@@ -12,10 +12,10 @@
  *  圆环样式
  */
 typedef enum{
-    kCirquePatternTypeForDefault = 0,             //带轨迹背景(默认)
-    kCirquePatternTypeForDefaultWithShadow = 1,   //带轨迹背景和阴影
-    kCirquePatternTypeForNone = 2,                //没有轨迹背景和阴影
-    kCirquePatternTypeForShadow = 3               //没有轨迹背景，但有阴影
+    kCirquePatternTypeDefault = 0,             //带轨迹背景(默认)
+    kCirquePatternTypeDefaultWithShadow = 1,   //带轨迹背景和阴影
+    kCirquePatternTypeNone = 2,                //没有轨迹背景和阴影
+    kCirquePatternTypeShadow = 3               //没有轨迹背景，但有阴影
 }kCirquePatternType;
 
 /**

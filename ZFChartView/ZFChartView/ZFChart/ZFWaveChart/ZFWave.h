@@ -13,8 +13,8 @@
  *  波浪图样式
  */
 typedef enum{
-    kWavePatternTypeForCurve = 0,   //曲线样式(默认样式)
-    kWavePatternTypeForSharp = 1    //直线样式
+    kWavePatternTypeCurve = 0,   //曲线样式(默认样式)
+    kWavePatternTypeSharp = 1    //直线样式
 }kWavePatternType;
 
 @interface ZFWave : UIView

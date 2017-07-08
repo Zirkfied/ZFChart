@@ -13,8 +13,8 @@
  *   饼图样式
  */
 typedef enum{
-    kPieChartPatternTypeForCirque = 0,   //圆环
-    kPieChartPatternTypeForCircle = 1    //整圆
+    kPieChartPatternTypeCirque = 0,   //圆环
+    kPieChartPatternTypeCircle = 1    //整圆
 }kPiePatternType;
 
 

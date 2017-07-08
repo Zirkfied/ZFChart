@@ -46,7 +46,6 @@
 }
 
 - (void)setUp{
-    _radarBackgroundColor = ZFClear;
     _sectionCount = 5;
 }
 
@@ -58,10 +57,10 @@
     return self;
 }
 
-#pragma mark - 画雷达
+#pragma mark - 画雷达（直线样式）
 
 /**
- *  画雷达
+ *  画雷达（直线样式）
  *
  *  @param index 第几个多边形
  *
@@ -118,9 +117,81 @@
 - (CAShapeLayer *)radarShapeLayer:(NSInteger)index{
     CAShapeLayer * shapeLayer = [CAShapeLayer layer];
     shapeLayer.lineWidth = _radarLineWidth;
-    shapeLayer.strokeColor = _radarLineColor.CGColor;
-    shapeLayer.fillColor = _radarBackgroundColor.CGColor;
+    shapeLayer.strokeColor = _radarPatternType == kRadarPatternTypeCircle ? ZFClear.CGColor : _radarLineColor.CGColor;
+    shapeLayer.fillColor = _radarPatternType == kRadarPatternTypeCircle ? ZFClear.CGColor : _radarBackgroundColor.CGColor;
     shapeLayer.path = [self drawRadar:index].CGPath;
+    
+    return shapeLayer;
+}
+
+#pragma mark - 画雷达（圆圈样式）
+
+/**
+ *  画雷达（圆圈样式）
+ *
+ *  @param index 第几个多边形
+ *
+ *  @return UIBezierPath
+ */
+- (UIBezierPath *)drawCircle:(NSInteger)index{
+    UIBezierPath * bezier = [UIBezierPath bezierPathWithArcCenter:CGPointMake(_radarCenter.x, _radarCenter.y) radius:_radius startAngle:ZFRadian(-90) endAngle:ZFRadian(270) clockwise:YES];
+    return bezier;
+}
+
+/**
+ *  雷达圆圈ShapeLayer
+ *
+ *  @return CAShapeLayer
+ */
+- (CAShapeLayer *)circleShapeLayer:(NSInteger)index{
+    CAShapeLayer * shapeLayer = [CAShapeLayer layer];
+    shapeLayer.lineWidth = _radarLineWidth;
+    shapeLayer.strokeColor = ZFClear.CGColor;
+    shapeLayer.fillColor = index == _sectionCount - 1 ? _radarBackgroundColor.CGColor : ZFClear.CGColor;
+    shapeLayer.opacity = 0.1f;
+    shapeLayer.path = [self drawCircle:index].CGPath;
+    
+    return shapeLayer;
+}
+
+/**
+ *  雷达圆圈ShapeLayer
+ *
+ *  @return CAShapeLayer
+ */
+- (CAShapeLayer *)circleLineShapeLayer:(NSInteger)index{
+    CAShapeLayer * shapeLayer = [CAShapeLayer layer];
+    shapeLayer.lineWidth = _radarLineWidth;
+        shapeLayer.strokeColor = _radarLineColor.CGColor;
+    shapeLayer.fillColor = ZFClear.CGColor;
+    shapeLayer.path = [self drawCircle:index].CGPath;
+    
+    return shapeLayer;
+}
+
+#pragma mark - item顶点
+
+/**
+ *  画item顶点
+ *
+ *  @return UIBezierPath
+ */
+- (UIBezierPath *)drawPeak:(NSInteger)index{
+    CGPoint endPoint = [self.pointArray[index] CGPointValue];
+    
+    UIBezierPath * bezier = [UIBezierPath bezierPathWithArcCenter:endPoint radius:_raderPeakRadius startAngle:ZFRadian(-90) endAngle:ZFRadian(270) clockwise:YES];
+    return bezier;
+}
+
+/**
+ *  item顶点ShapeLayer
+ *
+ *  @return CAShapeLayer
+ */
+- (CAShapeLayer *)topCircleShapeLayer:(NSInteger)index{
+    CAShapeLayer * shapeLayer = [CAShapeLayer layer];
+    shapeLayer.fillColor = _radarPeakColor.CGColor;
+    shapeLayer.path = [self drawPeak:index].CGPath;
     
     return shapeLayer;
 }
@@ -184,11 +255,20 @@
         _radius = _averageRadius * (i + 1);
         _startYPos = _radarCenter.y - _radius;
         [self.layer addSublayer:[self radarShapeLayer:i]];
+        //当雷达底层蒙版 = kRadarPatternTypeCircle
+        _radarPatternType == kRadarPatternTypeCircle ? [self.layer addSublayer:[self circleShapeLayer:i]] : nil;
+        _radarPatternType == kRadarPatternTypeCircle ? [self.layer addSublayer:[self circleLineShapeLayer:i]] : nil;
     }
     
     if (_isShowSeparate) {
         for (NSInteger i = 0; i < self.pointArray.count; i++) {
             [self.layer addSublayer:[self separateShapeLayer:i]];
+        }
+    }
+    
+    if (_isShowRadarPeak) {
+        for (NSInteger i = 0; i < self.pointArray.count; i++) {
+            [self.layer addSublayer:[self topCircleShapeLayer:i]];
         }
     }
 }

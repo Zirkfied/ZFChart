@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZFRadar.h"
 #import "ZFConst.h"
 @class ZFRadarChart;
 
@@ -122,6 +123,10 @@
 @property (nonatomic, strong) UIColor * valueTextColor;
 /** 雷达图边线颜色(默认为浅灰色) */
 @property (nonatomic, strong) UIColor * radarLineColor;
+/** 雷达背景颜色(默认ZFClear) */
+@property (nonatomic, strong) UIColor * radarBackgroundColor;
+/** 雷达蒙版顶点颜色(默认为白色) */
+@property (nonatomic, strong) UIColor * radarPeakColor;
 
 /** item字体大小(默认15.f) */
 @property (nonatomic, strong) UIFont * itemFont;
@@ -134,6 +139,8 @@
 @property (nonatomic, assign) CGFloat separateLineWidth;
 /** 多边形线宽(默认1.f) */
 @property (nonatomic, assign) CGFloat polygonLineWidth;
+/** 雷达蒙版顶点半径(默认5.f) */
+@property (nonatomic, assign) CGFloat radarPeakRadius;
 /** 多边形透明度(默认0.3f) */
 @property (nonatomic, assign) CGFloat opacity;
 /** 是否一致显示固定的最大值，默认为NO，该属性有一下3种情况
@@ -171,8 +178,12 @@
 @property (nonatomic, assign) BOOL isShowValue;
 /** 是否显示雷达图分割线(默认为YES) */
 @property (nonatomic, assign) BOOL isShowSeparate;
+/** 是否显示雷达蒙版顶点(默认为NO) */
+@property (nonatomic, assign) BOOL isShowRadarPeak;
 /** 是否添加旋转手势(默认为YES) */
 @property (nonatomic, assign) BOOL canRotation;
+/** 雷达底层蒙版样式(默认为kRadarPatternTypeSharp) */
+@property (nonatomic, assign) kRadarPatternType radarPatternType;
 /** 雷达图分段数值的显示类型(保留有效小数或显示整数形式，默认为整数形式) */
 @property (nonatomic, assign) kValueType valueType;
 

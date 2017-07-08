@@ -38,7 +38,7 @@
     _lineWidth = 8.f;
     _shadowOpacity = 1.f;
     _isAnimated = YES;
-    _cirquePatternType = kCirquePatternTypeForDefault;
+    _cirquePatternType = kCirquePatternTypeDefault;
     _cirqueStartOrientation = kCirqueStartOrientationOnTop;
     self.backgroundColor = ZFWhite;
 }

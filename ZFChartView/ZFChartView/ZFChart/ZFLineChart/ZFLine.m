@@ -73,7 +73,7 @@
  *  @return UIBezierPath
  */
 - (UIBezierPath *)bezierWithValuePointArray:(NSMutableArray *)valuePointArray linePatternType:(kLinePatternType)linePatternType padding:(CGFloat)padding{
-    if (linePatternType == kLinePatternTypeForCurve) {
+    if (linePatternType == kLinePatternTypeCurve) {
         UIBezierPath * bezier = [UIBezierPath bezierPath];
         for (NSInteger i = 0; i < self.curveArray.count; i++) {
             UIBezierPath * subBezier = [UIBezierPath bezierPath];
@@ -94,7 +94,7 @@
         
         return bezier;
         
-    }else if (linePatternType == kLinePatternTypeForSharp){
+    }else if (linePatternType == kLinePatternTypeSharp){
         [_valuePointArray removeObjectAtIndex:0];
         [_valuePointArray removeObjectAtIndex:0];
         [_valuePointArray removeLastObject];

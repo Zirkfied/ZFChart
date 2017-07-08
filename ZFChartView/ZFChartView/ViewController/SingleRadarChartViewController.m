@@ -53,6 +53,8 @@
     self.radarChart.valueType = kValueTypeDecimal;
 //    self.radarChart.isResetMinValue = YES;
     self.radarChart.valueTextColor = ZFOrange;
+//    self.radarChart.radarPatternType = kRadarPatternTypeCircle;
+//    self.radarChart.radarLineColor = ZFBlack;
     [self.view addSubview:self.radarChart];
     [self.radarChart strokePath];
 }

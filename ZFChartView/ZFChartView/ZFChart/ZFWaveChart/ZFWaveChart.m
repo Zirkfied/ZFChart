@@ -36,7 +36,7 @@
     _valuePosition = kChartValuePositionDefalut;
     _valueTextColor = ZFBlack;
     _overMaxValueTextColor = ZFRed;
-    _wavePatternType = kWavePatternTypeForCurve;
+    _wavePatternType = kWavePatternTypeCurve;
     _valueLabelToWaveLinePadding = 0.f;
 }
 

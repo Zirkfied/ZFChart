@@ -73,7 +73,7 @@
     shapeLayer.strokeColor = _pathColor.CGColor;
     shapeLayer.path = [self drawCirque].CGPath;
 
-    if (_cirquePatternType == kCirquePatternTypeForShadow) {
+    if (_cirquePatternType == kCirquePatternTypeShadow) {
         shapeLayer.shadowOpacity = _shadowOpacity;
         shapeLayer.shadowColor = ZFDarkGray.CGColor;
         shapeLayer.shadowOffset = _shadowOffset;
@@ -111,7 +111,7 @@
     shapeLayer.strokeColor = ZFTaupe2.CGColor;
     shapeLayer.path = [self drawCirqueBackgroundView].CGPath;
     
-    if (_cirquePatternType == kCirquePatternTypeForDefaultWithShadow) {
+    if (_cirquePatternType == kCirquePatternTypeDefaultWithShadow) {
         shapeLayer.shadowOpacity = _shadowOpacity;
         shapeLayer.shadowColor = ZFDarkGray.CGColor;
         shapeLayer.shadowOffset = _shadowOffset;
@@ -160,7 +160,7 @@
 - (void)strokePath{
     [self removeAllSubLayers];
     
-    if (_cirquePatternType == kCirquePatternTypeForDefault || _cirquePatternType == kCirquePatternTypeForDefaultWithShadow) {
+    if (_cirquePatternType == kCirquePatternTypeDefault || _cirquePatternType == kCirquePatternTypeDefaultWithShadow) {
         [self.layer addSublayer:[self cirqueShapeLayerBackgroundView]];
     }
     

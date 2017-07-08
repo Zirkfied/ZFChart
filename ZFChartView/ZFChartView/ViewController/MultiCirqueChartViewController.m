@@ -56,8 +56,8 @@
 }
 
 - (id)colorArrayInCirqueChart:(ZFCirqueChart *)cirqueChart{
-    return ZFGrassGreen;
-//    return @[ZFRed, ZFOrange, ZFMagenta, ZFBlue, ZFPurple];
+//    return ZFGrassGreen;
+    return @[ZFRed, ZFOrange, ZFMagenta, ZFBlue, ZFPurple];
 }
 
 - (CGFloat)maxValueInCirqueChart:(ZFCirqueChart *)cirqueChart{

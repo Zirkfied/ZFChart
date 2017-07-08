@@ -43,7 +43,7 @@
 }
 
 - (UIBezierPath *)noFill{
-    if (_wavePatternType == kWavePatternTypeForCurve) {
+    if (_wavePatternType == kWavePatternTypeCurve) {
         UIBezierPath * bezier = [UIBezierPath bezierPath];
         for (NSInteger i = 0; i < self.curveArray.count; i++) {
             UIBezierPath * subBezier = [UIBezierPath bezierPath];
@@ -68,7 +68,7 @@
         
         return bezier;
         
-    }else if (_wavePatternType == kWavePatternTypeForSharp){
+    }else if (_wavePatternType == kWavePatternTypeSharp){
         UIBezierPath * bezier = [UIBezierPath bezierPath];
         [bezier moveToPoint:CGPointMake(0, self.frame.size.height)];
         for (NSInteger i = 0; i < _valuePointArray.count; i++) {
@@ -86,7 +86,7 @@
 }
 
 - (UIBezierPath *)fill{
-    if (_wavePatternType == kWavePatternTypeForCurve) {
+    if (_wavePatternType == kWavePatternTypeCurve) {
         UIBezierPath * bezier = [UIBezierPath bezierPath];
         for (NSInteger i = 0; i < self.curveArray.count; i++) {
             UIBezierPath * subBezier = [UIBezierPath bezierPath];
@@ -111,7 +111,7 @@
         
         return bezier;
         
-    }else if (_wavePatternType == kWavePatternTypeForSharp){
+    }else if (_wavePatternType == kWavePatternTypeSharp){
         UIBezierPath * bezier = [UIBezierPath bezierPath];
         [bezier moveToPoint:CGPointMake(0, self.frame.size.height)];
         for (NSInteger i = 0; i < _valuePointArray.count; i++) {
@@ -202,7 +202,7 @@
         [layer removeFromSuperlayer];
     }
     
-    if (_wavePatternType == kWavePatternTypeForCurve) {
+    if (_wavePatternType == kWavePatternTypeCurve) {
         [self subsectionCruve];
     }
     

@@ -45,6 +45,12 @@
 //    self.radarChart.isResetMinValue = YES;
 //    self.radarChart.valueType = kValueTypeDecimal;
     self.radarChart.valueTextColor = ZFDeepPink;
+    self.radarChart.radarPatternType = kRadarPatternTypeCircle;
+//    self.radarChart.radarLineColor = ZFBlack;
+    self.radarChart.radarBackgroundColor = ZFMagenta;
+    self.radarChart.isShowRadarPeak = YES;
+    self.radarChart.radarPeakColor = ZFGrassGreen;
+//    self.radarChart.radarPeakRadius = 10.f;
     [self.view addSubview:self.radarChart];
     [self.radarChart strokePath];
 }

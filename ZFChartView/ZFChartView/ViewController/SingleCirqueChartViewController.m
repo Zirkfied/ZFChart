@@ -43,7 +43,7 @@
     self.cirqueChart.textLabel.font = [UIFont boldSystemFontOfSize:12.f];
     self.cirqueChart.isResetMaxValue = YES;
     //    self.cirqueChart.isAnimated = NO;
-    self.cirqueChart.cirquePatternType = kCirquePatternTypeForNone;
+    self.cirqueChart.cirquePatternType = kCirquePatternTypeNone;
     //    self.cirqueChart.cirqueStartOrientation = kCirqueStartOrientationOnRight;
     [self.view addSubview:self.cirqueChart];
     [self.cirqueChart strokePath];
