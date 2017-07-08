@@ -488,8 +488,8 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         2016.12.02 ①柱状图(ZFBarChart), 波浪图(ZFWaveChart)新增渐变色样式, 具体代码查看Demo
                    ②修复部分Bug
         
-        2017.07.08 ①雷达图(ZFRadarChart)新增底部蒙板圆圈样式及相关属性, 具体代码查看Demo
-                   ②优化部分枚举值的命名，请注意修改
+        2017.07.08 ①雷达图(ZFRadarChart)新增底部蒙板圆圈样式及相关属性, 具体代码查看Demo
+                   ②优化部分枚举值的命名，请注意修改
                    
 ## 本人其他开源框架
 #### [ZFChart - 一款简单好用的图表库，目前有柱状，线状，饼图，波浪，雷达，圆环图类型](https://github.com/Zirkfied/ZFChart)
