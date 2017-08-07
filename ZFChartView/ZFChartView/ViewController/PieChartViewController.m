@@ -33,6 +33,7 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self setUp];
+
     
     self.pieChart = [[ZFPieChart alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, _height)];
     self.pieChart.dataSource = self;

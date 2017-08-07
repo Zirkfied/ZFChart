@@ -139,15 +139,15 @@
     [self.endAngleArray removeAllObjects];
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, _originHeight);
     
+    NSArray * subviews = [NSArray arrayWithArray:self.subviews];
+    for (UIView * view in subviews) {
+        [view removeFromSuperview];
+    }
+    
     NSArray * subLayers = [NSArray arrayWithArray:self.layer.sublayers];
     for (CALayer * layer in subLayers) {
         [layer removeAllAnimations];
         [layer removeFromSuperlayer];
-    }
-    
-    NSArray * subviews = [NSArray arrayWithArray:self.subviews];
-    for (UIView * view in subviews) {
-        [view removeFromSuperview];
     }
 }
 
