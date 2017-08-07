@@ -59,4 +59,9 @@
  */
 - (CGFloat)cachedMinValue:(NSMutableArray *)array;
 
+/**
+ *  所有value是否都为0
+ */
+- (BOOL)isAllValuesZero:(NSMutableArray *)array;
+
 @end

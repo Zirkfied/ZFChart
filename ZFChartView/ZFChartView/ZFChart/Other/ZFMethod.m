@@ -146,4 +146,23 @@ static ZFMethod * instance = nil;
     return 0.f;
 }
 
+/**
+ *  所有value是否都为0
+ */
+- (BOOL)isAllValuesZero:(NSMutableArray *)array{
+    for (id subObject in array) {
+        if ([subObject isKindOfClass:[NSString class]]) {
+            CGFloat value = [subObject floatValue];
+            if (value != 0.f) {
+                return NO;
+            }
+            
+        }else if([subObject isKindOfClass:[NSArray class]]){
+            [self isAllValuesZero:subObject];
+        }
+    }
+    
+    return YES;
+}
+
 @end

@@ -12,6 +12,7 @@
 #import "NSString+Zirkfied.h"
 #import "UIView+Zirkfied.h"
 #import "ZFTranslucencePath.h"
+#import "ZFMethod.h"
 
 @interface ZFPieChart()
 
@@ -173,6 +174,13 @@
     
     if ([self.dataSource respondsToSelector:@selector(valueArrayInPieChart:)]) {
         self.valueArray = [NSMutableArray arrayWithArray:[self.dataSource valueArrayInPieChart:self]];
+        
+        //判断全部数值是否为0
+        BOOL isAllValuesZero = [[ZFMethod shareInstance] isAllValuesZero:self.valueArray];
+        if (isAllValuesZero) {
+            NSLog(@"当前所有数值为0，无法绘画图表");
+            return;
+        }
     }
     
     if ([self.dataSource respondsToSelector:@selector(colorArrayInPieChart:)]) {
