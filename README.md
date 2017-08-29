@@ -492,6 +492,9 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
                    ②优化部分枚举值的命名，请注意修改
         
         2017.08.07 ①优化饼图(ZFPieChart)全部数据为0时的刷新问题
+        
+        2017.08.29 ①新增ZFGenericChartDataSource数据源方法：- (NSInteger)axisLineStartToDisplayValueAtIndex:(ZFGenericChart *)chart，根据给予的NSInteger数值从第几个数据开始显示，正数从左往右数，负数从右往左数，eg:若返回-7，就从最右的数往左数第7个数据开始显示
+                   ②新增ZFGenericChartDataSource数据源方法：- (void)genericChartDidScroll:(UIScrollView *)scrollView，通过此方法可实时监听坐标轴滚动的偏移量，方便后续做对应的操作
 
 
                    
