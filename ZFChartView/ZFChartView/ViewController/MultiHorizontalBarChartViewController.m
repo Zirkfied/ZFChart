@@ -86,6 +86,10 @@
 //    return 10;
 //}
 
+//- (void)genericChartDidScroll:(UIScrollView *)scrollView{
+//    NSLog(@"当前偏移量 ------ %f", scrollView.contentOffset.y);
+//}
+
 #pragma mark - ZFHorizontalBarChartDelegate
 
 //- (CGFloat)barHeightInHorizontalBarChart:(ZFHorizontalBarChart *)barChart{

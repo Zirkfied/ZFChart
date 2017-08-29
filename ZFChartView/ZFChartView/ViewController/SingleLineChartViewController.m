@@ -84,9 +84,13 @@
     return 10;
 }
 
-- (NSInteger)axisLineStartToDisplayValueAtIndex:(ZFGenericChart *)chart{
-    return -7;
-}
+//- (NSInteger)axisLineStartToDisplayValueAtIndex:(ZFGenericChart *)chart{
+//    return -7;
+//}
+
+//- (void)genericChartDidScroll:(UIScrollView *)scrollView{
+//    NSLog(@"当前偏移量 ------ %f", scrollView.contentOffset.x);
+//}
 
 #pragma mark - ZFLineChartDelegate
 

@@ -11,7 +11,7 @@
 #import "NSString+Zirkfied.h"
 #import "ZFMethod.h"
 
-@interface ZFBarChart()
+@interface ZFBarChart()<ZFGenericAxisDelegate>
 
 /** 通用坐标轴图表 */
 @property (nonatomic, strong) ZFGenericAxis * genericAxis;
@@ -66,6 +66,7 @@
  */
 - (void)drawGenericChart{
     self.genericAxis = [[ZFGenericAxis alloc] initWithFrame:self.bounds];
+    self.genericAxis.genericAxisDelegate = self;
     [self addSubview:self.genericAxis];
 }
 
@@ -289,6 +290,20 @@
     }
 }
 
+#pragma mark - 求每组宽度
+
+/**
+ *  求每组宽度
+ */
+- (CGFloat)cachedGroupWidth:(NSMutableArray *)array{
+    id subObject = array.firstObject;
+    if ([subObject isKindOfClass:[NSArray class]]) {
+        return array.count * _barWidth + (array.count - 1) * _barPadding;
+    }
+    
+    return _barWidth;
+}
+
 #pragma mark - 清除控件
 
 /**
@@ -453,16 +468,12 @@
     [self bringSubviewToFront:self.topicLabel];
 }
 
-/**
- *  求每组宽度
- */
-- (CGFloat)cachedGroupWidth:(NSMutableArray *)array{
-    id subObject = array.firstObject;
-    if ([subObject isKindOfClass:[NSArray class]]) {
-        return array.count * _barWidth + (array.count - 1) * _barPadding;
+#pragma mark - ZFGenericAxisDelegate
+
+- (void)genericAxisDidScroll:(UIScrollView *)scrollView{
+    if ([self.dataSource respondsToSelector:@selector(genericChartDidScroll:)]) {
+        [self.dataSource genericChartDidScroll:scrollView];
     }
-    
-    return _barWidth;
 }
 
 #pragma mark - 重写setter,getter方法

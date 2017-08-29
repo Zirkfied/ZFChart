@@ -11,7 +11,7 @@
 #import "NSString+Zirkfied.h"
 #import "ZFMethod.h"
 
-@interface ZFHorizontalBarChart()
+@interface ZFHorizontalBarChart()<ZFHorizontalAxisDelegate>
 
 /** 横向通用坐标轴图表 */
 @property (nonatomic, strong) ZFHorizontalAxis * horizontalAxis;
@@ -68,6 +68,7 @@
  */
 - (void)drawGenericChart{
     self.horizontalAxis = [[ZFHorizontalAxis alloc] initWithFrame:self.bounds];
+    self.horizontalAxis.horizontalAxisDelegate = self;
     [self addSubview:self.horizontalAxis];
 }
 
@@ -461,6 +462,14 @@
     }
     
     return _barHeight;
+}
+
+#pragma mark - ZFHorizontalAxisDelegate
+
+- (void)horizontalAxisDidScroll:(UIScrollView *)scrollView{
+    if ([self.dataSource respondsToSelector:@selector(genericChartDidScroll:)]) {
+        [self.dataSource genericChartDidScroll:scrollView];
+    }
 }
 
 #pragma mark - 重写setter,getter方法

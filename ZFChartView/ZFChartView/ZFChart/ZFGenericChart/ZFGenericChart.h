@@ -16,6 +16,7 @@
 @protocol ZFGenericChartDataSource <NSObject>
 
 @required
+
 /**
  *  value数据
  *  
@@ -73,6 +74,12 @@
  */
 - (NSInteger)axisLineStartToDisplayValueAtIndex:(ZFGenericChart *)chart;
 
+/**
+ *  监听坐标轴滚动
+ *
+ *  @param  scrollView 可.contentOffset获取当前坐标轴的偏移量
+ */
+- (void)genericChartDidScroll:(UIScrollView *)scrollView;
 
 @end;
 

@@ -380,6 +380,10 @@
             sectionView.frame = CGRectMake(self.yAxisLine.yLineStartXPos + self.contentOffset.x, sectionView.frame.origin.y, sectionView.frame.size.width, sectionView.frame.size.height);
         }
     }
+    
+    if ([self.genericAxisDelegate respondsToSelector:@selector(genericAxisDidScroll:)]) {
+        [self.genericAxisDelegate genericAxisDidScroll:scrollView];
+    }
 }
 
 #pragma mark - 重写setter,getter方法

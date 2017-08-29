@@ -9,7 +9,6 @@
 #import "ZFGenericChart.h"
 #import "ZFColor.h"
 
-
 @implementation ZFGenericChart
 
 /**

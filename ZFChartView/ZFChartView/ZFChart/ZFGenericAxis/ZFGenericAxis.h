@@ -10,7 +10,19 @@
 #import "ZFXAxisLine.h"
 #import "ZFYAxisLine.h"
 
+/*********************  ZFGenericAxisDelegate(ZFGenericAxis协议方法)  *********************/
+@protocol ZFGenericAxisDelegate <NSObject>
+
+@optional
+
+- (void)genericAxisDidScroll:(UIScrollView *)scrollView;
+
+@end
+
+
 @interface ZFGenericAxis : UIScrollView
+
+@property (nonatomic, weak) id<ZFGenericAxisDelegate> genericAxisDelegate;
 
 /** X轴 */
 @property (nonatomic, strong) ZFXAxisLine * xAxisLine;

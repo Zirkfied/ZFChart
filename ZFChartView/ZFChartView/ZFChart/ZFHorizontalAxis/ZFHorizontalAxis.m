@@ -401,6 +401,10 @@
     
     //顶部遮罩层
     self.maskView.frame = CGRectMake(self.maskView.frame.origin.x, scrollView.contentOffset.y, self.maskView.frame.size.width, self.maskView.frame.size.height);
+    
+    if ([self.horizontalAxisDelegate respondsToSelector:@selector(horizontalAxisDidScroll:)]) {
+        [self.horizontalAxisDelegate horizontalAxisDidScroll:scrollView];
+    }
 }
 
 #pragma mark - 重写setter,getter方法

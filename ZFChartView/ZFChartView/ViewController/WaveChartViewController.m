@@ -77,6 +77,10 @@
     return 10;
 }
 
+//- (void)genericChartDidScroll:(UIScrollView *)scrollView{
+//    NSLog(@"当前偏移量 ------ %f", scrollView.contentOffset.x);
+//}
+
 #pragma mark - ZFWaveChartDelegate
 
 //- (CGFloat)groupWidthInWaveChart:(ZFWaveChart *)waveChart{

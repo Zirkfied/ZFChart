@@ -11,7 +11,7 @@
 #import "ZFMethod.h"
 #import "NSString+Zirkfied.h"
 
-@interface ZFWaveChart ()
+@interface ZFWaveChart ()<ZFGenericAxisDelegate>
 
 /** 通用坐标轴图表 */
 @property (nonatomic, strong) ZFGenericAxis * genericAxis;
@@ -56,6 +56,7 @@
  */
 - (void)drawGenericChart{
     self.genericAxis = [[ZFGenericAxis alloc] initWithFrame:self.bounds];
+    self.genericAxis.genericAxisDelegate = self;
     [self addSubview:self.genericAxis];
 }
 
@@ -297,6 +298,14 @@
     }
     
     return valuePointArray;
+}
+
+#pragma mark - ZFGenericAxisDelegate
+
+- (void)genericAxisDidScroll:(UIScrollView *)scrollView{
+    if ([self.dataSource respondsToSelector:@selector(genericChartDidScroll:)]) {
+        [self.dataSource genericChartDidScroll:scrollView];
+    }
 }
 
 #pragma mark - 重写setter,getter方法
