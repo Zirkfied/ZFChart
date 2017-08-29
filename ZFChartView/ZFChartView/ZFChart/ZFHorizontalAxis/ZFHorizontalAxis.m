@@ -46,6 +46,7 @@
     _xLineValueColor = ZFBlack;
     _axisLineBackgroundColor = ZFWhite;
     _separateColor = ZFLightGray;
+    _displayValueAtIndex = 0;
     
     self.delegate = self;
     self.showsVerticalScrollIndicator = NO;
@@ -361,6 +362,12 @@
         if (_isShowYLineSeparate) {
             [self.layer addSublayer:[self yAxisLineSectionShapeLayer:i sectionColor:_separateColor]];
         }
+    }
+    
+    if (_displayValueAtIndex < 0) {
+        self.contentOffset = CGPointMake(self.contentOffset.x, self.contentOffset.y - (_yLineNameArray.count - _displayValueAtIndex) * (self.groupHeight + self.groupPadding));
+    }else{
+        self.contentOffset = CGPointMake(self.contentOffset.x, self.contentOffset.y - _displayValueAtIndex * (self.groupHeight + self.groupPadding));
     }
 }
 

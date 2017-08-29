@@ -64,9 +64,15 @@
 - (CGFloat)axisLineMinValueInGenericChart:(ZFGenericChart *)chart;
 
 /**
- *  y轴(普通图表) 或 x轴(横向图表) 数值显示的段数(若不设置,默认5段)
+ *  y轴(普通图表) 或 x轴(横向图表) 数值显示的段数(若不设置，默认5段)
  */
 - (NSUInteger)axisLineSectionCountInGenericChart:(ZFGenericChart *)chart;
+
+/**
+ *  从下标为n的数值开始显示(正数:从左往右数，负数:从右往左数)
+ */
+- (NSInteger)axisLineStartToDisplayValueAtIndex:(ZFGenericChart *)chart;
+
 
 @end;
 

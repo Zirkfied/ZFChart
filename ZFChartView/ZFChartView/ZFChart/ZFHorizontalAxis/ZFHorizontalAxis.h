@@ -26,6 +26,8 @@
 @property (nonatomic, assign) CGFloat xLineMinValue;
 /** x轴数值显示的段数 */
 @property (nonatomic, assign) NSInteger xLineSectionCount;
+/** 开始显示的Value下标(默认为0) */
+@property (nonatomic, assign) NSInteger displayValueAtIndex;
 
 /** 每组宽度(变相求y轴标题label高度) */
 @property (nonatomic, assign) CGFloat groupHeight;

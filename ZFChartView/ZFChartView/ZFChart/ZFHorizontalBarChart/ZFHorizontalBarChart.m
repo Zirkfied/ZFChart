@@ -432,6 +432,10 @@
     
     self.horizontalAxis.groupHeight = [self cachedGroupHeight:self.horizontalAxis.yLineValueArray];
     
+    if ([self.dataSource respondsToSelector:@selector(axisLineStartToDisplayValueAtIndex:)]) {
+        self.horizontalAxis.displayValueAtIndex = [self.dataSource axisLineStartToDisplayValueAtIndex:self];
+    }
+    
     [self removeAllBar];
     [self removeLabelOnChart];
     self.horizontalAxis.isAnimated = self.isAnimated;

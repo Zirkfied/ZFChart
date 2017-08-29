@@ -64,11 +64,11 @@
 #pragma mark - ZFGenericChartDataSource
 
 - (NSArray *)valueArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[@"123", @"256", @"300", @"283", @"490", @"236"];
+    return @[@"123", @"256", @"300", @"283", @"490", @"236", @"123", @"256", @"300", @"283", @"490", @"236", @"123", @"256", @"300", @"283", @"490", @"236", @"123", @"256", @"300", @"283", @"490", @"236", @"123", @"256", @"300", @"283", @"490", @"236"];
 }
 
 - (NSArray *)nameArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[@"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级"];
+    return @[@"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级", @"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级", @"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级", @"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级", @"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级"];
 }
 
 - (NSArray *)colorArrayInGenericChart:(ZFGenericChart *)chart{
@@ -85,6 +85,10 @@
 
 - (NSUInteger)axisLineSectionCountInGenericChart:(ZFGenericChart *)chart{
     return 10;
+}
+
+- (NSInteger)axisLineStartToDisplayValueAtIndex:(ZFGenericChart *)chart{
+    return -7;
 }
 
 #pragma mark - ZFBarChartDelegate

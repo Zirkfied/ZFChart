@@ -472,6 +472,10 @@
         return;
     }
     
+    if ([self.dataSource respondsToSelector:@selector(axisLineStartToDisplayValueAtIndex:)]) {
+        self.genericAxis.displayValueAtIndex = [self.dataSource axisLineStartToDisplayValueAtIndex:self];
+    }
+    
     [self removeAllCircle];
     [self removeLabelOnChart];
     [self removeAllSubLayer];

@@ -32,6 +32,8 @@
 @property (nonatomic, assign) CGFloat xLineNameLabelToXAxisLinePadding;
 /** y轴数值显示的段数 */
 @property (nonatomic, assign) NSInteger yLineSectionCount;
+/** 开始显示的Value下标(默认为0) */
+@property (nonatomic, assign) NSInteger displayValueAtIndex;
 
 /** y轴单位 */
 @property (nonatomic, copy) NSString * unit;
@@ -47,7 +49,6 @@
 @property (nonatomic, strong) UIColor * xAxisColor;
 /** y轴颜色(默认为黑色) */
 @property (nonatomic, strong) UIColor * yAxisColor;
-
 
 /** x轴上名称字体大小(默认为10.f) */
 @property (nonatomic, strong) UIFont * xLineNameFont;

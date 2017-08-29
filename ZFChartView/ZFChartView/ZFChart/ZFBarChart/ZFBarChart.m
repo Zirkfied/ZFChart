@@ -433,6 +433,10 @@
     
     self.genericAxis.groupWidth = [self cachedGroupWidth:self.genericAxis.xLineValueArray];
     
+    if ([self.dataSource respondsToSelector:@selector(axisLineStartToDisplayValueAtIndex:)]) {
+        self.genericAxis.displayValueAtIndex = [self.dataSource axisLineStartToDisplayValueAtIndex:self];
+    }
+    
     [self removeAllBar];
     [self removeLabelOnChart];
     self.genericAxis.xLineNameLabelToXAxisLinePadding = self.xLineNameLabelToXAxisLinePadding;
