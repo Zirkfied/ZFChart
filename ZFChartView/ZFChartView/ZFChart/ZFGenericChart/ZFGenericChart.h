@@ -170,6 +170,9 @@
 /** 是否显示坐标轴箭头(默认为YES) */
 @property (nonatomic, assign) BOOL isShowAxisArrows;
 
+/** 最后一个关闭区域是否垂直关闭 */
+@property (nonatomic, assign) BOOL isVerticalClose;
+
 
 
 #pragma mark - 此方法不需理会(Ignore this method)

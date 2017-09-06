@@ -69,6 +69,7 @@
     self.wave.padding = self.genericAxis.groupPadding;
     self.wave.wavePatternType = _wavePatternType;
     self.wave.isAnimated = self.isAnimated;
+    self.wave.isVerticalClose = self.isVerticalClose;
     self.wave.opacity = self.opacity;
     self.wave.gradientAttribute = _gradientAttribute;
     [self.genericAxis addSubview:self.wave];
