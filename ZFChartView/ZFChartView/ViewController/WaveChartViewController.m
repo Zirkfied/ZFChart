@@ -38,6 +38,8 @@
     self.waveChart.dataSource = self;
     self.waveChart.delegate = self;
     self.waveChart.topicLabel.text = @"xx小学各年级人数";
+    self.waveChart.wavePatternType = kWavePatternTypeSharp;
+    self.waveChart.isVerticalClose = YES;
     self.waveChart.unit = @"人";
 //    self.waveChart.isShowYLineSeparate = YES;
 //    self.waveChart.pathColor = ZFGrassGreen;
