@@ -495,8 +495,8 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         
         2017.08.29 ①新增ZFGenericChartDataSource数据源方法：- (NSInteger)axisLineStartToDisplayValueAtIndex:(ZFGenericChart *)chart，根据给予的NSInteger数值从第几个数据开始显示，正数从左往右数，负数从右往左数，eg:若返回-7，就从最右的数往左数第7个数据开始显示
                    ②新增ZFGenericChartDataSource数据源方法：- (void)genericChartDidScroll:(UIScrollView *)scrollView，通过此方法可实时监听坐标轴滚动的偏移量，方便后续做对应的操作
-                
-        2017.09.13 ①线状图(ZFLineChart)新增渐变色样式, 具体代码查看Demo
+                   
+        2017.09.13 ①线状图(ZFLineChart)新增渐变色样式, 具体代码查看Demo
 
 
                    
