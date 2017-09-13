@@ -9,7 +9,6 @@
 #import "ZFLine.h"
 #import <UIKit/UIKit.h>
 #import "ZFCircle.h"
-#import "ZFConst.h"
 #import "UIBezierPath+Zirkfied.h"
 #import "ZFCurveAttribute.h"
 
@@ -61,6 +60,7 @@
             CABasicAnimation * animation = [self animation];
             [self addAnimation:animation forKey:nil];
         }
+        
     }
     return self;
 }
@@ -114,6 +114,23 @@
     }
     
     return nil;
+}
+
+/**
+ *  渐变色
+ */
+- (CALayer *)lineGradientColor{
+    CALayer * layer = [CALayer layer];
+    CAGradientLayer * gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
+    gradientLayer.colors = _gradientAttribute.colors;
+    gradientLayer.locations = _gradientAttribute.locations;
+    gradientLayer.startPoint = _gradientAttribute.startPoint;
+    gradientLayer.endPoint = _gradientAttribute.endPoint;
+    [layer addSublayer:gradientLayer];
+    layer.mask = self;
+    
+    return layer;
 }
 
 #pragma mark - 动画

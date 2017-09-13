@@ -8,6 +8,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
+#import "ZFConst.h"
 
 /**
  *  波浪图样式
@@ -21,6 +22,8 @@ typedef enum{
 
 /** 是否带阴影效果(默认为YES) */
 @property (nonatomic, assign) BOOL isShadow;
+/** line渐变色模型 */
+@property (nonatomic, strong) ZFGradientAttribute * gradientAttribute;
 
 #pragma mark - public method
 
@@ -32,5 +35,10 @@ typedef enum{
  *  @return self
  */
 + (instancetype)lineWithValuePointArray:(NSMutableArray *)valuePointArray isAnimated:(BOOL)isAnimated shadowColor:(UIColor *)shadowColor linePatternType:(kLinePatternType)linePatternType padding:(CGFloat)padding;
+
+/**
+ *  渐变色
+ */
+- (CALayer *)lineGradientColor;
 
 @end

@@ -51,12 +51,12 @@
 //    self.lineChart.valueCenterToCircleCenterPadding = 0;
 //    self.lineChart.separateColor = ZFYellow;
 //    self.lineChart.linePatternType = kLinePatternTypeForCurve;
-    self.lineChart.unitColor = ZFWhite;
-    self.lineChart.backgroundColor = ZFPurple;
-    self.lineChart.xAxisColor = ZFWhite;
-    self.lineChart.yAxisColor = ZFWhite;
-    self.lineChart.axisLineNameColor = ZFWhite;
-    self.lineChart.axisLineValueColor = ZFWhite;
+//    self.lineChart.unitColor = ZFWhite;
+//    self.lineChart.backgroundColor = ZFPurple;
+//    self.lineChart.xAxisColor = ZFWhite;
+//    self.lineChart.yAxisColor = ZFWhite;
+//    self.lineChart.axisLineNameColor = ZFWhite;
+//    self.lineChart.axisLineValueColor = ZFWhite;
     self.lineChart.xLineNameLabelToXAxisLinePadding = 40;
     [self.view addSubview:self.lineChart];
     [self.lineChart strokePath];
@@ -111,6 +111,28 @@
 
 //- (NSArray *)valuePositionInLineChart:(ZFLineChart *)lineChart{
 //    return @[@(kChartValuePositionOnTop), @(kChartValuePositionDefalut), @(kChartValuePositionOnBelow)];
+//}
+
+//- (NSArray<ZFGradientAttribute *> *)gradientColorArrayInLineChart:(ZFLineChart *)lineChart{
+//    ZFGradientAttribute * gradientAttribute1 = [[ZFGradientAttribute alloc] init];
+//    gradientAttribute1.colors = @[(id)ZFRed.CGColor, (id)ZFGreen.CGColor];
+//    gradientAttribute1.locations = @[@(0.1)];
+//    gradientAttribute1.startPoint = CGPointMake(0.5, 1);
+//    gradientAttribute1.endPoint = CGPointMake(0.5, 0);
+//    
+//    ZFGradientAttribute * gradientAttribute2 = [[ZFGradientAttribute alloc] init];
+//    gradientAttribute2.colors = @[(id)ZFOrange.CGColor, (id)ZFCyan.CGColor];
+//    gradientAttribute2.locations = @[@(0.1)];
+//    gradientAttribute2.startPoint = CGPointMake(0.5, 1);
+//    gradientAttribute2.endPoint = CGPointMake(0.5, 0);
+//    
+//    ZFGradientAttribute * gradientAttribute3 = [[ZFGradientAttribute alloc] init];
+//    gradientAttribute3.colors = @[(id)ZFGold.CGColor, (id)ZFMagenta.CGColor];
+//    gradientAttribute3.locations = @[@(0.1)];
+//    gradientAttribute3.startPoint = CGPointMake(0.5, 1);
+//    gradientAttribute3.endPoint = CGPointMake(0.5, 0);
+//    
+//    return [NSArray arrayWithObjects:gradientAttribute1, gradientAttribute2, gradientAttribute3, nil];
 //}
 
 - (void)lineChart:(ZFLineChart *)lineChart didSelectCircleAtLineIndex:(NSInteger)lineIndex circleIndex:(NSInteger)circleIndex circle:(ZFCircle *)circle popoverLabel:(ZFPopoverLabel *)popoverLabel{

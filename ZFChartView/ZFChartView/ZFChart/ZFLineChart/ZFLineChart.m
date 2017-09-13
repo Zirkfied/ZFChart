@@ -24,6 +24,8 @@
 @property (nonatomic, strong) NSMutableArray * colorArray;
 /** 存储每条线value位置的数组 */
 @property (nonatomic, strong) NSMutableArray * valuePositionArray;
+/** 存储line渐变色的数组 */
+@property (nonatomic, strong) NSMutableArray * gradientColorArray;
 /** 半径 */
 @property (nonatomic, assign) CGFloat radius;
 /** 线宽 */
@@ -238,10 +240,25 @@
 - (void)drawLine{
     id subObject = self.circleArray.firstObject;
     if ([subObject isKindOfClass:[ZFCircle class]]) {
-        [self.genericAxis.layer addSublayer:[self lineShapeLayer:self.circleArray index:0]];
+        ZFLine * line = (ZFLine *)[self lineShapeLayer:self.circleArray index:0];
+        [self.genericAxis.layer addSublayer:line];
+        
+        //渐变色
+        if (_gradientColorArray) {
+            line.gradientAttribute = _gradientColorArray.firstObject;
+            [self.genericAxis.layer addSublayer:[line lineGradientColor]];
+        }
+
     }else if ([subObject isKindOfClass:[NSArray class]]){
         for (NSInteger i = 0; i < self.circleArray.count; i++) {
-            [self.genericAxis.layer addSublayer:[self lineShapeLayer:(NSMutableArray *)self.circleArray[i] index:i]];
+            ZFLine * line = (ZFLine *)[self lineShapeLayer:(NSMutableArray *)self.circleArray[i] index:i];
+            [self.genericAxis.layer addSublayer:line];
+            
+            //渐变色
+            if (_gradientColorArray) {
+                line.gradientAttribute = _gradientColorArray[i];
+                [self.genericAxis.layer addSublayer:[line lineGradientColor]];
+            }
         }
     }
 }
@@ -255,6 +272,7 @@
     NSMutableArray * valuePointArray = [self cachedValuePointArray:array];
     
     ZFLine * layer = [ZFLine lineWithValuePointArray:valuePointArray isAnimated:self.isAnimated shadowColor:self.shadowColor linePatternType:_linePatternType padding:self.genericAxis.groupPadding];
+    layer.frame = CGRectMake(0, 0, self.genericAxis.xLineWidth + self.genericAxis.axisStartXPos, self.genericAxis.yLineMaxValueHeight + self.genericAxis.yLineMaxValueYPos);
     layer.strokeColor = [_colorArray[index] CGColor];
     layer.lineWidth = _lineWidth;
     layer.isShadow = _isShadow;
@@ -466,6 +484,10 @@
         self.valuePositionArray = [NSMutableArray arrayWithArray:[self.delegate valuePositionInLineChart:self]];
     }else{
         self.valuePositionArray = [NSMutableArray arrayWithArray:[[ZFMethod shareInstance] cachedValuePositionInLineChart:self.genericAxis.xLineValueArray]];
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(gradientColorArrayInLineChart:)]) {
+        _gradientColorArray = [NSMutableArray arrayWithArray:[self.delegate gradientColorArrayInLineChart:self]];
     }
     
     if (self.genericAxis.yLineMaxValue - self.genericAxis.yLineMinValue == 0) {

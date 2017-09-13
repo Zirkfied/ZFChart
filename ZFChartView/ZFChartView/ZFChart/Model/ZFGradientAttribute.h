@@ -18,7 +18,7 @@
 /** 颜色 */
 @property(nonatomic, strong) NSArray * colors;
 /** 区域 */
-@property(nonatomic, strong) NSArray<NSNumber *> *locations;
+@property(nonatomic, strong) NSArray<NSNumber *> * locations;
 /** 开始位置 */
 @property(nonatomic, assign) CGPoint startPoint;
 /** 结束位置 */
