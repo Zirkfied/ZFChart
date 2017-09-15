@@ -214,6 +214,11 @@
     layer.strokeColor = sectionColor.CGColor;
     layer.path = [self drawXAxisLineSection:i sectionLength:sectionLength].CGPath;
     
+    if (_separateLineStyle == kLineStyleDashLine) {
+        layer.lineDashPhase = _separateLineDashPhase;
+        layer.lineDashPattern = _separateLineDashPattern;
+    }
+    
     return layer;
 }
 
@@ -262,6 +267,11 @@
     CAShapeLayer * layer = [CAShapeLayer layer];
     layer.strokeColor = sectionColor.CGColor;
     layer.path = [self drawYAxisLineSection:i].CGPath;
+    
+    if (_separateLineStyle == kLineStyleDashLine) {
+        layer.lineDashPhase = _separateLineDashPhase;
+        layer.lineDashPattern = _separateLineDashPattern;
+    }
     
     return layer;
 }

@@ -18,14 +18,6 @@ typedef enum{
     kLinePatternTypeCurve = 1    //曲线样式
 }kLinePatternType;
 
-/**
- *  线状图线条样式
- */
-typedef enum{
-    kLineStyleRealLine = 0,   //实线(默认样式)
-    kLineStyleDashLine = 1    //虚线
-}kLineStyle;
-
 @interface ZFLine : CAShapeLayer
 
 /** 是否带阴影效果(默认为YES) */

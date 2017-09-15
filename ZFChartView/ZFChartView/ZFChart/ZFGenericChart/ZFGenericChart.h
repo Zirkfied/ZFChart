@@ -119,6 +119,12 @@
 /** y轴(普通图表) 或 x轴(横向图表) 上数值字体大小(默认为10.f) */
 @property (nonatomic, strong) UIFont * axisLineValueFont;
 
+/** 分割线线条样式(默认为kLineStyleRealLine) */
+@property (nonatomic, assign) kLineStyle separateLineStyle;
+/** 分割线在第一个虚线绘制的时候跳过多少个点(默认为0.f) */
+@property (nonatomic, assign) CGFloat separateLineDashPhase;
+/** 分割线虚线交替绘制参数(默认为  @[@(2), @(2)]  ) */
+@property (nonatomic, strong) NSArray<NSNumber *> * separateLineDashPattern;
 /** 图表透明度(范围0 ~ 1, 默认为1.f) */
 @property (nonatomic, assign) CGFloat opacity;
 /** x轴名称label与x轴之间的距离(默认为0.f)(横向图表无效) */

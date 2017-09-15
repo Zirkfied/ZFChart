@@ -191,6 +191,14 @@ typedef enum{
     kValueTypeDecimal = 1,   //取小数形式(默认显示1位小数, 如需显示其余位数则设置ZFGenericChart.h文件中 numberOfDecimal属性)
 }kValueType;
 
+/**
+ *  线条样式
+ */
+typedef enum{
+    kLineStyleRealLine = 0,   //实线(默认样式)
+    kLineStyleDashLine = 1    //虚线
+}kLineStyle;
+
 @interface ZFConst : NSObject
 
 @end

@@ -52,6 +52,11 @@
 //    self.barChart.axisLineValueColor = ZFWhite;
 //    self.barChart.isShowAxisLineValue = NO;
 //    self.barChart.isAnimated = NO;
+//    self.barChart.separateLineStyle = kLineStyleDashLine;
+//    self.barChart.separateLineDashPhase = 0.f;
+//    self.barChart.separateLineDashPattern = @[@(5), @(5)];
+    
+    
     [self.view addSubview:self.barChart];
     [self.barChart strokePath];
 }

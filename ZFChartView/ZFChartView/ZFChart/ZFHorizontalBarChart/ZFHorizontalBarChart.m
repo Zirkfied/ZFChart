@@ -443,6 +443,9 @@
     self.horizontalAxis.isShowAxisArrows = self.isShowAxisArrows;
     self.horizontalAxis.valueType = self.valueType;
     self.horizontalAxis.numberOfDecimal = self.numberOfDecimal;
+    self.horizontalAxis.separateLineStyle = self.separateLineStyle;
+    self.horizontalAxis.separateLineDashPhase = self.separateLineDashPhase;
+    self.horizontalAxis.separateLineDashPattern = self.separateLineDashPattern;
     [self.horizontalAxis strokePath];
     [self drawBar:self.horizontalAxis.yLineValueArray];
     [self setValueLabelOnChart:self.horizontalAxis.yLineValueArray];

@@ -25,6 +25,9 @@
     _isShowAxisLineValue = YES;
     _isShowAxisArrows = YES;
     _numberOfDecimal = 1;
+    _separateLineStyle = kLineStyleRealLine;
+    _separateLineDashPhase = 0.f;
+    _separateLineDashPattern = @[@(2), @(2)];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{

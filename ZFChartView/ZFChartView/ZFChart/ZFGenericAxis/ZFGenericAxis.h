@@ -82,6 +82,13 @@
 /** 小数位数(默认为显示1位小数，当 kValueType = kValueTypeDecimal，该属性才有效) */
 @property (nonatomic, assign) NSInteger numberOfDecimal;
 
+/** 分割线线条样式(默认为kLineStyleRealLine) */
+@property (nonatomic, assign) kLineStyle separateLineStyle;
+/** 分割线在第一个虚线绘制的时候跳过多少个点(默认为0.f) */
+@property (nonatomic, assign) CGFloat separateLineDashPhase;
+/** 分割线虚线交替绘制参数(默认为  @[@(2), @(2)]  ) */
+@property (nonatomic, strong) NSArray<NSNumber *> * separateLineDashPattern;
+
 
 #warning message - readonly(只读)
 /** 获取坐标轴起点x值 */

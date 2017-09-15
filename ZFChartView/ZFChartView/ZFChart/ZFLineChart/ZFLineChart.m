@@ -515,6 +515,9 @@
     self.genericAxis.isShowAxisArrows = self.isShowAxisArrows;
     self.genericAxis.valueType = self.valueType;
     self.genericAxis.numberOfDecimal = self.numberOfDecimal;
+    self.genericAxis.separateLineStyle = self.separateLineStyle;
+    self.genericAxis.separateLineDashPhase = self.separateLineDashPhase;
+    self.genericAxis.separateLineDashPattern = self.separateLineDashPattern;
     [self.genericAxis strokePath];
     [self drawCircle];
     [self drawLine];

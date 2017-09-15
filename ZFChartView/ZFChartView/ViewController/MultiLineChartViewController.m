@@ -39,7 +39,7 @@
     self.lineChart.delegate = self;
     self.lineChart.topicLabel.text = @"xx小学各年级男女人数";
     self.lineChart.unit = @"人";
-    self.lineChart.topicLabel.textColor = ZFWhite;
+//    self.lineChart.topicLabel.textColor = ZFWhite;
 //    self.lineChart.isShowXLineSeparate = YES;
     self.lineChart.isShowYLineSeparate = YES;
 //    self.lineChart.isAnimated = NO;
