@@ -46,6 +46,9 @@
     _overMaxValueCircleColor = ZFRed;
     _lineWidth = 2.f;
     _linePatternType = kLinePatternTypeSharp;
+    _lineStyle = kLineStyleRealLine;
+    _lineDashPhase = 0.f;
+    _lineDashPattern = @[@(10), @(5)];
     self.shadowColor = ZFLightGray;
 }
 
@@ -277,6 +280,11 @@
     layer.lineWidth = _lineWidth;
     layer.isShadow = _isShadow;
     layer.opacity = self.opacity;
+    
+    if (_lineStyle == kLineStyleDashLine) {
+        layer.lineDashPhase = _lineDashPhase;
+        layer.lineDashPattern = _lineDashPattern;
+    }
     
     return layer;
 }

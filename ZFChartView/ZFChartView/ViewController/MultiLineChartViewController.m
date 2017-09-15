@@ -50,13 +50,16 @@
 //    self.lineChart.valueLabelPattern = kPopoverLabelPatternBlank;
 //    self.lineChart.valueCenterToCircleCenterPadding = 0;
 //    self.lineChart.separateColor = ZFYellow;
-//    self.lineChart.linePatternType = kLinePatternTypeForCurve;
+//    self.lineChart.linePatternType = kLinePatternTypeCurve;
 //    self.lineChart.unitColor = ZFWhite;
 //    self.lineChart.backgroundColor = ZFPurple;
 //    self.lineChart.xAxisColor = ZFWhite;
 //    self.lineChart.yAxisColor = ZFWhite;
 //    self.lineChart.axisLineNameColor = ZFWhite;
 //    self.lineChart.axisLineValueColor = ZFWhite;
+//    self.lineChart.lineStyle = kLineStyleDashLine;
+//    self.lineChart.lineDashPhase = 0.f;
+//    self.lineChart.lineDashPattern = @[@(5), @(5)];
     self.lineChart.xLineNameLabelToXAxisLinePadding = 40;
     [self.view addSubview:self.lineChart];
     [self.lineChart strokePath];

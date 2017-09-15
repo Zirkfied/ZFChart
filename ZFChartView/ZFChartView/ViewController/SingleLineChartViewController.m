@@ -46,6 +46,9 @@
     self.lineChart.isShowXLineSeparate = YES;
     self.lineChart.isShowYLineSeparate = YES;
     self.lineChart.linePatternType = kLinePatternTypeCurve;
+    self.lineChart.lineStyle = kLineStyleDashLine;
+//    self.lineChart.lineDashPhase = 0.f;
+//    self.lineChart.lineDashPattern = @[@(5), @(5)];
 //    self.lineChart.isShowAxisLineValue = NO;
 //    self.lineChart.valueCenterToCircleCenterPadding = 0;    
     

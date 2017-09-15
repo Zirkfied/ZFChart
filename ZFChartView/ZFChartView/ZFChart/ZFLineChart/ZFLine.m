@@ -35,7 +35,7 @@
 }
 
 + (instancetype)lineWithValuePointArray:(NSMutableArray *)valuePointArray isAnimated:(BOOL)isAnimated shadowColor:(UIColor *)shadowColor linePatternType:(kLinePatternType)linePatternType padding:(CGFloat)padding{
-    return [[ZFLine alloc] initWithValuePointArray:valuePointArray isAnimated:isAnimated shadowColor:shadowColor linePatternType:linePatternType  padding:padding];
+    return [[ZFLine alloc] initWithValuePointArray:valuePointArray isAnimated:isAnimated shadowColor:shadowColor linePatternType:linePatternType padding:padding];
 }
 
 - (instancetype)initWithValuePointArray:(NSMutableArray *)valuePointArray isAnimated:(BOOL)isAnimated shadowColor:(UIColor *)shadowColor linePatternType:(kLinePatternType)linePatternType padding:(CGFloat)padding{
@@ -109,7 +109,7 @@
                 [bezier addLineToPoint:CGPointMake([point[ZFLineChartXPos] floatValue], [point[ZFLineChartYPos] floatValue])];
             }
         }
-        
+
         return bezier;
     }
     
@@ -220,15 +220,6 @@
             attribute.pointArray = [NSMutableArray arrayWithArray:self.subArray];
             //a.a.a
             if ([previousPoint1[ZFLineChartIsHeightEqualZero] boolValue] == [currentPoint[ZFLineChartIsHeightEqualZero] boolValue] && [previousPoint2[ZFLineChartIsHeightEqualZero] boolValue] == [currentPoint[ZFLineChartIsHeightEqualZero] boolValue]) {
-                //当高度为0
-                if ([currentPoint[ZFLineChartIsHeightEqualZero] boolValue]) {
-                    attribute.isCurve = NO;
-                }else{
-                    attribute.isCurve = YES;
-                }
-                
-                //a.b.b
-            }else if (![previousPoint1[ZFLineChartIsHeightEqualZero] boolValue] == [currentPoint[ZFLineChartIsHeightEqualZero] boolValue] && [previousPoint2[ZFLineChartIsHeightEqualZero] boolValue] == [currentPoint[ZFLineChartIsHeightEqualZero] boolValue]){
                 //当高度为0
                 if ([currentPoint[ZFLineChartIsHeightEqualZero] boolValue]) {
                     attribute.isCurve = NO;

@@ -88,6 +88,12 @@
 @property (nonatomic, strong) UIColor * overMaxValueCircleColor;
 /** 线样式(默认为kLinePatternTypeForSharp) */
 @property (nonatomic, assign) kLinePatternType linePatternType;
+/** 线条样式(默认为kLineStyleRealLine) */
+@property (nonatomic, assign) kLineStyle lineStyle;
+/** 在第一个虚线绘制的时候跳过多少个点(默认为0.f) */
+@property (nonatomic, assign) CGFloat lineDashPhase;
+/** 虚线交替绘制参数(默认为  @[@(15), @(10)]  ) */
+@property (nonatomic, strong) NSArray<NSNumber *> * lineDashPattern;
 
 
 #pragma mark - public method

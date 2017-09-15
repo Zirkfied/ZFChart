@@ -11,12 +11,20 @@
 #import "ZFConst.h"
 
 /**
- *  波浪图样式
+ *  线状图样式
  */
 typedef enum{
     kLinePatternTypeSharp = 0,   //直线样式(默认样式)
     kLinePatternTypeCurve = 1    //曲线样式
 }kLinePatternType;
+
+/**
+ *  线状图线条样式
+ */
+typedef enum{
+    kLineStyleRealLine = 0,   //实线(默认样式)
+    kLineStyleDashLine = 1    //虚线
+}kLineStyle;
 
 @interface ZFLine : CAShapeLayer
 
