@@ -36,11 +36,16 @@ typedef enum{
 /** 是否带动画显示(默认为YES，带动画) */
 @property (nonatomic, assign) BOOL isAnimated;
 
+/** 最后一个关闭区域是否垂直关闭  Riber添加 适用于kWavePatternTypeSharp样式*/
+@property (nonatomic, assign) BOOL isVerticalClose;
+
 #pragma mark - public method
 
 /**
  *  重绘
  */
 - (void)strokePath;
+
+
 
 @end

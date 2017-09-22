@@ -99,12 +99,22 @@
                     [subBezier addLineToPoint:CGPointMake([currentPoint[ZFWaveChartXPos] floatValue], [currentPoint[ZFWaveChartYPos] floatValue])];
                 }
             }
+            
             //判断绘画直线还是曲线
             subBezier = attribute.isCurve ? [subBezier smoothedPathWithGranularity:_padding] : subBezier;
             [bezier appendPath:subBezier];
             
             UIBezierPath * closeBezier = [UIBezierPath bezierPath];
-            [closeBezier moveToPoint:CGPointMake(self.frame.size.width, self.frame.size.height)];
+
+            if (_isVerticalClose) {
+                NSDictionary * lastPoint = [attribute.pointArray lastObject];
+                [closeBezier moveToPoint:CGPointMake([lastPoint[ZFWaveChartXPos] floatValue], self.frame.size.height)];
+            } 
+            else
+            {
+                [closeBezier moveToPoint:CGPointMake(self.frame.size.width, self.frame.size.height)];
+            }
+            
             [closeBezier addLineToPoint:CGPointMake(0, self.frame.size.height)];
             [bezier appendPath:closeBezier];
         }
@@ -118,8 +128,18 @@
             NSDictionary * point = _valuePointArray[i];
             [bezier addLineToPoint:CGPointMake([point[ZFWaveChartXPos] floatValue], [point[ZFWaveChartYPos] floatValue])];
         }
-    
-        [bezier addLineToPoint:CGPointMake(self.frame.size.width, self.frame.size.height)];
+        
+        if (_isVerticalClose) {
+            NSDictionary * lastPoint = [_valuePointArray lastObject];
+            [bezier addLineToPoint:CGPointMake([lastPoint[ZFWaveChartXPos] floatValue], self.frame.size.height)];
+        }
+        else
+        {
+            [bezier addLineToPoint:CGPointMake(self.frame.size.width, self.frame.size.height)];
+        }
+
+        
+        
         [bezier closePath];
         return bezier;
     }
