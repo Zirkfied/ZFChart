@@ -409,6 +409,9 @@
             [layer removeAllAnimations];
             [layer removeFromSuperlayer];
         }
+        if ([layer.name isEqualToString:@"gradientLayer"]) {
+            [layer removeFromSuperlayer];
+        }
     }
 }
 
