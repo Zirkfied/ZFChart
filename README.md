@@ -501,6 +501,8 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         2017.09.15 ①线状图(ZFLineChart)新增虚线样式(DashLine)以及相关参数属性, 具体代码查看Demo
                    ②坐标轴分割线新增虚线样式(DashLine)以及相关参数属性, 具体代码查看Demo
                    ③修复线状图(ZFLineChart)的一个小BUG
+                   
+        2017.10.20 ①修复线状图(ZFLineChart)渐变色图层重绘时旧图层不移除BUG
 
 
                    
