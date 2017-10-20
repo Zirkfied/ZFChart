@@ -121,6 +121,7 @@
  */
 - (CALayer *)lineGradientColor{
     CALayer * layer = [CALayer layer];
+    layer.name = ZFLineChartGradientLayer;
     CAGradientLayer * gradientLayer = [CAGradientLayer layer];
     gradientLayer.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
     gradientLayer.colors = _gradientAttribute.colors;

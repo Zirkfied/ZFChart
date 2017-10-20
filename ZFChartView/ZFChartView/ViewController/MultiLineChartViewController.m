@@ -176,4 +176,10 @@
     [self.lineChart strokePath];
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [super touchesBegan:touches withEvent:event];
+    
+    [self.lineChart strokePath];
+}
+
 @end

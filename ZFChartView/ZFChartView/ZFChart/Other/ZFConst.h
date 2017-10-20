@@ -151,6 +151,11 @@ extern NSString * const ZFLineChartYPos;
 extern NSString * const ZFLineChartIsHeightEqualZero;
 
 /**
+ *  线状图渐变色图层标识
+ */
+extern NSString * const ZFLineChartGradientLayer;
+
+/**
  *  波浪图路径x点标识
  */
 extern NSString * const ZFWaveChartXPos;

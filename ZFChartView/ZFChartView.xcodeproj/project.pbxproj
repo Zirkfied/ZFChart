@@ -783,8 +783,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: xuefeng deng (QZ7Y6658V7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: xuefeng deng (QZ7Y6658V7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = CXCDY7CVCC;
@@ -807,7 +807,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "9999bd0c-0bcb-44a2-831d-2c2f65d1304c";
+				PROVISIONING_PROFILE = "ef901adb-2309-489f-9a7c-f6b8b8272106";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -832,8 +832,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: xuefeng deng (QZ7Y6658V7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: xuefeng deng (QZ7Y6658V7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CXCDY7CVCC;
@@ -849,7 +849,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "9999bd0c-0bcb-44a2-831d-2c2f65d1304c";
+				PROVISIONING_PROFILE = "ef901adb-2309-489f-9a7c-f6b8b8272106";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -860,15 +860,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: xuefeng deng (QZ7Y6658V7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: xuefeng deng (QZ7Y6658V7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = W6629ZPGR7;
 				INFOPLIST_FILE = ZFChartView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Zirkfied.ZFChartView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9493096f-3f06-46d6-9492-87c4c7644296";
+				PROVISIONING_PROFILE = "5a1228da-83c8-46aa-a5bb-125b84f3e215";
 				PROVISIONING_PROFILE_SPECIFIER = iOS_Wildcard_Provisioning_Profile_Development;
 			};
 			name = Debug;
@@ -877,15 +878,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: xuefeng deng (QZ7Y6658V7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: xuefeng deng (QZ7Y6658V7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = W6629ZPGR7;
 				INFOPLIST_FILE = ZFChartView/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Zirkfied.ZFChartView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "253f64d3-d574-4600-8040-e876d9c5abb7";
+				PROVISIONING_PROFILE = "ef901adb-2309-489f-9a7c-f6b8b8272106";
 				PROVISIONING_PROFILE_SPECIFIER = iOS_Wildcard_Provisioning_Profile_Development;
 			};
 			name = Release;

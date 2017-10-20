@@ -409,6 +409,10 @@
             [layer removeAllAnimations];
             [layer removeFromSuperlayer];
         }
+        
+        if ([layer.name isEqualToString:ZFLineChartGradientLayer]) {
+            [layer removeFromSuperlayer];
+        }
     }
 }
 
