@@ -76,6 +76,16 @@ extern CGFloat const ZFAxisLinePaddingForBarLength;
 extern CGFloat const ZFAxisLineGapFromAxisLineMaxValueToArrow;
 
 /**
+ *  x轴右边屏幕保留距离(竖向)
+ */
+extern CGFloat const ZFAxisXLineRightGapVertical;
+
+/**
+ *  x轴右边屏幕保留距离(横向)
+ */
+extern CGFloat const ZFAxisXLineRightGapHorizontal;
+
+/**
  *  坐标轴分段线长度
  */
 extern CGFloat const ZFAxisLineSectionLength;

@@ -36,7 +36,7 @@
  *  初始化默认变量
  */
 - (void)commonInit{
-    _xLineRightGap = _direction == kAxisDirectionVertical ? 20.f : 40.f;
+    _xLineRightGap = _direction == kAxisDirectionVertical ? ZFAxisXLineRightGapVertical : ZFAxisXLineRightGapHorizontal;
     _xLineWidth = self.frame.size.width - ZFAxisLineStartXPos - _xLineRightGap;
     _xLineHeight = 1.f;
     
