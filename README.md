@@ -503,6 +503,8 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
                    ③修复线状图(ZFLineChart)的一个小BUG
                    
         2017.10.20 ①修复线状图(ZFLineChart)渐变色图层重绘时旧图层不移除BUG
+        
+        2017.12.11 ①柱状图(ZFBarChart) 和 横向柱状图(ZFHorizontalBarChart) 新增isMultipleColorInSingleBarChart属性，该属性的作用在只有一组数据的情况下，bar是否开启独立颜色(默认为NO，该属性只在singleBarChart情况下有效)
 
 
                    
