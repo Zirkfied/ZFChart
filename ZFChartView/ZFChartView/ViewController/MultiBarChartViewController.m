@@ -116,21 +116,21 @@
     gradientAttribute1.locations = @[@(0.5), @(0.99)];
     gradientAttribute1.startPoint = CGPointMake(0, 0.5);
     gradientAttribute1.endPoint = CGPointMake(1, 0.5);
-    
+
     //该组第2个bar渐变色
     ZFGradientAttribute * gradientAttribute2 = [[ZFGradientAttribute alloc] init];
     gradientAttribute2.colors = @[(id)ZFGold.CGColor, (id)ZFWhite.CGColor];
     gradientAttribute2.locations = @[@(0.5), @(0.99)];
     gradientAttribute2.startPoint = CGPointMake(0, 0.5);
     gradientAttribute2.endPoint = CGPointMake(1, 0.5);
-    
+
     //该组第3个bar渐变色
     ZFGradientAttribute * gradientAttribute3 = [[ZFGradientAttribute alloc] init];
     gradientAttribute3.colors = @[(id)ZFColor(16, 140, 39, 1).CGColor, (id)ZFWhite.CGColor];
     gradientAttribute3.locations = @[@(0.5), @(0.99)];
     gradientAttribute3.startPoint = CGPointMake(0, 0.5);
     gradientAttribute3.endPoint = CGPointMake(1, 0.5);
-    
+
     return [NSArray arrayWithObjects:gradientAttribute1, gradientAttribute2, gradientAttribute3, nil];
 }
 

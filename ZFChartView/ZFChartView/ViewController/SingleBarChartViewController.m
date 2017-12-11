@@ -57,6 +57,7 @@
 //    self.barChart.backgroundColor = ZFPurple;
 //    self.barChart.isShowAxisArrows = NO;
     self.barChart.separateLineStyle = kLineStyleDashLine;
+//    self.barChart.isMultipleColorInSingleBarChart = YES;
 //    self.barChart.separateLineDashPhase = 0.f;
 //    self.barChart.separateLineDashPattern = @[@(5), @(5)];
     
@@ -74,9 +75,11 @@
     return @[@"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级"];
 }
 
-- (NSArray *)colorArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[ZFMagenta];
-}
+//- (NSArray *)colorArrayInGenericChart:(ZFGenericChart *)chart{
+//    return @[ZFMagenta];
+//    
+////    return @[ZFRandom, ZFRandom, ZFRandom, ZFRandom, ZFRandom, ZFRandom];
+//}
 
 - (CGFloat)axisLineMaxValueInGenericChart:(ZFGenericChart *)chart{
     return 500;
@@ -116,7 +119,7 @@
     ZFGradientAttribute * gradientAttribute = [[ZFGradientAttribute alloc] init];
     gradientAttribute.colors = @[(id)ZFRed.CGColor, (id)ZFWhite.CGColor];
     gradientAttribute.locations = @[@(0.5), @(0.99)];
-    
+
     return [NSArray arrayWithObjects:gradientAttribute, nil];
 }
 

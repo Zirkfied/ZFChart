@@ -91,9 +91,9 @@
             //当前数值超过y轴显示上限时，柱状改为红色
             if ([self.genericAxis.xLineValueArray[i] floatValue] / self.genericAxis.yLineMaxValue <= 1) {
                 bar.percent = ([self.genericAxis.xLineValueArray[i] floatValue] - self.genericAxis.yLineMinValue) / (self.genericAxis.yLineMaxValue - self.genericAxis.yLineMinValue);
-                bar.barColor = _colorArray.firstObject;
-                
+                bar.barColor = !_isMultipleColorInSingleBarChart ? _colorArray.firstObject : _colorArray[bar.barIndex];
                 bar.isOverrun = NO;
+                
             }else{
                 bar.percent = 1.f;
                 bar.barColor = _overMaxValueBarColor;
@@ -134,6 +134,7 @@
                     bar.percent = ([valueArray[groupIndex][barIndex] floatValue] - self.genericAxis.yLineMinValue) / (self.genericAxis.yLineMaxValue - self.genericAxis.yLineMinValue);
                     bar.barColor = _colorArray[groupIndex];
                     bar.isOverrun = NO;
+                    
                 }else{
                     bar.percent = 1.f;
                     bar.barColor = _overMaxValueBarColor;
@@ -257,9 +258,20 @@
 #pragma mark - 重置Bar原始设置
 
 - (void)resetBar:(ZFBar *)sender popoverLabel:(ZFPopoverLabel *)label{
+    id subObject = self.genericAxis.xLineValueArray.firstObject;
+    
     for (ZFBar * bar in self.barArray) {
         if (bar != sender) {
-            bar.barColor = bar.isOverrun ? _overMaxValueBarColor : _colorArray[bar.groupIndex];
+            if ([subObject isKindOfClass:[NSString class]]) {
+                if (bar.isOverrun) {
+                    bar.barColor = _overMaxValueBarColor;
+                }else{
+                    bar.barColor = !_isMultipleColorInSingleBarChart ? _colorArray.firstObject : _colorArray[bar.barIndex];
+                }
+            }else if ([subObject isKindOfClass:[NSArray class]]){
+                bar.barColor = bar.isOverrun ? _overMaxValueBarColor : _colorArray[bar.groupIndex];
+            }
+            
             bar.isAnimated = NO;
             bar.opacity = self.opacity;
             [bar strokePath];

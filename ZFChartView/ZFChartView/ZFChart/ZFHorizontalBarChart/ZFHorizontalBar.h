@@ -35,6 +35,8 @@
 @property (nonatomic, assign) NSInteger groupIndex;
 /** self在该组数据的下标位置 */
 @property (nonatomic, assign) NSInteger barIndex;
+/** 记录数据是否超出上限 */
+@property (nonatomic, assign) BOOL isOverrun;
 
 
 #warning message - readonly(只读)

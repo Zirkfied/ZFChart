@@ -78,6 +78,8 @@
 @property (nonatomic, strong) UIColor * overMaxValueBarColor;
 /** valueLabel到bar的距离(默认为5.f) */
 @property (nonatomic, assign) CGFloat valueLabelToBarPadding;
+/** 在只有一组数据的情况下，bar是否开启独立颜色(默认为NO，该属性只在singleBarChart情况下有效) */
+@property (nonatomic, assign) BOOL isMultipleColorInSingleBarChart;
 
 #pragma mark - public method
 

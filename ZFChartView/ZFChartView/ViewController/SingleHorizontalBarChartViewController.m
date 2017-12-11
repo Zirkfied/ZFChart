@@ -55,6 +55,7 @@
 //    self.barChart.separateLineStyle = kLineStyleDashLine;
 //    self.barChart.separateLineDashPhase = 0.f;
 //    self.barChart.separateLineDashPattern = @[@(5), @(5)];
+//    self.barChart.isMultipleColorInSingleBarChart = YES;
     
     
     [self.view addSubview:self.barChart];
@@ -64,23 +65,17 @@
 #pragma mark - ZFGenericChartDataSource
 
 - (NSArray *)valueArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[@"123", @"256", @"300", @"283", @"490", @"236",
-             @"123", @"256", @"300", @"283", @"490", @"236",
-             @"123", @"256", @"300", @"283", @"490", @"236",
-             @"123", @"256", @"300", @"283", @"490", @"236",
-             @"123", @"256", @"300", @"283", @"490", @"236"];
+    return @[@"123", @"256", @"300", @"283", @"490", @"236"];
 }
 
 - (NSArray *)nameArrayInGenericChart:(ZFGenericChart *)chart{
-    return @[@"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级",
-             @"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级",
-             @"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级",
-             @"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级",
-             @"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级"];
+    return @[@"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级"];
 }
 
 //- (NSArray *)colorArrayInGenericChart:(ZFGenericChart *)chart{
 //    return @[ZFMagenta];
+//    
+////    return @[ZFRandom, ZFRandom, ZFRandom, ZFRandom, ZFRandom, ZFRandom];
 //}
 
 - (CGFloat)axisLineMaxValueInGenericChart:(ZFGenericChart *)chart{
@@ -125,7 +120,7 @@
     ZFGradientAttribute * gradientAttribute = [[ZFGradientAttribute alloc] init];
     gradientAttribute.colors = @[(id)ZFMagenta.CGColor, (id)ZFWhite.CGColor];
     gradientAttribute.locations = @[@(0.0), @(0.9)];
-    
+
     return [NSArray arrayWithObjects:gradientAttribute, nil];
 }
 

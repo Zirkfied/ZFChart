@@ -84,6 +84,8 @@
 @property (nonatomic, assign) BOOL isShadow;
 /** 超过y轴显示最大值时柱状条bar颜色(默认为红色) */
 @property (nonatomic, strong) UIColor * overMaxValueBarColor;
+/** 在只有一组数据的情况下，bar是否开启独立颜色(默认为NO，该属性只在singleBarChart情况下有效) */
+@property (nonatomic, assign) BOOL isMultipleColorInSingleBarChart;
 
 
 #pragma mark - public method
