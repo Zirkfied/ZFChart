@@ -16,6 +16,8 @@
 
 @interface ZFPieChart()
 
+/** 存储title的数组 */
+@property (nonatomic, strong) NSMutableArray <NSString *>* titleArray;
 /** 存储value的数组 */
 @property (nonatomic, strong) NSMutableArray * valueArray;
 /** 存储颜色的数组 */
@@ -171,7 +173,9 @@
 - (void)strokePath{
     [self removeAllSubLayers];
     [self removeZFTranslucencePath];
-    
+    if ([self.dataSource respondsToSelector:@selector(titleArrayInPieChart:)]) {
+        self.titleArray = [NSMutableArray arrayWithArray:[self.dataSource titleArrayInPieChart:self]];
+    }
     if ([self.dataSource respondsToSelector:@selector(valueArrayInPieChart:)]) {
         self.valueArray = [NSMutableArray arrayWithArray:[self.dataSource valueArrayInPieChart:self]];
         
@@ -354,8 +358,13 @@
  */
 - (void)creatPercentLabel:(NSInteger)i{
     NSString * string = [self getPercent:i];
+    if (i < self.titleArray.count) {
+        NSString * title = self.titleArray[i];
+        string = [NSString stringWithFormat:@"%@\n%@", string ,title];
+    }
     CGRect rect = [string stringWidthRectWithSize:CGSizeMake(0, 0) font:_percentOnChartFont];
     UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
+    label.numberOfLines = 0;
     label.text = string;
     label.alpha = 0.f;
     label.textAlignment = NSTextAlignmentCenter;
