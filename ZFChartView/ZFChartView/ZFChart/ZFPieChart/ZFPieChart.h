@@ -28,6 +28,14 @@
  */
 - (NSArray *)colorArrayInPieChart:(ZFPieChart *)pieChart;
 
+/**
+ *  value标题
+ *
+ *  @return NSArray必须存储NSString类型
+ */
+
+- (NSArray <NSString *> *)titleArrayInPieChart:(ZFPieChart *)pieChart;
+
 @end
 
 

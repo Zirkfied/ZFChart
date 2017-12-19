@@ -38,7 +38,7 @@
     self.pieChart = [[ZFPieChart alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, _height)];
     self.pieChart.dataSource = self;
     self.pieChart.delegate = self;
-//    self.pieChart.piePatternType = kPieChartPatternTypeForCircle;
+    self.pieChart.piePatternType = kPieChartPatternTypeCircle;
 //    self.pieChart.percentType = kPercentTypeInteger;
 //    self.pieChart.isShadow = NO;
 //    self.pieChart.isAnimated = NO;
@@ -47,6 +47,9 @@
 }
 
 #pragma mark - ZFPieChartDataSource
+- (NSArray <NSString *> *)titleArrayInPieChart:(ZFPieChart *)pieChart{
+    return @[@"apple", @"suns", @"Mi", @"meizu", @"oppo", @"vivo"];
+}
 
 - (NSArray *)valueArrayInPieChart:(ZFPieChart *)chart{
     return @[@"50", @"256", @"300", @"283", @"490", @"236"];
