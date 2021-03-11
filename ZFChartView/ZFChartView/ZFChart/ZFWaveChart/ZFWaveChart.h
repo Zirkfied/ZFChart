@@ -58,7 +58,7 @@
 @property (nonatomic, strong) UIColor * overMaxValueTextColor;
 /** 图表上value位置(默认为kChartValuePositionDefalut) */
 @property (nonatomic, assign) kChartValuePosition valuePosition;
-/** 波浪样式(默认为kWavePatternTypeForCurve) */
+/** 波浪样式(默认为kWavePatternTypeCurve) */
 @property (nonatomic, assign) kWavePatternType wavePatternType;
 /** valueLabel到波浪线的距离(默认为0.f) */
 @property (nonatomic, assign) CGFloat valueLabelToWaveLinePadding;

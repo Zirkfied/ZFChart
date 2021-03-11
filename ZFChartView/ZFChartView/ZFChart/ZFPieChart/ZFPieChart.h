@@ -19,14 +19,14 @@
  *
  *  @return NSArray必须存储NSString类型
  */
-- (NSArray *)valueArrayInPieChart:(ZFPieChart *)pieChart;
+- (NSArray<NSString *> *)valueArrayInPieChart:(ZFPieChart *)pieChart;
 
 /**
  *  颜色数组
  *
  *  @return NSArray必须存储UIColor类型
  */
-- (NSArray *)colorArrayInPieChart:(ZFPieChart *)pieChart;
+- (NSArray<UIColor *> *)colorArrayInPieChart:(ZFPieChart *)pieChart;
 
 @end
 
@@ -42,7 +42,7 @@
  *
  *  @return 半径
  */
-- (CGFloat)radiusForPieChart:(ZFPieChart *)pieChart;
+- (CGFloat)radiusInPieChart:(ZFPieChart *)pieChart;
 
 
 
@@ -66,7 +66,7 @@
  *  (若不设置，默认平均分2段)
  *  (e.g. radius为100，把半径平均分成4段，则圆环的线宽为100 * (1 / 4), 即25)
  *
- *  (PS:此方法对 整圆(kPieChartPatternTypeForCircle)类型 无效)
+ *  (PS:此方法对 整圆(kPieChartPatternTypeCircle)类型 无效)
  *
  *  @return 设置半径平均段数(可以为小数, 返回的值必须大于1，当<=1时则自动返回默认值)
  */
@@ -93,7 +93,7 @@ typedef enum{
 /** 图表上百分比字体大小 */
 @property (nonatomic, strong) UIFont * percentOnChartFont;
 
-/** 饼图样式(若不设置，默认为kPieChartPatternTypeForCirque(圆环样式)) */
+/** 饼图样式(若不设置，默认为kPieChartPatternTypeCirque(圆环样式)) */
 @property (nonatomic, assign) kPiePatternType piePatternType;
 /** kPercentType类型 */
 @property (nonatomic, assign) kPercentType percentType;

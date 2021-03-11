@@ -26,13 +26,13 @@ typedef enum{
 /** 雷达图分割线线宽(默认1.f) */
 @property (nonatomic, assign) CGFloat separateLineWidth;
 /** 雷达蒙版顶点半径(默认5.f) */
-@property (nonatomic, assign) CGFloat raderPeakRadius;
+@property (nonatomic, assign) CGFloat radarPeakRadius;
 /** 分段数 */
 @property (nonatomic, assign) NSUInteger sectionCount;
-/** 雷达边线颜色 */
+/** 雷达边线颜色((默认为ZFLightGray)) */
 @property (nonatomic, strong) UIColor * radarLineColor;
-/** 雷达背景颜色 */
-@property (nonatomic, strong) UIColor * radarBackgroundColor;
+/** 雷达蒙版背景颜色数组 */
+@property (nonatomic, strong) NSMutableArray<UIColor *> * radarBackgroundColorArray;
 /** 雷达顶点颜色(默认为白色) */
 @property (nonatomic, strong) UIColor * radarPeakColor;
 /** 是否显示雷达图分割线(默认为YES) */
@@ -51,6 +51,8 @@ typedef enum{
 @property (nonatomic, assign, readonly) CGFloat averageRadarAngle;
 /** 半径平均分成n段的长度 */
 @property (nonatomic, assign, readonly) CGFloat averageRadius;
+/** 最外层雷达蒙版的半径 */
+@property (nonatomic, assign, readonly) CGFloat outermostRadarRadius;
 
 
 #pragma mark - public method

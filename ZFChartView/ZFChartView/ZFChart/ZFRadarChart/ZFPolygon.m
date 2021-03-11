@@ -28,7 +28,9 @@
 /** 获取当前item半径 */
 @property (nonatomic, assign) CGFloat currentRadius;
 /** 存储每个item半径的数组 */
-@property (nonatomic, strong) NSMutableArray * radiusArray;
+@property (nonatomic, strong) NSMutableArray<NSNumber *> * radiusArray;
+/** 存储item point的数组 */
+@property (nonatomic, strong) NSMutableArray * pointArray;
 
 @end
 
@@ -76,6 +78,8 @@
     _currentRadius = [_radiusArray.firstObject floatValue];
     UIBezierPath * bezier = [UIBezierPath bezierPath];
     [bezier moveToPoint:CGPointMake(_polygonCenter.x, _polygonCenter.y - _currentRadius)];
+    //存储多边形开始的棱角point
+    [self.pointArray addObject:[NSValue valueWithCGPoint:CGPointMake(_polygonCenter.x, _polygonCenter.y - _currentRadius)]];
     
     for (NSInteger i = 1; i < _radiusArray.count; i++) {
         _currentRadarAngle = _averageRadarAngle * i;
@@ -104,6 +108,9 @@
         [bezier addLineToPoint:CGPointMake(_endXPos, _endYPos)];
         //记录下一个item开始角度
         _startAngle = _endAngle;
+        
+        //存储多边形各棱角的point,用于画圆点
+        [self.pointArray addObject:[NSValue valueWithCGPoint:CGPointMake(_endXPos, _endYPos)]];
     }
     [bezier closePath];
     return bezier;
@@ -151,6 +158,48 @@
     return shapeLayer;
 }
 
+#pragma mark - item顶点
+
+/**
+ *  画item顶点(开始显示的位置)
+ *
+ *  @return UIBezierPath
+ */
+- (UIBezierPath *)drawStartPeak:(NSInteger)index{
+    UIBezierPath * bezier = [UIBezierPath bezierPathWithArcCenter:_polygonCenter radius:_polygonPeakRadius startAngle:ZFRadian(-90) endAngle:ZFRadian(270) clockwise:YES];
+    return bezier;
+}
+
+/**
+ *  画item顶点(最终显示的位置)
+ *
+ *  @return UIBezierPath
+ */
+- (UIBezierPath *)drawEndPeak:(NSInteger)index{
+    CGPoint endPoint = [self.pointArray[index] CGPointValue];
+
+    UIBezierPath * bezier = [UIBezierPath bezierPathWithArcCenter:endPoint radius:_polygonPeakRadius startAngle:ZFRadian(-90) endAngle:ZFRadian(270) clockwise:YES];
+    return bezier;
+}
+
+/**
+ *  item顶点ShapeLayer
+ *
+ *  @return CAShapeLayer
+ */
+- (CAShapeLayer *)topCircleShapeLayer:(NSInteger)index{
+    CAShapeLayer * shapeLayer = [CAShapeLayer layer];
+    shapeLayer.fillColor = _polygonPeakColor.CGColor;
+    shapeLayer.path = [self drawEndPeak:index].CGPath;
+    
+    if (_isAnimated) {
+        CABasicAnimation * animation = [self polygonPeakAnimation:index];
+        [shapeLayer addAnimation:animation forKey:nil];
+    }
+    
+    return shapeLayer;
+}
+
 #pragma mark - 动画
 
 /**
@@ -166,6 +215,21 @@
     fillAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     fillAnimation.fromValue = (__bridge id)[self noFill].CGPath;
     fillAnimation.toValue = (__bridge id)[self fill].CGPath;
+    
+    return fillAnimation;
+}
+
+/**
+ *  顶点动画
+ */
+- (CABasicAnimation *)polygonPeakAnimation:(NSInteger)i{
+    CABasicAnimation * fillAnimation = [CABasicAnimation animationWithKeyPath:@"path"];
+    fillAnimation.duration = _animationDuration;
+    fillAnimation.fillMode = kCAFillModeForwards;
+    fillAnimation.removedOnCompletion = NO;
+    fillAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    fillAnimation.fromValue = (__bridge id)[self drawStartPeak:i].CGPath;
+    fillAnimation.toValue = (__bridge id)[self drawEndPeak:i].CGPath;
     
     return fillAnimation;
 }
@@ -189,9 +253,16 @@
  *  重绘
  */
 - (void)strokePath{
+    [self.pointArray removeAllObjects];
     [self removeAllSubLayers];
     [self.layer addSublayer:[self polygonFillShapelayer]];
     _isShowPolygonLine ? [self.layer addSublayer:[self polygonStrokeShapelayer]] : nil;
+    
+    if (_isShowPolygonPeak) {
+        for (NSInteger i = 0; i < self.pointArray.count; i++) {
+            [self.layer addSublayer:[self topCircleShapeLayer:i]];
+        }
+    }
 }
 
 #pragma mark - 重写setter, getter方法
@@ -215,7 +286,14 @@
 
 #pragma mark - 懒加载
 
-- (NSMutableArray *)radiusArray{
+- (NSMutableArray *)pointArray{
+    if (!_pointArray) {
+        _pointArray = [NSMutableArray array];
+    }
+    return _pointArray;
+}
+
+- (NSMutableArray<NSNumber *> *)radiusArray{
     if (!_radiusArray) {
         _radiusArray = [NSMutableArray array];
     }

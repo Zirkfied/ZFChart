@@ -65,7 +65,7 @@
              @"123", @"256", @"-157", @"350", @"490", @"236"];
 }
 
-- (NSArray *)nameArrayInGenericChart:(ZFGenericChart *)chart{
+- (NSArray<NSString *> *)nameArrayInGenericChart:(ZFGenericChart *)chart{
     return @[@"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级",
              @"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级",
              @"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级",

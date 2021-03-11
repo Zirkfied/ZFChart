@@ -11,6 +11,7 @@
 #import "ZFLabel.h"
 #import "ZFMethod.h"
 #import "NSString+Zirkfied.h"
+#import "NSNumber+Zirkfied.h"
 
 @interface ZFRadarChart()
 
@@ -53,15 +54,16 @@
     _itemTextColor = ZFBlack;
     _valueTextColor = ZFBlack;
     _radarLineColor = ZFLightGray;
-    _radarBackgroundColor = ZFClear;
     _radarPeakColor = ZFWhite;
+    _polygonPeakColor = ZFWhite;
     _radarLineWidth = 1.f;
     _separateLineWidth = 1.f;
     _polygonLineWidth = 1.f;
     _radarPeakRadius = 5.f;
+    _polygonPeakRadius = 5.f;
     _itemFont = [UIFont systemFontOfSize:15.f];
     _valueFont = [UIFont systemFontOfSize:10.f];
-    _opacity = 0.3f;
+    _polygonOpacity = 0.3f;
     _isAnimated = YES;
     _finalRotationAngle = 0.f;
     _valueType = kValueTypeInteger;
@@ -71,6 +73,7 @@
     _valueRotationAngle = _valueStartAngle;
     _isShowSeparate = YES;
     _canRotation = YES;
+    _numberOfDecimal = 1;
     self.backgroundColor = ZFWhite;
 }
 
@@ -101,7 +104,7 @@
     id subObject = _valueArray.firstObject;
     //一组数据
     if ([subObject isKindOfClass:[NSString class]]) {
-        CGFloat width = self.radar.radius * 2;
+        CGFloat width = self.radar.outermostRadarRadius * 2;
         CGFloat height = width;
         
         ZFPolygon * polygon = [[ZFPolygon alloc] initWithFrame:CGRectMake(0, 0, width, height)];
@@ -110,20 +113,23 @@
         polygon.averageRadarAngle = self.radar.averageRadarAngle;
         polygon.maxValue = self.maxValue;
         polygon.minValue = self.minValue;
-        polygon.maxRadius = self.radar.radius;
+        polygon.maxRadius = self.radar.outermostRadarRadius;
         polygon.isAnimated = _isAnimated;
         polygon.valueArray = _valueArray;
-        polygon.opacity = _opacity;
+        polygon.opacity = _polygonOpacity;
         polygon.polygonLineColor = _colorArray.firstObject;
         polygon.polygonLineWidth = _polygonLineWidth;
         polygon.isShowPolygonLine = _isShowPolygonLine;
+        polygon.polygonPeakRadius = _polygonPeakRadius;
+        polygon.polygonPeakColor = _polygonPeakColor;
+        polygon.isShowPolygonPeak = _isShowPolygonPeak;
         [self.radar addSubview:polygon];
         [polygon strokePath];
     
     //多组数据
     }else if ([subObject isKindOfClass:[NSArray class]]){
         for (NSInteger i = 0; i < _valueArray.count; i++) {
-            CGFloat width = self.radar.radius * 2;
+            CGFloat width = self.radar.outermostRadarRadius * 2;
             CGFloat height = width;
             
             ZFPolygon * polygon = [[ZFPolygon alloc] initWithFrame:CGRectMake(0, 0, width, height)];
@@ -132,13 +138,16 @@
             polygon.averageRadarAngle = self.radar.averageRadarAngle;
             polygon.maxValue = self.maxValue;
             polygon.minValue = self.minValue;
-            polygon.maxRadius = self.radar.radius;
+            polygon.maxRadius = self.radar.outermostRadarRadius;
             polygon.isAnimated = _isAnimated;
             polygon.valueArray = _valueArray[i];
-            polygon.opacity = _opacity;
+            polygon.opacity = _polygonOpacity;
             polygon.polygonLineColor = _colorArray[i];
             polygon.polygonLineWidth = _polygonLineWidth;
             polygon.isShowPolygonLine = _isShowPolygonLine;
+            polygon.polygonPeakRadius = _polygonPeakRadius;
+            polygon.polygonPeakColor = _polygonPeakColor;
+            polygon.isShowPolygonPeak = _isShowPolygonPeak;
             [self.radar addSubview:polygon];
             [polygon strokePath];
         }
@@ -153,7 +162,7 @@
 - (void)setItemLabelOnChart{
     for (NSInteger i = 0; i < self.radar.itemLabelCenterArray.count; i++) {
         CGPoint labelCenter = [self.radar.itemLabelCenterArray[i] CGPointValue];
-        CGSize size = [self.radar.itemArray[i] stringWidthRectWithSize:CGSizeMake(self.bounds.size.width / 2 - self.radar.radius - 10, self.bounds.size.width / 2 - self.radar.radius - 10) font:_itemFont].size;
+        CGSize size = [self.radar.itemArray[i] stringWidthRectWithSize:CGSizeMake(self.bounds.size.width / 2 - self.radar.outermostRadarRadius - 10, self.bounds.size.width / 2 - self.radar.outermostRadarRadius - 10) font:_itemFont].size;
         
         ZFLabel * itemLabel = [[ZFLabel alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
         itemLabel.center = labelCenter;
@@ -196,7 +205,7 @@
         if (_valueType == kValueTypeInteger) {
             valueString = [NSString stringWithFormat:@"%.0f", valueAverage * i + _minValue];
         }else if (_valueType == kValueTypeDecimal){
-            valueString = [NSString stringWithFormat:@"%@", @(valueAverage * i + _minValue)];
+            valueString = [NSNumber roundOffValue:@(valueAverage * i + _minValue) numberOfdecimal:_numberOfDecimal];
         }
         
         if (_unit) {
@@ -314,8 +323,8 @@
         _minValue = [self.dataSource minValueInRadarChart:self];
     }
     
-    if ([self.delegate respondsToSelector:@selector(radiusForRadarChart:)]) {
-        self.radar.radius = [self.delegate radiusForRadarChart:self];
+    if ([self.delegate respondsToSelector:@selector(radiusInRadarChart:)]) {
+        self.radar.radius = [self.delegate radiusInRadarChart:self];
     }
     
     if ([self.delegate respondsToSelector:@selector(sectionCountInRadarChart:)]) {
@@ -324,15 +333,22 @@
     
     if (self.radar.itemArray) {
         for (NSInteger i = 0; i < self.radar.itemArray.count; i++) {
-            if ([self.delegate respondsToSelector:@selector(radiusExtendLengthForRadarChart:itemIndex:)]) {
-                CGFloat radiusExtendLength = [self.delegate radiusExtendLengthForRadarChart:self itemIndex:i];
+            if ([self.delegate respondsToSelector:@selector(radiusExtendLengthInRadarChart:itemIndex:)]) {
+                CGFloat radiusExtendLength = [self.delegate radiusExtendLengthInRadarChart:self itemIndex:i];
                 [self.radar.radiusExtendLengthArray replaceObjectAtIndex:i withObject:@(radiusExtendLength)];
             }
         }
     }
     
-    if ([self.delegate respondsToSelector:@selector(valueRotationAngleForRadarChart:)]) {
-        _valueRotationAngle = [self.delegate valueRotationAngleForRadarChart:self];
+    if ([self.delegate respondsToSelector:@selector(valueRotationAngleInRadarChart:)]) {
+        _valueRotationAngle = [self.delegate valueRotationAngleInRadarChart:self];
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(radarBackgroundColorArrayInRadarChart:)]) {
+        self.radar.radarBackgroundColorArray = [NSMutableArray arrayWithArray:[self.delegate radarBackgroundColorArrayInRadarChart:self]];
+        
+    } else {
+        self.radar.radarBackgroundColorArray = [NSMutableArray arrayWithObject:ZFClear];
     }
     
     if (_maxValue - _minValue == 0) {
@@ -341,10 +357,9 @@
     
     self.radar.radarPatternType = _radarPatternType;
     self.radar.radarLineColor = _radarLineColor;
-    self.radar.radarBackgroundColor = _radarBackgroundColor;
     self.radar.radarLineWidth = _radarLineWidth;
     self.radar.separateLineWidth = _separateLineWidth;
-    self.radar.raderPeakRadius = _radarPeakRadius;
+    self.radar.radarPeakRadius = _radarPeakRadius;
     self.radar.isShowSeparate = _isShowSeparate;
     self.radar.isShowRadarPeak = _isShowRadarPeak;
     self.radar.radarPeakColor = _radarPeakColor;

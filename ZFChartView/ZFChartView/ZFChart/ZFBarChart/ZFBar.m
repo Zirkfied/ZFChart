@@ -72,7 +72,7 @@
 - (CAShapeLayer *)shapeLayer{
     CAShapeLayer * layer = [CAShapeLayer layer];
     layer.fillColor = _barColor.CGColor;
-    layer.lineCap = kCALineCapRound;
+//    layer.lineCap = kCALineCapRound;
     layer.path = [self fill].CGPath;
     layer.opacity = _opacity;
     

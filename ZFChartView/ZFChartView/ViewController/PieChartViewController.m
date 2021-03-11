@@ -38,7 +38,7 @@
     self.pieChart = [[ZFPieChart alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, _height)];
     self.pieChart.dataSource = self;
     self.pieChart.delegate = self;
-//    self.pieChart.piePatternType = kPieChartPatternTypeForCircle;
+//    self.pieChart.piePatternType = kPieChartPatternTypeCircle;
 //    self.pieChart.percentType = kPercentTypeInteger;
 //    self.pieChart.isShadow = NO;
 //    self.pieChart.isAnimated = NO;
@@ -66,11 +66,11 @@
     return 5.f;
 }
 
-- (CGFloat)radiusForPieChart:(ZFPieChart *)pieChart{
+- (CGFloat)radiusInPieChart:(ZFPieChart *)pieChart{
     return 120.f;
 }
 
-/** 此方法只对圆环类型(kPieChartPatternTypeForCirque)有效 */
+/** 此方法只对圆环类型(kPieChartPatternTypeCirque)有效 */
 - (CGFloat)radiusAverageNumberOfSegments:(ZFPieChart *)pieChart{
     return 2.f;
 }

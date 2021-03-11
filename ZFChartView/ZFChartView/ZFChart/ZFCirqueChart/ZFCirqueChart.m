@@ -145,8 +145,8 @@
         }
     }
     
-    if ([self.delegate respondsToSelector:@selector(radiusForCirqueChart:)]) {
-        _radius = [self.delegate radiusForCirqueChart:self];
+    if ([self.delegate respondsToSelector:@selector(radiusInCirqueChart:)]) {
+        _radius = [self.delegate radiusInCirqueChart:self];
     }
     
     if ([self.delegate respondsToSelector:@selector(paddingForCirqueInCirqueChart:)]) {

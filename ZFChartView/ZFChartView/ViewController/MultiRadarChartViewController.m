@@ -46,8 +46,8 @@
 //    self.radarChart.valueType = kValueTypeDecimal;
     self.radarChart.valueTextColor = ZFDeepPink;
     self.radarChart.radarPatternType = kRadarPatternTypeCircle;
-//    self.radarChart.radarLineColor = ZFBlack;
-//    self.radarChart.radarBackgroundColor = ZFMagenta;
+//    self.radarChart.radarLineColor = ZFClear;
+    self.radarChart.isShowSeparate = NO;
 //    self.radarChart.isShowRadarPeak = YES;
 //    self.radarChart.radarPeakColor = ZFGrassGreen;
 //    self.radarChart.radarPeakRadius = 10.f;
@@ -59,11 +59,16 @@
 
 - (NSArray *)itemArrayInRadarChart:(ZFRadarChart *)radarChart{
     return @[@"item 1", @"item 2", @"item 3", @"item 4", @"item 5", @"item 6", @"item 7", @"item 8"];
+    
+//    return @[@"item 1", @"item 2", @"item 3", @"item 4", @"item 5", @"item 6"];
 }
 
 - (NSArray *)valueArrayInRadarChart:(ZFRadarChart *)radarChart{
     return @[@[@"2", @"5", @"2", @"4.5", @"3.5", @"4", @"4.8", @"2.5"],
              @[@"3.8", @"2", @"4.5", @"4", @"5", @"1.5", @"2.8", @"3.9"]];
+    
+//    return @[@[@"2", @"5", @"2", @"4.5", @"3.5", @"4"],
+//             @[@"3.8", @"2", @"4.5", @"4", @"5", @"1.5"]];
 }
 
 - (NSArray *)colorArrayInRadarChart:(ZFRadarChart *)radarChart{
@@ -80,7 +85,7 @@
 
 #pragma mark - ZFRadarChartDelegate
 
-- (CGFloat)radiusForRadarChart:(ZFRadarChart *)radarChart{
+- (CGFloat)radiusInRadarChart:(ZFRadarChart *)radarChart{
     if ([[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeLeft || [[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeRight){
         return (SCREEN_HEIGHT - 100) / 2;
     }else{
@@ -90,11 +95,20 @@
 //    return 100.f;
 }
 
-//- (NSUInteger)sectionCountInRadarChart:(ZFRadarChart *)radarChart{
-//    return 4;
+//- (NSArray<UIColor *> *)radarBackgroundColorArrayInRadarChart:(ZFRadarChart *)radarChart{
+//    return @[ZFColor(250, 250, 250, 1),
+//             ZFColor(195, 209, 235, 1),
+//             ZFColor(178, 195, 227, 1),
+//             ZFColor(195, 211, 241, 1),
+//             ZFColor(211, 223, 245, 1),
+//             ZFColor(235, 241, 252, 1)];
 //}
 
-//- (CGFloat)radiusExtendLengthForRadarChart:(ZFRadarChart *)radarChart itemIndex:(NSInteger)itemIndex{
+//- (NSUInteger)sectionCountInRadarChart:(ZFRadarChart *)radarChart{
+//    return 6;
+//}
+
+//- (CGFloat)radiusExtendLengthInRadarChart:(ZFRadarChart *)radarChart itemIndex:(NSInteger)itemIndex{
 //    if (itemIndex == 7) {
 //        return 50.f;
 //    }
@@ -102,7 +116,7 @@
 //    return 25.f;
 //}
 
-- (CGFloat)valueRotationAngleForRadarChart:(ZFRadarChart *)radarChart{
+- (CGFloat)valueRotationAngleInRadarChart:(ZFRadarChart *)radarChart{
     return 45.f;
 }
 

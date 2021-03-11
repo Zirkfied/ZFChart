@@ -44,7 +44,7 @@ typedef enum{
 @property (nonatomic, assign) CGFloat lineWidth;
 /** 阴影透明度(默认为1.f) */
 @property (nonatomic, assign) CGFloat shadowOpacity;
-/** 圆环样式(默认为kCirquePatternTypeForDefault) */
+/** 圆环样式(默认为kCirquePatternTypeDefault) */
 @property (nonatomic, assign) kCirquePatternType cirquePatternType;
 /** 圆环起始位置(默认为kCirqueStartOrientationOnTop) */
 @property (nonatomic, assign) kCirqueStartOrientation cirqueStartOrientation;

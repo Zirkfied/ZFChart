@@ -17,7 +17,7 @@
 @property (nonatomic, assign) CGFloat animationDuration;
 /** 临时新数值坐标的数组 */
 @property (nonatomic, strong) NSMutableArray * tempValuePointArray;
-/** 存储kWavePatternTypeForCurve样式下各段线段模型数组(存储的是ZFCurveAttribute模型) */
+/** 存储kWavePatternTypeCurve样式下各段线段模型数组(存储的是ZFCurveAttribute模型) */
 @property (nonatomic, strong) NSMutableArray * curveArray;
 /** 存储细分曲线的子数组 */
 @property (nonatomic, strong) NSMutableArray * subArray;
@@ -209,7 +209,7 @@
     _gradientAttribute ? [self.layer addSublayer:[self pathGradientColor]] : [self.layer addSublayer:[self shapeLayer]];
 }
 
-#pragma mark - kWavePatternTypeForCurve样式下模型处理
+#pragma mark - kWavePatternTypeCurve样式下模型处理
 
 /**
  *  细分曲线

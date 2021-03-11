@@ -43,7 +43,7 @@
 //    self.barChart.isAnimated = NO;
 //    self.barChart.isResetAxisLineMinValue = YES;
 //    self.barChart.isResetAxisLineMaxValue = YES;
-//    self.barChart.isShadowForValueLabel = NO;
+//    self.barChart.isShadowInValueLabel = NO;
 //    self.barChart.valueLabelPattern = kPopoverLabelPatternBlank;
 //    self.barChart.isShowAxisLineValue = NO;
     self.barChart.isShowYLineSeparate = YES;
@@ -70,11 +70,11 @@
              @[@"256", @"256", @"256", @"256", @"256", @"256"]];
 }
 
-- (NSArray *)nameArrayInGenericChart:(ZFGenericChart *)chart{
+- (NSArray<NSString *> *)nameArrayInGenericChart:(ZFGenericChart *)chart{
     return @[@"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级"];
 }
 
-- (NSArray *)colorArrayInGenericChart:(ZFGenericChart *)chart{
+- (NSArray<UIColor *> *)colorArrayInGenericChart:(ZFGenericChart *)chart{
     return @[ZFColor(71, 204, 255, 1), ZFGold, ZFColor(16, 140, 39, 1)];
 }
 

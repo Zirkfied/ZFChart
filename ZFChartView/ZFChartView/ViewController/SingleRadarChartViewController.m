@@ -45,16 +45,19 @@
 //    self.radarChart.radarLineWidth = 3.f;
 //    self.radarChart.separateLineWidth = 3.f;
     self.radarChart.polygonLineWidth = 2.f;
-//    self.radarChart.valueType = kValueTypeDecimal;
-//    self.radarChart.isShowPolygonLine = NO;
+    self.radarChart.isShowPolygonLine = NO;
 //    self.radarChart.isShowValue = NO;
 //    self.radarChart.isAnimated = NO;
-//    self.radarChart.isShowSeparate = NO;
+    self.radarChart.isShowSeparate = NO;
     self.radarChart.valueType = kValueTypeDecimal;
+    self.radarChart.numberOfDecimal = 2;
 //    self.radarChart.isResetMinValue = YES;
+//    self.radarChart.isResetMaxValue = YES;
     self.radarChart.valueTextColor = ZFOrange;
 //    self.radarChart.radarPatternType = kRadarPatternTypeCircle;
-//    self.radarChart.radarLineColor = ZFBlack;
+    self.radarChart.radarLineColor = ZFClear;
+    self.radarChart.isShowPolygonPeak = YES;
+    self.radarChart.polygonPeakColor = ZFBlue;
     [self.view addSubview:self.radarChart];
     [self.radarChart strokePath];
 }
@@ -62,24 +65,28 @@
 #pragma mark - ZFRadarChartDataSource
 
 - (NSArray *)itemArrayInRadarChart:(ZFRadarChart *)radarChart{
-    return @[@"item 1", @"item 2", @"item 3", @"item 4", @"item 5", @"item 6", @"item 7", @"item 8", @"item 9"];
+//    return @[@"item 1", @"item 2", @"item 3", @"item 4", @"item 5", @"item 6", @"item 7", @"item 8", @"item 9"];
+    
+    return @[@"item 1", @"item 2", @"item 3", @"item 4", @"item 5", @"item 6"];
 }
 
 - (NSArray *)valueArrayInRadarChart:(ZFRadarChart *)radarChart{
-    return @[@"4", @"10", @"4", @"9", @"7", @"8", @"3.2", @"5", @"8.4"];
+//    return @[@"4", @"10", @"4", @"9", @"7", @"8", @"3.2", @"5", @"8.4"];
+    
+    return @[@"4", @"10", @"4", @"9", @"7", @"8"];
 }
 
 //- (NSArray *)colorArrayInRadarChart:(ZFRadarChart *)radarChart{
 //    return @[ZFRed];
 //}
 
-- (CGFloat)maxValueInRadarChart:(ZFRadarChart *)radarChart{
-    return 10.f;
-}
+//- (CGFloat)maxValueInRadarChart:(ZFRadarChart *)radarChart{
+//    return 10.f;
+//}
 
 #pragma mark - ZFRadarChartDelegate
 
-- (CGFloat)radiusForRadarChart:(ZFRadarChart *)radarChart{
+- (CGFloat)radiusInRadarChart:(ZFRadarChart *)radarChart{
     
     if ([[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeLeft || [[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeRight){
         return (SCREEN_HEIGHT - 100) / 2;
@@ -90,11 +97,20 @@
 //    return 100.f;
 }
 
-//- (NSUInteger)sectionCountInRadarChart:(ZFRadarChart *)radarChart{
-//    return 4;
-//}
+- (NSArray<UIColor *> *)radarBackgroundColorArrayInRadarChart:(ZFRadarChart *)radarChart{
+    return @[ZFColor(250, 250, 250, 1),
+             ZFColor(195, 209, 235, 1),
+             ZFColor(178, 195, 227, 1),
+             ZFColor(195, 211, 241, 1),
+             ZFColor(211, 223, 245, 1),
+             ZFColor(235, 241, 252, 1)];
+}
 
-//- (CGFloat)radiusExtendLengthForRadarChart:(ZFRadarChart *)radarChart itemIndex:(NSInteger)itemIndex{
+- (NSUInteger)sectionCountInRadarChart:(ZFRadarChart *)radarChart{
+    return 6;
+}
+
+//- (CGFloat)radiusExtendLengthInRadarChart:(ZFRadarChart *)radarChart itemIndex:(NSInteger)itemIndex{
 //    if (itemIndex == 7) {
 //        return 50.f;
 //    }
@@ -102,7 +118,7 @@
 //    return 25.f;
 //}
 
-//- (CGFloat)valueRotationAngleForRadarChart:(ZFRadarChart *)radarChart{
+//- (CGFloat)valueRotationAngleInRadarChart:(ZFRadarChart *)radarChart{
 //    return 45.f;
 //}
 

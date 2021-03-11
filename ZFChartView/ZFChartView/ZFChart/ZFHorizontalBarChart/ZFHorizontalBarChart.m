@@ -177,7 +177,7 @@
             popoverLabel.center = label_center;
             popoverLabel.pattern = self.valueLabelPattern;
             popoverLabel.textColor = (UIColor *)self.valueTextColorArray.firstObject;
-            popoverLabel.isShadow = self.isShadowForValueLabel;
+            popoverLabel.isShadow = self.isShadowInValueLabel;
             popoverLabel.isAnimated = self.isAnimated;
             popoverLabel.shadowColor = self.valueLabelShadowColor;
             popoverLabel.hidden = self.isShowAxisLineValue ? NO : YES;
@@ -205,7 +205,7 @@
                 popoverLabel.center = label_center;
                 popoverLabel.pattern = self.valueLabelPattern;
                 popoverLabel.textColor = (UIColor *)self.valueTextColorArray[groupIndex];
-                popoverLabel.isShadow = self.isShadowForValueLabel;
+                popoverLabel.isShadow = self.isShadowInValueLabel;
                 popoverLabel.isAnimated = self.isAnimated;
                 popoverLabel.groupIndex = groupIndex;
                 popoverLabel.labelIndex = barIndex;
@@ -299,7 +299,7 @@
             popoverLabel.font = self.valueOnChartFont;
             popoverLabel.textColor = (UIColor *)self.valueTextColorArray[popoverLabel.groupIndex];
             popoverLabel.shadowColor = self.valueLabelShadowColor;
-            popoverLabel.isShadow = self.isShadowForValueLabel;
+            popoverLabel.isShadow = self.isShadowInValueLabel;
             popoverLabel.isAnimated = sender.isAnimated;
             [popoverLabel strokePath];
         }

@@ -28,12 +28,12 @@
  */
 - (NSArray *)valueArrayInGenericChart:(ZFGenericChart *)chart;
 
-/**
+/** 
  *  名称数据
  *
  *  @return NSArray必须存储NSString类型
  */
-- (NSArray *)nameArrayInGenericChart:(ZFGenericChart *)chart;
+- (NSArray<NSString *> *)nameArrayInGenericChart:(ZFGenericChart *)chart;
 
 
 
@@ -46,7 +46,7 @@
  *
  *  @return NSArray必须存储UIColor类型
  */
-- (NSArray *)colorArrayInGenericChart:(ZFGenericChart *)chart;
+- (NSArray<UIColor *> *)colorArrayInGenericChart:(ZFGenericChart *)chart;
 
 /**
  *  y轴(普通图表) 或 x轴(横向图表) 数值显示的最大值(若不设置，默认返回数据源最大值)
@@ -166,7 +166,7 @@
 /** 是否带动画显示(默认为YES，带动画) */
 @property (nonatomic, assign) BOOL isAnimated;
 /** valueLabel当为气泡样式时，是否带阴影效果(默认为YES) */
-@property (nonatomic, assign) BOOL isShadowForValueLabel;
+@property (nonatomic, assign) BOOL isShadowInValueLabel;
 /** 是否显示 y轴(普通图表) 或 x轴(横向图表) 的value(默认为YES，当需要自定义value显示样式时，可设置为NO) */
 @property (nonatomic, assign) BOOL isShowAxisLineValue;
 /** 是否显示x轴分割线(默认为NO) */

@@ -189,7 +189,7 @@
     popoverLabel.font = self.valueOnChartFont;
     popoverLabel.textColor = _colorArray[colorIndex];
     popoverLabel.pattern = self.valueLabelPattern;
-    popoverLabel.isShadow = self.isShadowForValueLabel;
+    popoverLabel.isShadow = self.isShadowInValueLabel;
     popoverLabel.isAnimated = self.isAnimated;
     popoverLabel.groupIndex = colorIndex;
     popoverLabel.labelIndex = index;

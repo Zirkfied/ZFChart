@@ -17,7 +17,7 @@
 /** 动画时间 */
 @property (nonatomic, assign) CGFloat animationDuration;
 @property (nonatomic, strong) NSMutableArray * valuePointArray;
-/** 存储kLinePatternTypeForCurve样式下各段线段模型数组(存储的是ZFCurveAttribute模型) */
+/** 存储kLinePatternTypeCurve样式下各段线段模型数组(存储的是ZFCurveAttribute模型) */
 @property (nonatomic, strong) NSMutableArray * curveArray;
 /** 存储细分曲线的子数组 */
 @property (nonatomic, strong) NSMutableArray * subArray;
@@ -152,7 +152,7 @@
     return fillAnimation;
 }
 
-#pragma mark - kLinePatternTypeForCurve样式下模型处理
+#pragma mark - kLinePatternTypeCurve样式下模型处理
 
 /**
  *  细分曲线

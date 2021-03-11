@@ -66,7 +66,7 @@
 
 #pragma mark - ZFCirqueChartDelegate
 
-- (CGFloat)radiusForCirqueChart:(ZFCirqueChart *)cirqueChart{
+- (CGFloat)radiusInCirqueChart:(ZFCirqueChart *)cirqueChart{
     return 40.f;
 }
 

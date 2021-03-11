@@ -187,8 +187,8 @@
         self.colorArray = [NSMutableArray arrayWithArray:[self.dataSource colorArrayInPieChart:self]];
     }
     
-    if ([self.delegate respondsToSelector:@selector(radiusForPieChart:)]) {
-        _radius = [self.delegate radiusForPieChart:self];
+    if ([self.delegate respondsToSelector:@selector(radiusInPieChart:)]) {
+        _radius = [self.delegate radiusInPieChart:self];
         if (_piePatternType == kPieChartPatternTypeCircle) {
             _lineWidth = _radius;
             _radius = _radius / 2;
@@ -244,9 +244,10 @@
     
     [_startAngleArray addObject:@(_startAngle)];
     [_endAngleArray addObject:@(_startAngle + angle)];
+    
     //临时记录下一个path的开始角度
     _startAngle += angle;
-    
+
     _isShowPercent ? [self creatPercentLabel:i] : nil;
 }
 

@@ -91,7 +91,7 @@
         popoverLabel.font = self.valueOnChartFont;
         popoverLabel.pattern = self.valueLabelPattern;
         popoverLabel.textColor = _valueTextColor;
-        popoverLabel.isShadow = self.isShadowForValueLabel;
+        popoverLabel.isShadow = self.isShadowInValueLabel;
         popoverLabel.isAnimated = self.isAnimated;
         popoverLabel.labelIndex = i;
         popoverLabel.shadowColor = self.valueLabelShadowColor;
@@ -161,7 +161,7 @@
             popoverLabel.font = self.valueOnChartFont;
             popoverLabel.textColor = popoverLabel.isOverrun ? _overMaxValueTextColor : _valueTextColor;
             popoverLabel.shadowColor = self.valueLabelShadowColor;
-            popoverLabel.isShadow = self.isShadowForValueLabel;
+            popoverLabel.isShadow = self.isShadowInValueLabel;
             popoverLabel.isAnimated = sender.isAnimated;
             [popoverLabel strokePath];
         }

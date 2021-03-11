@@ -46,10 +46,10 @@
 //    self.waveChart.isAnimated = NO;
 //    self.waveChart.isResetAxisLineMinValue = YES;
 //    self.waveChart.isShowAxisLineValue = NO;
-//    self.waveChart.isShadowForValueLabel = NO;
+//    self.waveChart.isShadowInValueLabel = NO;
 //    self.waveChart.valuePosition = kChartValuePositionOnBelow;
 //    self.waveChart.valueLabelPattern = kPopoverLabelPatternBlank;
-//    self.waveChart.wavePatternType = kWavePatternTypeForSharp;
+//    self.waveChart.wavePatternType = kWavePatternTypeSharp;
 //    self.waveChart.valueLabelToWaveLinePadding = 20.f;
     [self.waveChart strokePath];
     [self.view addSubview:self.waveChart];

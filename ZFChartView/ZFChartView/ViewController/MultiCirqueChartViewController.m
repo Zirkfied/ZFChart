@@ -43,7 +43,7 @@
     self.cirqueChart.textLabel.font = [UIFont boldSystemFontOfSize:12.f];
     self.cirqueChart.isResetMaxValue = YES;
 //    self.cirqueChart.isAnimated = NO;
-//    self.cirqueChart.cirquePatternType = kCirquePatternTypeForDefaultWithShadow;
+//    self.cirqueChart.cirquePatternType = kCirquePatternTypeDefaultWithShadow;
 //    self.cirqueChart.cirqueStartOrientation = kCirqueStartOrientationOnRight;
     [self.view addSubview:self.cirqueChart];
     [self.cirqueChart strokePath];
@@ -66,7 +66,7 @@
 
 #pragma mark - ZFCirqueChartDelegate
 
-- (CGFloat)radiusForCirqueChart:(ZFCirqueChart *)cirqueChart{
+- (CGFloat)radiusInCirqueChart:(ZFCirqueChart *)cirqueChart{
     return 40.f;
 }
 

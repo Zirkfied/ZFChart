@@ -71,7 +71,7 @@
     return @[@"123", @"256", @"300", @"283", @"490", @"236"];
 }
 
-- (NSArray *)nameArrayInGenericChart:(ZFGenericChart *)chart{
+- (NSArray<NSString *> *)nameArrayInGenericChart:(ZFGenericChart *)chart{
     return @[@"一年级", @"二年级", @"三年级", @"四年级", @"五年级", @"六年级"];
 }
 
@@ -115,7 +115,7 @@
 //    return ZFBlue;
 //}
 
-- (NSArray *)gradientColorArrayInBarChart:(ZFBarChart *)barChart{
+- (NSArray<ZFGradientAttribute *> *)gradientColorArrayInBarChart:(ZFBarChart *)barChart{
     ZFGradientAttribute * gradientAttribute = [[ZFGradientAttribute alloc] init];
     gradientAttribute.colors = @[(id)ZFRed.CGColor, (id)ZFWhite.CGColor];
     gradientAttribute.locations = @[@(0.5), @(0.99)];

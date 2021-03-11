@@ -23,7 +23,7 @@
  *
  *  @return NSArray必须存储NSString类型
  */
-- (NSArray *)itemArrayInRadarChart:(ZFRadarChart *)radarChart;
+- (NSArray<NSString *> *)itemArrayInRadarChart:(ZFRadarChart *)radarChart;
 
 /**
  *  value数组
@@ -32,7 +32,7 @@
  *          eg: ①当只有1组数据时，NSArray存储 @[@"1", @"2", @"3", @"4"]
  *              ②当有多组数据时，NSArray存储 @[@[@"1", @"2", @"3", @"4"], @[@"1", @"2", @"3", @"4"]]
  */
-- (NSArray *)valueArrayInRadarChart:(ZFRadarChart *)radarChart;
+- (NSArray<NSString *> *)valueArrayInRadarChart:(ZFRadarChart *)radarChart;
 
 
 
@@ -43,7 +43,7 @@
  *
  *  @return NSArray必须存储UIColor类型
  */
-- (NSArray *)colorArrayInRadarChart:(ZFRadarChart *)radarChart;
+- (NSArray<UIColor *> *)colorArrayInRadarChart:(ZFRadarChart *)radarChart;
 
 /**
  *  数值显示的最大值(若不设置，默认返回数据源最大值)
@@ -71,7 +71,7 @@
  *
  *  @return 半径
  */
-- (CGFloat)radiusForRadarChart:(ZFRadarChart *)radarChart;
+- (CGFloat)radiusInRadarChart:(ZFRadarChart *)radarChart;
 
 
 
@@ -85,20 +85,29 @@
 - (NSUInteger)sectionCountInRadarChart:(ZFRadarChart *)radarChart;
 
 /**
+ *  雷达图蒙版背景颜色数组(默认为ZFClear)
+ *
+ *  @return 返回UIColor或者NSArray
+ *          eg: ①return @[ZFRed];  若只返回1个颜色, 则全部蒙版背景颜色为红色
+ *             ②return @[ZFRed, ZFOrange, ZFBlue]; 若返回蒙版层数的颜色个数， 则从蒙版最内层至最外层方向赋值背景颜色
+ */
+- (NSArray<UIColor *> *)radarBackgroundColorArrayInRadarChart:(ZFRadarChart *)radarChart;
+
+/**
  *  设置雷达图半径延伸长度，用于计算item label的中心点位置(默认25.f)
  *
  *  @param itemIndex item下标(可根据item的字符长度自行调节item label的中心点位置)
  *
  *  @return 半径延伸长度
  */
-- (CGFloat)radiusExtendLengthForRadarChart:(ZFRadarChart *)radarChart itemIndex:(NSInteger)itemIndex;
+- (CGFloat)radiusExtendLengthInRadarChart:(ZFRadarChart *)radarChart itemIndex:(NSInteger)itemIndex;
 
 /**
  *  雷达图分段数值的角度位置(若不设置,默认为-90度(正上方))
  *
  *  @return 角度( 可调节范围 [-90, 270) )
  */
-- (CGFloat)valueRotationAngleForRadarChart:(ZFRadarChart *)radarChart;
+- (CGFloat)valueRotationAngleInRadarChart:(ZFRadarChart *)radarChart;
 
 /**
  *  用于编写点击item Label后需要执行后续代码
@@ -121,28 +130,33 @@
 @property (nonatomic, strong) UIColor * itemTextColor;
 /** value字体颜色(默认为黑色) */
 @property (nonatomic, strong) UIColor * valueTextColor;
-/** 雷达图边线颜色(默认为浅灰色) */
+/** 雷达图边线颜色(默认为ZFLightGray) */
 @property (nonatomic, strong) UIColor * radarLineColor;
-/** 雷达背景颜色(默认ZFClear) */
-@property (nonatomic, strong) UIColor * radarBackgroundColor;
 /** 雷达蒙版顶点颜色(默认为白色) */
 @property (nonatomic, strong) UIColor * radarPeakColor;
+/** 多边形顶点颜色(默认为白色) */
+@property (nonatomic, strong) UIColor * polygonPeakColor;
 
 /** item字体大小(默认15.f) */
 @property (nonatomic, strong) UIFont * itemFont;
 /** value字体大小(默认10.f) */
 @property (nonatomic, strong) UIFont * valueFont;
 
+
 /** 雷达图线宽(默认1.f) */
 @property (nonatomic, assign) CGFloat radarLineWidth;
 /** 雷达图分割线线宽(默认1.f) */
 @property (nonatomic, assign) CGFloat separateLineWidth;
+/** 雷达图背景颜色透明度 */
+@property (nonatomic, assign) CGFloat radarOpacity;
 /** 多边形线宽(默认1.f) */
 @property (nonatomic, assign) CGFloat polygonLineWidth;
 /** 雷达蒙版顶点半径(默认5.f) */
 @property (nonatomic, assign) CGFloat radarPeakRadius;
+/** 多边形顶点半径(默认5.f) */
+@property (nonatomic, assign) CGFloat polygonPeakRadius;
 /** 多边形透明度(默认0.3f) */
-@property (nonatomic, assign) CGFloat opacity;
+@property (nonatomic, assign) CGFloat polygonOpacity;
 /** 是否一致显示固定的最大值，默认为NO，该属性有一下3种情况
     ①当为NO时，且不实现
         - (CGFloat)maxValueInRadarChart:(ZFRadarChart *)radarChart
@@ -180,12 +194,16 @@
 @property (nonatomic, assign) BOOL isShowSeparate;
 /** 是否显示雷达蒙版顶点(默认为NO) */
 @property (nonatomic, assign) BOOL isShowRadarPeak;
+/** 是否显示多边形顶点(默认为NO) */
+@property (nonatomic, assign) BOOL isShowPolygonPeak;
 /** 是否添加旋转手势(默认为YES) */
 @property (nonatomic, assign) BOOL canRotation;
 /** 雷达底层蒙版样式(默认为kRadarPatternTypeSharp) */
 @property (nonatomic, assign) kRadarPatternType radarPatternType;
-/** 雷达图分段数值的显示类型(保留有效小数或显示整数形式，默认为整数形式) */
+/** 雷达图分段数值的显示类型(保留有效小数或显示整数形式，默认为整数形式kValueTypeInteger) */
 @property (nonatomic, assign) kValueType valueType;
+/** 小数位数(默认为显示1位小数，当 kValueType = kValueTypeDecimal，该属性才有效) */
+@property (nonatomic, assign) NSInteger numberOfDecimal;
 
 
 #pragma mark - public method

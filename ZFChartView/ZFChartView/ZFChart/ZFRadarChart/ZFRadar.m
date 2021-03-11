@@ -33,6 +33,10 @@
 /** 存储item point的数组 */
 @property (nonatomic, strong) NSMutableArray * pointArray;
 
+
+
+@property (nonatomic, strong) NSMutableArray<UIColor *> * tempColorArray;
+
 @end
 
 @implementation ZFRadar
@@ -43,6 +47,8 @@
 - (void)commonInit{
     _radarCenter = self.center;
     _startXPos = _radarCenter.x;
+    
+    self.tempColorArray = [NSMutableArray arrayWithObjects:ZFCyan, ZFBlue, ZFOrange, ZFMagenta, ZFGreen, nil];
 }
 
 - (void)setUp{
@@ -105,7 +111,8 @@
             [self.pointArray addObject:[NSValue valueWithCGPoint:CGPointMake(_endXPos, _endYPos)]];
         }
     }
-    [bezier closePath];
+    [bezier closePath];    
+    
     return bezier;
 }
 
@@ -118,7 +125,8 @@
     CAShapeLayer * shapeLayer = [CAShapeLayer layer];
     shapeLayer.lineWidth = _radarLineWidth;
     shapeLayer.strokeColor = _radarPatternType == kRadarPatternTypeCircle ? ZFClear.CGColor : _radarLineColor.CGColor;
-    shapeLayer.fillColor = _radarPatternType == kRadarPatternTypeCircle ? ZFClear.CGColor : _radarBackgroundColor.CGColor;
+    UIColor * radarBackgroundColor = self.radarBackgroundColorArray.count == 1 ? (UIColor *)self.radarBackgroundColorArray.firstObject : (UIColor *)self.radarBackgroundColorArray[index];
+    shapeLayer.fillColor = _radarPatternType == kRadarPatternTypeCircle ? ZFClear.CGColor : radarBackgroundColor.CGColor;
     shapeLayer.path = [self drawRadar:index].CGPath;
     
     return shapeLayer;
@@ -147,8 +155,9 @@
     CAShapeLayer * shapeLayer = [CAShapeLayer layer];
     shapeLayer.lineWidth = _radarLineWidth;
     shapeLayer.strokeColor = ZFClear.CGColor;
-    shapeLayer.fillColor = index == _sectionCount - 1 ? _radarBackgroundColor.CGColor : ZFClear.CGColor;
-    shapeLayer.opacity = 0.1f;
+    UIColor * radarBackgroundColor = self.radarBackgroundColorArray.count == 1 ? (UIColor *)self.radarBackgroundColorArray.firstObject : (UIColor *)self.radarBackgroundColorArray[index];
+    shapeLayer.fillColor = radarBackgroundColor.CGColor;
+//    shapeLayer.opacity = 0.1f;
     shapeLayer.path = [self drawCircle:index].CGPath;
     
     return shapeLayer;
@@ -162,7 +171,7 @@
 - (CAShapeLayer *)circleLineShapeLayer:(NSInteger)index{
     CAShapeLayer * shapeLayer = [CAShapeLayer layer];
     shapeLayer.lineWidth = _radarLineWidth;
-        shapeLayer.strokeColor = _radarLineColor.CGColor;
+    shapeLayer.strokeColor = _radarLineColor.CGColor;
     shapeLayer.fillColor = ZFClear.CGColor;
     shapeLayer.path = [self drawCircle:index].CGPath;
     
@@ -179,7 +188,7 @@
 - (UIBezierPath *)drawPeak:(NSInteger)index{
     CGPoint endPoint = [self.pointArray[index] CGPointValue];
     
-    UIBezierPath * bezier = [UIBezierPath bezierPathWithArcCenter:endPoint radius:_raderPeakRadius startAngle:ZFRadian(-90) endAngle:ZFRadian(270) clockwise:YES];
+    UIBezierPath * bezier = [UIBezierPath bezierPathWithArcCenter:endPoint radius:_radarPeakRadius startAngle:ZFRadian(-90) endAngle:ZFRadian(270) clockwise:YES];
     return bezier;
 }
 
@@ -250,7 +259,8 @@
     [self commonInit];
     
     _averageRadius = _radius / _sectionCount;
-    for (NSInteger i = 0; i < _sectionCount; i++) {
+
+    for (NSInteger i = _sectionCount - 1; i >= 0; i--) {
         _startAngle = -90.f;
         _radius = _averageRadius * (i + 1);
         _startYPos = _radarCenter.y - _radius;
@@ -259,6 +269,7 @@
         _radarPatternType == kRadarPatternTypeCircle ? [self.layer addSublayer:[self circleShapeLayer:i]] : nil;
         _radarPatternType == kRadarPatternTypeCircle ? [self.layer addSublayer:[self circleLineShapeLayer:i]] : nil;
     }
+    
     
     if (_isShowSeparate) {
         for (NSInteger i = 0; i < self.pointArray.count; i++) {
@@ -283,28 +294,31 @@
     [self.itemLabelCenterMutableArray removeAllObjects];
     
     _startAngle = -90.f;
+    //最外层雷达蒙版的半径
+    _outermostRadarRadius = _averageRadius * _sectionCount;
     
     for (NSInteger i = 0; i < self.itemArray.count; i++) {
         CGFloat radiusExtendLength = [self.radiusExtendLengthArray[i] floatValue];
+        
         _currentRadarAngle = self.averageRadarAngle * i;
         //计算每个item的角度,当为第1个item是终点就是起点
         _endAngle = i != 0 ? _startAngle + self.averageRadarAngle : _startAngle;
         
         if (_endAngle >= -90.f && _endAngle < 0.f) {
-            _endXPos = _radarCenter.x + fabs(-((_radius + radiusExtendLength) * ZFSin(_currentRadarAngle)));
-            _endYPos = _radarCenter.y - fabs((_radius + radiusExtendLength) * ZFCos(_currentRadarAngle));
+            _endXPos = _radarCenter.x + fabs(-((_outermostRadarRadius + radiusExtendLength) * ZFSin(_currentRadarAngle)));
+            _endYPos = _radarCenter.y - fabs((_outermostRadarRadius + radiusExtendLength) * ZFCos(_currentRadarAngle));
             
         }else if (_endAngle >= 0.f && _endAngle < 90.f){
-            _endXPos = _radarCenter.x + fabs(-((_radius + radiusExtendLength) * ZFSin(_currentRadarAngle)));
-            _endYPos = _radarCenter.y + fabs((_radius + radiusExtendLength) * ZFCos(_currentRadarAngle));
+            _endXPos = _radarCenter.x + fabs(-((_outermostRadarRadius + radiusExtendLength) * ZFSin(_currentRadarAngle)));
+            _endYPos = _radarCenter.y + fabs((_outermostRadarRadius + radiusExtendLength) * ZFCos(_currentRadarAngle));
             
         }else if (_endAngle >= 90.f && _endAngle < 180.f){
-            _endXPos = _radarCenter.x - fabs(-((_radius + radiusExtendLength) * ZFSin(_currentRadarAngle)));
-            _endYPos = _radarCenter.y + fabs((_radius + radiusExtendLength) * ZFCos(_currentRadarAngle));
+            _endXPos = _radarCenter.x - fabs(-((_outermostRadarRadius + radiusExtendLength) * ZFSin(_currentRadarAngle)));
+            _endYPos = _radarCenter.y + fabs((_outermostRadarRadius + radiusExtendLength) * ZFCos(_currentRadarAngle));
             
         }else if (_endAngle >= 180.f && _endAngle < 270.f){
-            _endXPos = _radarCenter.x - fabs(-((_radius + radiusExtendLength) * ZFSin(_currentRadarAngle)));
-            _endYPos = _radarCenter.y - fabs((_radius + radiusExtendLength) * ZFCos(_currentRadarAngle));
+            _endXPos = _radarCenter.x - fabs(-((_outermostRadarRadius + radiusExtendLength) * ZFSin(_currentRadarAngle)));
+            _endYPos = _radarCenter.y - fabs((_outermostRadarRadius + radiusExtendLength) * ZFCos(_currentRadarAngle));
         }
         
         _startAngle = _endAngle;

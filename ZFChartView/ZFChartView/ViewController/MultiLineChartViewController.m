@@ -45,7 +45,7 @@
 //    self.lineChart.isAnimated = NO;
     self.lineChart.isResetAxisLineMinValue = YES;
 //    self.lineChart.isShowAxisLineValue = NO;
-//    self.lineChart.isShadowForValueLabel = NO;
+//    self.lineChart.isShadowInValueLabel = NO;
     self.lineChart.isShadow = NO;
 //    self.lineChart.valueLabelPattern = kPopoverLabelPatternBlank;
 //    self.lineChart.valueCenterToCircleCenterPadding = 0;

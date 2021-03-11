@@ -16,7 +16,7 @@
  */
 - (void)commonInit{
     _isAnimated = YES;
-    _isShadowForValueLabel = YES;
+    _isShadowInValueLabel = YES;
     _opacity = 1.f;
     _valueOnChartFont = [UIFont systemFontOfSize:10.f];
     _xLineNameLabelToXAxisLinePadding = 0.f;

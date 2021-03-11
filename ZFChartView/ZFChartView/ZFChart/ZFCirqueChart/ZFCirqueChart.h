@@ -21,7 +21,7 @@
  *
  *  @return NSArray必须存储NSString类型(根据返回的数组个数自动生成N个圆环数)
  */
-- (NSArray *)valueArrayInCirqueChart:(ZFCirqueChart *)cirqueChart;
+- (NSArray<NSString *> *)valueArrayInCirqueChart:(ZFCirqueChart *)cirqueChart;
 
 /**
  *  颜色数组
@@ -55,7 +55,7 @@
 /**
  *  设置圆环图半径(该半径是中心点与最内层圆的半径)
  */
-- (CGFloat)radiusForCirqueChart:(ZFCirqueChart *)cirqueChart;
+- (CGFloat)radiusInCirqueChart:(ZFCirqueChart *)cirqueChart;
 
 
 
@@ -99,11 +99,11 @@
 /** 是否带动画显示(默认为YES，带动画) */
 @property (nonatomic, assign) BOOL isAnimated;
 
-/** 圆环样式(默认为kCirquePatternTypeForDefault) */
+/** 圆环样式(默认为kCirquePatternTypeDefault) */
 @property (nonatomic, assign) kCirquePatternType cirquePatternType;
 /** 圆环起始位置(默认为kCirqueStartOrientationOnTop) */
 @property (nonatomic, assign) kCirqueStartOrientation cirqueStartOrientation;
-/** 阴影透明度(默认为1.f)(当cirquePatternType == kCirquePatternTypeForDefault 或 kCirquePatternTypeForNone该属性无效) */
+/** 阴影透明度(默认为1.f)(当cirquePatternType == kCirquePatternTypeDefault 或 kCirquePatternTypeNone该属性无效) */
 @property (nonatomic, assign) CGFloat shadowOpacity;
 
 
