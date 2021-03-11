@@ -511,6 +511,9 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         
         2017.12.11 ①柱状图(ZFBarChart) 和 横向柱状图(ZFHorizontalBarChart) 新增isMultipleColorInSingleBarChart属性，该属性的作用在只有一组数据的情况下，bar是否开启独立颜色(默认为NO，该属性只在singleBarChart情况下有效)
 
+        2021.03.11 ①雷达图(ZFRadarChart)新增蒙版样式
+                   ②优化部分属性和方法命名
+
 
                    
 ## 本人其他开源框架
