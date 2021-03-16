@@ -66,7 +66,8 @@
  */
 - (void)setCirque{
     for (NSInteger i = 0; i < _valueArray.count; i++) {
-        ZFCirque * cirque = [[ZFCirque alloc] initWithFrame:self.frame];
+        ZFCirque * cirque = [[ZFCirque alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
+        
         //计算百分比
         if ([_valueArray[i] floatValue] / _maxValue <= 1.f) {
             cirque.percent = [_valueArray[i] floatValue] / _maxValue;
