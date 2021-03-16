@@ -361,6 +361,11 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
 
 ![image](https://github.com/Zirkfied/Library/blob/master/RadarChart.gif)
 
+#### 样式展示
+![image](https://github.com/Zirkfied/Library/blob/master/radar1.png) ![image](https://github.com/Zirkfied/Library/blob/master/radar2.png)
+![image](https://github.com/Zirkfied/Library/blob/master/radar3.png) ![image](https://github.com/Zirkfied/Library/blob/master/radar4.png)
+
+
 
 
 ## CirqueChart(圆环图)
@@ -505,6 +510,9 @@ A simple chart library for iOS , contains barChart, lineChart, pieChart, waveCha
         2017.10.20 ①修复线状图(ZFLineChart)渐变色图层重绘时旧图层不移除BUG
         
         2017.12.11 ①柱状图(ZFBarChart) 和 横向柱状图(ZFHorizontalBarChart) 新增isMultipleColorInSingleBarChart属性，该属性的作用在只有一组数据的情况下，bar是否开启独立颜色(默认为NO，该属性只在singleBarChart情况下有效)
+
+        2021.03.11 ①雷达图(ZFRadarChart)新增蒙版样式
+                   ②优化部分属性和方法命名
 
 
                    
